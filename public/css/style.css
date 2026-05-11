@@ -248,7 +248,7 @@ body{
 }
 
 .st-topbar{
-  background:rgba(255,255,255,.94);
+  background:rgb(255 149 149 / 94%);
   border-bottom:1px solid rgba(17,17,17,.06);
   backdrop-filter:blur(10px);
 }
@@ -375,7 +375,7 @@ body{
 .st-navbar{
   margin:0 auto;
   width:min(100% - 24px, 1320px);
-  background:rgba(255,255,255,.62);
+  background:rgb(255 202 202 / 62%);
   border:1px solid rgba(255,255,255,.58);
   border-bottom-color:rgba(17,17,17,.06);
   border-radius:26px;
@@ -383,10 +383,11 @@ body{
   backdrop-filter:blur(18px) saturate(135%);
   overflow:visible;
   transition:background .3s ease, box-shadow .3s ease, border-color .3s ease, transform .3s ease;
+  height: 8vh;
 }
 
 .st-navbar.st-scrolled{
-  background:rgba(255,255,255,.96);
+  background:rgb(255 202 202 / 62%);
   border-color:rgba(17,17,17,.06);
   box-shadow:var(--brand-shadow-strong);
 }
