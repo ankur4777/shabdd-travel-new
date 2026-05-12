@@ -135,18 +135,7 @@
                     </ul>
                 </div>
 
-                <div class="st-nav-actions st-desktop-only">
-                    <a href="#" class="st-iconbtn st-whatsapp-btn" aria-label="WhatsApp">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path
-                                d="M20 11.52c0 4.59-3.71 8.31-8.29 8.31a8.2 8.2 0 0 1-4.02-1.05L4 20l1.24-3.57a8.3 8.3 0 1 1 14.76-4.91Z"
-                                stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
-                            <path
-                                d="M9.2 8.95c.22-.47.45-.48.65-.49.17-.01.37-.01.56-.01.18 0 .47.07.71.34.24.27.92.9.92 2.18 0 1.28-.94 2.52-1.07 2.69-.13.17-.26.38-.06.76.2.38.88 1.45 1.9 2.34 1.3 1.13 2.4 1.48 2.74 1.65.34.17.54.14.74-.08.2-.22.86-1 .1-1.97"
-                                stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </a>
+                <div class="st-nav-actions st-desktop-only">    
                     <button class="st-iconbtn" type="button" aria-label="Search">
                         <svg viewBox="0 0 24 24" fill="none">
                             <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.7" />
@@ -196,15 +185,38 @@
             <a href="#" class="st-mobile-pill st-mobile-pill-alt">WhatsApp</a>
         </div>
 
-        <div class="st-mobile-links">
-            <a href="#" class="st-mobile-link">Domestic Tours <span aria-hidden="true">›</span></a>
-            <a href="#" class="st-mobile-link">International Tours <span aria-hidden="true">›</span></a>
-            <a href="#" class="st-mobile-link">Honeymoon <span aria-hidden="true">›</span></a>
-            <a href="#" class="st-mobile-link">Family Trips <span aria-hidden="true">›</span></a>
-            <a href="#" class="st-mobile-link">Adventure <span aria-hidden="true">›</span></a>
-            <a href="#" class="st-mobile-link">Luxury Holidays <span aria-hidden="true">›</span></a>
-            <a href="#" class="st-mobile-link">Blogs <span aria-hidden="true">›</span></a>
-            <a href="#" class="st-mobile-link">Contact <span aria-hidden="true">›</span></a>
+        <div class="st-mobile-links" id="stMobileLinksMain">
+            <div class="st-mobile-menu-item st-has-submenu">
+                <button class="st-mobile-link st-mobile-menu-toggle" type="button" data-submenu="domestic" aria-expanded="false">
+                    Domestic Tours <span aria-hidden="true">›</span>
+                </button>
+            </div>
+
+            <div class="st-mobile-menu-item st-has-submenu">
+                <button class="st-mobile-link st-mobile-menu-toggle" type="button" data-submenu="international" aria-expanded="false">
+                    International Tours <span aria-hidden="true">›</span>
+                </button>
+            </div>
+
+            <a href="#" class="st-mobile-link">Honeymoon</a>
+            <a href="#" class="st-mobile-link">Family Trips</a>
+            <a href="#" class="st-mobile-link">Adventure</a>
+            <a href="#" class="st-mobile-link">Luxury Holidays</a>
+            <a href="#" class="st-mobile-link">Blogs</a>
+            <a href="#" class="st-mobile-link">Contact</a>
+        </div>
+
+        <div class="st-mobile-submenu" id="stMobileSubmenu">
+            <div class="st-mobile-submenu-header">
+                <button class="st-mobile-submenu-close" id="stMobileSubmenuClose" type="button" aria-label="Close submenu">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M6 6 18 18M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    </svg>
+                </button>
+                <h3 class="st-mobile-submenu-title-main" id="stMobileSubmenuTitle"></h3>
+            </div>
+
+            <div id="stMobileSubmenuContent"></div>
         </div>
 
         <div class="st-mobile-footer">
@@ -243,6 +255,74 @@
             return;
         }
 
+        // Submenu data structure
+        const submenuData = {
+            domestic: {
+                title: 'Domestic Tours',
+                sections: [
+                    {
+                        title: 'Top Destinations',
+                        items: [
+                            { text: 'Himachal Escapes', url: '#' },
+                            { text: 'Kashmir Retreats', url: '#' },
+                            { text: 'Rajasthan Royal Trails', url: '#' },
+                            { text: 'Kerala Backwaters', url: '#' }
+                        ]
+                    },
+                    {
+                        title: 'Travel Styles',
+                        items: [
+                            { text: 'Weekend Gateways', url: '#' },
+                            { text: 'Hill Station Tours', url: '#' },
+                            { text: 'Temple and Heritage', url: '#' },
+                            { text: 'Wildlife Safaris', url: '#' }
+                        ]
+                    },
+                    {
+                        title: 'Quick Plan',
+                        items: [
+                            { text: 'Under 25k Packages', url: '#' },
+                            { text: 'Family Specials', url: '#' },
+                            { text: 'Honeymoon Picks', url: '#' },
+                            { text: 'View All Domestic Tours', url: '#' }
+                        ]
+                    }
+                ]
+            },
+            international: {
+                title: 'International Tours',
+                sections: [
+                    {
+                        title: 'Most Booked',
+                        items: [
+                            { text: 'Dubai Luxe Getaways', url: '#' },
+                            { text: 'Thailand Beach Journeys', url: '#' },
+                            { text: 'Bali Island Escape', url: '#' },
+                            { text: 'Singapore Family Fun', url: '#' }
+                        ]
+                    },
+                    {
+                        title: 'Premium Journeys',
+                        items: [
+                            { text: 'Europe Signature Circuits', url: '#' },
+                            { text: 'Swiss Alpine Luxury', url: '#' },
+                            { text: 'Japan Seasonal Trails', url: '#' },
+                            { text: 'Turkey and Greece', url: '#' }
+                        ]
+                    },
+                    {
+                        title: 'Travel Help',
+                        items: [
+                            { text: 'Visa Assistance', url: '#' },
+                            { text: 'Group Departures', url: '#' },
+                            { text: 'Fixed Departure Dates', url: '#' },
+                            { text: 'View All International Tours', url: '#' }
+                        ]
+                    }
+                ]
+            }
+        };
+
         const setScrolledState = function () {
             navbar.classList.toggle('st-scrolled', window.scrollY > 10);
         };
@@ -259,7 +339,72 @@
             drawer.classList.remove('show');
             openBtn.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
+            // Close any open submenu
+            closeSubmenu();
         };
+
+        const showSubmenu = function (submenuId) {
+            const submenuEl = document.getElementById('stMobileSubmenu');
+            const mainLinksEl = document.getElementById('stMobileLinksMain');
+            const data = submenuData[submenuId];
+
+            if (!data) return;
+
+            // Update title
+            document.getElementById('stMobileSubmenuTitle').textContent = data.title;
+
+            // Build content
+            const contentEl = document.getElementById('stMobileSubmenuContent');
+            contentEl.innerHTML = '';
+
+            data.sections.forEach(section => {
+                const sectionEl = document.createElement('div');
+                sectionEl.className = 'st-mobile-submenu-section';
+
+                const titleEl = document.createElement('p');
+                titleEl.className = 'st-mobile-submenu-title';
+                titleEl.textContent = section.title;
+                sectionEl.appendChild(titleEl);
+
+                section.items.forEach(item => {
+                    const linkEl = document.createElement('a');
+                    linkEl.href = item.url;
+                    linkEl.className = 'st-mobile-submenu-link';
+                    linkEl.textContent = item.text;
+                    sectionEl.appendChild(linkEl);
+                });
+
+                contentEl.appendChild(sectionEl);
+            });
+
+            // Show submenu, hide main menu
+            mainLinksEl.style.display = 'none';
+            submenuEl.classList.add('show');
+        };
+
+        const closeSubmenu = function () {
+            const submenuEl = document.getElementById('stMobileSubmenu');
+            const mainLinksEl = document.getElementById('stMobileLinksMain');
+
+            submenuEl.classList.remove('show');
+            mainLinksEl.style.display = 'flex';
+        };
+
+        // Menu toggle buttons
+        const menuToggles = drawer.querySelectorAll('.st-mobile-menu-toggle');
+        menuToggles.forEach(toggle => {
+            toggle.addEventListener('click', function (e) {
+                e.preventDefault();
+                const submenuId = this.getAttribute('data-submenu');
+                showSubmenu(submenuId);
+            });
+        });
+
+        // Close submenu button
+        const closeSubmenuBtn = document.getElementById('stMobileSubmenuClose');
+        if (closeSubmenuBtn) {
+            closeSubmenuBtn.addEventListener('click', closeSubmenu);
+        }
 
         setScrolledState();
         window.addEventListener('scroll', setScrolledState, { passive: true });
