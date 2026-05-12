@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="overflow-x: hidden;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 </head>
-<body>
+<body style="overflow-x: hidden;">
 
 @include('partials.header')
 
@@ -30,6 +30,13 @@
 
 <!-- App JS -->
 <script type="module" src="/resources/js/app.js"></script>
+
+<!-- Testimonials CSS/JS -->
+<link rel="stylesheet" href="{{ asset('css/testimonials-section.css') }}">
+<script src="{{ asset('js/testimonials-section.js') }}" defer></script>
+<!-- Destination Filter JS -->
+<script src="{{ asset('js/destination-filter.js') }}" defer></script>
+
 
 </body>
 </html>

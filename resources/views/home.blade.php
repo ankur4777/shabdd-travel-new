@@ -552,8 +552,8 @@
     {{-- ── Styles ── --}}
     <style>
         /* ═══════════════════════════════════════════════
-       SECTION WRAPPER
-    ════════════════════════════════════════════════*/
+                                   SECTION WRAPPER
+                                ════════════════════════════════════════════════*/
         .st-themes-section {
             width: min(100% - 24px, 1320px);
             margin: 0 auto 48px;
@@ -561,8 +561,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-       HEADER ROW
-    ════════════════════════════════════════════════*/
+                                   HEADER ROW
+                                ════════════════════════════════════════════════*/
         .st-themes-header {
             display: flex;
             align-items: center;
@@ -614,8 +614,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-       SLIDER OUTER  (the visible window + arrows)
-    ════════════════════════════════════════════════*/
+                                   SLIDER OUTER  (the visible window + arrows)
+                                ════════════════════════════════════════════════*/
         .st-themes-slider-outer {
             position: relative;
             display: flex;
@@ -624,8 +624,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-       ARROW BUTTONS
-    ════════════════════════════════════════════════*/
+                                   ARROW BUTTONS
+                                ════════════════════════════════════════════════*/
         .st-themes-arrow {
             position: absolute;
             top: 50%;
@@ -668,8 +668,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-       TRACK  (the scrolling row of cards)
-    ════════════════════════════════════════════════*/
+                                   TRACK  (the scrolling row of cards)
+                                ════════════════════════════════════════════════*/
         .st-themes-track {
             display: flex;
             gap: 14px;
@@ -688,8 +688,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-       INDIVIDUAL THEME CARD
-    ════════════════════════════════════════════════*/
+                                   INDIVIDUAL THEME CARD
+                                ════════════════════════════════════════════════*/
         .st-theme-card {
             flex: 0 0 auto;
             width: 176px;
@@ -742,8 +742,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-       VIEW ALL CARD
-    ════════════════════════════════════════════════*/
+                                   VIEW ALL CARD
+                                ════════════════════════════════════════════════*/
         .st-theme-viewall .st-theme-card-img {
             background: #fff !important;
             border: 1.5px dashed rgba(17, 17, 17, .16);
@@ -807,8 +807,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-       RESPONSIVE
-    ════════════════════════════════════════════════*/
+                                   RESPONSIVE
+                                ════════════════════════════════════════════════*/
         @media (max-width: 767.98px) {
             .st-themes-header {
                 flex-direction: column;
@@ -956,124 +956,524 @@
         })();
     </script>
 
+    {{--
+    ============================================================
+    SECTION: Seasonal Journeys
+    FILE: resources/views/partials/seasonal-journeys.blade.php
+    INCLUDE: @include('partials.seasonal-journeys') in your page
+    CSS FILE: seasonal-journeys.css (add to your layout or assets)
+    ============================================================
+    --}}
+
+    <section class="sj-section">
+        <div class="container-fluid px-0">
+
+            {{-- ── Section Header ── --}}
+            <div class="sj-header">
+                <h2 class="sj-title">Seasonal Journeys</h2>
+                <p class="sj-subtitle">Best places to visit this season for unforgettable escapes!</p>
+            </div>
+
+            {{-- ── Bento Grid ── --}}
+            <div class="sj-grid">
+
+                {{-- ANDAMAN – wide left --}}
+                <a href="#" class="sj-card sj-card--wide-left">
+                    <img src="{{ asset('images/dubai.jpg') }}" alt="Andaman" class="sj-card__img" loading="lazy">
+                    <div class="sj-card__overlay"></div>
+                    <div class="sj-card__content">
+                        <h3 class="sj-card__name">ANDAMAN</h3>
+                        <p class="sj-card__price">Start From ₹ 14,999</p>
+                    </div>
+                </a>
+
+                {{-- EUROPE – tall center (spans both rows) --}}
+                <a href="#" class="sj-card sj-card--tall-center">
+                    <img src="{{ asset('images/himachal.jpg') }}" alt="Europe" class="sj-card__img" loading="lazy">
+                    <div class="sj-card__overlay"></div>
+                    <div class="sj-card__content">
+                        <h3 class="sj-card__name">EUROPE</h3>
+                        <p class="sj-card__price">Start From ₹ 69,089</p>
+                    </div>
+                </a>
+
+                {{-- MAURITIUS – wide right --}}
+                <a href="#" class="sj-card sj-card--wide-right">
+                    <img src="{{ asset('images/himachal.jpg') }}" alt="Mauritius" class="sj-card__img" loading="lazy">
+                    <div class="sj-card__overlay"></div>
+                    <div class="sj-card__content">
+                        <h3 class="sj-card__name">MAURITIUS</h3>
+                        <p class="sj-card__price">Start From ₹ 26,999</p>
+                    </div>
+                </a>
+
+                {{-- HIMACHAL – bottom left --}}
+                <a href="#" class="sj-card sj-card--bottom-sm">
+                    <img src="{{ asset('images/himachal.jpg') }}" alt="Himachal Pradesh" class="sj-card__img"
+                        loading="lazy">
+                    <div class="sj-card__overlay"></div>
+                    <div class="sj-card__content">
+                        <h3 class="sj-card__name">HIMACHAL PRADESH</h3>
+                        <p class="sj-card__price">Start From ₹ 9,999</p>
+                    </div>
+                </a>
+
+                {{-- KERALA – bottom second --}}
+                <a href="#" class="sj-card sj-card--bottom-sm">
+                    <img src="{{ asset('images/kerala.avif') }}" alt="Kerala" class="sj-card__img" loading="lazy">
+                    <div class="sj-card__overlay"></div>
+                    <div class="sj-card__content">
+                        <h3 class="sj-card__name">KERALA</h3>
+                        <p class="sj-card__price">Start From ₹ 9,999</p>
+                    </div>
+                </a>
+
+                {{-- MALAYSIA – bottom right --}}
+                <a href="#" class="sj-card sj-card--bottom-right">
+                    <img src="{{ asset('images/himachal.jpg') }}" alt="Malaysia" class="sj-card__img" loading="lazy">
+                    <div class="sj-card__overlay"></div>
+                    <div class="sj-card__content">
+                        <h3 class="sj-card__name">MALAYSIA</h3>
+                        <p class="sj-card__price">Start From ₹ 21,999</p>
+                    </div>
+                </a>
+
+            </div>{{-- /sj-grid --}}
+
+        </div>
+    </section>
 
 
 
-<!-- SEASONAL JOURNEYS SECTION -->
-{{-- <section class="st-seasonal-section">
 
-    <div class="container-fluid">
+    {{--
+    ============================================================
+    SECTION: Popular Destinations Cards
+    FILE: resources/views/partials/popular-destinations.blade.php
+    INCLUDE: @include('partials.popular-destinations') in your page
+    CSS: paste popular-destinations.css into your main stylesheet
+    ============================================================
+    --}}
 
-        <!-- SECTION HEADER -->
-        <div class="st-seasonal-header">
+    <section class="pd-section">
+        <div class="pd-container">
 
-            <div>
-                <h2 class="st-seasonal-title">
-                    Seasonal Journeys
-                </h2>
+            {{-- ── Section Header ── --}}
+            <div class="pd-header">
+                <div class="pd-header-left">
+                    <p class="pd-eyebrow">Where To Next?</p>
+                    <h2 class="pd-title">Popular Destinations</h2>
+                </div>
+                <div class="pd-header-right">
+                    <span class="pd-count" id="pdCount">1 of 6</span>
+                    <div class="pd-nav-btns">
+                        <button class="pd-nav-btn" id="pdPrev" aria-label="Previous">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button class="pd-nav-btn" id="pdNext" aria-label="Next">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-                <p class="st-seasonal-subtitle">
-                    Best places to visit this season for unforgettable escapes!
-                </p>
+            {{-- ── Cards Track ── --}}
+            <div class="pd-track-outer">
+                <div class="pd-track" id="pdTrack">
+
+                    {{-- CARD 1: Dubai --}}
+                    <article class="pd-card">
+                        <div class="pd-card-img-wrap">
+                            <img src="{{ asset('images/dubai.jpg') }}" alt="Dubai" class="pd-card-img" loading="lazy">
+                            <div class="pd-card-img-overlay"></div>
+                            <span class="pd-rating">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                4.7
+                            </span>
+                            <span class="pd-badge pd-badge--hot">Hot Deal</span>
+                        </div>
+                        <div class="pd-card-body">
+                            <div class="pd-card-top">
+                                <div>
+                                    <h3 class="pd-card-name">Dubai</h3>
+                                    <p class="pd-card-region">
+                                        <svg viewBox="0 0 24 24" fill="none">
+                                            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6" />
+                                            <path
+                                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+                                                stroke="currentColor" stroke-width="1.6" />
+                                        </svg>
+                                        UAE
+                                    </p>
+                                </div>
+                                <div class="pd-card-price-wrap">
+                                    <div class="pd-price-top">
+                                        <span class="pd-price-original">INR 4,21,913</span>
+                                        <span class="pd-price-save">SAVE INR 1,04,610</span>
+                                    </div>
+                                    <div class="pd-price-bottom">
+                                        <span class="pd-price-final">INR 3,17,303</span>
+                                        <span class="pd-price-per">/Adult</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pd-amenities">
+                                <span class="pd-amenity">4 nights</span>
+                                <span class="pd-amenity">Desert</span>
+                                <span class="pd-amenity">Shopping</span>
+                            </div>
+                            <a href="#" class="pd-btn">View packages <span aria-hidden="true">→</span></a>
+                        </div>
+                    </article>
+
+                    {{-- CARD 2: Switzerland --}}
+                    <article class="pd-card">
+                        <div class="pd-card-img-wrap">
+                            <img src="{{ asset('images/switzerland.jpg') }}" alt="Switzerland" class="pd-card-img"
+                                loading="lazy">
+                            <div class="pd-card-img-overlay"></div>
+                            <span class="pd-rating">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                4.9
+                            </span>
+                            <span class="pd-badge pd-badge--new">New</span>
+                        </div>
+                        <div class="pd-card-body">
+                            <div class="pd-card-top">
+                                <div>
+                                    <h3 class="pd-card-name">Switzerland</h3>
+                                    <p class="pd-card-region">
+                                        <svg viewBox="0 0 24 24" fill="none">
+                                            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6" />
+                                            <path
+                                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+                                                stroke="currentColor" stroke-width="1.6" />
+                                        </svg>
+                                        Europe
+                                    </p>
+                                </div>
+                                <div class="pd-card-price-wrap">
+                                    <div class="pd-price-top">
+                                        <span class="pd-price-original">INR 4,21,913</span>
+                                        <span class="pd-price-save">SAVE INR 1,04,610</span>
+                                    </div>
+                                    <div class="pd-price-bottom">
+                                        <span class="pd-price-final">INR 3,17,303</span>
+                                        <span class="pd-price-per">/Adult</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pd-amenities">
+                                <span class="pd-amenity">8 nights</span>
+                                <span class="pd-amenity">Mountains</span>
+                                <span class="pd-amenity">Snow</span>
+                            </div>
+                            <a href="#" class="pd-btn">View packages <span aria-hidden="true">→</span></a>
+                        </div>
+                    </article>
+
+                    {{-- CARD 3: Japan --}}
+                    <article class="pd-card">
+                        <div class="pd-card-img-wrap">
+                            <img src="{{ asset('images/japan.jpg') }}" alt="Japan" class="pd-card-img" loading="lazy">
+                            <div class="pd-card-img-overlay"></div>
+                            <span class="pd-rating">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                4.8
+                            </span>
+                            <span class="pd-badge pd-badge--seasonal">Seasonal</span>
+                        </div>
+                        <div class="pd-card-body">
+                            <div class="pd-card-top">
+                                <div>
+                                    <h3 class="pd-card-name">Japan</h3>
+                                    <p class="pd-card-region">
+                                        <svg viewBox="0 0 24 24" fill="none">
+                                            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6" />
+                                            <path
+                                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+                                                stroke="currentColor" stroke-width="1.6" />
+                                        </svg>
+                                        East Asia
+                                    </p>
+                                </div>
+                                <div class="pd-card-price-wrap">
+                                    <div class="pd-price-top">
+                                        <span class="pd-price-original">INR 4,21,913</span>
+                                        <span class="pd-price-save">SAVE INR 1,04,610</span>
+                                    </div>
+                                    <div class="pd-price-bottom">
+                                        <span class="pd-price-final">INR 3,17,303</span>
+                                        <span class="pd-price-per">/Adult</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pd-amenities">
+                                <span class="pd-amenity">10 nights</span>
+                                <span class="pd-amenity">Culture</span>
+                                <span class="pd-amenity">Cherry</span>
+                            </div>
+                            <a href="#" class="pd-btn">View packages <span aria-hidden="true">→</span></a>
+                        </div>
+                    </article>
+
+                    {{-- CARD 4: Bali --}}
+                    <article class="pd-card">
+                        <div class="pd-card-img-wrap">
+                            <img src="{{ asset('images/bali.jpg') }}" alt="Bali" class="pd-card-img" loading="lazy">
+                            <div class="pd-card-img-overlay"></div>
+                            <span class="pd-rating">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                4.6
+                            </span>
+                            <span class="pd-badge pd-badge--hot">Hot Deal</span>
+                        </div>
+                        <div class="pd-card-body">
+                            <div class="pd-card-top">
+                                <div>
+                                    <h3 class="pd-card-name">Bali</h3>
+                                    <p class="pd-card-region">
+                                        <svg viewBox="0 0 24 24" fill="none">
+                                            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6" />
+                                            <path
+                                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+                                                stroke="currentColor" stroke-width="1.6" />
+                                        </svg>
+                                        Indonesia
+                                    </p>
+                                </div>
+                                <div class="pd-card-price-wrap">
+                                    <div class="pd-price-top">
+                                        <span class="pd-price-original">INR 4,21,913</span>
+                                        <span class="pd-price-save">SAVE INR 1,04,610</span>
+                                    </div>
+                                    <div class="pd-price-bottom">
+                                        <span class="pd-price-final">INR 3,17,303</span>
+                                        <span class="pd-price-per">/Adult</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pd-amenities">
+                                <span class="pd-amenity">6 nights</span>
+                                <span class="pd-amenity">Beach</span>
+                                <span class="pd-amenity">Temples</span>
+                            </div>
+                            <a href="#" class="pd-btn">View packages <span aria-hidden="true">→</span></a>
+                        </div>
+                    </article>
+
+                    {{-- CARD 5: Maldives --}}
+                    <article class="pd-card">
+                        <div class="pd-card-img-wrap">
+                            <img src="{{ asset('images/maldives.jpg') }}" alt="Maldives" class="pd-card-img" loading="lazy">
+                            <div class="pd-card-img-overlay"></div>
+                            <span class="pd-rating">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                5.0
+                            </span>
+                            <span class="pd-badge pd-badge--new">New</span>
+                        </div>
+                        <div class="pd-card-body">
+                            <div class="pd-card-top">
+                                <div>
+                                    <h3 class="pd-card-name">Maldives</h3>
+                                    <p class="pd-card-region">
+                                        <svg viewBox="0 0 24 24" fill="none">
+                                            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6" />
+                                            <path
+                                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+                                                stroke="currentColor" stroke-width="1.6" />
+                                        </svg>
+                                        South Asia
+                                    </p>
+                                </div>
+                                <div class="pd-card-price-wrap">
+                                    <div class="pd-price-top">
+                                        <span class="pd-price-original">INR 4,21,913</span>
+                                        <span class="pd-price-save">SAVE INR 1,04,610</span>
+                                    </div>
+                                    <div class="pd-price-bottom">
+                                        <span class="pd-price-final">INR 3,17,303</span>
+                                        <span class="pd-price-per">/Adult</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pd-amenities">
+                                <span class="pd-amenity">5 nights</span>
+                                <span class="pd-amenity">Luxury</span>
+                                <span class="pd-amenity">Overwater</span>
+                            </div>
+                            <a href="#" class="pd-btn">View packages <span aria-hidden="true">→</span></a>
+                        </div>
+                    </article>
+
+                    {{-- CARD 6: Thailand --}}
+                    <article class="pd-card">
+                        <div class="pd-card-img-wrap">
+                            <img src="{{ asset('images/thailand.jpg') }}" alt="Thailand" class="pd-card-img" loading="lazy">
+                            <div class="pd-card-img-overlay"></div>
+                            <span class="pd-rating">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                4.5
+                            </span>
+                            <span class="pd-badge pd-badge--seasonal">Seasonal</span>
+                        </div>
+                        <div class="pd-card-body">
+                            <div class="pd-card-top">
+                                <div>
+                                    <h3 class="pd-card-name">Thailand</h3>
+                                    <p class="pd-card-region">
+                                        <svg viewBox="0 0 24 24" fill="none">
+                                            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6" />
+                                            <path
+                                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+                                                stroke="currentColor" stroke-width="1.6" />
+                                        </svg>
+                                        Southeast Asia
+                                    </p>
+                                </div>
+                                <div class="pd-card-price-wrap">
+                                    <div class="pd-price-top">
+                                        <span class="pd-price-original">INR 4,21,913</span>
+                                        <span class="pd-price-save">SAVE INR 1,04,610</span>
+                                    </div>
+                                    <div class="pd-price-bottom">
+                                        <span class="pd-price-final">INR 3,17,303</span>
+                                        <span class="pd-price-per">/Adult</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pd-amenities">
+                                <span class="pd-amenity">7 nights</span>
+                                <span class="pd-amenity">Islands</span>
+                                <span class="pd-amenity">Street Food</span>
+                            </div>
+                            <a href="#" class="pd-btn">View packages <span aria-hidden="true">→</span></a>
+                        </div>
+                    </article>
+
+                </div>{{-- /pd-track --}}
+            </div>
+
+            {{-- ── Dot Indicators ── --}}
+            <div class="pd-dots" id="pdDots" aria-hidden="true"></div>
+
+            {{-- ── View All ── --}}
+            <div class="pd-footer">
+                <a href="#" class="pd-view-all">View all destinations <span aria-hidden="true">→</span></a>
             </div>
 
         </div>
+    </section>
 
-        <!-- GRID -->
-        <div class="st-seasonal-grid">
+    {{-- ── JS ── --}}
+    <script>
+        (function () {
+            const track = document.getElementById('pdTrack');
+            const prevBtn = document.getElementById('pdPrev');
+            const nextBtn = document.getElementById('pdNext');
+            const countEl = document.getElementById('pdCount');
+            const dotsEl = document.getElementById('pdDots');
 
-            <!-- ANDAMAN -->
-            <a href="#" class="st-seasonal-card st-card-wide">
-                <img src="{{ asset('images/himachal.jpg') }}" alt="Andaman">
+            if (!track) return;
 
-                <div class="st-seasonal-overlay"></div>
+            const cards = Array.from(track.children);
+            const total = cards.length;
+            let current = 0;
 
-                <div class="st-seasonal-content">
-                    <h3>ANDAMAN</h3>
-                    <p>Start From ₹ 14,999</p>
-                </div>
-            </a>
+            /* ── How many cards visible? ── */
+            function visibleCount() {
+                const w = track.parentElement.offsetWidth;
+                if (w >= 1024) return 3;
+                if (w >= 640) return 2;
+                return 1;
+            }
 
-            <!-- DUBAI -->
-<a href="#" class="st-seasonal-card st-card-tall-small">
-    <img src="{{ asset('images/himachal.jpg') }}" alt="Dubai">
+            /* ── Card width including gap ── */
+            function cardStep() {
+                const card = cards[0];
+                if (!card) return 0;
+                const gap = parseInt(getComputedStyle(track).gap) || 24;
+                return card.offsetWidth + gap;
+            }
 
-    <div class="st-seasonal-overlay"></div>
+            function maxIndex() {
+                return Math.max(0, total - visibleCount());
+            }
 
-    <div class="st-seasonal-content">
-        <h3>DUBAI</h3>
-        <p>Start From ₹ 34,999</p>
-    </div>
-</a>
+            function goTo(idx) {
+                current = Math.max(0, Math.min(idx, maxIndex()));
+                track.style.transform = `translateX(-${current * cardStep()}px)`;
+                countEl.textContent = `${current + 1} of ${total}`;
+                prevBtn.disabled = current === 0;
+                nextBtn.disabled = current >= maxIndex();
+                updateDots();
+            }
 
-            <!-- EUROPE -->
-            <a href="#" class="st-seasonal-card st-card-tall">
-                <img src="{{ asset('images/himachal.jpg') }}" alt="Europe">
+            /* ── Dots ── */
+            function buildDots() {
+                dotsEl.innerHTML = '';
+                for (let i = 0; i <= maxIndex(); i++) {
+                    const d = document.createElement('button');
+                    d.className = 'pd-dot';
+                    d.setAttribute('aria-label', `Go to slide ${i + 1}`);
+                    d.addEventListener('click', () => goTo(i));
+                    dotsEl.appendChild(d);
+                }
+            }
 
-                <div class="st-seasonal-overlay"></div>
+            function updateDots() {
+                Array.from(dotsEl.children).forEach((d, i) => {
+                    d.classList.toggle('pd-dot--active', i === current);
+                });
+            }
 
-                <div class="st-seasonal-content">
-                    <h3>EUROPE</h3>
-                    <p>Start From ₹ 69,089</p>
-                </div>
-            </a>
+            /* ── Touch / swipe ── */
+            let tx = 0;
+            track.addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; }, { passive: true });
+            track.addEventListener('touchend', e => {
+                const delta = tx - e.changedTouches[0].clientX;
+                if (Math.abs(delta) > 40) delta > 0 ? goTo(current + 1) : goTo(current - 1);
+            }, { passive: true });
 
-            <!-- MAURITIUS -->
-            <a href="#" class="st-seasonal-card st-card-wide-small">
-                <img src="{{ asset('images/himachal.jpg') }}" alt="Mauritius">
+            prevBtn.addEventListener('click', () => goTo(current - 1));
+            nextBtn.addEventListener('click', () => goTo(current + 1));
 
-                <div class="st-seasonal-overlay"></div>
+            /* ── Resize ── */
+            let rt;
+            window.addEventListener('resize', () => {
+                clearTimeout(rt);
+                rt = setTimeout(() => { buildDots(); goTo(Math.min(current, maxIndex())); }, 120);
+            });
 
-                <div class="st-seasonal-content">
-                    <h3>MAURITIUS</h3>
-                    <p>Start From ₹ 26,999</p>
-                </div>
-            </a>
-
-            <!-- HIMACHAL -->
-            <a href="#" class="st-seasonal-card">
-                <img src="{{ asset('images/himachal.jpg') }}" alt="Himachal">
-
-                <div class="st-seasonal-overlay"></div>
-
-                <div class="st-seasonal-content">
-                    <h3>HIMACHAL PRADESH</h3>
-                    <p>Start From ₹ 9,999</p>
-                </div>
-            </a>
-
-            <!-- KERALA -->
-            <a href="#" class="st-seasonal-card">
-                <img src="{{ asset('images/himachal.jpg') }}" alt="Kerala">
-
-                <div class="st-seasonal-overlay"></div>
-
-                <div class="st-seasonal-content">
-                    <h3>KERALA</h3>
-                    <p>Start From ₹ 9,999</p>
-                </div>
-            </a>
-
-            <!-- MALAYSIA -->
-            <a href="#" class="st-seasonal-card st-card-wide-small">
-                <img src="{{ asset('images/himachal.jpg') }}" alt="Malaysia">
-
-                <div class="st-seasonal-overlay"></div>
-
-                <div class="st-seasonal-content">
-                    <h3>MALAYSIA</h3>
-                    <p>Start From ₹ 21,999</p>
-                </div>
-            </a>
-
-        </div>
-
-    </div>
-
-</section> --}}
-
-
-
+            buildDots();
+            goTo(0);
+        })();
+    </script>
 
 
 
@@ -1081,88 +1481,622 @@
 
 {{--
 ============================================================
-SECTION: Seasonal Journeys
-FILE: resources/views/partials/seasonal-journeys.blade.php
-INCLUDE: @include('partials.seasonal-journeys') in your page
-CSS FILE: seasonal-journeys.css  (add to your layout or assets)
+SECTION: Destination Filtering & Discovery
+FILE: resources/views/partials/destination-filter.blade.php
+INCLUDE: @include('partials.destination-filter') in your page
+CSS:  <link rel="stylesheet" href="{{ asset('assets/css/destination-filter.css') }}">
+JS:   <script src="{{ asset('assets/js/destination-filter.js') }}" defer></script>
 ============================================================
 --}}
 
-<section class="sj-section">
-    <div class="container-fluid px-0">
-
-        {{-- ── Section Header ── --}}
-        <div class="sj-header">
-            <h2 class="sj-title">Seasonal Journeys</h2>
-            <p class="sj-subtitle">Best places to visit this season for unforgettable escapes!</p>
-        </div>
-
-        {{-- ── Bento Grid ── --}}
-        <div class="sj-grid">
-
-            {{-- ANDAMAN – wide left --}}
-            <a href="#" class="sj-card sj-card--wide-left">
-                <img src="{{ asset('images/dubai.jpg') }}" alt="Andaman" class="sj-card__img" loading="lazy">
-                <div class="sj-card__overlay"></div>
-                <div class="sj-card__content">
-                    <h3 class="sj-card__name">ANDAMAN</h3>
-                    <p class="sj-card__price">Start From ₹ 14,999</p>
-                </div>
-            </a>
-
-            {{-- EUROPE – tall center (spans both rows) --}}
-            <a href="#" class="sj-card sj-card--tall-center">
-                <img src="{{ asset('images/himachal.jpg') }}" alt="Europe" class="sj-card__img" loading="lazy">
-                <div class="sj-card__overlay"></div>
-                <div class="sj-card__content">
-                    <h3 class="sj-card__name">EUROPE</h3>
-                    <p class="sj-card__price">Start From ₹ 69,089</p>
-                </div>
-            </a>
-
-            {{-- MAURITIUS – wide right --}}
-            <a href="#" class="sj-card sj-card--wide-right">
-                <img src="{{ asset('images/himachal.jpg') }}" alt="Mauritius" class="sj-card__img" loading="lazy">
-                <div class="sj-card__overlay"></div>
-                <div class="sj-card__content">
-                    <h3 class="sj-card__name">MAURITIUS</h3>
-                    <p class="sj-card__price">Start From ₹ 26,999</p>
-                </div>
-            </a>
-
-            {{-- HIMACHAL – bottom left --}}
-            <a href="#" class="sj-card sj-card--bottom-sm">
-                <img src="{{ asset('images/himachal.jpg') }}" alt="Himachal Pradesh" class="sj-card__img" loading="lazy">
-                <div class="sj-card__overlay"></div>
-                <div class="sj-card__content">
-                    <h3 class="sj-card__name">HIMACHAL PRADESH</h3>
-                    <p class="sj-card__price">Start From ₹ 9,999</p>
-                </div>
-            </a>
-
-            {{-- KERALA – bottom second --}}
-            <a href="#" class="sj-card sj-card--bottom-sm">
-                <img src="{{ asset('images/kerala.avif') }}" alt="Kerala" class="sj-card__img" loading="lazy">
-                <div class="sj-card__overlay"></div>
-                <div class="sj-card__content">
-                    <h3 class="sj-card__name">KERALA</h3>
-                    <p class="sj-card__price">Start From ₹ 9,999</p>
-                </div>
-            </a>
-
-            {{-- MALAYSIA – bottom right --}}
-            <a href="#" class="sj-card sj-card--bottom-right">
-                <img src="{{ asset('images/himachal.jpg') }}" alt="Malaysia" class="sj-card__img" loading="lazy">
-                <div class="sj-card__overlay"></div>
-                <div class="sj-card__content">
-                    <h3 class="sj-card__name">MALAYSIA</h3>
-                    <p class="sj-card__price">Start From ₹ 21,999</p>
-                </div>
-            </a>
-
-        </div>{{-- /sj-grid --}}
-
+{{-- ── Mobile Filter Trigger (sticky) ── --}}
+<div class="df-mobile-filter-bar d-lg-none">
+    <button class="df-mobile-filter-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#dfFilterOffcanvas" aria-controls="dfFilterOffcanvas">
+        <i class="bi bi-sliders2"></i>
+        <span>Filters</span>
+        <span class="df-filter-badge" id="dfMobileFilterBadge" style="display:none;">0</span>
+    </button>
+    <div class="df-mobile-sort-wrap">
+        <select class="df-mobile-sort-select" id="dfMobileSortSelect" aria-label="Sort by">
+            <option value="popular">Most Popular</option>
+            <option value="budget">Budget Friendly</option>
+            <option value="luxury">Luxury</option>
+            <option value="trending">Trending</option>
+            <option value="duration">Duration</option>
+        </select>
+        <i class="bi bi-chevron-down df-mobile-sort-chevron"></i>
     </div>
-</section>
+</div>
+
+{{-- ── Mobile Offcanvas Sidebar ── --}}
+<div class="offcanvas offcanvas-start df-offcanvas" tabindex="-1" id="dfFilterOffcanvas" aria-labelledby="dfFilterOffcanvasLabel">
+    <div class="offcanvas-header df-offcanvas-header">
+        <div>
+            <h5 class="offcanvas-title df-sidebar-title" id="dfFilterOffcanvasLabel">Find Your Perfect Journey</h5>
+            <p class="df-sidebar-subtitle">Filter curated travel experiences.</p>
+        </div>
+        <button type="button" class="df-offcanvas-close" data-bs-dismiss="offcanvas" aria-label="Close">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+    <div class="offcanvas-body df-offcanvas-body">
+        {{-- Mobile sidebar content inserted by JS --}}
+        <div id="dfOffcanvasContent"></div>
+    </div>
+</div>
+
+{{-- ── Main Section ── --}}
+<section class="df-section" id="dfSection">
+    <div class="df-wrapper">
+
+        {{-- ════ LEFT SIDEBAR ════ --}}
+        <aside class="df-sidebar d-none d-lg-flex" id="dfSidebar" aria-label="Filter destinations">
+
+            <div class="df-sidebar-inner">
+                {{-- Header --}}
+                <div class="df-sidebar-head">
+                    <div class="df-sidebar-head-icon">
+                        <i class="bi bi-compass"></i>
+                    </div>
+                    <div>
+                        <h2 class="df-sidebar-title">Find Your Perfect Journey</h2>
+                        <p class="df-sidebar-subtitle">Filter curated travel experiences based on your travel style.</p>
+                    </div>
+                </div>
+
+                {{-- ── 1. Destination Dropdown ── --}}
+                <div class="df-filter-group" id="dfDesktopDestGroup">
+                    <label class="df-filter-label" for="dfDestination">
+                        <i class="bi bi-geo-alt"></i> Destination
+                    </label>
+                    <div class="df-select-wrap">
+                        <select class="df-select" id="dfDestination" aria-label="Select destination">
+                            <option value="">All Destinations</option>
+                            <option value="bali">Bali</option>
+                            <option value="goa">Goa</option>
+                            <option value="dubai">Dubai</option>
+                            <option value="thailand">Thailand</option>
+                            <option value="maldives">Maldives</option>
+                            <option value="kashmir">Kashmir</option>
+                            <option value="kerala">Kerala</option>
+                            <option value="switzerland">Switzerland</option>
+                        </select>
+                        <i class="bi bi-chevron-down df-select-chevron"></i>
+                    </div>
+                </div>
+
+                {{-- ── 2. Budget Filter (Dynamic) ── --}}
+                <div class="df-filter-group" id="dfDesktopBudgetGroup">
+                    <label class="df-filter-label">
+                        <i class="bi bi-currency-rupee"></i> Budget
+                    </label>
+                    <div class="df-budget-options" id="dfBudgetOptions" role="radiogroup" aria-label="Budget range">
+                        {{-- Populated by JS --}}
+                    </div>
+                </div>
+
+                {{-- ── 3. Duration ── --}}
+                <div class="df-filter-group">
+                    <label class="df-filter-label">
+                        <i class="bi bi-clock"></i> Duration
+                    </label>
+                    <div class="df-chip-group" id="dfDurationGroup" role="group" aria-label="Duration">
+                        <button class="df-chip" data-filter="duration" data-value="weekend">Weekend</button>
+                        <button class="df-chip" data-filter="duration" data-value="3-5">3–5 Days</button>
+                        <button class="df-chip" data-filter="duration" data-value="5-7">5–7 Days</button>
+                        <button class="df-chip" data-filter="duration" data-value="7+">7+ Days</button>
+                    </div>
+                </div>
+
+                {{-- ── 4. Travel Style ── --}}
+                <div class="df-filter-group">
+                    <label class="df-filter-label">
+                        <i class="bi bi-heart"></i> Travel Style
+                    </label>
+                    <div class="df-chip-group df-chip-group--wrap" id="dfStyleGroup" role="group" aria-label="Travel style">
+                        <button class="df-chip" data-filter="style" data-value="honeymoon">💑 Honeymoon</button>
+                        <button class="df-chip" data-filter="style" data-value="adventure">🧗 Adventure</button>
+                        <button class="df-chip" data-filter="style" data-value="family">👨‍👩‍👧 Family</button>
+                        <button class="df-chip" data-filter="style" data-value="solo">🎒 Solo</button>
+                        <button class="df-chip" data-filter="style" data-value="friends">🎉 Friends</button>
+                        <button class="df-chip" data-filter="style" data-value="luxury">✨ Luxury</button>
+                    </div>
+                </div>
+
+                {{-- ── 5. Domestic / International ── --}}
+                <div class="df-filter-group">
+                    <label class="df-filter-label">
+                        <i class="bi bi-globe2"></i> Trip Type
+                    </label>
+                    <div class="df-toggle-pill" id="dfTripToggle" role="radiogroup" aria-label="Trip type">
+                        <button class="df-toggle-btn df-toggle-btn--active" data-value="all" aria-pressed="true">All</button>
+                        <button class="df-toggle-btn" data-value="domestic" aria-pressed="false">Domestic</button>
+                        <button class="df-toggle-btn" data-value="international" aria-pressed="false">International</button>
+                    </div>
+                </div>
+
+                {{-- ── 6. Season ── --}}
+                <div class="df-filter-group">
+                    <label class="df-filter-label">
+                        <i class="bi bi-sun"></i> Season
+                    </label>
+                    <div class="df-chip-group df-chip-group--wrap" id="dfSeasonGroup" role="group" aria-label="Season">
+                        <button class="df-chip" data-filter="season" data-value="summer">☀️ Summer</button>
+                        <button class="df-chip" data-filter="season" data-value="winter">❄️ Winter</button>
+                        <button class="df-chip" data-filter="season" data-value="monsoon">🌧️ Monsoon</button>
+                        <button class="df-chip" data-filter="season" data-value="december">🎄 December</button>
+                    </div>
+                </div>
+
+                {{-- ── 7. Ratings ── --}}
+                <div class="df-filter-group">
+                    <label class="df-filter-label">
+                        <i class="bi bi-star"></i> Minimum Rating
+                    </label>
+                    <div class="df-chip-group" id="dfRatingGroup" role="radiogroup" aria-label="Minimum rating">
+                        <button class="df-chip" data-filter="rating" data-value="4">4★ & above</button>
+                        <button class="df-chip" data-filter="rating" data-value="4.5">4.5★ & above</button>
+                    </div>
+                </div>
+
+                {{-- ── 8. Sort By ── --}}
+                <div class="df-filter-group">
+                    <label class="df-filter-label" for="dfSort">
+                        <i class="bi bi-sort-down"></i> Sort By
+                    </label>
+                    <div class="df-select-wrap">
+                        <select class="df-select" id="dfSort" aria-label="Sort results">
+                            <option value="popular">Most Popular</option>
+                            <option value="budget">Budget Friendly</option>
+                            <option value="luxury">Luxury</option>
+                            <option value="trending">Trending</option>
+                            <option value="duration">Duration</option>
+                        </select>
+                        <i class="bi bi-chevron-down df-select-chevron"></i>
+                    </div>
+                </div>
+
+                {{-- ── Actions ── --}}
+                <div class="df-sidebar-actions">
+                    <button class="df-btn-clear" id="dfClearFilters" type="button" aria-label="Clear all filters">
+                        <i class="bi bi-x-circle"></i> Clear Filters
+                    </button>
+                    <button class="df-btn-search" id="dfExploreBtn" type="button">
+                        <i class="bi bi-search"></i> Explore Packages
+                    </button>
+                </div>
+
+            </div>{{-- /df-sidebar-inner --}}
+        </aside>
+
+        {{-- ════ RIGHT CONTENT ════ --}}
+        <div class="df-results" id="dfResults">
+
+            {{-- Results Top Bar --}}
+            <div class="df-results-topbar">
+                <div class="df-results-meta">
+                    <h2 class="df-results-title">Recommended Destinations</h2>
+                    <p class="df-results-subtitle">Handpicked journeys curated based on your travel preferences.</p>
+                </div>
+                <div class="df-results-controls">
+                    <span class="df-results-count" id="dfResultsCount">8 packages found</span>
+                    <div class="df-active-filters" id="dfActiveFilters" aria-live="polite"></div>
+                    <div class="df-view-toggle d-none d-md-flex" role="group" aria-label="View mode">
+                        <button class="df-view-btn df-view-btn--active" id="dfViewGrid" aria-label="Grid view" title="Grid view">
+                            <i class="bi bi-grid-3x3-gap"></i>
+                        </button>
+                        <button class="df-view-btn" id="dfViewList" aria-label="List view" title="List view">
+                            <i class="bi bi-list-ul"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Cards Grid --}}
+            <div class="df-cards-grid" id="dfCardsGrid" aria-live="polite" aria-label="Destination results">
+
+                {{-- CARD: Bali --}}
+                <article class="df-card"
+                    data-destination="bali"
+                    data-type="international"
+                    data-style="honeymoon,adventure,friends"
+                    data-season="summer,monsoon"
+                    data-duration="5-7"
+                    data-rating="4.7"
+                    data-price="50000"
+                    data-tag="trending">
+                    <div class="df-card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80" alt="Bali, Indonesia" class="df-card-img" loading="lazy">
+                        <div class="df-card-overlay"></div>
+                        <div class="df-card-badges">
+                            <span class="df-badge df-badge--trending">Trending</span>
+                        </div>
+                        <button class="df-wishlist-btn" aria-label="Add Bali to wishlist" data-wishlisted="false">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="df-card-rating">
+                            <i class="bi bi-star-fill"></i> 4.7
+                        </div>
+                    </div>
+                    <div class="df-card-body">
+                        <div class="df-card-header">
+                            <div>
+                                <h3 class="df-card-name">Bali</h3>
+                                <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> Indonesia</p>
+                            </div>
+                            <div class="df-card-price-block">
+                                <span class="df-price-from">From</span>
+                                <span class="df-price">₹50,000</span>
+                            </div>
+                        </div>
+                        <div class="df-card-highlights">
+                            <span><i class="bi bi-clock"></i> 5–7 Days</span>
+                            <span><i class="bi bi-water"></i> Beach & Temples</span>
+                            <span><i class="bi bi-camera"></i> Rice Terraces</span>
+                        </div>
+                        <div class="df-card-tags">
+                            <span class="df-tag">Honeymoon</span>
+                            <span class="df-tag">Adventure</span>
+                            <span class="df-tag">Friends</span>
+                        </div>
+                        <a href="#" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                {{-- CARD: Goa --}}
+                <article class="df-card"
+                    data-destination="goa"
+                    data-type="domestic"
+                    data-style="friends,adventure,solo"
+                    data-season="winter,december"
+                    data-duration="weekend"
+                    data-rating="4.3"
+                    data-price="10000"
+                    data-tag="bestseller">
+                    <div class="df-card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&q=80" alt="Goa, India" class="df-card-img" loading="lazy">
+                        <div class="df-card-overlay"></div>
+                        <div class="df-card-badges">
+                            <span class="df-badge df-badge--bestseller">Bestseller</span>
+                        </div>
+                        <button class="df-wishlist-btn" aria-label="Add Goa to wishlist" data-wishlisted="false">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="df-card-rating">
+                            <i class="bi bi-star-fill"></i> 4.3
+                        </div>
+                    </div>
+                    <div class="df-card-body">
+                        <div class="df-card-header">
+                            <div>
+                                <h3 class="df-card-name">Goa</h3>
+                                <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> India</p>
+                            </div>
+                            <div class="df-card-price-block">
+                                <span class="df-price-from">From</span>
+                                <span class="df-price">₹10,000</span>
+                            </div>
+                        </div>
+                        <div class="df-card-highlights">
+                            <span><i class="bi bi-clock"></i> Weekend Trip</span>
+                            <span><i class="bi bi-water"></i> Beaches</span>
+                            <span><i class="bi bi-music-note"></i> Nightlife</span>
+                        </div>
+                        <div class="df-card-tags">
+                            <span class="df-tag">Friends</span>
+                            <span class="df-tag">Adventure</span>
+                            <span class="df-tag">Solo</span>
+                        </div>
+                        <a href="#" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                {{-- CARD: Dubai --}}
+                <article class="df-card"
+                    data-destination="dubai"
+                    data-type="international"
+                    data-style="luxury,family,honeymoon"
+                    data-season="winter,december"
+                    data-duration="3-5"
+                    data-rating="4.8"
+                    data-price="120000"
+                    data-tag="luxury">
+                    <div class="df-card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80" alt="Dubai, UAE" class="df-card-img" loading="lazy">
+                        <div class="df-card-overlay"></div>
+                        <div class="df-card-badges">
+                            <span class="df-badge df-badge--luxury">Luxury</span>
+                        </div>
+                        <button class="df-wishlist-btn" aria-label="Add Dubai to wishlist" data-wishlisted="false">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="df-card-rating">
+                            <i class="bi bi-star-fill"></i> 4.8
+                        </div>
+                    </div>
+                    <div class="df-card-body">
+                        <div class="df-card-header">
+                            <div>
+                                <h3 class="df-card-name">Dubai</h3>
+                                <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> UAE</p>
+                            </div>
+                            <div class="df-card-price-block">
+                                <span class="df-price-from">From</span>
+                                <span class="df-price">₹1,20,000</span>
+                            </div>
+                        </div>
+                        <div class="df-card-highlights">
+                            <span><i class="bi bi-clock"></i> 3–5 Days</span>
+                            <span><i class="bi bi-buildings"></i> Skyline</span>
+                            <span><i class="bi bi-sun"></i> Desert Safari</span>
+                        </div>
+                        <div class="df-card-tags">
+                            <span class="df-tag">Luxury</span>
+                            <span class="df-tag">Family</span>
+                            <span class="df-tag">Honeymoon</span>
+                        </div>
+                        <a href="#" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                {{-- CARD: Maldives --}}
+                <article class="df-card"
+                    data-destination="maldives"
+                    data-type="international"
+                    data-style="honeymoon,luxury"
+                    data-season="summer,winter"
+                    data-duration="5-7"
+                    data-rating="4.9"
+                    data-price="150000"
+                    data-tag="luxury">
+                    <div class="df-card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80" alt="Maldives" class="df-card-img" loading="lazy">
+                        <div class="df-card-overlay"></div>
+                        <div class="df-card-badges">
+                            <span class="df-badge df-badge--luxury">Luxury</span>
+                        </div>
+                        <button class="df-wishlist-btn" aria-label="Add Maldives to wishlist" data-wishlisted="false">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="df-card-rating">
+                            <i class="bi bi-star-fill"></i> 4.9
+                        </div>
+                    </div>
+                    <div class="df-card-body">
+                        <div class="df-card-header">
+                            <div>
+                                <h3 class="df-card-name">Maldives</h3>
+                                <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> South Asia</p>
+                            </div>
+                            <div class="df-card-price-block">
+                                <span class="df-price-from">From</span>
+                                <span class="df-price">₹1,50,000</span>
+                            </div>
+                        </div>
+                        <div class="df-card-highlights">
+                            <span><i class="bi bi-clock"></i> 5–7 Days</span>
+                            <span><i class="bi bi-houses"></i> Overwater Villa</span>
+                            <span><i class="bi bi-water"></i> Coral Reefs</span>
+                        </div>
+                        <div class="df-card-tags">
+                            <span class="df-tag">Honeymoon</span>
+                            <span class="df-tag">Luxury</span>
+                        </div>
+                        <a href="#" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                {{-- CARD: Kashmir --}}
+                <article class="df-card"
+                    data-destination="kashmir"
+                    data-type="domestic"
+                    data-style="honeymoon,family,adventure"
+                    data-season="summer,winter"
+                    data-duration="5-7"
+                    data-rating="4.6"
+                    data-price="35000"
+                    data-tag="trending">
+                    <div class="df-card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80" alt="Kashmir, India" class="df-card-img" loading="lazy">
+                        <div class="df-card-overlay"></div>
+                        <div class="df-card-badges">
+                            <span class="df-badge df-badge--trending">Trending</span>
+                        </div>
+                        <button class="df-wishlist-btn" aria-label="Add Kashmir to wishlist" data-wishlisted="false">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="df-card-rating">
+                            <i class="bi bi-star-fill"></i> 4.6
+                        </div>
+                    </div>
+                    <div class="df-card-body">
+                        <div class="df-card-header">
+                            <div>
+                                <h3 class="df-card-name">Kashmir</h3>
+                                <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> India</p>
+                            </div>
+                            <div class="df-card-price-block">
+                                <span class="df-price-from">From</span>
+                                <span class="df-price">₹35,000</span>
+                            </div>
+                        </div>
+                        <div class="df-card-highlights">
+                            <span><i class="bi bi-clock"></i> 5–7 Days</span>
+                            <span><i class="bi bi-snow"></i> Snow Peaks</span>
+                            <span><i class="bi bi-water"></i> Dal Lake</span>
+                        </div>
+                        <div class="df-card-tags">
+                            <span class="df-tag">Honeymoon</span>
+                            <span class="df-tag">Family</span>
+                            <span class="df-tag">Adventure</span>
+                        </div>
+                        <a href="#" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                {{-- CARD: Thailand --}}
+                <article class="df-card"
+                    data-destination="thailand"
+                    data-type="international"
+                    data-style="friends,adventure,solo"
+                    data-season="summer,winter"
+                    data-duration="7+"
+                    data-rating="4.5"
+                    data-price="60000"
+                    data-tag="bestseller">
+                    <div class="df-card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?w=800&q=80" alt="Thailand" class="df-card-img" loading="lazy">
+                        <div class="df-card-overlay"></div>
+                        <div class="df-card-badges">
+                            <span class="df-badge df-badge--bestseller">Bestseller</span>
+                        </div>
+                        <button class="df-wishlist-btn" aria-label="Add Thailand to wishlist" data-wishlisted="false">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="df-card-rating">
+                            <i class="bi bi-star-fill"></i> 4.5
+                        </div>
+                    </div>
+                    <div class="df-card-body">
+                        <div class="df-card-header">
+                            <div>
+                                <h3 class="df-card-name">Thailand</h3>
+                                <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> Southeast Asia</p>
+                            </div>
+                            <div class="df-card-price-block">
+                                <span class="df-price-from">From</span>
+                                <span class="df-price">₹60,000</span>
+                            </div>
+                        </div>
+                        <div class="df-card-highlights">
+                            <span><i class="bi bi-clock"></i> 7+ Days</span>
+                            <span><i class="bi bi-tropical-storm"></i> Islands</span>
+                            <span><i class="bi bi-cup-hot"></i> Street Food</span>
+                        </div>
+                        <div class="df-card-tags">
+                            <span class="df-tag">Friends</span>
+                            <span class="df-tag">Adventure</span>
+                            <span class="df-tag">Solo</span>
+                        </div>
+                        <a href="#" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                {{-- CARD: Switzerland --}}
+                <article class="df-card"
+                    data-destination="switzerland"
+                    data-type="international"
+                    data-style="honeymoon,family,luxury"
+                    data-season="winter,summer"
+                    data-duration="7+"
+                    data-rating="4.9"
+                    data-price="200000"
+                    data-tag="luxury">
+                    <div class="df-card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" alt="Switzerland" class="df-card-img" loading="lazy">
+                        <div class="df-card-overlay"></div>
+                        <div class="df-card-badges">
+                            <span class="df-badge df-badge--luxury">Luxury</span>
+                        </div>
+                        <button class="df-wishlist-btn" aria-label="Add Switzerland to wishlist" data-wishlisted="false">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="df-card-rating">
+                            <i class="bi bi-star-fill"></i> 4.9
+                        </div>
+                    </div>
+                    <div class="df-card-body">
+                        <div class="df-card-header">
+                            <div>
+                                <h3 class="df-card-name">Switzerland</h3>
+                                <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> Europe</p>
+                            </div>
+                            <div class="df-card-price-block">
+                                <span class="df-price-from">From</span>
+                                <span class="df-price">₹2,00,000</span>
+                            </div>
+                        </div>
+                        <div class="df-card-highlights">
+                            <span><i class="bi bi-clock"></i> 7+ Days</span>
+                            <span><i class="bi bi-snow2"></i> Alps</span>
+                            <span><i class="bi bi-train-front"></i> Scenic Rail</span>
+                        </div>
+                        <div class="df-card-tags">
+                            <span class="df-tag">Honeymoon</span>
+                            <span class="df-tag">Luxury</span>
+                            <span class="df-tag">Family</span>
+                        </div>
+                        <a href="#" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                {{-- CARD: Kerala --}}
+                <article class="df-card"
+                    data-destination="kerala"
+                    data-type="domestic"
+                    data-style="honeymoon,family,solo"
+                    data-season="monsoon,winter"
+                    data-duration="5-7"
+                    data-rating="4.6"
+                    data-price="25000"
+                    data-tag="bestseller">
+                    <div class="df-card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?w=800&q=80" alt="Kerala, India" class="df-card-img" loading="lazy">
+                        <div class="df-card-overlay"></div>
+                        <div class="df-card-badges">
+                            <span class="df-badge df-badge--bestseller">Bestseller</span>
+                        </div>
+                        <button class="df-wishlist-btn" aria-label="Add Kerala to wishlist" data-wishlisted="false">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="df-card-rating">
+                            <i class="bi bi-star-fill"></i> 4.6
+                        </div>
+                    </div>
+                    <div class="df-card-body">
+                        <div class="df-card-header">
+                            <div>
+                                <h3 class="df-card-name">Kerala</h3>
+                                <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> India</p>
+                            </div>
+                            <div class="df-card-price-block">
+                                <span class="df-price-from">From</span>
+                                <span class="df-price">₹25,000</span>
+                            </div>
+                        </div>
+                        <div class="df-card-highlights">
+                            <span><i class="bi bi-clock"></i> 5–7 Days</span>
+                            <span><i class="bi bi-water"></i> Backwaters</span>
+                            <span><i class="bi bi-tree"></i> Spice Gardens</span>
+                        </div>
+                        <div class="df-card-tags">
+                            <span class="df-tag">Honeymoon</span>
+                            <span class="df-tag">Family</span>
+                            <span class="df-tag">Solo</span>
+                        </div>
+                        <a href="#" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </article>
+
+            </div>{{-- /df-cards-grid --}}
+
+            {{-- No Results State --}}
+            <div class="df-no-results" id="dfNoResults" style="display:none;" aria-live="assertive">
+                <div class="df-no-results-inner">
+                    <div class="df-no-results-icon"><i class="bi bi-search-heart"></i></div>
+                    <h3>No packages found</h3>
+                    <p>Try adjusting your filters or clearing them to discover more destinations.</p>
+                    <button class="df-btn-search" id="dfClearFiltersAlt" type="button">
+                        <i class="bi bi-arrow-counterclockwise"></i> Reset Filters
+                    </button>
+                </div>
+            </div>
+
+        </div>{{-- /df-results --}}
+    </div>{{-- /df-wrapper --}}
+    </section>
+
+    {{-- Premium Testimonials & Reviews --}}
+    @include('partials.testimonials-section')
 
 @endsection
