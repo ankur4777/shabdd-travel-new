@@ -246,6 +246,9 @@ body{
   width:1em;
   height:1em;
 }
+    .navbar-expand-xl {
+        flex-wrap: nowrap;
+        justify-content: flex-start;}
 
 .st-topbar{
   background:rgb(255 149 149 / 94%);
@@ -1018,4 +1021,830 @@ body{
   .st-mobile-only{
     display:none !important;
   }
+}
+
+/* Offers banner slider */
+.st-offers-slider-section{
+  width:min(100% - 24px, 1320px);
+  margin:0 auto 40px;
+}
+
+.st-offers-slider-head{
+  margin:22px 0 14px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.st-offers-slider-title{
+  margin:0;
+  font-size:clamp(1.4rem, 2.3vw, 2.1rem);
+  font-weight:800;
+  color:#0f1115;
+}
+
+.st-offers-slider-subtitle{
+  margin:0;
+  color:rgba(42,42,42,.75);
+  font-weight:700;
+}
+
+.st-offers-carousel{
+  border-radius:28px;
+  overflow:hidden;
+  border:1px solid rgba(17,17,17,.06);
+  box-shadow:0 26px 70px rgba(17,17,17,.08);
+  background:#0f1115;
+}
+
+.st-offers-slide{
+  position:relative;
+  min-height:clamp(320px, 42vh, 520px);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+
+.st-offers-slide-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(75% 120% at 10% 20%, rgba(255,59,48,.35) 0%, rgba(255,59,48,0) 55%),
+    linear-gradient(90deg, rgba(9,11,14,.88) 0%, rgba(9,11,14,.65) 55%, rgba(9,11,14,.55) 100%);
+  z-index:0;
+}
+
+.st-offers-slide-content{
+  position:relative;
+  z-index:1;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:34px 34px;
+  max-width:720px;
+  color:#fff;
+}
+
+.st-offers-pill{
+  display:inline-flex;
+  align-items:center;
+  width:fit-content;
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(255,59,48,.18);
+  border:1px solid rgba(255,59,48,.35);
+  color:#fff;
+  font-weight:900;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+  font-size:12px;
+  margin-bottom:14px;
+}
+
+.st-offers-slide-title{
+  margin:0;
+  font-size:clamp(1.3rem, 2.8vw, 2.6rem);
+  font-weight:900;
+  letter-spacing:-.02em;
+}
+
+.st-offers-slide-text{
+  margin:14px 0 0;
+  color:rgba(255,255,255,.88);
+  font-weight:700;
+  line-height:1.6;
+  max-width:560px;
+}
+
+.st-offers-slide-cta{
+  margin-top:18px;
+  width:fit-content;
+  background:linear-gradient(135deg, #ff574d 0%, var(--brand-primary) 100%) !important;
+  border:1px solid rgba(255,59,48,.18);
+  color:#fff;
+  text-decoration:none;
+  padding:12px 18px;
+  border-radius:16px;
+  font-weight:900;
+  letter-spacing:.02em;
+  transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+  box-shadow:0 18px 38px rgba(255,59,48,.22);
+}
+
+.st-offers-slide-cta:hover{
+  transform:translateY(-2px);
+  box-shadow:0 22px 44px rgba(255,59,48,.28);
+  filter:saturate(1.05);
+}
+
+.st-offers-carousel-control{
+  width:52px;
+  opacity:1;
+}
+
+.st-offers-carousel-control .carousel-control-prev-icon,
+.st-offers-carousel-control .carousel-control-next-icon{
+  filter:invert(1);
+}
+
+.st-offers-indicators{
+  bottom:18px;
+}
+
+.st-offers-indicators button{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  margin:0 8px;
+  background:rgba(255,255,255,.35);
+  border:1px solid rgba(255,255,255,.35);
+}
+
+.st-offers-indicators button.active{
+  background:rgba(255,59,48,.95);
+  border-color:rgba(255,59,48,.95);
+}
+
+@media (max-width:575.98px){
+  .st-offers-slide-content{
+    padding:24px 16px;
+  }
+
+  .st-offers-slider-section{
+    margin-bottom:26px;
+  }
+}
+
+
+/* =========================================
+   SEASONAL JOURNEYS
+========================================= */
+
+
+
+
+
+
+
+
+/* =========================================================
+   SEASONAL JOURNEYS  –  seasonal-journeys.css
+   Include this file in your layout:
+     <link rel="stylesheet" href="{{ asset('css/seasonal-journeys.css') }}">
+   Or paste the contents into your main stylesheet.
+   ========================================================= */
+
+/* ── Section wrapper ── */
+.sj-section {
+    width: min(100% - 24px, 1320px);
+    margin: 0 auto 56px;
+    font-family: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ── Header ── */
+.sj-header {
+    margin-bottom: 22px;
+}
+
+.sj-title {
+    margin: 0 0 6px;
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    font-weight: 800;
+    color: #0f1115;
+    letter-spacing: -0.01em;
+}
+
+.sj-subtitle {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(42, 42, 42, 0.65);
+}
+
+/* ── Bento Grid ──
+   Layout (desktop):
+   [ANDAMAN wide ] [EUROPE tall ] [MAURITIUS wide  ]
+   [HIMACHAL  sm ] [KERALA sm   ] [EUROPE tall cont] [MALAYSIA wide-right]
+
+   Implemented with a 12-column grid + named row heights:
+   Row 1: ~260px  |  Row 2: ~260px
+   Columns: 4.5 | 3 | 4.5  (proportional)
+*/
+.sj-grid {
+    display: grid;
+    grid-template-columns: 4fr 3.5fr 4fr;
+    grid-template-rows: 260px 260px;
+    gap: 14px;
+}
+
+/* ── Base card ── */
+.sj-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    /* smooth lift on hover */
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.3s ease;
+    box-shadow: 0 8px 28px rgba(17, 17, 17, 0.1);
+}
+
+.sj-card:hover {
+    transform: translateY(-5px) scale(1.015);
+    box-shadow: 0 22px 54px rgba(17, 17, 17, 0.18);
+}
+
+/* ── Card image ── */
+.sj-card__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    /* subtle zoom on hover via parent */
+    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.sj-card:hover .sj-card__img {
+    transform: scale(1.06);
+}
+
+/* ── Gradient overlay ── */
+.sj-card__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(
+            160deg,
+            rgba(6, 8, 12, 0) 30%,
+            rgba(6, 8, 12, 0.72) 100%
+        ),
+        linear-gradient(
+            0deg,
+            rgba(6, 8, 12, 0.62) 0%,
+            rgba(6, 8, 12, 0) 50%
+        );
+    transition: background 0.3s ease;
+}
+
+.sj-card:hover .sj-card__overlay {
+    background:
+        linear-gradient(
+            160deg,
+            rgba(6, 8, 12, 0) 20%,
+            rgba(6, 8, 12, 0.80) 100%
+        ),
+        linear-gradient(
+            0deg,
+            rgba(6, 8, 12, 0.72) 0%,
+            rgba(6, 8, 12, 0) 55%
+        );
+}
+
+/* ── Text content ── */
+.sj-card__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    padding: 20px 22px;
+    color: #fff;
+}
+
+.sj-card__name {
+    margin: 0 0 4px;
+    font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+    font-weight: 900;
+    letter-spacing: 0.01em;
+    line-height: 1.15;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.sj-card__price {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Grid placement ──
+   Grid columns: 1 = left | 2 = center | 3 = right
+   Grid rows:    1 = top  | 2 = bottom
+*/
+
+/* ANDAMAN: col 1, row 1 */
+.sj-card--wide-left {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+/* EUROPE: col 2, spans both rows */
+.sj-card--tall-center {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+}
+
+/* MAURITIUS: col 3, row 1 */
+.sj-card--wide-right {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+}
+
+/* HIMACHAL: col 1, row 2 — occupies roughly half of left col */
+.sj-card--bottom-sm:nth-child(4) {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    /* Split left col between Himachal & Kerala using a nested sub-grid approach below */
+}
+
+/* KERALA: occupies the other half of left col  */
+/* MALAYSIA: col 3, row 2 */
+
+/*
+  Because the main grid only has 3 cols and HIMACHAL + KERALA must share column 1
+  in row 2, we use a sub-grid (nested) on that cell.
+  Easier approach: re-define bottom row with 4 columns that map cleanly.
+  We achieve this by making the grid 12-column under the hood.
+*/
+
+/* ── Re-define as 12-column grid for precision ── */
+.sj-grid {
+    grid-template-columns:
+        minmax(0, 2fr)          /* col 1–4  : left area */
+        minmax(0, 1.25fr)       /* col 5–6  : Himachal */
+        minmax(0, 1.25fr)       /* col 7–8  : Kerala   */
+        minmax(0, 2.5fr)        /* col 9–12 : center (Europe) */
+        minmax(0, 2fr);         /* col 13+  : right area */
+}
+
+/* Reset — use 5 logical columns */
+.sj-card--wide-left    { grid-column: 1 / 2; grid-row: 1 / 2; }
+.sj-card--tall-center  { grid-column: 4 / 5; grid-row: 1 / 3; }
+.sj-card--wide-right   { grid-column: 5 / 6; grid-row: 1 / 2; }
+.sj-card--bottom-right { grid-column: 5 / 6; grid-row: 2 / 3; }
+
+/* Himachal & Kerala split col 1 in row 2 */
+/* Use a 2-column span for left area, then split: */
+.sj-grid {
+    grid-template-columns:
+        minmax(0, 1.9fr)   /* Andaman / left wide   */
+        minmax(0, 1.1fr)   /* Himachal              */
+        minmax(0, 1.1fr)   /* Kerala                */
+        minmax(0, 2.1fr)   /* Europe tall           */
+        minmax(0, 2fr);    /* Mauritius / Malaysia  */
+    grid-template-rows: 260px 260px;
+}
+
+.sj-card--wide-left {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+/* Andaman spans cols 1–3 in row 1 for the "wide" look */
+.sj-card--wide-left {
+    grid-column: 1 / 4;
+    grid-row: 1 / 2;
+}
+
+/* Europe spans col 4, both rows */
+.sj-card--tall-center {
+    grid-column: 4 / 5;
+    grid-row: 1 / 3;
+}
+
+/* Mauritius: col 5, row 1 */
+.sj-card--wide-right {
+    grid-column: 5 / 6;
+    grid-row: 1 / 2;
+}
+
+/* Himachal: col 1, row 2 */
+.sj-card--bottom-sm:nth-of-type(4) {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+/* Kerala: cols 2–3, row 2 */
+.sj-card--bottom-sm:nth-of-type(5) {
+    grid-column: 2 / 4;
+    grid-row: 2 / 3;
+}
+
+/* Malaysia: col 5, row 2 */
+.sj-card--bottom-right {
+    grid-column: 5 / 6;
+    grid-row: 2 / 3;
+}
+
+/* ── Responsive ── */
+
+/* Tablet: 2 cols */
+@media (max-width: 991.98px) {
+    .sj-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 220px 220px 220px;
+        gap: 12px;
+    }
+
+    /* Andaman: full width row 1 */
+    .sj-card--wide-left {
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+    }
+
+    /* Europe: left col, rows 2–3 */
+    .sj-card--tall-center {
+        grid-column: 1 / 2;
+        grid-row: 2 / 4;
+    }
+
+    /* Mauritius: right col, row 2 */
+    .sj-card--wide-right {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+    }
+
+    /* Himachal: right col, row 3 */
+    .sj-card--bottom-sm:nth-of-type(4) {
+        grid-column: 2 / 3;
+        grid-row: 3 / 4;
+    }
+
+    /* Kerala: hide on tablet or stack as extra row */
+    .sj-card--bottom-sm:nth-of-type(5) {
+        display: none;
+    }
+
+    /* Malaysia: hide on tablet */
+    .sj-card--bottom-right {
+        display: none;
+    }
+}
+
+/* Mobile: single column */
+@media (max-width: 575.98px) {
+    .sj-section {
+        width: min(100% - 16px, 1320px);
+        margin-bottom: 32px;
+    }
+
+    .sj-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, 200px);
+        gap: 10px;
+    }
+
+    .sj-card--wide-left,
+    .sj-card--tall-center,
+    .sj-card--wide-right,
+    .sj-card--bottom-sm:nth-of-type(4),
+    .sj-card--bottom-sm:nth-of-type(5),
+    .sj-card--bottom-right {
+        grid-column: 1 / 2;
+        grid-row: auto;
+        display: block;
+    }
+
+    .sj-card__name {
+        font-size: 1rem;
+    }
+
+    .sj-card__price {
+        font-size: 0.82rem;
+    }
+}
+
+
+/* =========================================================
+   FOOTER  –  footer.css
+   Link in your layout head:
+     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+   ========================================================= */
+
+/* ── Root / Tokens ── */
+.st-footer {
+    background: #161616;
+    color: rgba(255, 255, 255, 0.78);
+    font-family: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14.5px;
+    line-height: 1.6;
+}
+
+/* ── Shared container ── */
+.st-footer-container {
+    width: min(100% - 40px, 1320px);
+    margin: 0 auto;
+}
+
+/* ── Dividers ── */
+.st-footer-divider,
+.st-footer-tab-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 0;
+}
+
+/* ==========================================================
+   PACKAGE LINKS SECTION
+   ========================================================== */
+.st-footer-links-section {
+    padding: 36px 0 0;
+}
+
+/* ── Tab Nav ── */
+.st-footer-tabs {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 0;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.st-footer-tab {
+    background: transparent;
+    border: 1px solid transparent;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    letter-spacing: 0.01em;
+}
+
+.st-footer-tab:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.st-footer-tab.active {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.st-footer-tab-divider {
+    margin: 14px 0 20px;
+}
+
+/* ── Tab Panels ── */
+.st-footer-tab-panel {
+    display: none;
+    padding-bottom: 32px;
+}
+
+.st-footer-tab-panel.active {
+    display: block;
+}
+
+/* ── Link Grid (wrapping inline links) ── */
+.st-footer-link-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 0;
+    /* Use separator dots between inline links */
+}
+
+.st-footer-link-grid a {
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+    /* Dot separator after each link except last */
+    padding-right: 14px;
+    margin-right: 0;
+    position: relative;
+}
+
+.st-footer-link-grid a::after {
+    content: "·";
+    position: absolute;
+    right: 5px;
+    color: rgba(255, 255, 255, 0.25);
+    font-weight: 400;
+}
+
+.st-footer-link-grid a:last-child::after {
+    display: none;
+}
+
+.st-footer-link-grid a:hover {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* ==========================================================
+   MAIN FOOTER BODY  (4 columns)
+   ========================================================== */
+.st-footer-body {
+    padding: 0 0 8px;
+}
+
+.st-footer-body .st-footer-divider {
+    margin-bottom: 40px;
+}
+
+.st-footer-cols {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1.4fr 1fr;
+    gap: 24px 48px;
+    padding-bottom: 48px;
+}
+
+/* ── Column ── */
+.st-footer-col-title {
+    margin: 0 0 18px;
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.01em;
+}
+
+.st-footer-col-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.st-footer-col-links a {
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+    font-size: 14.5px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.st-footer-col-links a:hover {
+    color: #fff;
+}
+
+/* ── Email link with icon ── */
+.st-footer-email-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.st-footer-email-link svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+/* ── Fraud warning link ── */
+.st-footer-fraud-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #ff3b30 !important;
+    font-weight: 700 !important;
+}
+
+.st-footer-fraud-link svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: #ff3b30;
+}
+
+.st-footer-fraud-link:hover {
+    color: #ff5e55 !important;
+}
+
+/* ── Social links ── */
+.st-footer-social-links {
+    gap: 14px !important;
+}
+
+.st-footer-social-link {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 10px;
+}
+
+.st-social-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+}
+
+.st-footer-social-link:hover .st-social-icon {
+    opacity: 1;
+}
+
+.st-social-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* ==========================================================
+   BOTTOM BAR
+   ========================================================== */
+.st-footer-bottom {
+    padding-bottom: 28px;
+}
+
+.st-footer-bottom .st-footer-divider {
+    margin-bottom: 26px;
+}
+
+.st-footer-bottom-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.st-footer-brand {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.st-footer-logo {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+.st-footer-copy {
+    margin: 0;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.01em;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+/* Tablet */
+@media (max-width: 991.98px) {
+    .st-footer-cols {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px 40px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 575.98px) {
+    .st-footer-links-section {
+        padding-top: 24px;
+    }
+
+    .st-footer-tabs {
+        gap: 4px;
+    }
+
+    .st-footer-tab {
+        font-size: 12.5px;
+        padding: 7px 12px;
+    }
+
+    .st-footer-link-grid a {
+        font-size: 13px;
+    }
+
+    .st-footer-cols {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px 24px;
+    }
+
+    .st-footer-bottom-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .st-footer-copy {
+        font-size: 12.5px;
+    }
+}
+
+@media (max-width: 400px) {
+    .st-footer-cols {
+        grid-template-columns: 1fr;
+    }
 }
