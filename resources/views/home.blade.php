@@ -549,6 +549,354 @@
         </div>
     </section>
 
+
+    {{--
+============================================================
+SECTION: Recommended Destinations Card Slider
+FILE: resources/views/partials/recommended-destinations.blade.php
+INCLUDE: @include('partials.recommended-destinations') in your page
+CSS: paste recommended-destinations.css into your main stylesheet
+============================================================
+--}}
+ 
+<section class="rd-section">
+    <div class="rd-container">
+ 
+        {{-- ── Section Header ── --}}
+        <div class="rd-header">
+            <div class="rd-header-left">
+                <p class="rd-eyebrow">Handpicked For You</p>
+                <h2 class="rd-title">Recommended Destinations</h2>
+                <p class="rd-subtitle">Curated escapes based on traveler love and seasonal trends.</p>
+            </div>
+            <div class="rd-header-right">
+                <div class="rd-nav-btns">
+                    <button class="rd-nav-btn" id="rdPrev" aria-label="Previous">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <button class="rd-nav-btn" id="rdNext" aria-label="Next">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+                <a href="#" class="rd-view-all-link">View all <span aria-hidden="true">→</span></a>
+            </div>
+        </div>
+ 
+        {{-- ── Slider Track ── --}}
+        <div class="rd-slider-outer">
+            <div class="rd-track" id="rdTrack">
+ 
+                {{-- CARD 1: Santorini --}}
+                <article class="rd-card"
+                    style="--rd-card-bg: url('https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80');">
+                    <div class="rd-card-img"></div>
+                    <div class="rd-card-overlay"></div>
+                    <div class="rd-card-badge rd-badge--hot">🔥 Trending</div>
+                    <button class="rd-wishlist" aria-label="Save Santorini" data-saved="false">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="rd-card-body">
+                        <div class="rd-card-rating">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            4.9
+                        </div>
+                        <div class="rd-card-info">
+                            <div class="rd-card-location">
+                                <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="1.6"/></svg>
+                                Greece
+                            </div>
+                            <h3 class="rd-card-name">Santorini</h3>
+                            <div class="rd-card-tags">
+                                <span class="rd-tag">Honeymoon</span>
+                                <span class="rd-tag">Luxury</span>
+                                <span class="rd-tag">5–7 Days</span>
+                            </div>
+                            <div class="rd-card-footer">
+                                <div class="rd-price-block">
+                                    <span class="rd-price-from">From</span>
+                                    <span class="rd-price">₹1,85,000</span>
+                                    <span class="rd-price-per">/Adult</span>
+                                </div>
+                                <a href="#" class="rd-card-btn">Explore <span>→</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+ 
+                {{-- CARD 2: Bali --}}
+                <article class="rd-card"
+                    style="--rd-card-bg: url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80');">
+                    <div class="rd-card-img"></div>
+                    <div class="rd-card-overlay"></div>
+                    <div class="rd-card-badge rd-badge--bestseller">⭐ Bestseller</div>
+                    <button class="rd-wishlist" aria-label="Save Bali" data-saved="false">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="rd-card-body">
+                        <div class="rd-card-rating">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            4.7
+                        </div>
+                        <div class="rd-card-info">
+                            <div class="rd-card-location">
+                                <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="1.6"/></svg>
+                                Indonesia
+                            </div>
+                            <h3 class="rd-card-name">Bali</h3>
+                            <div class="rd-card-tags">
+                                <span class="rd-tag">Adventure</span>
+                                <span class="rd-tag">Friends</span>
+                                <span class="rd-tag">5–7 Days</span>
+                            </div>
+                            <div class="rd-card-footer">
+                                <div class="rd-price-block">
+                                    <span class="rd-price-from">From</span>
+                                    <span class="rd-price">₹50,000</span>
+                                    <span class="rd-price-per">/Adult</span>
+                                </div>
+                                <a href="#" class="rd-card-btn">Explore <span>→</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+ 
+                {{-- CARD 3: Maldives --}}
+                <article class="rd-card"
+                    style="--rd-card-bg: url('https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80');">
+                    <div class="rd-card-img"></div>
+                    <div class="rd-card-overlay"></div>
+                    <div class="rd-card-badge rd-badge--luxury">✨ Luxury</div>
+                    <button class="rd-wishlist" aria-label="Save Maldives" data-saved="false">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="rd-card-body">
+                        <div class="rd-card-rating">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            5.0
+                        </div>
+                        <div class="rd-card-info">
+                            <div class="rd-card-location">
+                                <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="1.6"/></svg>
+                                South Asia
+                            </div>
+                            <h3 class="rd-card-name">Maldives</h3>
+                            <div class="rd-card-tags">
+                                <span class="rd-tag">Honeymoon</span>
+                                <span class="rd-tag">Overwater</span>
+                                <span class="rd-tag">5–7 Days</span>
+                            </div>
+                            <div class="rd-card-footer">
+                                <div class="rd-price-block">
+                                    <span class="rd-price-from">From</span>
+                                    <span class="rd-price">₹1,50,000</span>
+                                    <span class="rd-price-per">/Adult</span>
+                                </div>
+                                <a href="#" class="rd-card-btn">Explore <span>→</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+ 
+                {{-- CARD 4: Kashmir --}}
+                <article class="rd-card"
+                    style="--rd-card-bg: url('https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80');">
+                    <div class="rd-card-img"></div>
+                    <div class="rd-card-overlay"></div>
+                    <div class="rd-card-badge rd-badge--hot">🔥 Trending</div>
+                    <button class="rd-wishlist" aria-label="Save Kashmir" data-saved="false">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="rd-card-body">
+                        <div class="rd-card-rating">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            4.6
+                        </div>
+                        <div class="rd-card-info">
+                            <div class="rd-card-location">
+                                <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="1.6"/></svg>
+                                India
+                            </div>
+                            <h3 class="rd-card-name">Kashmir</h3>
+                            <div class="rd-card-tags">
+                                <span class="rd-tag">Family</span>
+                                <span class="rd-tag">Snow</span>
+                                <span class="rd-tag">5–7 Days</span>
+                            </div>
+                            <div class="rd-card-footer">
+                                <div class="rd-price-block">
+                                    <span class="rd-price-from">From</span>
+                                    <span class="rd-price">₹35,000</span>
+                                    <span class="rd-price-per">/Adult</span>
+                                </div>
+                                <a href="#" class="rd-card-btn">Explore <span>→</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+ 
+                {{-- CARD 5: Switzerland --}}
+                <article class="rd-card"
+                    style="--rd-card-bg: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80');">
+                    <div class="rd-card-img"></div>
+                    <div class="rd-card-overlay"></div>
+                    <div class="rd-card-badge rd-badge--luxury">✨ Luxury</div>
+                    <button class="rd-wishlist" aria-label="Save Switzerland" data-saved="false">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="rd-card-body">
+                        <div class="rd-card-rating">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            4.9
+                        </div>
+                        <div class="rd-card-info">
+                            <div class="rd-card-location">
+                                <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="1.6"/></svg>
+                                Europe
+                            </div>
+                            <h3 class="rd-card-name">Switzerland</h3>
+                            <div class="rd-card-tags">
+                                <span class="rd-tag">Honeymoon</span>
+                                <span class="rd-tag">Alps</span>
+                                <span class="rd-tag">7+ Days</span>
+                            </div>
+                            <div class="rd-card-footer">
+                                <div class="rd-price-block">
+                                    <span class="rd-price-from">From</span>
+                                    <span class="rd-price">₹2,00,000</span>
+                                    <span class="rd-price-per">/Adult</span>
+                                </div>
+                                <a href="#" class="rd-card-btn">Explore <span>→</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+ 
+                {{-- CARD 6: Thailand --}}
+                <article class="rd-card"
+                    style="--rd-card-bg: url('https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?w=800&q=80');">
+                    <div class="rd-card-img"></div>
+                    <div class="rd-card-overlay"></div>
+                    <div class="rd-card-badge rd-badge--bestseller">⭐ Bestseller</div>
+                    <button class="rd-wishlist" aria-label="Save Thailand" data-saved="false">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="rd-card-body">
+                        <div class="rd-card-rating">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            4.5
+                        </div>
+                        <div class="rd-card-info">
+                            <div class="rd-card-location">
+                                <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="1.6"/></svg>
+                                Southeast Asia
+                            </div>
+                            <h3 class="rd-card-name">Thailand</h3>
+                            <div class="rd-card-tags">
+                                <span class="rd-tag">Friends</span>
+                                <span class="rd-tag">Islands</span>
+                                <span class="rd-tag">7+ Days</span>
+                            </div>
+                            <div class="rd-card-footer">
+                                <div class="rd-price-block">
+                                    <span class="rd-price-from">From</span>
+                                    <span class="rd-price">₹60,000</span>
+                                    <span class="rd-price-per">/Adult</span>
+                                </div>
+                                <a href="#" class="rd-card-btn">Explore <span>→</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+ 
+                {{-- CARD 7: Dubai --}}
+                <article class="rd-card"
+                    style="--rd-card-bg: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80');">
+                    <div class="rd-card-img"></div>
+                    <div class="rd-card-overlay"></div>
+                    <div class="rd-card-badge rd-badge--hot">🔥 Trending</div>
+                    <button class="rd-wishlist" aria-label="Save Dubai" data-saved="false">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="rd-card-body">
+                        <div class="rd-card-rating">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            4.8
+                        </div>
+                        <div class="rd-card-info">
+                            <div class="rd-card-location">
+                                <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="1.6"/></svg>
+                                UAE
+                            </div>
+                            <h3 class="rd-card-name">Dubai</h3>
+                            <div class="rd-card-tags">
+                                <span class="rd-tag">Luxury</span>
+                                <span class="rd-tag">Family</span>
+                                <span class="rd-tag">3–5 Days</span>
+                            </div>
+                            <div class="rd-card-footer">
+                                <div class="rd-price-block">
+                                    <span class="rd-price-from">From</span>
+                                    <span class="rd-price">₹1,20,000</span>
+                                    <span class="rd-price-per">/Adult</span>
+                                </div>
+                                <a href="#" class="rd-card-btn">Explore <span>→</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+ 
+                {{-- CARD 8: Goa --}}
+                <article class="rd-card"
+                    style="--rd-card-bg: url('https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&q=80');">
+                    <div class="rd-card-img"></div>
+                    <div class="rd-card-overlay"></div>
+                    <div class="rd-card-badge rd-badge--bestseller">⭐ Bestseller</div>
+                    <button class="rd-wishlist" aria-label="Save Goa" data-saved="false">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="rd-card-body">
+                        <div class="rd-card-rating">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            4.3
+                        </div>
+                        <div class="rd-card-info">
+                            <div class="rd-card-location">
+                                <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="1.6"/></svg>
+                                India
+                            </div>
+                            <h3 class="rd-card-name">Goa</h3>
+                            <div class="rd-card-tags">
+                                <span class="rd-tag">Friends</span>
+                                <span class="rd-tag">Beach</span>
+                                <span class="rd-tag">Weekend</span>
+                            </div>
+                            <div class="rd-card-footer">
+                                <div class="rd-price-block">
+                                    <span class="rd-price-from">From</span>
+                                    <span class="rd-price">₹10,000</span>
+                                    <span class="rd-price-per">/Adult</span>
+                                </div>
+                                <a href="#" class="rd-card-btn">Explore <span>→</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+ 
+            </div>{{-- /rd-track --}}
+        </div>{{-- /rd-slider-outer --}}
+ 
+        {{-- ── Dots ── --}}
+        <div class="rd-dots" id="rdDots" aria-hidden="true"></div>
+ 
+    </div>{{-- /rd-container --}}
+</section>
+
     {{-- ── Styles ── --}}
     <style>
         /* ═══════════════════════════════════════════════
@@ -603,7 +951,7 @@
         .st-themes-phone-number {
             font-size: 14.5px;
             font-weight: 900;
-            color: #0f9d88;
+            color: #ff3b30;
             text-decoration: none;
             letter-spacing: .01em;
             transition: color .2s;
@@ -1675,7 +2023,7 @@ JS:   <script src="{{ asset('assets/js/destination-filter.js') }}" defer></scrip
             {{-- Results Top Bar --}}
             <div class="df-results-topbar">
                 <div class="df-results-meta">
-                    <h2 class="df-results-title">Recommended Destinations</h2>
+                    <h2 class="df-results-title">Discover Your Next Journey</h2>
                     <p class="df-results-subtitle">Handpicked journeys curated based on your travel preferences.</p>
                 </div>
                 <div class="df-results-controls">
@@ -1692,8 +2040,21 @@ JS:   <script src="{{ asset('assets/js/destination-filter.js') }}" defer></scrip
                 </div>
             </div>
 
-            {{-- Cards Grid --}}
-            <div class="df-cards-grid" id="dfCardsGrid" aria-live="polite" aria-label="Destination results">
+            {{-- Carousel Wrapper --}}
+            <div class="df-carousel-wrapper">
+                {{-- Cards Carousel --}}
+                <div class="df-carousel-outer" id="dfCarouselOuter">
+                {{-- Left Arrow (hidden on first load) --}}
+                <button class="df-carousel-arrow df-carousel-arrow-left" id="dfCarouselArrowLeft" aria-label="Scroll left"
+                    style="display:none;">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+
+                {{-- Cards Track --}}
+                <div class="df-cards-grid" id="dfCardsGrid" aria-live="polite" aria-label="Destination results">
 
                 {{-- CARD: Bali --}}
                 <article class="df-card"
@@ -2080,6 +2441,18 @@ JS:   <script src="{{ asset('assets/js/destination-filter.js') }}" defer></scrip
 
             </div>{{-- /df-cards-grid --}}
 
+            {{-- Right Arrow --}}
+            <button class="df-carousel-arrow df-carousel-arrow-right" id="dfCarouselArrowRight" aria-label="Scroll right">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+
+            </div>{{-- /df-carousel-outer --}}
+
+            </div>{{-- /df-carousel-wrapper --}}
+
             {{-- No Results State --}}
             <div class="df-no-results" id="dfNoResults" style="display:none;" aria-live="assertive">
                 <div class="df-no-results-inner">
@@ -2094,7 +2467,138 @@ JS:   <script src="{{ asset('assets/js/destination-filter.js') }}" defer></scrip
 
         </div>{{-- /df-results --}}
     </div>{{-- /df-wrapper --}}
+    <div class="df-footer">
+                <a href="#" class="df-view-all">View all destinations <span aria-hidden="true">→</span></a>
+            </div>
     </section>
+
+
+
+    {{-- ============================================================
+SECTION: Honeymoon Romantic Luxury Banner
+Add your image: style="--hb-bg: url('{{ asset('images/your-honeymoon-bg.jpg') }}')"
+============================================================ --}}
+
+<section class="hb-section" style="--hb-bg: url('{{ asset('images/himachal.jpg') }}');">
+
+    {{-- 3D floating card / content layer --}}
+    <div class="hb-inner">
+
+        {{-- Decorative floating orbs --}}
+        <div class="hb-orb hb-orb--1" aria-hidden="true"></div>
+        <div class="hb-orb hb-orb--2" aria-hidden="true"></div>
+        <div class="hb-orb hb-orb--3" aria-hidden="true"></div>
+
+        {{-- Floating hearts --}}
+        <div class="hb-hearts" aria-hidden="true">
+            <span class="hb-heart hb-heart--1">♥</span>
+            <span class="hb-heart hb-heart--2">♥</span>
+            <span class="hb-heart hb-heart--3">♥</span>
+            <span class="hb-heart hb-heart--4">♥</span>
+            <span class="hb-heart hb-heart--5">♥</span>
+            <span class="hb-heart hb-heart--6">♥</span>
+            <span class="hb-heart hb-heart--7">♥</span>
+            <span class="hb-heart hb-heart--8">♥</span>
+            <span class="hb-heart hb-heart--9">♥</span>
+            <span class="hb-heart hb-heart--10">♥</span>
+            <span class="hb-heart hb-heart--11">♥</span>
+            <span class="hb-heart hb-heart--12">♥</span>
+            <span class="hb-heart hb-heart--13">♥</span>
+            <span class="hb-heart hb-heart--14">♥</span>
+            <span class="hb-heart hb-heart--15">♥</span>
+            <span class="hb-heart hb-heart--16">♥</span>
+
+
+        </div>
+
+        {{-- 3D Content Card --}}
+        <div class="hb-card">
+
+            <div class="hb-card-glow" aria-hidden="true"></div>
+
+            <div class="hb-card-body">
+
+                {{-- Pill --}}
+                <div class="hb-pill">
+                    <span class="hb-pill-dot"></span>
+                    Exclusive Honeymoon Packages
+                </div>
+
+                {{-- Headline --}}
+                <h2 class="hb-title">
+                    Where Every Moment<br>
+                    Becomes <em>Forever</em>
+                </h2>
+
+                {{-- Sub text --}}
+                <p class="hb-text">
+                    Drift away on curated romantic escapes — overwater villas, candlelit sunsets,
+                    and memories crafted just for two.
+                </p>
+
+                {{-- Stats row --}}
+                <div class="hb-stats">
+                    <div class="hb-stat">
+                        <span class="hb-stat-num">60+</span>
+                        <span class="hb-stat-label">Destinations</span>
+                    </div>
+                    <div class="hb-stat-divider" aria-hidden="true"></div>
+                    <div class="hb-stat">
+                        <span class="hb-stat-num">5,000+</span>
+                        <span class="hb-stat-label">Couples</span>
+                    </div>
+                    <div class="hb-stat-divider" aria-hidden="true"></div>
+                    <div class="hb-stat">
+                        <span class="hb-stat-num">4.9 ★</span>
+                        <span class="hb-stat-label">Rating</span>
+                    </div>
+                </div>
+
+                {{-- CTA Buttons --}}
+                <div class="hb-actions">
+                    <a href="#" class="hb-btn hb-btn--primary">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21C12 21 4 13.5 4 8.5a8 8 0 0 1 16 0C20 13.5 12 21 12 21z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="8.5" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg>
+                        Explore Packages
+                    </a>
+                    <a href="#" class="hb-btn hb-btn--ghost">
+                        Customize My Trip
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </a>
+                </div>
+
+            </div>{{-- /hb-card-body --}}
+
+            {{-- Right decorative visual panel --}}
+            <div class="hb-card-visual" aria-hidden="true">
+                <div class="hb-visual-ring hb-visual-ring--1"></div>
+                <div class="hb-visual-ring hb-visual-ring--2"></div>
+                <div class="hb-visual-ring hb-visual-ring--3"></div>
+
+                <div class="hb-visual-badge hb-visual-badge--top">
+                    <span class="hb-badge-icon">🌙</span>
+                    <div>
+                        <p class="hb-badge-title">Honeymoon Suite</p>
+                        <p class="hb-badge-sub">Maldives Overwater Villa</p>
+                    </div>
+                </div>
+
+                <div class="hb-visual-center">
+                    <div class="hb-heart-3d">♥</div>
+                </div>
+
+                <div class="hb-visual-badge hb-visual-badge--bottom">
+                    <span class="hb-badge-icon">✈️</span>
+                    <div>
+                        <p class="hb-badge-title">Starting ₹49,999</p>
+                        <p class="hb-badge-sub">Flights + Stay Included</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>{{-- /hb-card --}}
+
+    </div>{{-- /hb-inner --}}
+</section>
 
     {{-- Premium Testimonials & Reviews --}}
     @include('partials.testimonials-section')

@@ -560,6 +560,142 @@
     }
 
     /* =========================================================
+       RECOMMENDED DESTINATIONS CAROUSEL
+       ========================================================= */
+    function initCardsCarousel() {
+        const carouselOuter = $('dfCarouselOuter');
+        const arrowLeft = $('dfCarouselArrowLeft');
+        const arrowRight = $('dfCarouselArrowRight');
+        if (!cardsGrid || !carouselOuter || !arrowLeft || !arrowRight) return;
+        if (cardsGrid.dataset.carouselInit === '1') return;
+        cardsGrid.dataset.carouselInit = '1';
+
+        const getStep = () => {
+            const card = cardsGrid.querySelector('.df-card:not(.df-card--hidden)') || cardsGrid.querySelector('.df-card');
+            if (!card) return 280;
+            const gap = parseInt(window.getComputedStyle(cardsGrid).gap, 10) || 20;
+            return card.getBoundingClientRect().width + gap;
+        };
+
+        const updateArrows = () => {
+            const maxScrollLeft = cardsGrid.scrollWidth - cardsGrid.clientWidth;
+            const isMobile = window.matchMedia('(max-width: 639.98px)').matches;
+
+            if (isMobile) {
+                arrowLeft.style.display = 'flex';
+                arrowRight.style.display = 'flex';
+                arrowLeft.disabled = maxScrollLeft <= 2 || cardsGrid.scrollLeft <= 2;
+                arrowRight.disabled = maxScrollLeft <= 2 || cardsGrid.scrollLeft >= (maxScrollLeft - 2);
+                return;
+            }
+
+            arrowLeft.disabled = false;
+            arrowRight.disabled = false;
+
+            if (maxScrollLeft <= 2) {
+                arrowLeft.style.display = 'none';
+                arrowRight.style.display = 'none';
+                return;
+            }
+            arrowLeft.style.display = cardsGrid.scrollLeft <= 2 ? 'none' : 'flex';
+            arrowRight.style.display = cardsGrid.scrollLeft >= (maxScrollLeft - 2) ? 'none' : 'flex';
+        };
+
+        const scrollByStep = direction => {
+            cardsGrid.scrollBy({ left: direction * getStep(), behavior: 'smooth' });
+        };
+
+        arrowRight.addEventListener('click', () => scrollByStep(1));
+        arrowLeft.addEventListener('click', () => scrollByStep(-1));
+        cardsGrid.addEventListener('scroll', updateArrows, { passive: true });
+        window.addEventListener('resize', updateArrows);
+
+        // Drag-to-scroll for touch/mouse without blocking real button/link taps
+        let isPointerDown = false;
+        let isDragging = false;
+        let startX = 0;
+        let startScrollLeft = 0;
+
+        cardsGrid.addEventListener('pointerdown', e => {
+            const interactive = e.target.closest('a, button, input, select, label, textarea');
+            if (interactive) return;
+            isPointerDown = true;
+            isDragging = false;
+            startX = e.clientX;
+            startScrollLeft = cardsGrid.scrollLeft;
+            cardsGrid.classList.add('df-is-dragging');
+            if (cardsGrid.setPointerCapture) {
+                cardsGrid.setPointerCapture(e.pointerId);
+            }
+        });
+
+        cardsGrid.addEventListener('pointermove', e => {
+            if (!isPointerDown) return;
+            const delta = e.clientX - startX;
+            if (Math.abs(delta) > 6) isDragging = true;
+            if (isDragging) {
+                e.preventDefault();
+                cardsGrid.scrollLeft = startScrollLeft - delta;
+            }
+        });
+
+        const endPointer = e => {
+            isPointerDown = false;
+            cardsGrid.classList.remove('df-is-dragging');
+            if (e && cardsGrid.releasePointerCapture) {
+                try {
+                    cardsGrid.releasePointerCapture(e.pointerId);
+                } catch (_) {}
+            }
+            setTimeout(() => { isDragging = false; }, 0);
+            updateArrows();
+        };
+        cardsGrid.addEventListener('pointerup', endPointer);
+        cardsGrid.addEventListener('pointercancel', endPointer);
+        cardsGrid.addEventListener('pointerleave', endPointer);
+
+        if (!window.PointerEvent) {
+            cardsGrid.addEventListener('touchstart', e => {
+                const interactive = e.target.closest('a, button, input, select, label, textarea');
+                if (interactive) return;
+                isPointerDown = true;
+                isDragging = false;
+                startX = e.changedTouches[0].clientX;
+                startScrollLeft = cardsGrid.scrollLeft;
+                cardsGrid.classList.add('df-is-dragging');
+            }, { passive: true });
+
+            cardsGrid.addEventListener('touchmove', e => {
+                if (!isPointerDown) return;
+                const delta = e.changedTouches[0].clientX - startX;
+                if (Math.abs(delta) > 6) isDragging = true;
+                if (isDragging) {
+                    e.preventDefault();
+                    cardsGrid.scrollLeft = startScrollLeft - delta;
+                }
+            }, { passive: false });
+
+            cardsGrid.addEventListener('touchend', endPointer);
+            cardsGrid.addEventListener('touchcancel', endPointer);
+        }
+
+        cardsGrid.addEventListener('click', e => {
+            if (!isDragging) return;
+            const interactive = e.target.closest('a, button');
+            if (interactive) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, true);
+
+        // Keep arrows in sync after filtering/sorting updates
+        const syncObserver = new MutationObserver(updateArrows);
+        syncObserver.observe(cardsGrid, { childList: true, subtree: false, attributes: true });
+
+        requestAnimationFrame(updateArrows);
+    }
+
+    /* =========================================================
        OFFCANVAS MOBILE SIDEBAR  —  clone desktop filters
        ========================================================= */
     function buildOffcanvasContent() {
@@ -748,6 +884,7 @@
         initSort();
         initViewToggle();
         initWishlistButtons();
+        initCardsCarousel();
         buildOffcanvasContent();
 
         if (clearBtn)    clearBtn.addEventListener('click', clearAllFilters);

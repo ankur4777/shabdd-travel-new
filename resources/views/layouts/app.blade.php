@@ -36,6 +36,9 @@
 <script src="{{ asset('js/testimonials-section.js') }}" defer></script>
 <!-- Destination Filter JS -->
 <script src="{{ asset('js/destination-filter.js') }}" defer></script>
+<!-- Carousel JS -->
+<script src="{{ asset('js/carousel.js') }}" defer></script>
+<script src="{{ asset('js/script.js') }}" defer></script>
 
 
 </body>
