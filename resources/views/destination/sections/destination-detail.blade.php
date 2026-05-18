@@ -1,105 +1,35 @@
 @php
-    $primaryColor = $destination->theme_color ?? '#2563eb';
+    $profile = $destinationProfile ?? [];
+    $primaryColor = $destination->theme_color ?: ($profile['primary_color'] ?? '#2563eb');
 
-    $cityPackages = $destination->city_packages ?? [
-        ['city_name' => 'Manali', 'url' => route('destinations.index', ['city' => 'manali'])],
-        ['city_name' => 'Shimla', 'url' => route('destinations.index', ['city' => 'shimla'])],
-        ['city_name' => 'Dharamshala', 'url' => route('destinations.index', ['city' => 'dharamshala'])],
-        ['city_name' => 'Kasol', 'url' => route('destinations.index', ['city' => 'kasol'])],
-        ['city_name' => 'Dalhousie', 'url' => route('destinations.index', ['city' => 'dalhousie'])],
-        ['city_name' => 'Kullu', 'url' => route('destinations.index', ['city' => 'kullu'])],
-        ['city_name' => 'Spiti Valley', 'url' => route('destinations.index', ['city' => 'spiti-valley'])],
-        ['city_name' => 'Kufri', 'url' => route('destinations.index', ['city' => 'kufri'])],
-        ['city_name' => 'Bir Billing', 'url' => route('destinations.index', ['city' => 'bir-billing'])],
-    ];
+    $displayPrice = $destination->formatted_price ?: '₹18,999';
+    $displayIdealDays = $destination->ideal_days ?: ($profile['ideal_days'] ?? '5-7 Days');
+    $displayBestSeason = $destination->best_season ?: ($profile['best_season'] ?? 'All year');
 
-    $places = $destination->places ?? [
-        [
-            'name' => 'Shimla',
-            'description' => 'Colonial charm with pine valleys, local cafes, and beautiful ridge views for family-friendly getaways.',
-            'attractions' => ['Mall Road', 'Jakhoo Temple', 'Christ Church'],
-            'duration' => '2-3 Days',
-            'image' => $destination->image_url,
-            'tags' => ['Family', 'Scenic'],
-        ],
-        [
-            'name' => 'Manali',
-            'description' => 'A mountain favorite for snow activities, riverside stays, and adventure-packed itineraries.',
-            'attractions' => ['Solang Valley', 'Hadimba Temple', 'Rohtang Pass'],
-            'duration' => '3-4 Days',
-            'image' => $destination->image_url,
-            'tags' => ['Adventure', 'Snow'],
-        ],
-        [
-            'name' => 'Dharamshala',
-            'description' => 'A peaceful Himalayan retreat blending monasteries, culture, and scenic walking routes.',
-            'attractions' => ['McLeod Ganj', 'Bhagsu Falls', 'Namgyal Monastery'],
-            'duration' => '2-3 Days',
-            'image' => $destination->image_url,
-            'tags' => ['Spiritual', 'Culture'],
-        ],
-        [
-            'name' => 'Spiti Valley',
-            'description' => 'High-altitude desert landscapes and monastery circuits for offbeat explorers and road trip lovers.',
-            'attractions' => ['Kaza', 'Key Monastery', 'Chandratal'],
-            'duration' => '5-7 Days',
-            'image' => $destination->image_url,
-            'tags' => ['Offbeat', 'Roadtrip'],
-        ],
-        [
-            'name' => 'Kasol',
-            'description' => 'Riverside village vibes, short treks, and laid-back mountain stays perfect for young travelers.',
-            'attractions' => ['Parvati Valley', 'Tosh', 'Manikaran'],
-            'duration' => '2-3 Days',
-            'image' => $destination->image_url,
-            'tags' => ['Backpacking', 'Nature'],
-        ],
-    ];
+    $overviewText = trim((string) ($destination->about ?? ''));
+    if (\Illuminate\Support\Str::length(strip_tags($overviewText)) < 380 && !empty($profile['overview'])) {
+        $overviewText = trim((string) $profile['overview']);
+    }
+    if ($overviewText === '') {
+        $overviewText = $destination->name . ' is a well-rounded destination for sightseeing, local culture, and memorable experiences planned around your travel style.';
+    }
+    $hasLongOverview = \Illuminate\Support\Str::length(strip_tags($overviewText)) > 420;
 
-    $packages = $destination->packages ?? [
-        ['name' => 'Honeymoon Package', 'duration' => '5D/4N', 'rating' => 4.8, 'price' => '₹27,999', 'image' => $destination->image_url, 'url' => '#'],
-        ['name' => 'Family Package', 'duration' => '6D/5N', 'rating' => 4.7, 'price' => '₹31,499', 'image' => $destination->image_url, 'url' => '#'],
-        ['name' => 'Adventure Package', 'duration' => '4D/3N', 'rating' => 4.9, 'price' => '₹24,999', 'image' => $destination->image_url, 'url' => '#'],
-        ['name' => 'Snow Package', 'duration' => '5D/4N', 'rating' => 4.6, 'price' => '₹26,999', 'image' => $destination->image_url, 'url' => '#'],
-        ['name' => 'Luxury Package', 'duration' => '7D/6N', 'rating' => 4.9, 'price' => '₹44,999', 'image' => $destination->image_url, 'url' => '#'],
-    ];
+    $cityPackages = !empty($destination->city_packages) ? $destination->city_packages : ($profile['city_packages'] ?? []);
+    if (empty($cityPackages)) {
+        $cityPackages = [
+            ['city_name' => $destination->name, 'url' => route('destinations.index', ['city' => \Illuminate\Support\Str::slug($destination->name)])],
+        ];
+    }
 
-    $features = $destination->features ?? [
-        ['icon' => 'bi bi-snow2', 'title' => 'Snow Adventures', 'desc' => 'Winter sports, snowfall views, and mountain experiences.'],
-        ['icon' => 'bi bi-image-alt', 'title' => 'Mountain Views', 'desc' => 'Postcard landscapes, valleys, and scenic drives.'],
-        ['icon' => 'bi bi-people', 'title' => 'Family Friendly', 'desc' => 'Safe routes, comfortable stays, and all-age itineraries.'],
-        ['icon' => 'bi bi-heart', 'title' => 'Honeymoon Destination', 'desc' => 'Romantic stays and curated private experiences.'],
-        ['icon' => 'bi bi-backpack3', 'title' => 'Trekking & Camping', 'desc' => 'Trail options for beginner to advanced explorers.'],
-        ['icon' => 'bi bi-brightness-high', 'title' => 'Spiritual Tourism', 'desc' => 'Monasteries, temples, and mindful mountain escapes.'],
-    ];
-
-    $seasons = $destination->seasons ?? [
-        ['name' => 'April to June', 'weather' => 'Pleasant weather (15°C to 28°C)', 'activities' => ['Sightseeing', 'Family trips', 'Adventure sports'], 'recommendation' => 'Best for first-time travelers.', 'icon' => 'bi bi-sun'],
-        ['name' => 'July to September', 'weather' => 'Monsoon freshness (12°C to 22°C)', 'activities' => ['Nature stays', 'Waterfalls', 'Budget travel'], 'recommendation' => 'Ideal for off-season discounts.', 'icon' => 'bi bi-cloud-rain'],
-        ['name' => 'October to March', 'weather' => 'Cold and snowy (0°C to 15°C)', 'activities' => ['Snow fun', 'Honeymoon', 'Winter photography'], 'recommendation' => 'Great for snowfall experiences.', 'icon' => 'bi bi-cloud-snow'],
-    ];
-
-    $blogs = $destination->blogs ?? [
-        ['title' => 'Best Places To Visit In Himachal', 'excerpt' => 'A practical guide to top scenic towns and hidden valleys in Himachal.', 'date' => '2026-01-18', 'image' => $destination->image_url, 'url' => '#'],
-        ['title' => 'Best Time To Visit Manali', 'excerpt' => 'Season-by-season trip planning for Manali adventures and family holidays.', 'date' => '2026-02-06', 'image' => $destination->image_url, 'url' => '#'],
-        ['title' => 'Hidden Gems Of Himachal', 'excerpt' => 'Discover lesser-known villages and offbeat places beyond mainstream routes.', 'date' => '2026-03-11', 'image' => $destination->image_url, 'url' => '#'],
-        ['title' => 'Himachal Honeymoon Guide', 'excerpt' => 'Romantic itineraries, best stays, and travel tips for couples.', 'date' => '2026-04-01', 'image' => $destination->image_url, 'url' => '#'],
-    ];
-
-    $testimonials = $destination->testimonials ?? [
-        ['name' => 'Ananya Mehra', 'rating' => 5, 'text' => 'Smooth planning and excellent stays. Our Himachal trip felt premium and stress-free.', 'location' => 'Delhi', 'image' => 'https://i.pravatar.cc/100?img=12'],
-        ['name' => 'Rohit Malhotra', 'rating' => 5, 'text' => 'The itinerary balance was perfect for our family. Great support throughout the trip.', 'location' => 'Mumbai', 'image' => 'https://i.pravatar.cc/100?img=16'],
-        ['name' => 'Kavya Singh', 'rating' => 4.8, 'text' => 'Loved the hotel quality and mountain experiences. Will book again.', 'location' => 'Bengaluru', 'image' => 'https://i.pravatar.cc/100?img=32'],
-    ];
-
-    $faqs = $destination->faqs ?? [
-        ['q' => 'What is the best time to visit Himachal?', 'a' => 'April to June is best for pleasant weather, while October to March is ideal for snowfall and winter trips.'],
-        ['q' => 'How many days are enough for Himachal?', 'a' => 'A 5 to 7 day itinerary covers major highlights comfortably, while shorter 3 to 4 day trips work for one or two cities.'],
-        ['q' => 'Is Himachal good for honeymoon?', 'a' => 'Yes, Himachal is one of India\'s top honeymoon destinations with scenic views, cozy stays, and romantic activities.'],
-        ['q' => 'Which is the best hill station in Himachal?', 'a' => 'Manali and Shimla are top picks, while Dharamshala and Spiti Valley are ideal for culture and offbeat travel.'],
-    ];
-
-    $popularFor = $destination->popular_for ?? ['Snow', 'Nature', 'Adventure'];
+    $places = !empty($destination->places) ? $destination->places : ($profile['places'] ?? []);
+    $packages = !empty($destination->packages) ? $destination->packages : ($profile['packages'] ?? []);
+    $features = !empty($destination->features) ? $destination->features : ($profile['features'] ?? []);
+    $seasons = !empty($destination->seasons) ? $destination->seasons : ($profile['seasons'] ?? []);
+    $blogs = !empty($destination->blogs) ? $destination->blogs : ($profile['blogs'] ?? []);
+    $testimonials = !empty($destination->testimonials) ? $destination->testimonials : ($profile['testimonials'] ?? []);
+    $faqs = !empty($destination->faqs) ? $destination->faqs : ($profile['faqs'] ?? []);
+    $popularFor = !empty($destination->popular_for) ? $destination->popular_for : ($profile['popular_for'] ?? ['Culture', 'Sightseeing']);
 
     $relatedItems = [];
 
@@ -115,12 +45,20 @@
     }
 
     if (empty($relatedItems)) {
-        $relatedItems = [
-            ['name' => 'Kashmir', 'country' => 'India', 'image' => $destination->image_url, 'url' => route('destinations.index', ['search' => 'kashmir'])],
-            ['name' => 'Uttarakhand', 'country' => 'India', 'image' => $destination->image_url, 'url' => route('destinations.index', ['search' => 'uttarakhand'])],
-            ['name' => 'Leh Ladakh', 'country' => 'India', 'image' => $destination->image_url, 'url' => route('destinations.index', ['search' => 'ladakh'])],
-            ['name' => 'Sikkim', 'country' => 'India', 'image' => $destination->image_url, 'url' => route('destinations.index', ['search' => 'sikkim'])],
+        $relatedByRegion = [
+            'india' => ['Kashmir', 'Goa', 'Himachal', 'Kerala'],
+            'international' => ['Bali', 'Maldives', 'Dubai', 'Santorini'],
         ];
+        $bucket = str_contains(strtolower((string) $destination->country), 'india') ? 'india' : 'international';
+
+        $relatedItems = collect($relatedByRegion[$bucket])
+            ->map(fn (string $name) => [
+                'name' => $name,
+                'country' => $bucket === 'india' ? 'India' : 'International',
+                'image' => $destination->image_url,
+                'url' => route('destinations.index', ['search' => strtolower($name)]),
+            ])
+            ->all();
     }
 @endphp
 
@@ -130,29 +68,121 @@
 
 <section class="seo-dd" style="--dd-primary: {{ $primaryColor }};">
     <div class="container seo-dd-container">
+        <div class="seo-dd-mobile-filter-bar" aria-label="Mobile quick actions">
+            <button class="seo-dd-mobile-filter-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#seoTripOffcanvas" aria-controls="seoTripOffcanvas">
+                <i class="bi bi-funnel-fill"></i>
+                <span>Filter</span>
+            </button>
+            <button class="seo-dd-mobile-filter-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#seoPageNavOffcanvas" aria-controls="seoPageNavOffcanvas">
+                <i class="bi bi-sort-down"></i>
+                <span>Sort</span>
+            </button>
+        </div>
+
+        <div class="offcanvas offcanvas-start seo-dd-offcanvas" tabindex="-1" id="seoTripOffcanvas" aria-labelledby="seoTripOffcanvasLabel">
+            <div class="offcanvas-header seo-dd-offcanvas-header">
+                <h5 class="offcanvas-title" id="seoTripOffcanvasLabel">Plan {{ $destination->name }} Trip</h5>
+                <button type="button" class="seo-dd-offcanvas-close" data-bs-dismiss="offcanvas" aria-label="Close">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="offcanvas-body seo-dd-offcanvas-body">
+                <article class="seo-dd-card seo-dd-booking-card">
+                    <p class="seo-dd-kicker">Book Your Trip</p>
+                    <h3>Plan {{ $destination->name }} Vacation</h3>
+                    <p class="seo-dd-sidebar-price">From {{ $displayPrice }} <span>per person</span></p>
+
+                    <form action="#" method="POST" class="seo-dd-form">
+                        @csrf
+                        <label>
+                            Travel Month
+                            <select name="month">
+                                <option value="">Select month</option>
+                                @foreach($monthOptions ?? ['January','February','March','April','May','June','July','August','September','October','November','December'] as $month)
+                                    <option value="{{ $month }}">{{ $month }}</option>
+                                @endforeach
+                            </select>
+                        </label>
+
+                        <label>
+                            Guests
+                            <select name="guests">
+                                @for($guest = 1; $guest <= 10; $guest++)
+                                    <option value="{{ $guest }}">{{ $guest }} {{ $guest === 1 ? 'Guest' : 'Guests' }}</option>
+                                @endfor
+                            </select>
+                        </label>
+
+                        <button type="submit" class="seo-dd-btn seo-dd-btn-primary seo-dd-btn-block">Send Enquiry</button>
+                        <a href="https://wa.me/" target="_blank" rel="noopener" class="seo-dd-btn seo-dd-btn-whatsapp seo-dd-btn-block">WhatsApp Expert</a>
+                    </form>
+                </article>
+
+                <article class="seo-dd-card seo-dd-quick-facts">
+                    <h4>Quick Destination Facts</h4>
+                    <ul>
+                        <li><span>Location</span><strong>{{ $destination->country ?? 'India' }}</strong></li>
+                        <li><span>Best Time</span><strong>{{ $displayBestSeason }}</strong></li>
+                        <li><span>Ideal Duration</span><strong>{{ $displayIdealDays }}</strong></li>
+                        <li><span>Rating</span><strong>{{ number_format((float) $destination->rating, 1) }}/5</strong></li>
+                        <li><span>Starting From</span><strong>{{ $displayPrice }}</strong></li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+
+        <div class="offcanvas offcanvas-end seo-dd-offcanvas seo-dd-offcanvas-nav" tabindex="-1" id="seoPageNavOffcanvas" aria-labelledby="seoPageNavOffcanvasLabel">
+            <div class="offcanvas-header seo-dd-offcanvas-header">
+                <h5 class="offcanvas-title" id="seoPageNavOffcanvasLabel">On This Page</h5>
+                <button type="button" class="seo-dd-offcanvas-close" data-bs-dismiss="offcanvas" aria-label="Close">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="offcanvas-body seo-dd-offcanvas-body">
+                <article class="seo-dd-card seo-dd-sticky-nav seo-dd-mobile-nav-card">
+                    <h4>On This Page</h4>
+                    <nav>
+                        <a href="#overview" class="seo-dd-anchor is-active" data-seo-offcanvas-anchor>Overview</a>
+                        <a href="#city-packages" class="seo-dd-anchor" data-seo-offcanvas-anchor>City Packages</a>
+                        <a href="#places" class="seo-dd-anchor" data-seo-offcanvas-anchor>Places</a>
+                        <a href="#packages" class="seo-dd-anchor" data-seo-offcanvas-anchor>Packages</a>
+                        <a href="#besttime" class="seo-dd-anchor" data-seo-offcanvas-anchor>Best Time</a>
+                        <a href="#blogs" class="seo-dd-anchor" data-seo-offcanvas-anchor>Blogs</a>
+                        <a href="#faq" class="seo-dd-anchor" data-seo-offcanvas-anchor>FAQs</a>
+                    </nav>
+                </article>
+                <article class="seo-dd-card seo-dd-cta-card">
+                    <p class="seo-dd-kicker">Limited Offer</p>
+                    <h4>Get Free Expert {{ $destination->name }} Itinerary</h4>
+                    <p>Unlock seasonal deals and custom routes for your next {{ $destination->name }} holiday.</p>
+                    <a href="#" class="seo-dd-btn seo-dd-btn-primary seo-dd-btn-block">Claim Offer</a>
+                </article>
+            </div>
+        </div>
+
         <section class="seo-dd-quick-strip" aria-label="Quick destination information">
             <article class="seo-dd-quick-card">
-                <i class="bi bi-currency-rupee"></i>
+                <i class="bi bi-wallet2"></i>
                 <p>Starting Price</p>
-                <strong>{{ $destination->formatted_price ?? '₹18,999' }}</strong>
+                <strong>{{ $displayPrice }}</strong>
             </article>
             <article class="seo-dd-quick-card">
-                <i class="bi bi-calendar3"></i>
+                <i class="bi bi-hourglass-split"></i>
                 <p>Ideal Duration</p>
-                <strong>{{ $destination->ideal_days ?? '5-7 Days' }}</strong>
+                <strong>{{ $displayIdealDays }}</strong>
             </article>
             <article class="seo-dd-quick-card">
-                <i class="bi bi-cloud-sun"></i>
+                <i class="bi bi-cloud-sun-fill"></i>
                 <p>Best Time To Visit</p>
-                <strong>{{ $destination->best_season ?? 'Apr-Jun, Oct-Mar' }}</strong>
+                <strong>{{ $displayBestSeason }}</strong>
             </article>
             <article class="seo-dd-quick-card">
-                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-stars"></i>
                 <p>Traveler Rating</p>
                 <strong>{{ number_format((float) $destination->rating, 1) }}/5</strong>
             </article>
             <article class="seo-dd-quick-card">
-                <i class="bi bi-compass"></i>
+                <i class="bi bi-airplane-fill"></i>
                 <p>Popular For</p>
                 <strong>{{ implode(', ', $popularFor) }}</strong>
             </article>
@@ -168,10 +198,12 @@
                         <h2 class="seo-dd-title">{{ $destination->name }} Tour Packages</h2>
                     </div>
                     <p class="seo-dd-lead">Explore handpicked <mark>{{ $destination->name }}</mark> itineraries crafted for couples, families, and adventure travelers.</p>
-                    <div class="seo-dd-copy is-collapsed" data-seo-readmore itemprop="description">
-                        {{ $destination->about }}
+                    <div class="seo-dd-copy {{ $hasLongOverview ? 'is-collapsed' : '' }}" data-seo-readmore itemprop="description">
+                        {{ $overviewText }}
                     </div>
-                    <button type="button" class="seo-dd-link" data-seo-toggle aria-expanded="false">Read More</button>
+                    @if($hasLongOverview)
+                        <button type="button" class="seo-dd-link" data-seo-toggle aria-expanded="false">Read More</button>
+                    @endif
                 </section>
 
                 <section id="city-packages" class="seo-dd-section">
@@ -179,7 +211,7 @@
                         <p class="seo-dd-kicker">Internal Package Links</p>
                         <h2 class="seo-dd-title">{{ $destination->name }} Packages By Cities</h2>
                     </div>
-                    <div class="seo-dd-pills" aria-label="City specific Himachal tour package links">
+                    <div class="seo-dd-pills" aria-label="City specific {{ $destination->name }} tour package links">
                         @foreach($cityPackages as $packageCity)
                             @php
                                 if (is_string($packageCity)) {
@@ -235,7 +267,7 @@
                 <section id="packages" class="seo-dd-section">
                     <div class="seo-dd-title-wrap">
                         <p class="seo-dd-kicker">Tour Packages</p>
-                        <h2 class="seo-dd-title">Explore More Himachal Packages</h2>
+                        <h2 class="seo-dd-title">Explore More {{ $destination->name }} Packages</h2>
                     </div>
 
                     <div class="swiper seo-dd-swiper" data-swiper-packages>
@@ -266,7 +298,7 @@
 
                 <section id="why" class="seo-dd-section">
                     <div class="seo-dd-title-wrap">
-                        <p class="seo-dd-kicker">Why Choose Himachal</p>
+                        <p class="seo-dd-kicker">Why Choose {{ $destination->name }}</p>
                         <h2 class="seo-dd-title">What Makes This Destination Special</h2>
                     </div>
                     <div class="seo-dd-card-grid seo-dd-feature-grid">
@@ -283,7 +315,7 @@
                 <section id="besttime" class="seo-dd-section">
                     <div class="seo-dd-title-wrap">
                         <p class="seo-dd-kicker">Season Guide</p>
-                        <h2 class="seo-dd-title">Best Time To Visit Himachal</h2>
+                        <h2 class="seo-dd-title">Best Time To Visit {{ $destination->name }}</h2>
                     </div>
                     <div class="seo-dd-card-grid seo-dd-season-grid">
                         @foreach($seasons as $season)
@@ -371,7 +403,7 @@
                 <section id="related" class="seo-dd-section">
                     <div class="seo-dd-title-wrap">
                         <p class="seo-dd-kicker">Related Destinations</p>
-                        <h2 class="seo-dd-title">Explore More Mountain Holidays</h2>
+                        <h2 class="seo-dd-title">Explore More Destinations Like {{ $destination->name }}</h2>
                     </div>
                     <div class="seo-dd-card-grid seo-dd-related-grid">
                         @foreach($relatedItems as $related)
@@ -424,10 +456,10 @@
                         <h4>Quick Destination Facts</h4>
                         <ul>
                             <li><span>Location</span><strong>{{ $destination->country ?? 'India' }}</strong></li>
-                            <li><span>Best Time</span><strong>{{ $destination->best_season ?? 'Apr-Jun, Oct-Mar' }}</strong></li>
-                            <li><span>Ideal Duration</span><strong>{{ $destination->ideal_days ?? '5-7 Days' }}</strong></li>
+                            <li><span>Best Time</span><strong>{{ $displayBestSeason }}</strong></li>
+                            <li><span>Ideal Duration</span><strong>{{ $displayIdealDays }}</strong></li>
                             <li><span>Rating</span><strong>{{ number_format((float) $destination->rating, 1) }}/5</strong></li>
-                            <li><span>Starting From</span><strong>{{ $destination->formatted_price ?? '₹18,999' }}</strong></li>
+                            <li><span>Starting From</span><strong>{{ $displayPrice }}</strong></li>
                         </ul>
                     </article>
 
@@ -446,8 +478,8 @@
 
                     <article class="seo-dd-card seo-dd-cta-card">
                         <p class="seo-dd-kicker">Limited Offer</p>
-                        <h4>Get Free Expert Itinerary</h4>
-                        <p>Unlock seasonal deals and custom routes for your next mountain holiday.</p>
+                        <h4>Get Free Expert {{ $destination->name }} Itinerary</h4>
+                        <p>Unlock seasonal deals and custom routes for your next {{ $destination->name }} holiday.</p>
                         <a href="#" class="seo-dd-btn seo-dd-btn-primary seo-dd-btn-block">Claim Offer</a>
                     </article>
                 </div>
@@ -480,6 +512,17 @@
                     }
                     event.preventDefault();
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+
+            document.querySelectorAll('[data-seo-offcanvas-anchor]').forEach(function (anchor) {
+                anchor.addEventListener('click', function () {
+                    const offcanvasElement = anchor.closest('.offcanvas');
+                    if (!offcanvasElement || typeof bootstrap === 'undefined' || !bootstrap.Offcanvas) {
+                        return;
+                    }
+                    const offcanvasInstance = bootstrap.Offcanvas.getOrCreateInstance(offcanvasElement);
+                    offcanvasInstance.hide();
                 });
             });
 

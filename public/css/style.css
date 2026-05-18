@@ -7294,21 +7294,53 @@ div.container.st-nav-inner{
    Reusable dynamic destination template
 ========================================================= */
 .seo-dd {
-    --dd-bg: #f7f9fd;
-    --dd-text: #152a44;
-    --dd-muted: #5f728b;
-    --dd-border: #e3eaf4;
-    --dd-card: rgba(255, 255, 255, 0.88);
-    --dd-shadow: 0 14px 30px rgba(17, 35, 59, 0.08);
+    --dd-bg: #f4f8ff;
+    --dd-bg-soft: #fff9f3;
+    --dd-text: #10253e;
+    --dd-muted: #516882;
+    --dd-border: color-mix(in srgb, var(--dd-primary) 18%, #d8e4f4);
+    --dd-card: rgba(255, 255, 255, 0.85);
+    --dd-shadow: 0 18px 38px rgba(18, 40, 66, 0.11);
     --dd-soft: color-mix(in srgb, var(--dd-primary) 14%, #ffffff);
-    --dd-grad: linear-gradient(130deg, var(--dd-primary), color-mix(in srgb, var(--dd-primary) 68%, #15b7c4));
+    --dd-soft-strong: color-mix(in srgb, var(--dd-primary) 24%, #ffffff);
+    --dd-primary-dark: color-mix(in srgb, var(--dd-primary) 75%, #10243d);
+    --dd-grad: linear-gradient(132deg, color-mix(in srgb, var(--dd-primary) 85%, #ff7a18), color-mix(in srgb, var(--dd-primary) 65%, #2563eb), color-mix(in srgb, var(--dd-primary) 75%, #06b6d4));
+    --dd-grad-soft: linear-gradient(150deg, color-mix(in srgb, var(--dd-primary) 10%, #ffffff), color-mix(in srgb, var(--dd-primary) 3%, #fff6ea));
     position: relative;
-    padding: 68px 0 84px;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 70px 0 86px;
     color: var(--dd-text);
     background:
-        radial-gradient(1000px 420px at 100% 0%, color-mix(in srgb, var(--dd-primary) 11%, #ffffff), transparent 62%),
-        radial-gradient(700px 380px at 0% 8%, color-mix(in srgb, var(--dd-primary) 9%, #ffffff), transparent 60%),
-        var(--dd-bg);
+        radial-gradient(1000px 460px at 100% -6%, color-mix(in srgb, var(--dd-primary) 16%, #ffffff), transparent 64%),
+        radial-gradient(720px 440px at 0% 2%, color-mix(in srgb, var(--dd-primary) 13%, #ffffff), transparent 63%),
+        linear-gradient(180deg, var(--dd-bg), var(--dd-bg-soft));
+}
+
+.seo-dd::before,
+.seo-dd::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(65px);
+    opacity: 0.28;
+    z-index: -1;
+}
+
+.seo-dd::before {
+    width: 240px;
+    height: 240px;
+    right: -70px;
+    top: 16%;
+    background: color-mix(in srgb, var(--dd-primary) 65%, #ff8a00);
+}
+
+.seo-dd::after {
+    width: 210px;
+    height: 210px;
+    left: -70px;
+    bottom: 9%;
+    background: color-mix(in srgb, var(--dd-primary) 58%, #06b6d4);
 }
 
 .seo-dd-container {
@@ -7334,21 +7366,45 @@ div.container.st-nav-inner{
 }
 
 .seo-dd-quick-card {
-    background: var(--dd-card);
+    background: linear-gradient(155deg, rgba(255, 255, 255, 0.93), rgba(249, 252, 255, 0.86));
     border: 1px solid var(--dd-border);
-    border-radius: 16px;
-    box-shadow: var(--dd-shadow);
-    padding: 14px 14px 12px;
-    backdrop-filter: blur(7px);
+    border-radius: 18px;
+    box-shadow: 0 12px 26px rgba(15, 34, 55, 0.09);
+    padding: 14px 14px 13px;
+    backdrop-filter: blur(12px);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.seo-dd-quick-card:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--dd-primary) 36%, #dbe6f5);
+    box-shadow: 0 18px 30px color-mix(in srgb, var(--dd-primary) 20%, rgba(15, 34, 55, 0.12));
 }
 
 .seo-dd-quick-card i {
-    color: var(--dd-primary);
-    font-size: 1.05rem;
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+    color: #fff;
+    border-radius: 50%;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--dd-primary) 78%, #ff8a00), color-mix(in srgb, var(--dd-primary) 75%, #2563eb));
+    box-shadow: 0 10px 18px color-mix(in srgb, var(--dd-primary) 28%, transparent);
+}
+
+.seo-dd-quick-card i::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    border: 1px solid color-mix(in srgb, var(--dd-primary) 35%, #f3f7ff);
+    opacity: 0.65;
 }
 
 .seo-dd-quick-card p {
-    margin: 8px 0 4px;
+    margin: 10px 0 4px;
     color: var(--dd-muted);
     font-size: 0.76rem;
     text-transform: uppercase;
@@ -7357,22 +7413,35 @@ div.container.st-nav-inner{
 }
 
 .seo-dd-quick-card strong {
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     font-weight: 800;
 }
 
 .seo-dd-section {
     margin-bottom: 20px;
-    border-radius: 20px;
+    border-radius: 22px;
     border: 1px solid var(--dd-border);
-    background: #fff;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(247, 251, 255, 0.86));
     box-shadow: var(--dd-shadow);
-    padding: 26px;
+    padding: 28px;
 }
 
 .seo-dd-glass {
-    background: linear-gradient(160deg, rgba(255, 255, 255, 0.9), rgba(246, 251, 255, 0.86));
-    backdrop-filter: blur(7px);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(152deg, rgba(255, 255, 255, 0.96), color-mix(in srgb, var(--dd-primary) 5%, #fffdf8));
+    backdrop-filter: blur(8px);
+}
+
+.seo-dd-glass::before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    right: -60px;
+    top: -90px;
+    background: radial-gradient(circle, color-mix(in srgb, var(--dd-primary) 28%, #fff), transparent 65%);
+    pointer-events: none;
 }
 
 .seo-dd-title-wrap {
@@ -7390,9 +7459,10 @@ div.container.st-nav-inner{
 
 .seo-dd-title {
     margin: 0;
-    font-size: clamp(1.35rem, 1.15rem + 0.8vw, 2rem);
-    line-height: 1.25;
+    font-size: clamp(1.35rem, 1.12rem + 0.9vw, 2rem);
+    line-height: 1.22;
     font-weight: 800;
+    color: #0c2239;
 }
 
 .seo-dd-lead {
@@ -7403,10 +7473,10 @@ div.container.st-nav-inner{
 }
 
 .seo-dd-lead mark {
-    background: color-mix(in srgb, var(--dd-primary) 18%, #ffffff);
-    color: color-mix(in srgb, var(--dd-primary) 80%, #101d32);
-    border-radius: 4px;
-    padding: 1px 6px;
+    background: color-mix(in srgb, var(--dd-primary) 18%, #fff4df);
+    color: color-mix(in srgb, var(--dd-primary) 78%, #0e2035);
+    border-radius: 8px;
+    padding: 2px 8px;
 }
 
 .seo-dd-copy {
@@ -7428,13 +7498,22 @@ div.container.st-nav-inner{
 }
 
 .seo-dd-link {
-    margin-top: 10px;
-    border: 0;
-    background: transparent;
-    color: var(--dd-primary);
-    font-size: 0.86rem;
+    margin-top: 12px;
+    border: 1px solid color-mix(in srgb, var(--dd-primary) 34%, #d5e3f4);
+    background: color-mix(in srgb, var(--dd-primary) 8%, #ffffff);
+    color: var(--dd-primary-dark);
+    border-radius: 999px;
+    font-size: 0.82rem;
     font-weight: 800;
-    padding: 0;
+    padding: 8px 14px;
+    letter-spacing: 0.02em;
+    transition: all 0.2s ease;
+}
+
+.seo-dd-link:hover {
+    color: #fff;
+    border-color: transparent;
+    background: var(--dd-grad);
 }
 
 .seo-dd-pills {
@@ -7445,21 +7524,22 @@ div.container.st-nav-inner{
 
 .seo-dd-pill {
     text-decoration: none;
-    border: 1px solid color-mix(in srgb, var(--dd-primary) 26%, #d4e0ee);
-    background: #fff;
-    color: color-mix(in srgb, var(--dd-primary) 80%, #17314f);
+    border: 1px solid color-mix(in srgb, var(--dd-primary) 28%, #d4e2f2);
+    background: linear-gradient(150deg, #fff, color-mix(in srgb, var(--dd-primary) 4%, #f9fcff));
+    color: color-mix(in srgb, var(--dd-primary) 78%, #18324f);
     font-size: 0.82rem;
     font-weight: 700;
     border-radius: 999px;
-    padding: 8px 14px;
+    padding: 8px 15px;
     transition: all 0.2s ease;
 }
 
 .seo-dd-pill:hover {
     transform: translateY(-2px);
-    background: var(--dd-soft);
-    color: var(--dd-primary);
-    box-shadow: 0 10px 24px color-mix(in srgb, var(--dd-primary) 18%, transparent);
+    border-color: transparent;
+    background: var(--dd-grad);
+    color: #fff;
+    box-shadow: 0 14px 26px color-mix(in srgb, var(--dd-primary) 30%, transparent);
 }
 
 .seo-dd-card-grid {
@@ -7482,17 +7562,17 @@ div.container.st-nav-inner{
 }
 
 .seo-dd-card {
-    border-radius: 16px;
+    border-radius: 18px;
     border: 1px solid var(--dd-border);
-    background: #fff;
+    background: linear-gradient(160deg, #fff, color-mix(in srgb, var(--dd-primary) 4%, #f8fbff));
     overflow: hidden;
     transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
 }
 
 .seo-dd-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 16px 32px rgba(15, 33, 58, 0.12);
-    border-color: color-mix(in srgb, var(--dd-primary) 30%, #d4ddeb);
+    box-shadow: 0 18px 34px rgba(15, 33, 58, 0.14);
+    border-color: color-mix(in srgb, var(--dd-primary) 36%, #d6e1f2);
 }
 
 .seo-dd-card img {
@@ -7500,10 +7580,15 @@ div.container.st-nav-inner{
     height: 186px;
     object-fit: cover;
     display: block;
+    transition: transform 0.35s ease;
+}
+
+.seo-dd-card:hover img {
+    transform: scale(1.04);
 }
 
 .seo-dd-card-body {
-    padding: 15px;
+    padding: 16px;
 }
 
 .seo-dd-row-between {
@@ -7522,7 +7607,7 @@ div.container.st-nav-inner{
 .seo-dd-card p {
     margin: 10px 0 0;
     color: var(--dd-muted);
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     line-height: 1.62;
 }
 
@@ -7530,8 +7615,9 @@ div.container.st-nav-inner{
     border-radius: 999px;
     font-size: 0.73rem;
     font-weight: 700;
-    color: var(--dd-primary);
-    background: var(--dd-soft);
+    color: var(--dd-primary-dark);
+    background: color-mix(in srgb, var(--dd-primary) 16%, #ffffff);
+    border: 1px solid color-mix(in srgb, var(--dd-primary) 24%, #dce7f5);
     padding: 6px 10px;
     white-space: nowrap;
 }
@@ -7553,18 +7639,19 @@ div.container.st-nav-inner{
 }
 
 .seo-dd-badge {
-    border: 1px solid #dce5f0;
-    color: #3c5574;
-    background: #f7fbff;
+    border: 1px solid color-mix(in srgb, var(--dd-primary) 18%, #dce5f0);
+    color: #345273;
+    background: #f8fbff;
 }
 
 .seo-dd-tag {
-    color: var(--dd-primary);
-    background: var(--dd-soft);
+    color: var(--dd-primary-dark);
+    background: color-mix(in srgb, var(--dd-primary) 16%, #f9fcff);
+    border: 1px solid color-mix(in srgb, var(--dd-primary) 24%, #dce8f6);
 }
 
 .seo-dd-btn {
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 10px 14px;
     text-decoration: none;
     font-size: 0.84rem;
@@ -7583,23 +7670,26 @@ div.container.st-nav-inner{
 .seo-dd-btn-primary {
     background: var(--dd-grad);
     color: #fff;
+    box-shadow: 0 10px 20px color-mix(in srgb, var(--dd-primary) 28%, transparent);
 }
 
 .seo-dd-btn-primary:hover {
     color: #fff;
-    filter: brightness(1.05);
+    transform: translateY(-1px);
+    filter: brightness(1.04);
 }
 
 .seo-dd-btn-ghost {
     margin-top: 12px;
-    border-color: var(--dd-border);
+    border-color: color-mix(in srgb, var(--dd-primary) 24%, #d8e4f4);
     background: #fff;
-    color: var(--dd-primary);
+    color: var(--dd-primary-dark);
 }
 
 .seo-dd-btn-ghost:hover {
-    border-color: color-mix(in srgb, var(--dd-primary) 36%, #d8e2f0);
-    background: var(--dd-soft);
+    border-color: transparent;
+    background: var(--dd-grad);
+    color: #fff;
 }
 
 .seo-dd-package-meta {
@@ -7615,25 +7705,35 @@ div.container.st-nav-inner{
 .seo-dd-price {
     margin: 0;
     font-size: 1.16rem;
-    color: #162e4d;
+    color: #102843;
     font-weight: 800;
 }
 
 .seo-dd-icon {
-    height: 40px;
-    width: 40px;
-    border-radius: 12px;
+    position: relative;
+    height: 44px;
+    width: 44px;
+    border-radius: 14px;
     display: grid;
     place-items: center;
     margin-bottom: 10px;
-    color: var(--dd-primary);
-    background: var(--dd-soft);
+    color: #fff;
+    background: var(--dd-grad);
     font-size: 1.08rem;
+    box-shadow: 0 12px 20px color-mix(in srgb, var(--dd-primary) 30%, transparent);
+}
+
+.seo-dd-icon::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .seo-dd-weather {
     font-weight: 700;
-    color: #1f3655;
+    color: #193753;
 }
 
 .seo-dd-reco {
@@ -7643,7 +7743,7 @@ div.container.st-nav-inner{
 .seo-dd-blog-card time {
     font-size: 0.78rem;
     font-weight: 700;
-    color: var(--dd-primary);
+    color: var(--dd-primary-dark);
 }
 
 .seo-dd-swiper {
@@ -7659,8 +7759,8 @@ div.container.st-nav-inner{
 
 .seo-dd-swiper-btn {
     border: 1px solid var(--dd-border);
-    background: #fff;
-    color: #284463;
+    background: linear-gradient(140deg, #fff, #f8fbff);
+    color: #294765;
     width: 38px;
     height: 38px;
     border-radius: 50%;
@@ -7668,9 +7768,9 @@ div.container.st-nav-inner{
 }
 
 .seo-dd-swiper-btn:hover {
-    color: var(--dd-primary);
-    border-color: color-mix(in srgb, var(--dd-primary) 35%, #cad8e8);
-    background: var(--dd-soft);
+    color: #fff;
+    border-color: transparent;
+    background: var(--dd-grad);
 }
 
 .seo-dd-testimonial-card {
@@ -7688,6 +7788,7 @@ div.container.st-nav-inner{
     height: 52px;
     border-radius: 50%;
     object-fit: cover;
+    border: 2px solid color-mix(in srgb, var(--dd-primary) 26%, #d9e6f5);
 }
 
 .seo-dd-user h3 {
@@ -7702,7 +7803,7 @@ div.container.st-nav-inner{
 
 .seo-dd-stars {
     margin: 10px 0 0;
-    color: #db8c00;
+    color: #d97706;
     font-weight: 800;
 }
 
@@ -7717,14 +7818,15 @@ div.container.st-nav-inner{
 
 .seo-dd-faq-item {
     border: 1px solid var(--dd-border);
-    border-radius: 12px;
+    border-radius: 14px;
     overflow: hidden;
+    background: linear-gradient(160deg, #fff, color-mix(in srgb, var(--dd-primary) 3%, #f9fcff));
 }
 
 .seo-dd-faq-btn {
     width: 100%;
     border: 0;
-    background: #fff;
+    background: transparent;
     padding: 14px 16px;
     font-size: 0.92rem;
     font-weight: 700;
@@ -7741,6 +7843,7 @@ div.container.st-nav-inner{
 
 .seo-dd-faq-btn.is-open i {
     transform: rotate(45deg);
+    color: var(--dd-primary-dark);
 }
 
 .seo-dd-faq-panel {
@@ -7748,7 +7851,7 @@ div.container.st-nav-inner{
     overflow: hidden;
     transition: max-height 0.28s ease, padding 0.28s ease;
     padding: 0 16px;
-    background: #fbfdff;
+    background: color-mix(in srgb, var(--dd-primary) 3%, #fbfdff);
 }
 
 .seo-dd-faq-panel.is-open {
@@ -7770,7 +7873,7 @@ div.container.st-nav-inner{
     position: sticky;
     top: 88px;
     display: grid;
-    gap: 12px;
+    gap: 13px;
 }
 
 .seo-dd-booking-card,
@@ -7793,7 +7896,7 @@ div.container.st-nav-inner{
     margin: 8px 0 14px;
     font-size: 1.3rem;
     font-weight: 800;
-    color: #143151;
+    color: #132f4d;
 }
 
 .seo-dd-sidebar-price span {
@@ -7817,10 +7920,11 @@ div.container.st-nav-inner{
 
 .seo-dd-form select {
     height: 42px;
-    border-radius: 12px;
+    border-radius: 13px;
     border: 1px solid var(--dd-border);
     padding: 0 10px;
     outline: 0;
+    background: #fff;
 }
 
 .seo-dd-form select:focus {
@@ -7873,25 +7977,112 @@ div.container.st-nav-inner{
 
 .seo-dd-anchor {
     text-decoration: none;
-    border: 1px solid #dde6f2;
-    border-radius: 10px;
+    border: 1px solid color-mix(in srgb, var(--dd-primary) 18%, #dde6f2);
+    border-radius: 12px;
     padding: 9px 10px;
-    color: #365375;
+    color: #315170;
     font-size: 0.84rem;
     font-weight: 700;
+    background: #fff;
+    transition: all 0.2s ease;
 }
 
 .seo-dd-anchor:hover,
 .seo-dd-anchor.is-active {
-    color: var(--dd-primary);
-    border-color: color-mix(in srgb, var(--dd-primary) 35%, #d1dded);
-    background: var(--dd-soft);
+    color: #fff;
+    border-color: transparent;
+    background: var(--dd-grad);
 }
 
 .seo-dd-cta-card p {
     margin: 9px 0 12px;
     color: var(--dd-muted);
     line-height: 1.6;
+}
+
+.seo-dd-mobile-filter-bar {
+    display: none;
+}
+
+.seo-dd-mobile-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    border: 1px solid color-mix(in srgb, var(--dd-primary) 22%, #d8e4f4);
+    border-radius: 999px;
+    padding: 10px 14px;
+    background: #fff;
+    color: #1f3e5e;
+    font-size: 0.82rem;
+    font-weight: 800;
+    line-height: 1;
+    box-shadow: 0 8px 18px rgba(16, 37, 61, 0.1);
+    transition: all 0.2s ease;
+}
+
+.seo-dd-mobile-filter-btn i {
+    color: var(--dd-primary-dark);
+    font-size: 0.92rem;
+}
+
+.seo-dd-mobile-filter-btn:active,
+.seo-dd-mobile-filter-btn:hover {
+    border-color: transparent;
+    color: #fff;
+    background: var(--dd-grad);
+}
+
+.seo-dd-mobile-filter-btn:active i,
+.seo-dd-mobile-filter-btn:hover i {
+    color: #fff;
+}
+
+.seo-dd-offcanvas {
+    --bs-offcanvas-width: min(360px, 92vw);
+}
+
+.seo-dd-offcanvas-nav {
+    --bs-offcanvas-width: min(320px, 88vw);
+}
+
+.seo-dd-offcanvas-header {
+    border-bottom: 1px solid color-mix(in srgb, var(--dd-primary) 14%, #dce7f4);
+    padding: 16px 16px 12px;
+}
+
+.seo-dd-offcanvas-header .offcanvas-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #123252;
+}
+
+.seo-dd-offcanvas-close {
+    width: 34px;
+    height: 34px;
+    border: 1px solid color-mix(in srgb, var(--dd-primary) 22%, #dbe7f5);
+    border-radius: 10px;
+    background: #fff;
+    color: #1b3a5a;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.seo-dd-offcanvas-close:hover {
+    color: #fff;
+    border-color: transparent;
+    background: var(--dd-grad);
+}
+
+.seo-dd-offcanvas-body {
+    display: grid;
+    gap: 12px;
+    padding: 14px 14px 20px;
+}
+
+.seo-dd-mobile-nav-card {
+    padding: 16px;
 }
 
 @media (max-width: 1199px) {
@@ -7922,6 +8113,40 @@ div.container.st-nav-inner{
 }
 
 @media (max-width: 767px) {
+    .seo-dd {
+        isolation: auto;
+        overflow: visible;
+    }
+
+    .seo-dd-mobile-filter-bar {
+        position: sticky;
+        top: 72px;
+        z-index: 1025;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 12px;
+        padding: 10px;
+        border-radius: 16px;
+        border: 1px solid color-mix(in srgb, var(--dd-primary) 18%, #dbe7f5);
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 22px rgba(15, 34, 56, 0.11);
+    }
+
+    .seo-dd-sidebar {
+        display: none;
+    }
+
+    .seo-dd-offcanvas {
+        position: fixed !important;
+        z-index: 1100 !important;
+    }
+
+    .offcanvas-backdrop.show {
+        z-index: 1099 !important;
+    }
+
     .seo-dd-section {
         border-radius: 16px;
         padding: 18px;
