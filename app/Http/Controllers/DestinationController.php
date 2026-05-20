@@ -152,9 +152,9 @@ class DestinationController extends Controller
                     ['name' => 'Akrotiri', 'description' => 'Historic excavations and dramatic coastline for culture-focused travelers.', 'attractions' => ['Akrotiri Ruins', 'Red Beach', 'Lighthouse'], 'duration' => '1 Day', 'tags' => ['History', 'Coastal']],
                 ],
                 'packages' => [
-                    ['name' => 'Santorini Romance Escape', 'duration' => '5D/4N', 'rating' => 4.9, 'price' => '₹1,89,999'],
-                    ['name' => 'Santorini Premium Stay', 'duration' => '6D/5N', 'rating' => 4.8, 'price' => '₹2,14,999'],
-                    ['name' => 'Greek Island Combo', 'duration' => '7D/6N', 'rating' => 4.7, 'price' => '₹2,39,999'],
+                    ['name' => 'Santorini Romance Escape', 'duration' => '5D/4N', 'rating' => 4.9, 'price' => '₹1,89,999', 'discounted price' => '₹1,59,999'],
+                    ['name' => 'Santorini Premium Stay', 'duration' => '6D/5N', 'rating' => 4.8, 'price' => '₹2,14,999', 'discounted price' => '₹1,89,999'],
+                    ['name' => 'Greek Island Combo', 'duration' => '7D/6N', 'rating' => 4.7, 'price' => '₹2,39,999', 'discounted price' => '₹2,09,999'],
                 ],
                 'features' => [
                     ['icon' => 'bi bi-stars', 'title' => 'Iconic Sunsets', 'desc' => 'Caldera sunsets and golden-hour viewpoints every evening.'],
@@ -199,9 +199,9 @@ class DestinationController extends Controller
                     ['name' => 'Uluwatu', 'description' => 'Cliff temples, surf beaches, and premium sunset experiences.', 'attractions' => ['Uluwatu Temple', 'Padang Padang', 'Kecak Show'], 'duration' => '1-2 Days', 'tags' => ['Sunset', 'Luxury']],
                 ],
                 'packages' => [
-                    ['name' => 'Bali Explorer Package', 'duration' => '6D/5N', 'rating' => 4.8, 'price' => '₹64,999'],
-                    ['name' => 'Bali Honeymoon Retreat', 'duration' => '7D/6N', 'rating' => 4.9, 'price' => '₹82,999'],
-                    ['name' => 'Bali Friends Getaway', 'duration' => '5D/4N', 'rating' => 4.7, 'price' => '₹56,999'],
+                    ['name' => 'Bali Explorer Package', 'duration' => '6D/5N', 'rating' => 4.8, 'price' => '₹64,999', 'discounted price' => '₹54,999'],
+                    ['name' => 'Bali Honeymoon Retreat', 'duration' => '7D/6N', 'rating' => 4.9, 'price' => '₹82,999', 'discounted price' => '₹72,999'],
+                    ['name' => 'Bali Friends Getaway', 'duration' => '5D/4N', 'rating' => 4.7, 'price' => '₹56,999', 'discounted price' => '₹46,999'],
                 ],
                 'features' => [
                     ['icon' => 'bi bi-tree-fill', 'title' => 'Jungle Escapes', 'desc' => 'Lush landscapes, waterfalls, and scenic countryside routes.'],
@@ -246,9 +246,9 @@ class DestinationController extends Controller
                     ['name' => 'Maafushi', 'description' => 'Popular local island for budget-friendly stays and water sports.', 'attractions' => ['Sandbanks', 'Shark Point', 'Dolphin Tours'], 'duration' => '1-2 Days', 'tags' => ['Budget', 'Adventure']],
                 ],
                 'packages' => [
-                    ['name' => 'Maldives Water Villa Escape', 'duration' => '4D/3N', 'rating' => 4.9, 'price' => '₹1,54,999'],
-                    ['name' => 'Maldives Couple Retreat', 'duration' => '5D/4N', 'rating' => 5.0, 'price' => '₹1,89,999'],
-                    ['name' => 'Maldives Family Resort Plan', 'duration' => '5D/4N', 'rating' => 4.8, 'price' => '₹1,74,999'],
+                    ['name' => 'Maldives Water Villa Escape', 'duration' => '4D/3N', 'rating' => 4.9, 'price' => '₹1,54,999', 'discounted price' => '₹1,29,999'],
+                    ['name' => 'Maldives Couple Retreat', 'duration' => '5D/4N', 'rating' => 5.0, 'price' => '₹1,89,999', 'discounted price' => '₹1,59,999'],
+                    ['name' => 'Maldives Family Resort Plan', 'duration' => '5D/4N', 'rating' => 4.8, 'price' => '₹1,74,999', 'discounted price' => '₹1,49,999'],
                 ],
                 'features' => [
                     ['icon' => 'bi bi-house-fill', 'title' => 'Overwater Villas', 'desc' => 'Iconic private stays with direct lagoon access.'],
@@ -293,9 +293,9 @@ class DestinationController extends Controller
                     ['name' => 'Pahalgam', 'description' => 'Scenic valleys and riverfront landscapes perfect for relaxed travel.', 'attractions' => ['Betaab Valley', 'Aru Valley', 'Lidder River'], 'duration' => '1-2 Days', 'tags' => ['Nature', 'Leisure']],
                 ],
                 'packages' => [
-                    ['name' => 'Kashmir Scenic Escape', 'duration' => '6D/5N', 'rating' => 4.7, 'price' => '₹44,999'],
-                    ['name' => 'Kashmir Snow Adventure', 'duration' => '5D/4N', 'rating' => 4.8, 'price' => '₹41,999'],
-                    ['name' => 'Kashmir Family Comfort Tour', 'duration' => '6D/5N', 'rating' => 4.6, 'price' => '₹46,999'],
+                    ['name' => 'Kashmir Scenic Escape', 'duration' => '6D/5N', 'rating' => 4.7, 'price' => '₹44,999', 'discounted price' => '₹37,999'],
+                    ['name' => 'Kashmir Snow Adventure', 'duration' => '5D/4N', 'rating' => 4.8, 'price' => '₹41,999', 'discounted price' => '₹36,999'],
+                    ['name' => 'Kashmir Family Comfort Tour', 'duration' => '6D/5N', 'rating' => 4.6, 'price' => '₹46,999', 'discounted price' => '₹39,999'],
                 ],
                 'features' => [
                     ['icon' => 'bi bi-snow2', 'title' => 'Winter Snow', 'desc' => 'Snow experiences, ski zones, and scenic winter routes.'],
@@ -340,9 +340,9 @@ class DestinationController extends Controller
                     ['name' => 'Zermatt', 'description' => 'Car-free alpine village known for Matterhorn views and winter sports.', 'attractions' => ['Matterhorn Glacier', 'Gornergrat', 'Ski Slopes'], 'duration' => '2 Days', 'tags' => ['Snow', 'Luxury']],
                 ],
                 'packages' => [
-                    ['name' => 'Swiss Scenic Rail Tour', 'duration' => '8D/7N', 'rating' => 4.9, 'price' => '₹2,29,999'],
-                    ['name' => 'Switzerland Honeymoon Plan', 'duration' => '7D/6N', 'rating' => 4.9, 'price' => '₹2,14,999'],
-                    ['name' => 'Swiss Family Premium Tour', 'duration' => '9D/8N', 'rating' => 4.8, 'price' => '₹2,39,999'],
+                    ['name' => 'Swiss Scenic Rail Tour', 'duration' => '8D/7N', 'rating' => 4.9, 'price' => '₹2,29,999', 'discounted price' => '₹1,99,999'],
+                    ['name' => 'Switzerland Honeymoon Plan', 'duration' => '7D/6N', 'rating' => 4.9, 'price' => '₹2,14,999', 'discounted price' => '₹1,89,999'],
+                    ['name' => 'Swiss Family Premium Tour', 'duration' => '9D/8N', 'rating' => 4.8, 'price' => '₹2,39,999', 'discounted price' => '₹2,09,999'],
                 ],
                 'features' => [
                     ['icon' => 'bi bi-train-front-fill', 'title' => 'Scenic Rail Network', 'desc' => 'Iconic train journeys through mountains, tunnels, and valleys.'],
@@ -387,9 +387,9 @@ class DestinationController extends Controller
                     ['name' => 'Krabi', 'description' => 'Known for limestone cliffs, clear waters, and calm island life.', 'attractions' => ['Four Island Tour', 'Railay Beach', 'Ao Nang'], 'duration' => '2 Days', 'tags' => ['Nature', 'Leisure']],
                 ],
                 'packages' => [
-                    ['name' => 'Thailand Island Combo', 'duration' => '7D/6N', 'rating' => 4.7, 'price' => '₹74,999'],
-                    ['name' => 'Thailand Friends Special', 'duration' => '6D/5N', 'rating' => 4.6, 'price' => '₹66,999'],
-                    ['name' => 'Thailand Family Fun Plan', 'duration' => '7D/6N', 'rating' => 4.5, 'price' => '₹79,999'],
+                    ['name' => 'Thailand Island Combo', 'duration' => '7D/6N', 'rating' => 4.7, 'price' => '₹74,999', 'discounted price' => '₹64,999'],
+                    ['name' => 'Thailand Friends Special', 'duration' => '6D/5N', 'rating' => 4.6, 'price' => '₹66,999', 'discounted price' => '₹56,999'],
+                    ['name' => 'Thailand Family Fun Plan', 'duration' => '7D/6N', 'rating' => 4.5, 'price' => '₹79,999', 'discounted price' => '₹69,999'],
                 ],
                 'features' => [
                     ['icon' => 'bi bi-water', 'title' => 'Island Routes', 'desc' => 'World-famous beaches and island-hopping experiences.'],
@@ -434,9 +434,9 @@ class DestinationController extends Controller
                     ['name' => 'Dubai Desert Zone', 'description' => 'Adventure region for dune drives, camps, and cultural performances.', 'attractions' => ['Desert Safari', 'Dune Bashing', 'BBQ Camp'], 'duration' => '1 Day', 'tags' => ['Adventure', 'Culture']],
                 ],
                 'packages' => [
-                    ['name' => 'Dubai Luxury Highlights', 'duration' => '5D/4N', 'rating' => 4.8, 'price' => '₹1,24,999'],
-                    ['name' => 'Dubai Family Explorer', 'duration' => '5D/4N', 'rating' => 4.7, 'price' => '₹1,18,999'],
-                    ['name' => 'Dubai Short Break', 'duration' => '4D/3N', 'rating' => 4.6, 'price' => '₹99,999'],
+                    ['name' => 'Dubai Luxury Highlights', 'duration' => '5D/4N', 'rating' => 4.8, 'price' => '₹1,24,999', 'discounted price' => '₹1,09,999'],
+                    ['name' => 'Dubai Family Explorer', 'duration' => '5D/4N', 'rating' => 4.7, 'price' => '₹1,18,999', 'discounted price' => '₹1,04,999'],
+                    ['name' => 'Dubai Short Break', 'duration' => '4D/3N', 'rating' => 4.6, 'price' => '₹99,999', 'discounted price' => '₹89,999'],
                 ],
                 'features' => [
                     ['icon' => 'bi bi-buildings-fill', 'title' => 'Skyline Landmarks', 'desc' => 'World-famous architecture and observation decks.'],
@@ -481,9 +481,9 @@ class DestinationController extends Controller
                     ['name' => 'Panaji & Old Goa', 'description' => 'Colonial history, riverside views, and local food culture.', 'attractions' => ['Fontainhas', 'Basilica', 'Mandovi Cruise'], 'duration' => '1 Day', 'tags' => ['Culture', 'Family']],
                 ],
                 'packages' => [
-                    ['name' => 'Goa Weekend Escape', 'duration' => '4D/3N', 'rating' => 4.5, 'price' => '₹18,999'],
-                    ['name' => 'Goa Friends Party Trip', 'duration' => '5D/4N', 'rating' => 4.6, 'price' => '₹24,999'],
-                    ['name' => 'Goa Relaxed Family Stay', 'duration' => '4D/3N', 'rating' => 4.4, 'price' => '₹21,499'],
+                    ['name' => 'Goa Weekend Escape', 'duration' => '4D/3N', 'rating' => 4.5, 'price' => '₹18,999', 'discounted price' => '₹16,999'],
+                    ['name' => 'Goa Friends Party Trip', 'duration' => '5D/4N', 'rating' => 4.6, 'price' => '₹24,999', 'discounted price' => '₹21,999'],
+                    ['name' => 'Goa Relaxed Family Stay', 'duration' => '4D/3N', 'rating' => 4.4, 'price' => '₹21,499', 'discounted price' => '₹19,499'],
                 ],
                 'features' => [
                     ['icon' => 'bi bi-sunset-fill', 'title' => 'Beach Sunsets', 'desc' => 'Golden-hour coastal spots and sea-facing cafe evenings.'],

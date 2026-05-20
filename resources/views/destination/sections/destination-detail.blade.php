@@ -52,7 +52,7 @@
         $bucket = str_contains(strtolower((string) $destination->country), 'india') ? 'india' : 'international';
 
         $relatedItems = collect($relatedByRegion[$bucket])
-            ->map(fn (string $name) => [
+            ->map(fn(string $name) => [
                 'name' => $name,
                 'country' => $bucket === 'india' ? 'India' : 'International',
                 'image' => $destination->image_url,
@@ -69,17 +69,20 @@
 <section class="seo-dd" style="--dd-primary: {{ $primaryColor }};">
     <div class="container seo-dd-container">
         <div class="seo-dd-mobile-filter-bar" aria-label="Mobile quick actions">
-            <button class="seo-dd-mobile-filter-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#seoTripOffcanvas" aria-controls="seoTripOffcanvas">
+            <button class="seo-dd-mobile-filter-btn" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#seoTripOffcanvas" aria-controls="seoTripOffcanvas">
                 <i class="bi bi-funnel-fill"></i>
                 <span>Filter</span>
             </button>
-            <button class="seo-dd-mobile-filter-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#seoPageNavOffcanvas" aria-controls="seoPageNavOffcanvas">
+            <button class="seo-dd-mobile-filter-btn" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#seoPageNavOffcanvas" aria-controls="seoPageNavOffcanvas">
                 <i class="bi bi-sort-down"></i>
                 <span>Sort</span>
             </button>
         </div>
 
-        <div class="offcanvas offcanvas-start seo-dd-offcanvas" tabindex="-1" id="seoTripOffcanvas" aria-labelledby="seoTripOffcanvasLabel">
+        <div class="offcanvas offcanvas-start seo-dd-offcanvas" tabindex="-1" id="seoTripOffcanvas"
+            aria-labelledby="seoTripOffcanvasLabel">
             <div class="offcanvas-header seo-dd-offcanvas-header">
                 <h5 class="offcanvas-title" id="seoTripOffcanvasLabel">Plan {{ $destination->name }} Trip</h5>
                 <button type="button" class="seo-dd-offcanvas-close" data-bs-dismiss="offcanvas" aria-label="Close">
@@ -90,7 +93,7 @@
                 <article class="seo-dd-card seo-dd-booking-card">
                     <p class="seo-dd-kicker">Book Your Trip</p>
                     <h3>Plan {{ $destination->name }} Vacation</h3>
-                    <p class="seo-dd-sidebar-price">From {{ $displayPrice }} <span>per person</span></p>
+
 
                     <form action="#" method="POST" class="seo-dd-form">
                         @csrf
@@ -98,7 +101,7 @@
                             Travel Month
                             <select name="month">
                                 <option value="">Select month</option>
-                                @foreach($monthOptions ?? ['January','February','March','April','May','June','July','August','September','October','November','December'] as $month)
+                                @foreach($monthOptions ?? ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] as $month)
                                     <option value="{{ $month }}">{{ $month }}</option>
                                 @endforeach
                             </select>
@@ -108,13 +111,17 @@
                             Guests
                             <select name="guests">
                                 @for($guest = 1; $guest <= 10; $guest++)
-                                    <option value="{{ $guest }}">{{ $guest }} {{ $guest === 1 ? 'Guest' : 'Guests' }}</option>
+                                    <option value="{{ $guest }}">{{ $guest }} {{ $guest === 1 ? 'Guest' : 'Guests' }}
+                                    </option>
                                 @endfor
                             </select>
                         </label>
 
-                        <button type="submit" class="seo-dd-btn seo-dd-btn-primary seo-dd-btn-block">Send Enquiry</button>
-                        <a href="https://wa.me/" target="_blank" rel="noopener" class="seo-dd-btn seo-dd-btn-whatsapp seo-dd-btn-block">WhatsApp Expert</a>
+                        <button type="submit"
+                            class="seo-dd-btn seo-dd-btn-primary seo-dd-btn-enquiry  seo-dd-btn-block">Send
+                            Enquiry</button>
+                        <a href="https://wa.me/" target="_blank" rel="noopener"
+                            class="seo-dd-btn seo-dd-btn-whatsapp seo-dd-btn-block">WhatsApp Expert</a>
                     </form>
                 </article>
 
@@ -124,14 +131,16 @@
                         <li><span>Location</span><strong>{{ $destination->country ?? 'India' }}</strong></li>
                         <li><span>Best Time</span><strong>{{ $displayBestSeason }}</strong></li>
                         <li><span>Ideal Duration</span><strong>{{ $displayIdealDays }}</strong></li>
-                        <li><span>Rating</span><strong>{{ number_format((float) $destination->rating, 1) }}/5</strong></li>
+                        <li><span>Rating</span><strong>{{ number_format((float) $destination->rating, 1) }}/5</strong>
+                        </li>
                         <li><span>Starting From</span><strong>{{ $displayPrice }}</strong></li>
                     </ul>
                 </article>
             </div>
         </div>
 
-        <div class="offcanvas offcanvas-end seo-dd-offcanvas seo-dd-offcanvas-nav" tabindex="-1" id="seoPageNavOffcanvas" aria-labelledby="seoPageNavOffcanvasLabel">
+        <div class="offcanvas offcanvas-end seo-dd-offcanvas seo-dd-offcanvas-nav" tabindex="-1"
+            id="seoPageNavOffcanvas" aria-labelledby="seoPageNavOffcanvasLabel">
             <div class="offcanvas-header seo-dd-offcanvas-header">
                 <h5 class="offcanvas-title" id="seoPageNavOffcanvasLabel">On This Page</h5>
                 <button type="button" class="seo-dd-offcanvas-close" data-bs-dismiss="offcanvas" aria-label="Close">
@@ -162,27 +171,22 @@
 
         <section class="seo-dd-quick-strip" aria-label="Quick destination information">
             <article class="seo-dd-quick-card">
-                <i class="bi bi-wallet2"></i>
                 <p>Starting Price</p>
                 <strong>{{ $displayPrice }}</strong>
             </article>
             <article class="seo-dd-quick-card">
-                <i class="bi bi-hourglass-split"></i>
                 <p>Ideal Duration</p>
                 <strong>{{ $displayIdealDays }}</strong>
             </article>
             <article class="seo-dd-quick-card">
-                <i class="bi bi-cloud-sun-fill"></i>
                 <p>Best Time To Visit</p>
                 <strong>{{ $displayBestSeason }}</strong>
             </article>
             <article class="seo-dd-quick-card">
-                <i class="bi bi-stars"></i>
                 <p>Traveler Rating</p>
                 <strong>{{ number_format((float) $destination->rating, 1) }}/5</strong>
             </article>
             <article class="seo-dd-quick-card">
-                <i class="bi bi-airplane-fill"></i>
                 <p>Popular For</p>
                 <strong>{{ implode(', ', $popularFor) }}</strong>
             </article>
@@ -197,8 +201,8 @@
                         <p class="seo-dd-kicker">Destination Overview</p>
                         <h2 class="seo-dd-title">{{ $destination->name }} Tour Packages</h2>
                     </div>
-                    <p class="seo-dd-lead">Explore handpicked <mark>{{ $destination->name }}</mark> itineraries crafted for couples, families, and adventure travelers.</p>
-                    <div class="seo-dd-copy {{ $hasLongOverview ? 'is-collapsed' : '' }}" data-seo-readmore itemprop="description">
+                    <div class="seo-dd-copy {{ $hasLongOverview ? 'is-collapsed' : '' }}" data-seo-readmore
+                        itemprop="description">
                         {{ $overviewText }}
                     </div>
                     @if($hasLongOverview)
@@ -240,7 +244,8 @@
                     <div class="seo-dd-card-grid seo-dd-place-grid">
                         @foreach($places as $place)
                             <article class="seo-dd-card seo-dd-place-card">
-                                <img src="{{ $place['image'] ?? $destination->image_url }}" alt="{{ $place['name'] }}" loading="lazy">
+                                <img src="{{ $place['image'] ?? $destination->image_url }}" alt="{{ $place['name'] }}"
+                                    loading="lazy">
                                 <div class="seo-dd-card-body">
                                     <div class="seo-dd-row-between">
                                         <h3>{{ $place['name'] }}</h3>
@@ -250,11 +255,6 @@
                                     <div class="seo-dd-badges">
                                         @foreach(array_slice(($place['attractions'] ?? []), 0, 3) as $attraction)
                                             <span class="seo-dd-badge">{{ $attraction }}</span>
-                                        @endforeach
-                                    </div>
-                                    <div class="seo-dd-tags">
-                                        @foreach(array_slice(($place['tags'] ?? []), 0, 2) as $tag)
-                                            <span class="seo-dd-tag">{{ $tag }}</span>
                                         @endforeach
                                     </div>
                                     <a href="#" class="seo-dd-btn seo-dd-btn-ghost">Explore {{ $place['name'] }}</a>
@@ -274,41 +274,62 @@
                         <div class="swiper-wrapper">
                             @foreach($packages as $package)
                                 <article class="swiper-slide seo-dd-card seo-dd-package-card">
-                                    <img src="{{ $package['image'] ?? $destination->image_url }}" alt="{{ $package['name'] }}" loading="lazy">
+                                    <img src="{{ $package['image'] ?? $destination->image_url }}"
+                                        alt="{{ $package['name'] }}" loading="lazy">
                                     <div class="seo-dd-card-body">
                                         <h3>{{ $package['name'] }}</h3>
                                         <div class="seo-dd-package-meta">
                                             <span><i class="bi bi-clock"></i> {{ $package['duration'] ?? '4D/3N' }}</span>
-                                            <span><i class="bi bi-star-fill"></i> {{ number_format((float) ($package['rating'] ?? 4.5), 1) }}</span>
+                                            <span><i class="bi bi-star-fill"></i>
+                                                {{ number_format((float) ($package['rating'] ?? 4.5), 1) }}</span>
                                         </div>
                                         <div class="seo-dd-row-between">
-                                            <p class="seo-dd-price">{{ $package['price'] ?? $destination->formatted_price }}</p>
-                                            <a href="{{ $package['url'] ?? '#' }}" class="seo-dd-btn seo-dd-btn-primary">View Package</a>
+                                            <p class="seo-dd-price normal-price">
+                                                {{ $package['price'] ?? $destination->formatted_price }}</p>
+                                            <p class="seo-dd-price discounted-price">
+                                                {{ $package['discounted price'] ?? '' }}</p>
+                                            <a href="{{ $package['url'] ?? '#' }}"
+                                                class="seo-dd-btn View-package-btn seo-dd-btn-primary">View Details</a>
                                         </div>
                                     </div>
                                 </article>
                             @endforeach
                         </div>
                         <div class="seo-dd-swiper-nav">
-                            <button class="seo-dd-swiper-btn prev" type="button" aria-label="Previous package"><i class="bi bi-arrow-left"></i></button>
-                            <button class="seo-dd-swiper-btn next" type="button" aria-label="Next package"><i class="bi bi-arrow-right"></i></button>
+                            <button class="seo-dd-swiper-btn prev" type="button" aria-label="Previous package"><i
+                                    class="bi bi-arrow-left"></i></button>
+                            <button class="seo-dd-swiper-btn next" type="button" aria-label="Next package"><i
+                                    class="bi bi-arrow-right"></i></button>
                         </div>
                     </div>
                 </section>
 
                 <section id="why" class="seo-dd-section">
                     <div class="seo-dd-title-wrap">
-                        <p class="seo-dd-kicker">Why Choose {{ $destination->name }}</p>
-                        <h2 class="seo-dd-title">What Makes This Destination Special</h2>
+                        <p class="seo-dd-kicker">Why Choose Us</p>
+                        <h2 class="seo-dd-title">What Makes Us Special</h2>
                     </div>
                     <div class="seo-dd-card-grid seo-dd-feature-grid">
-                        @foreach($features as $feature)
-                            <article class="seo-dd-card seo-dd-feature-card">
-                                <span class="seo-dd-icon"><i class="{{ $feature['icon'] ?? 'bi bi-check2-circle' }}"></i></span>
-                                <h3>{{ $feature['title'] ?? '' }}</h3>
-                                <p>{{ $feature['desc'] ?? '' }}</p>
-                            </article>
-                        @endforeach
+                        <article class="seo-dd-card seo-dd-feature-card">
+                            <h3>Handpicked Destinations</h3>
+                            <p>From mountains and beaches to international adventures, we offer thoughtfully selected destinations for every traveler.</p>
+                        </article>
+                        <article class="seo-dd-card seo-dd-feature-card">
+                            <h3>Customized Tour Packages</h3>
+                            <p>Whether you are planning a honeymoon, family trip, group tour, or solo adventure, we personalize every journey to match your needs.</p>
+                        </article>
+                        <article class="seo-dd-card seo-dd-feature-card">
+                            <h3>24/7 Travel Assistance</h3>
+                            <p>Our support team is always available to help you before, during, and after your trip for a stress-free experience.</p>
+                        </article>
+                        <article class="seo-dd-card seo-dd-feature-card">
+                            <h3>Experienced Travel Experts</h3>
+                            <p>Our travel specialists have deep destination knowledge and help you plan the perfect vacation with expert guidance.</p>
+                        </article>
+                        <article class="seo-dd-card seo-dd-feature-card">
+                            <h3>Safe & Comfortable Travel</h3>
+                            <p>We prioritize your safety and comfort with trusted hotel partners, reliable transport, and verified services.</p>
+                        </article>
                     </div>
                 </section>
 
@@ -342,9 +363,11 @@
                     <div class="seo-dd-card-grid seo-dd-blog-grid">
                         @foreach($blogs as $blog)
                             <article class="seo-dd-card seo-dd-blog-card">
-                                <img src="{{ $blog['image'] ?? $destination->image_url }}" alt="{{ $blog['title'] }}" loading="lazy">
+                                <img src="{{ $blog['image'] ?? $destination->image_url }}" alt="{{ $blog['title'] }}"
+                                    loading="lazy">
                                 <div class="seo-dd-card-body">
-                                    <time datetime="{{ $blog['date'] }}">{{ \Carbon\Carbon::parse($blog['date'])->format('M d, Y') }}</time>
+                                    <time
+                                        datetime="{{ $blog['date'] }}">{{ \Carbon\Carbon::parse($blog['date'])->format('M d, Y') }}</time>
                                     <h3>{{ $blog['title'] }}</h3>
                                     <p>{{ $blog['excerpt'] }}</p>
                                     <a href="{{ $blog['url'] ?? '#' }}" class="seo-dd-btn seo-dd-btn-ghost">Read More</a>
@@ -387,12 +410,15 @@
 
                     <div class="seo-dd-faq-list">
                         @foreach($faqs as $index => $faq)
-                            <article class="seo-dd-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                                <button class="seo-dd-faq-btn {{ $index === 0 ? 'is-open' : '' }}" type="button" data-faq-toggle>
+                            <article class="seo-dd-faq-item" itemscope itemprop="mainEntity"
+                                itemtype="https://schema.org/Question">
+                                <button class="seo-dd-faq-btn {{ $index === 0 ? 'is-open' : '' }}" type="button"
+                                    data-faq-toggle>
                                     <span itemprop="name">{{ $faq['q'] }}</span>
                                     <i class="bi bi-plus-lg"></i>
                                 </button>
-                                <div class="seo-dd-faq-panel {{ $index === 0 ? 'is-open' : '' }}" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                                <div class="seo-dd-faq-panel {{ $index === 0 ? 'is-open' : '' }}" itemscope
+                                    itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                                     <p itemprop="text">{{ $faq['a'] }}</p>
                                 </div>
                             </article>
@@ -424,7 +450,6 @@
                     <article class="seo-dd-card seo-dd-booking-card">
                         <p class="seo-dd-kicker">Book Your Trip</p>
                         <h3>Plan {{ $destination->name }} Vacation</h3>
-                        <p class="seo-dd-sidebar-price">From {{ $destination->formatted_price ?? '₹18,999' }} <span>per person</span></p>
 
                         <form action="#" method="POST" class="seo-dd-form">
                             @csrf
@@ -432,7 +457,7 @@
                                 Travel Month
                                 <select name="month">
                                     <option value="">Select month</option>
-                                    @foreach($monthOptions ?? ['January','February','March','April','May','June','July','August','September','October','November','December'] as $month)
+                                    @foreach($monthOptions ?? ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] as $month)
                                         <option value="{{ $month }}">{{ $month }}</option>
                                     @endforeach
                                 </select>
@@ -442,13 +467,17 @@
                                 Guests
                                 <select name="guests">
                                     @for($guest = 1; $guest <= 10; $guest++)
-                                        <option value="{{ $guest }}">{{ $guest }} {{ $guest === 1 ? 'Guest' : 'Guests' }}</option>
+                                        <option value="{{ $guest }}">{{ $guest }} {{ $guest === 1 ? 'Guest' : 'Guests' }}
+                                        </option>
                                     @endfor
                                 </select>
                             </label>
 
-                            <button type="submit" class="seo-dd-btn seo-dd-btn-primary seo-dd-btn-block">Send Enquiry</button>
-                            <a href="https://wa.me/" target="_blank" rel="noopener" class="seo-dd-btn seo-dd-btn-whatsapp seo-dd-btn-block">WhatsApp Expert</a>
+                            <button type="submit"
+                                class="seo-dd-btn seo-dd-btn-primary seo-dd-btn-enquiry seo-dd-btn-block">Send
+                                Enquiry</button>
+                            <a href="https://wa.me/" target="_blank" rel="noopener"
+                                class="seo-dd-btn seo-dd-btn-whatsapp seo-dd-btn-block">WhatsApp Expert</a>
                         </form>
                     </article>
 
@@ -458,7 +487,8 @@
                             <li><span>Location</span><strong>{{ $destination->country ?? 'India' }}</strong></li>
                             <li><span>Best Time</span><strong>{{ $displayBestSeason }}</strong></li>
                             <li><span>Ideal Duration</span><strong>{{ $displayIdealDays }}</strong></li>
-                            <li><span>Rating</span><strong>{{ number_format((float) $destination->rating, 1) }}/5</strong></li>
+                            <li><span>Rating</span><strong>{{ number_format((float) $destination->rating, 1) }}/5</strong>
+                            </li>
                             <li><span>Starting From</span><strong>{{ $displayPrice }}</strong></li>
                         </ul>
                     </article>
@@ -603,19 +633,19 @@
     </script>
 
     <script type="application/ld+json">
-        {!! json_encode([
-            '@context' => 'https://schema.org',
-            '@type' => 'FAQPage',
-            'mainEntity' => array_map(function ($faq) {
-                return [
-                    '@type' => 'Question',
-                    'name' => $faq['q'],
-                    'acceptedAnswer' => [
-                        '@type' => 'Answer',
-                        'text' => $faq['a'],
-                    ],
-                ];
-            }, $faqs),
-        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
-    </script>
+            {!! json_encode([
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => array_map(function ($faq) {
+            return [
+                '@type' => 'Question',
+                'name' => $faq['q'],
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => $faq['a'],
+                ],
+            ];
+        }, $faqs),
+    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+        </script>
 @endpush
