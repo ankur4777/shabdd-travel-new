@@ -748,6 +748,344 @@ div.container.st-nav-inner {
     text-transform: uppercase;
 }
 
+/* =============================================
+   CTA Section - Package Detail Card Styles
+   ============================================= */
+
+.CTA-section-container {
+    position: relative;
+    margin: 32px 0;
+    border-radius: 24px;
+    overflow: hidden;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.CTA-section-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(20, 20, 30, 0.75) 0%,
+        rgba(30, 30, 50, 0.65) 50%,
+        rgba(20, 20, 30, 0.75) 100%
+    );
+    z-index: 1;
+}
+
+.CTA-section-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 40px 48px;
+    color: white;
+}
+
+.CTA-section-header {
+    margin-bottom: 28px;
+}
+
+.CTA-section-meta {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.CTA-section-meta-item {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.CTA-section-title {
+    margin: 0 0 16px;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: white;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.CTA-section-description {
+    margin: 0 0 24px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.92);
+    max-width: 900px;
+    font-weight: 500;
+}
+
+.CTA-section-columns {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    margin-bottom: 28px;
+}
+
+.CTA-section-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.CTA-section-col-left {
+    padding-right: 20px;
+}
+
+.CTA-section-col-right {
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 20px;
+}
+
+.CTA-section-subtitle {
+    margin: 0 0 14px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.CTA-section-attractions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.CTA-section-attractions li {
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.12);
+    border-left: 3px solid rgba(255, 149, 0, 0.8);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.93);
+    transition: all 0.3s ease;
+}
+
+.CTA-section-attractions li:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-left-color: #ff9500;
+    transform: translateX(6px);
+}
+
+.CTA-section-info-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.CTA-section-difficulty {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 8px 0;
+}
+
+.CTA-section-seasons {
+    display: grid;
+    gap: 10px;
+}
+
+.CTA-section-season-item {
+    display: grid;
+    gap: 4px;
+}
+
+.CTA-section-season-item strong {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 700;
+}
+
+.CTA-section-season-item small {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 400;
+}
+
+.CTA-section-why-visit {
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.CTA-section-why-text {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    max-width: 950px;
+}
+
+/* Responsive Design for CTA Section */
+@media (max-width: 1024px) {
+    .CTA-section-container {
+        min-height: 600px;
+    }
+
+    .CTA-section-content {
+        padding: 32px 36px;
+    }
+
+    .CTA-section-columns {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .CTA-section-col-left {
+        padding-right: 0;
+    }
+
+    .CTA-section-title {
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .CTA-section-container {
+        min-height: 700px;
+        background-attachment: scroll;
+    }
+
+    .CTA-section-content {
+        padding: 24px 20px;
+    }
+
+    .CTA-section-meta {
+        gap: 12px;
+        font-size: 0.85rem;
+    }
+
+    .CTA-section-meta-item {
+        font-size: 0.85rem;
+    }
+
+    .CTA-section-title {
+        font-size: clamp(1.5rem, 2.5vw, 2rem);
+        margin-bottom: 12px;
+    }
+
+    .CTA-section-description {
+        font-size: 0.95rem;
+        margin-bottom: 18px;
+    }
+
+    .CTA-section-columns {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 18px;
+    }
+
+    .CTA-section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+
+    .CTA-section-attractions li {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .CTA-section-why-visit {
+        padding-top: 14px;
+    }
+
+    .CTA-section-why-text {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+}
+
+@media (max-width: 480px) {
+    .CTA-section-container {
+        min-height: 600px;
+        margin: 16px 0;
+        border-radius: 16px;
+    }
+
+    .CTA-section-content {
+        padding: 18px 14px;
+    }
+
+    .CTA-section-meta {
+        gap: 8px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .CTA-section-meta-item {
+        font-size: 0.8rem;
+    }
+
+    .CTA-section-title {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+    }
+
+    .CTA-section-description {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        margin-bottom: 14px;
+    }
+
+    .CTA-section-columns {
+        gap: 12px;
+        margin-bottom: 14px;
+    }
+
+    .CTA-section-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+
+    .CTA-section-attractions li {
+        padding: 7px 10px;
+        font-size: 0.85rem;
+    }
+
+    .CTA-section-info-box {
+        padding: 12px;
+    }
+
+    .CTA-section-difficulty {
+        font-size: 0.9rem;
+    }
+
+    .CTA-section-season-item strong {
+        font-size: 0.85rem;
+    }
+
+    .CTA-section-season-item small {
+        font-size: 0.75rem;
+    }
+
+    .CTA-section-why-text {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+}
+
 .st-mega-link {
     margin-bottom: 2px;
 }

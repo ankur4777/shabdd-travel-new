@@ -295,6 +295,34 @@ class DestinationController extends Controller
             ];
         }
 
+        // Extract attractions from places and itinerary
+        $attractions = array_merge(
+            collect($places)
+                ->map(fn ($place) => is_array($place) ? ($place['name'] ?? null) : null)
+                ->filter()
+                ->take(5)
+                ->all(),
+            collect($places)
+                ->map(fn ($place) => is_array($place) ? 
+                    (collect($place['attractions'] ?? [])->first() ?? null) : null)
+                ->filter()
+                ->take(2)
+                ->all()
+        );
+        $attractions = array_values(array_unique(array_filter($attractions)));
+        if (empty($attractions)) {
+            $attractions = ['Scenic landscapes', 'Cultural heritage', 'Local experiences', 'Adventure activities', 'Comfortable stays'];
+        }
+
+        // Get seasons info
+        $seasonsInfo = $this->getDestinationSeasons($destinationProfile);
+        
+        // Build difficulty level based on day count
+        $difficulty = $this->buildDifficultyLevel($dayCount);
+
+        // Distance placeholder (can be enhanced based on destination)
+        $distance = $this->calculateEstimatedDistance($destination->name, $dayCount);
+
         return [
             'destination_tagline' => $destinationTagline,
             'package_title' => $selectedPackage['name'],
@@ -315,6 +343,12 @@ class DestinationController extends Controller
             'hotel_category' => $hotelCategory,
             'hotel_highlights' => $hotelHighlights,
             'highlight_points' => $highlights,
+            'attractions' => $attractions,
+            'difficulty' => $difficulty,
+            'seasons' => $seasonsInfo,
+            'distance' => $distance,
+            'why_visit' => $this->buildWhyVisit($destination, $selectedPackage, $dayCount),
+            'main_image' => $galleryImages[0] ?? $destination->image_url,
             'contact_phone' => '+91-98280-65555',
             'contact_email' => 'support@shabddtravel.com',
             'other_packages' => collect($destinationPackages)
@@ -323,6 +357,73 @@ class DestinationController extends Controller
                 ->values()
                 ->all(),
         ];
+    }
+
+    private function buildDifficultyLevel(int $dayCount): string
+    {
+        if ($dayCount <= 3) {
+            return 'Easy - Relaxed pace';
+        } elseif ($dayCount <= 5) {
+            return 'Moderate - Balanced pace';
+        } elseif ($dayCount <= 8) {
+            return 'Moderate to challenging';
+        }
+        return 'Challenging - Active exploration';
+    }
+
+    private function getDestinationSeasons(array $destinationProfile): array
+    {
+        $seasons = $destinationProfile['seasons'] ?? [];
+        if (empty($seasons)) {
+            return [
+                ['name' => 'April to June', 'note' => 'Best - Pleasant weather'],
+                ['name' => 'September to October', 'note' => 'Ideal - Comfortable temperatures'],
+            ];
+        }
+        return array_slice(
+            array_map(fn ($s) => ['name' => $s['name'] ?? '', 'note' => $s['recommendation'] ?? ''], $seasons),
+            0,
+            2
+        );
+    }
+
+    private function calculateEstimatedDistance(string $destination, int $dayCount): string
+    {
+        $baseDistances = [
+            'bali' => 200,
+            'maldives' => 150,
+            'kashmir' => 400,
+            'santorini' => 350,
+            'iceland' => 628,
+            'switzerland' => 280,
+            'thailand' => 320,
+            'goa' => 250,
+        ];
+
+        $dest = Str::lower($destination);
+        $base = 0;
+        foreach (array_keys($baseDistances) as $key) {
+            if (Str::contains($dest, $key)) {
+                $base = $baseDistances[$key];
+                break;
+            }
+        }
+
+        return $base > 0 ? number_format($base) . ' Miles' : ($dayCount * 120) . ' Miles (approx)';
+    }
+
+    private function buildWhyVisit(Destination $destination, array $selectedPackage, int $dayCount): string
+    {
+        $overview = $selectedPackage['why_visit'] ?? null;
+        
+        if ($overview) {
+            return $overview;
+        }
+
+        $destinationName = $destination->name;
+        $packageName = $selectedPackage['name'] ?? 'This package';
+        
+        return "$packageName offers an unparalleled opportunity to experience {$destinationName}'s diverse landscapes, rich culture, and authentic local experiences in a single journey. Over {$dayCount} days, you'll discover hidden gems, iconic landmarks, and create lasting memories with expert guidance and comfortable stays throughout your adventure.";
     }
 
     private function resolvePackageItinerary(array $selectedPackage, Destination $destination, array $places, int $dayCount): array

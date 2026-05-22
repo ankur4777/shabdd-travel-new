@@ -43,6 +43,62 @@
                         @endif
                     </section>
 
+                    <!-- Package Section Card -->
+                    <section class="CTA-section-container" style="background-image: url('{{ $mainImage }}'); background-size: cover; background-position: center;">
+                        <div class="CTA-section-overlay"></div>
+                        <div class="CTA-section-content">
+                            <div class="CTA-section-header">
+                                <div class="CTA-section-meta">
+                                    <span class="CTA-section-meta-item">📍 {{ $pd['destination_tagline'] }}</span>
+                                    <span class="CTA-section-meta-item">📏 {{ $pd['distance'] }}</span>
+                                    <span class="CTA-section-meta-item">📅 {{ $pd['package_duration'] }}</span>
+                                </div>
+                            </div>
+
+                            <div class="CTA-section-main">
+                                <h2 class="CTA-section-title">{{ $pd['package_title'] }}</h2>
+                                <p class="CTA-section-description">{{ $pd['overview_text'] }}</p>
+
+                                <div class="CTA-section-columns">
+                                    <!-- Left Column -->
+                                    <div class="CTA-section-col CTA-section-col-left">
+                                        <h3 class="CTA-section-subtitle">✨ Attractions</h3>
+                                        <ul class="CTA-section-attractions">
+                                            @foreach(array_slice($pd['attractions'] ?? [], 0, 5) as $attraction)
+                                                <li>{{ $attraction }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+
+                                    <!-- Right Column -->
+                                    <div class="CTA-section-col CTA-section-col-right">
+                                        <div class="CTA-section-info-box">
+                                            <h3 class="CTA-section-subtitle">⛏️ Difficulty</h3>
+                                            <p class="CTA-section-difficulty">{{ $pd['difficulty'] }}</p>
+                                        </div>
+
+                                        <div class="CTA-section-info-box">
+                                            <h3 class="CTA-section-subtitle">🌤️ Seasons</h3>
+                                            <div class="CTA-section-seasons">
+                                                @foreach($pd['seasons'] as $season)
+                                                    <div class="CTA-section-season-item">
+                                                        <strong>{{ $season['name'] }}</strong>
+                                                        <small>{{ $season['note'] }}</small>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="CTA-section-why-visit">
+                                    <h3 class="CTA-section-subtitle">💡 Why Visit</h3>
+                                    <p class="CTA-section-why-text">{{ $pd['why_visit'] }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                     <nav class="xpkd-anchor-tabs" aria-label="Package sections">
                         <a href="#xpkd-overview-block">Overview</a>
                         <a href="#xpkd-hotel-block">Hotel Details</a>
