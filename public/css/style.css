@@ -9277,3 +9277,471 @@ div.container.st-nav-inner {
         height: auto;
     }
 }
+
+/* Package details page (unique namespace) */
+#xpkd-root-shell {
+    padding: 28px 0 42px;
+}
+
+.xpkd-container-wrap {
+    width: min(100% - 24px, 1240px);
+}
+
+.xpkd-breadcrumb-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 13px;
+    margin-bottom: 14px;
+}
+
+.xpkd-breadcrumb-line a {
+    color: #1f5fbf;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.xpkd-breadcrumb-line strong {
+    color: #0f172a;
+}
+
+.xpkd-head-cluster {
+    margin-bottom: 16px;
+}
+
+.xpkd-head-kicker {
+    margin: 0 0 4px;
+    color: #475569;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.xpkd-head-title {
+    margin: 0;
+    font-size: clamp(1.35rem, 2.1vw, 2rem);
+    color: #111827;
+    font-weight: 800;
+}
+
+.xpkd-head-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.xpkd-head-metrics span {
+    background: #eef5ff;
+    border: 1px solid #c8dcff;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #183a75;
+}
+
+.xpkd-grid-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1.85fr) minmax(280px, 0.82fr);
+    gap: 16px;
+    align-items: start;
+}
+
+.xpkd-main-column {
+    display: grid;
+    gap: 14px;
+}
+
+.xpkd-hero-media-card {
+    background: #fff;
+    border: 1px solid #d9e4f7;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.xpkd-hero-media-main img {
+    width: 100%;
+    height: min(440px, 50vw);
+    min-height: 240px;
+    object-fit: cover;
+    display: block;
+}
+
+.xpkd-hero-media-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    padding: 8px;
+    background: #f7fbff;
+}
+
+.xpkd-hero-media-strip img {
+    width: 100%;
+    height: 92px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #d8e3f4;
+}
+
+.xpkd-anchor-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid #d9e4f7;
+    background: #fff;
+    border-radius: 12px;
+}
+
+.xpkd-anchor-tabs a {
+    border: 1px solid #d2e2fe;
+    color: #1f4a96;
+    text-decoration: none;
+    font-size: 12.5px;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 7px 12px;
+}
+
+.xpkd-content-card {
+    border: 1px solid #d9e4f7;
+    border-radius: 12px;
+    background: #fff;
+    padding: 16px;
+}
+
+.xpkd-content-card h2 {
+    margin: 0 0 10px;
+    font-size: 1.1rem;
+    color: #0f172a;
+    font-weight: 800;
+}
+
+.xpkd-content-card p {
+    margin: 0;
+    color: #334155;
+    line-height: 1.7;
+}
+
+.xpkd-highlight-badges {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.xpkd-highlight-badges span {
+    background: #eef6ff;
+    border: 1px solid #d0e3ff;
+    color: #1d4c9c;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 10px;
+    border-radius: 999px;
+}
+
+.xpkd-hotel-panel {
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+}
+
+.xpkd-hotel-image img {
+    width: 100%;
+    height: 128px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #d5e2f8;
+}
+
+.xpkd-hotel-copy h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #0f172a;
+}
+
+.xpkd-hotel-copy p {
+    margin: 5px 0 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #475569;
+}
+
+.xpkd-hotel-copy ul {
+    margin: 0;
+    padding-left: 18px;
+    color: #334155;
+}
+
+.xpkd-hotel-copy li + li {
+    margin-top: 6px;
+}
+
+.xpkd-itinerary-stack {
+    display: grid;
+    gap: 10px;
+}
+
+.xpkd-itinerary-card {
+    border: 1px solid #d6e5fa;
+    border-radius: 10px;
+    background: #f8fbff;
+    padding: 12px;
+}
+
+.xpkd-itinerary-day {
+    display: inline-block;
+    font-size: 11px;
+    color: #0f4aa1;
+    font-weight: 800;
+    padding: 4px 8px;
+    background: #dcecff;
+    border-radius: 999px;
+    margin-bottom: 7px;
+}
+
+.xpkd-itinerary-card h3 {
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.xpkd-itinerary-card p {
+    margin: 0;
+    color: #334155;
+    font-size: 14px;
+}
+
+.xpkd-inclexc-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.xpkd-inclexc-box {
+    border-radius: 10px;
+    border: 1px solid #d8e5f6;
+    padding: 12px;
+}
+
+.xpkd-inclexc-box h3 {
+    margin: 0 0 8px;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.xpkd-inclexc-box ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.xpkd-inclexc-box li + li {
+    margin-top: 6px;
+}
+
+.xpkd-inclexc-box-in {
+    background: #f5fffb;
+    border-color: #bfe9db;
+}
+
+.xpkd-inclexc-box-ex {
+    background: #fff9f9;
+    border-color: #f1d2d2;
+}
+
+.xpkd-other-pack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.xpkd-other-pack-card {
+    border: 1px solid #d9e4f7;
+    border-radius: 10px;
+    background: #fbfdff;
+    padding: 12px;
+}
+
+.xpkd-other-pack-card p {
+    margin: 0 0 5px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+.xpkd-other-pack-card h3 {
+    margin: 0 0 8px;
+    font-size: 15px;
+    color: #0f172a;
+}
+
+.xpkd-other-pack-card strong {
+    display: block;
+    color: #1656b1;
+    margin-bottom: 8px;
+}
+
+.xpkd-other-pack-card a {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+    color: #1d4f9f;
+}
+
+.xpkd-side-column {
+    display: grid;
+    gap: 12px;
+    position: sticky;
+    top: 88px;
+}
+
+.xpkd-booking-card,
+.xpkd-support-card {
+    background: #fff;
+    border: 1px solid #d9e4f7;
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.xpkd-price-kicker {
+    margin: 0;
+    color: #475569;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 800;
+}
+
+.xpkd-booking-card h3 {
+    margin: 4px 0 0;
+    font-size: 2rem;
+    line-height: 1;
+    color: #0f172a;
+    font-weight: 800;
+}
+
+.xpkd-strike-price {
+    margin: 5px 0 0;
+    color: #94a3b8;
+    text-decoration: line-through;
+    font-weight: 700;
+}
+
+.xpkd-price-note {
+    margin: 6px 0 12px;
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 700;
+}
+
+.xpkd-cta-btn {
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 42px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 800;
+    color: #fff;
+    background: linear-gradient(90deg, #1f67ce, #3182f7);
+    border: 1px solid #1b5fbe;
+    margin-bottom: 8px;
+}
+
+.xpkd-cta-btn-lite {
+    color: #114ea6;
+    background: #e9f2ff;
+    border-color: #c8dcff;
+}
+
+.xpkd-side-split {
+    height: 1px;
+    background: #d9e4f7;
+    margin: 8px 0 10px;
+}
+
+.xpkd-side-facts {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 8px;
+}
+
+.xpkd-side-facts li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 13px;
+}
+
+.xpkd-side-facts span {
+    color: #64748b;
+}
+
+.xpkd-side-facts strong {
+    color: #0f172a;
+}
+
+.xpkd-support-card h4 {
+    margin: 0 0 10px;
+    color: #0f172a;
+    font-weight: 800;
+}
+
+.xpkd-support-card a {
+    display: block;
+    text-decoration: none;
+    color: #1f4fa0;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.xpkd-support-card input {
+    width: 100%;
+    margin-top: 8px;
+    border: 1px solid #d5e2f7;
+    border-radius: 8px;
+    padding: 9px 10px;
+    font-size: 12px;
+    color: #475569;
+    background: #f8fbff;
+}
+
+@media (max-width: 991.98px) {
+    .xpkd-grid-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .xpkd-side-column {
+        position: static;
+    }
+
+    .xpkd-other-pack-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 767.98px) {
+    #xpkd-root-shell {
+        padding-top: 16px;
+    }
+
+    .xpkd-container-wrap {
+        width: min(100% - 14px, 1240px);
+    }
+
+    .xpkd-hotel-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .xpkd-inclexc-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .xpkd-hero-media-main img {
+        height: 250px;
+    }
+}

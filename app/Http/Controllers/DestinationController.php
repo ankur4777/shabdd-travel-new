@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Destination;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class DestinationController extends Controller
 {
@@ -45,13 +46,41 @@ class DestinationController extends Controller
         }
 
         $destinationProfile = $this->buildDestinationProfile($destination);
+        $destinationPackages = $this->resolvePackageCollection($destination, $destinationProfile);
 
         return view('destination.show', compact(
             'destination',
             'relatedDestinations',
             'locationOptions',
             'monthOptions',
-            'destinationProfile'
+            'destinationProfile',
+            'destinationPackages'
+        ));
+    }
+
+    public function packageShow(Destination $destination, string $packageSlug): View
+    {
+        abort_unless($destination->is_active, 404);
+
+        $destinationProfile = $this->buildDestinationProfile($destination);
+        $destinationPackages = $this->resolvePackageCollection($destination, $destinationProfile);
+        $selectedPackage = collect($destinationPackages)->firstWhere('package_slug', $packageSlug);
+
+        abort_if($selectedPackage === null, 404);
+
+        $packagePageData = $this->buildPackagePageData(
+            $destination,
+            $destinationProfile,
+            $selectedPackage,
+            $destinationPackages
+        );
+
+        return view('destination.package-show', compact(
+            'destination',
+            'destinationProfile',
+            'destinationPackages',
+            'selectedPackage',
+            'packagePageData'
         ));
     }
 
@@ -134,6 +163,267 @@ class DestinationController extends Controller
             'testimonials' => array_values($profile['testimonials'] ?? []),
             'faqs' => array_values($profile['faqs'] ?? []),
         ];
+    }
+
+    private function resolvePackageCollection(Destination $destination, array $destinationProfile): array
+    {
+        $rawPackages = !empty($destination->packages)
+            ? $destination->packages
+            : ($destinationProfile['packages'] ?? []);
+
+        $usedSlugs = [];
+
+        return collect($rawPackages)
+            ->values()
+            ->map(function ($package, int $index) use ($destination, &$usedSlugs) {
+                $packageData = is_array($package) ? $package : ['name' => (string) $package];
+                $packageName = trim((string) ($packageData['name'] ?? 'Package ' . ($index + 1)));
+                $baseSlug = Str::slug($packageName) ?: 'package-' . ($index + 1);
+                $packageSlug = $baseSlug;
+                $counter = 2;
+
+                while (isset($usedSlugs[$packageSlug])) {
+                    $packageSlug = $baseSlug . '-' . $counter;
+                    $counter++;
+                }
+
+                $usedSlugs[$packageSlug] = true;
+
+                $packageData['name'] = $packageName;
+                $packageData['duration'] = $packageData['duration'] ?? '5D/4N';
+                $packageData['price'] = $packageData['price'] ?? ($destination->formatted_price ?: '₹39,999');
+                $packageData['discounted_price'] = $packageData['discounted price'] ?? ($packageData['discounted_price'] ?? '');
+                $packageData['image'] = $packageData['image'] ?? $destination->image_url;
+                $packageData['package_slug'] = $packageSlug;
+                $packageData['detail_url'] = route('destinations.packages.show', [
+                    'destination' => $destination,
+                    'packageSlug' => $packageSlug,
+                ]);
+
+                return $packageData;
+            })
+            ->all();
+    }
+
+    private function buildPackagePageData(
+        Destination $destination,
+        array $destinationProfile,
+        array $selectedPackage,
+        array $destinationPackages
+    ): array {
+        $places = !empty($destination->places) ? $destination->places : ($destinationProfile['places'] ?? []);
+        $features = !empty($destination->features) ? $destination->features : ($destinationProfile['features'] ?? []);
+        $overview = trim((string) ($selectedPackage['overview'] ?? $destination->about ?? $destinationProfile['overview'] ?? ''));
+        $duration = (string) ($selectedPackage['duration'] ?? '5D/4N');
+        $dayCount = $this->extractDayCount($duration);
+        $nightCount = max(1, $dayCount - 1);
+
+        if ($overview === '') {
+            $overview = $selectedPackage['name'] . ' is a curated tour package for ' . $destination->name .
+                ' covering top highlights with smooth stays, transfers, and guided local experiences.';
+        }
+
+        $galleryImages = collect([$selectedPackage['image'] ?? null, $destination->image_url ?? null])
+            ->merge(
+                collect($places)
+                    ->map(fn ($place) => is_array($place) ? ($place['image'] ?? null) : null)
+                    ->filter()
+                    ->take(3)
+            )
+            ->filter()
+            ->unique()
+            ->take(4)
+            ->values()
+            ->all();
+
+        $itinerary = $this->resolvePackageItinerary($selectedPackage, $destination, $places, $dayCount);
+        $inclusions = $this->normalizeStringList($selectedPackage['inclusions'] ?? []);
+        $exclusions = $this->normalizeStringList($selectedPackage['exclusions'] ?? []);
+
+        if (empty($inclusions)) {
+            $inclusions = [
+                $nightCount . ' nights hotel stay with breakfast',
+                'Airport and intercity transfers',
+                'Sightseeing as per itinerary',
+                'Experienced trip coordination support',
+            ];
+        }
+
+        if (empty($exclusions)) {
+            $exclusions = [
+                'Flights, train tickets, and visa fees',
+                'Meals not listed in itinerary',
+                'Personal expenses, shopping, and tips',
+                'Anything not explicitly mentioned in inclusions',
+            ];
+        }
+
+        $hotelName = trim((string) ($selectedPackage['hotel_name'] ?? ($destination->name . ' Signature Stay')));
+        $hotelArea = trim((string) ($selectedPackage['hotel_area'] ?? ($destination->name . ' Central Area')));
+        $hotelCategory = trim((string) ($selectedPackage['hotel_category'] ?? '4 Star Hotel'));
+        $hotelHighlights = $this->normalizeStringList($selectedPackage['hotel_highlights'] ?? []);
+
+        if (empty($hotelHighlights)) {
+            $hotelHighlights = [
+                'Well-rated rooms with daily housekeeping',
+                'Easy access to key sightseeing locations',
+                'Comfortable stay curated by our travel experts',
+            ];
+        }
+
+        $destinationTagline = $destination->country
+            ? $destination->name . ', ' . $destination->country
+            : $destination->name;
+
+        $startingPrice = (string) ($selectedPackage['discounted_price'] ?: $selectedPackage['price'] ?: $destination->formatted_price);
+        $originalPrice = (string) ($selectedPackage['price'] ?? '');
+        $rating = number_format((float) ($selectedPackage['rating'] ?? $destination->rating ?? 4.6), 1);
+        $reviewCount = (int) ($selectedPackage['review_count'] ?? (400 + ($dayCount * 53)));
+        $highlights = collect($features)
+            ->map(fn ($feature) => is_array($feature) ? ($feature['title'] ?? null) : null)
+            ->filter()
+            ->take(4)
+            ->values()
+            ->all();
+
+        if (empty($highlights)) {
+            $highlights = [
+                'Handpicked sightseeing route',
+                'Balanced travel pace',
+                'Reliable local support',
+                'Comfort-focused stay options',
+            ];
+        }
+
+        return [
+            'destination_tagline' => $destinationTagline,
+            'package_title' => $selectedPackage['name'],
+            'package_duration' => $duration,
+            'day_count' => $dayCount,
+            'night_count' => $nightCount,
+            'starting_price' => $startingPrice,
+            'original_price' => $originalPrice,
+            'package_rating' => $rating,
+            'review_count' => $reviewCount,
+            'overview_text' => $overview,
+            'gallery_images' => $galleryImages,
+            'itinerary_items' => $itinerary,
+            'inclusions' => $inclusions,
+            'exclusions' => $exclusions,
+            'hotel_name' => $hotelName,
+            'hotel_area' => $hotelArea,
+            'hotel_category' => $hotelCategory,
+            'hotel_highlights' => $hotelHighlights,
+            'highlight_points' => $highlights,
+            'contact_phone' => '+91-98280-65555',
+            'contact_email' => 'support@shabddtravel.com',
+            'other_packages' => collect($destinationPackages)
+                ->reject(fn (array $package) => ($package['package_slug'] ?? '') === ($selectedPackage['package_slug'] ?? ''))
+                ->take(3)
+                ->values()
+                ->all(),
+        ];
+    }
+
+    private function resolvePackageItinerary(array $selectedPackage, Destination $destination, array $places, int $dayCount): array
+    {
+        $existingItinerary = $selectedPackage['itinerary'] ?? [];
+
+        if (is_array($existingItinerary) && !empty($existingItinerary)) {
+            return collect($existingItinerary)
+                ->values()
+                ->map(function ($item, int $index) {
+                    if (is_string($item)) {
+                        return [
+                            'day' => $index + 1,
+                            'title' => 'Day ' . ($index + 1),
+                            'summary' => $item,
+                        ];
+                    }
+
+                    return [
+                        'day' => $item['day'] ?? ($index + 1),
+                        'title' => $item['title'] ?? ('Day ' . ($index + 1)),
+                        'summary' => $item['summary'] ?? ($item['description'] ?? 'Guided activities as per planned itinerary.'),
+                    ];
+                })
+                ->all();
+        }
+
+        $placeNames = collect($places)
+            ->map(fn ($place) => is_array($place) ? ($place['name'] ?? null) : null)
+            ->filter()
+            ->values()
+            ->all();
+
+        if (empty($placeNames)) {
+            $placeNames = [$destination->name];
+        }
+
+        $itinerary = [];
+        $lastDay = max(2, $dayCount);
+
+        for ($day = 1; $day <= $lastDay; $day++) {
+            if ($day === 1) {
+                $itinerary[] = [
+                    'day' => 1,
+                    'title' => 'Arrival and Local Welcome Tour',
+                    'summary' => 'Arrive in ' . $destination->name . ', hotel check-in, and a relaxed local orientation with nearby sightseeing.',
+                ];
+
+                continue;
+            }
+
+            if ($day === $lastDay) {
+                $itinerary[] = [
+                    'day' => $day,
+                    'title' => 'Departure Day',
+                    'summary' => 'After breakfast, check out and proceed for return transfer with beautiful trip memories.',
+                ];
+
+                continue;
+            }
+
+            $placeName = $placeNames[($day - 2) % count($placeNames)];
+
+            $itinerary[] = [
+                'day' => $day,
+                'title' => $placeName . ' Sightseeing',
+                'summary' => 'Explore top highlights in ' . $placeName . ' with guided stops, flexible photo breaks, and local leisure time.',
+            ];
+        }
+
+        return $itinerary;
+    }
+
+    private function normalizeStringList($items): array
+    {
+        if (is_string($items)) {
+            $items = array_filter(array_map('trim', preg_split('/[\r\n,]+/', $items)));
+        }
+
+        if (!is_array($items)) {
+            return [];
+        }
+
+        return collect($items)
+            ->map(fn ($item) => trim((string) $item))
+            ->filter()
+            ->values()
+            ->all();
+    }
+
+    private function extractDayCount(string $duration): int
+    {
+        if (preg_match('/(\d+)\s*D/i', $duration, $matches)) {
+            return max(2, (int) $matches[1]);
+        }
+
+        if (preg_match('/(\d+)\s*day/i', $duration, $matches)) {
+            return max(2, (int) $matches[1]);
+        }
+
+        return 5;
     }
 
     private function destinationProfiles(): array
@@ -571,6 +861,36 @@ class DestinationController extends Controller
                 ['q' => 'Can this trip be customized?', 'a' => 'Yes, the itinerary can be tailored to your budget and travel style.'],
             ],
         ];
+    }
+
+    public function packagePdf(Destination $destination, string $packageSlug)
+    {
+        abort_unless($destination->is_active, 404);
+
+        $destinationProfile = $this->buildDestinationProfile($destination);
+        $destinationPackages = $this->resolvePackageCollection($destination, $destinationProfile);
+        $selectedPackage = collect($destinationPackages)->firstWhere('package_slug', $packageSlug);
+
+        abort_if($selectedPackage === null, 404);
+
+        $packagePageData = $this->buildPackagePageData(
+            $destination,
+            $destinationProfile,
+            $selectedPackage,
+            $destinationPackages
+        );
+
+        $html = view('destination.package-pdf', compact(
+            'destination',
+            'destinationProfile',
+            'selectedPackage',
+            'packagePageData'
+        ))->render();
+
+        $pdf = Pdf::loadHTML($html);
+        $filename = Str::slug($selectedPackage['name']) . '-' . now()->format('Y-m-d') . '.pdf';
+
+        return $pdf->download($filename);
     }
 
     private function getLocationOptions(Destination $destination): array

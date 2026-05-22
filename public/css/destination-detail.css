@@ -499,3 +499,178 @@
         white-space: normal;
     }
 }
+
+/* Package Info Card Styles */
+.xpkd-package-info-card {
+    border: 1px solid var(--dd-border);
+    border-radius: 18px;
+    background: linear-gradient(155deg, rgba(255,255,255,0.95), rgba(247,252,255,0.92));
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(14, 31, 53, 0.1);
+    padding: 24px;
+    margin-bottom: 16px;
+    animation: slideInUp 0.4s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.xpkd-package-header {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.xpkd-duration-badge,
+.xpkd-location-badge {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+    background: rgba(255, 59, 48, 0.08);
+    border-radius: 12px;
+    border-left: 3px solid #ff3b30;
+}
+
+.xpkd-duration-badge svg,
+.xpkd-location-badge svg {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: #ff3b30;
+    margin-top: 2px;
+}
+
+.xpkd-duration-badge span,
+.xpkd-location-badge span {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #11253f;
+    line-height: 1.4;
+}
+
+.xpkd-pdf-download-section {
+    margin-bottom: 20px;
+}
+
+.xpkd-pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, #ff9500 0%, #ff7500 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 149, 0, 0.3);
+}
+
+.xpkd-pdf-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 149, 0, 0.4);
+    background: linear-gradient(135deg, #ffaa1a 0%, #ff8500 100%);
+}
+
+.xpkd-pdf-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.xpkd-includes-section {
+    background: linear-gradient(135deg, #f0f9ff 0%, #f8faff 100%);
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.xpkd-includes-section h4 {
+    margin: 0 0 14px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #11253f;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.xpkd-includes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.xpkd-include-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #e4eaf3;
+    text-align: center;
+    transition: all 0.25s ease;
+}
+
+.xpkd-include-item:hover {
+    border-color: #ff3b30;
+    background: linear-gradient(135deg, rgba(255, 59, 48, 0.04), rgba(255, 59, 48, 0.02));
+}
+
+.xpkd-include-item svg {
+    width: 28px;
+    height: 28px;
+    color: #ff3b30;
+    flex-shrink: 0;
+}
+
+.xpkd-include-item span {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #2f4868;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.xpkd-side-split {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #e4eaf3, transparent);
+    margin: 16px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .xpkd-package-info-card {
+        padding: 18px;
+    }
+
+    .xpkd-includes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .xpkd-duration-badge,
+    .xpkd-location-badge {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    .xpkd-pdf-btn {
+        padding: 12px 14px;
+        font-size: 0.88rem;
+    }
+}

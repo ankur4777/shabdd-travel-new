@@ -23,7 +23,7 @@
     }
 
     $places = !empty($destination->places) ? $destination->places : ($profile['places'] ?? []);
-    $packages = !empty($destination->packages) ? $destination->packages : ($profile['packages'] ?? []);
+    $packages = $destinationPackages ?? (!empty($destination->packages) ? $destination->packages : ($profile['packages'] ?? []));
     $features = !empty($destination->features) ? $destination->features : ($profile['features'] ?? []);
     $seasons = !empty($destination->seasons) ? $destination->seasons : ($profile['seasons'] ?? []);
     $blogs = !empty($destination->blogs) ? $destination->blogs : ($profile['blogs'] ?? []);
@@ -277,11 +277,15 @@
                                     $packageDuration = $package['duration'] ?? '4D/3N';
                                     $packageRating = number_format((float) ($package['rating'] ?? 4.5), 1);
                                     $packageOldPrice = $package['price'] ?? $destination->formatted_price;
-                                    $packageNewPrice = $package['discounted price'] ?? '';
+                                    $packageNewPrice = $package['discounted_price'] ?? ($package['discounted price'] ?? '');
                                     $packageType = $popularFor[0] ?? 'Leisure';
                                     $inclusionOne = $package['inclusion_one'] ?? 'Hotel stay included';
                                     $inclusionTwo = $package['inclusion_two'] ?? 'Local transfers covered';
                                     $inclusionThree = $package['inclusion_three'] ?? 'Top sightseeing spots';
+                                    $packageDetailUrl = $package['detail_url'] ?? route('destinations.packages.show', [
+                                        'destination' => $destination,
+                                        'packageSlug' => $package['package_slug'] ?? \Illuminate\Support\Str::slug(($package['name'] ?? 'package') . '-' . $loop->iteration),
+                                    ]);
                                 @endphp
                                 <article class="swiper-slide seo-dd-card seo-dd-package-card">
                                     <img src="{{ $package['image'] ?? $destination->image_url }}"
@@ -308,7 +312,7 @@
                                                 <p class="seo-dd-price discounted-price">{{ $packageNewPrice }}</p>
                                                 <span class="seo-dd-price-note">Per person on twin sharing</span>
                                             </div>
-                                            <a href="{{ $package['url'] ?? '#' }}"
+                                            <a href="{{ $packageDetailUrl }}"
                                                 class="seo-dd-btn View-package-btn seo-dd-btn-primary">View Details</a>
                                         </div>
                                     </div>
