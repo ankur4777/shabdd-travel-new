@@ -1,6 +1,9 @@
 @php
     $profile = $destinationProfile ?? [];
-    $primaryColor = $destination->theme_color ?: ($profile['primary_color'] ?? '#2563eb');
+    // Destination is expected from parent view/controller.
+    // Guard to prevent IDE/static warnings when the section is included in isolation.
+    $primaryColor = isset($destination) && $destination ? ($destination->theme_color ?: ($profile['primary_color'] ?? '#2563eb')) : ($profile['primary_color'] ?? '#2563eb');
+
 
     $displayPrice = $destination->formatted_price ?: '₹18,999';
     $displayIdealDays = $destination->ideal_days ?: ($profile['ideal_days'] ?? '5-7 Days');
@@ -156,7 +159,7 @@
                         <a href="#places" class="seo-dd-anchor" data-seo-offcanvas-anchor>Places</a>
                         <a href="#packages" class="seo-dd-anchor" data-seo-offcanvas-anchor>Packages</a>
                         <a href="#besttime" class="seo-dd-anchor" data-seo-offcanvas-anchor>Best Time</a>
-                        <a href="#blogs" class="seo-dd-anchor" data-seo-offcanvas-anchor>Blogs</a>
+                        <a href="{{ route('blog.index') }}" class="seo-dd-anchor" data-seo-offcanvas-anchor>Blogs</a>
                         <a href="#faq" class="seo-dd-anchor" data-seo-offcanvas-anchor>FAQs</a>
                     </nav>
                 </article>
@@ -196,7 +199,8 @@
             <main class="seo-dd-main" itemscope itemtype="https://schema.org/TouristDestination">
                 <meta itemprop="name" content="{{ $destination->name }} Tour Packages">
 
-                <section id="overview" class="seo-dd-section seo-dd-glass">
+                <section id="overview" class="seo-dd-section seo-dd-glass" id="seo-dd-overview">
+
                     <div class="seo-dd-title-wrap">
                         <p class="seo-dd-kicker">Destination Overview</p>
                         <h2 class="seo-dd-title">{{ $destination->name }} Tour Packages</h2>
@@ -428,8 +432,13 @@
                                 $blogDate = !empty($blog['date']) ? \Carbon\Carbon::parse($blog['date'])->format('d M') : '02 May';
                                 $blogAuthor = $blog['author'] ?? 'Travel Team';
                                 $blogRole = $blog['role'] ?? 'Verified writer';
+                                $blogSlug = \Illuminate\Support\Str::slug($blog['slug'] ?? $blogTitle) ?: 'travel-guide';
+                                $blogUrl = $blog['url'] ?? route('blog.show', [
+                                    'destination' => $destination,
+                                    'blog' => $blogSlug,
+                                ]);
                             @endphp
-                            <article
+                            <a href="{{ $blogUrl }}"
                                 class="seo-dd-card seo-dd-blog-card {{ $isFeaturedBlog ? 'is-featured' : 'is-compact' }}">
                                 <img src="{{ $blog['image'] ?? $destination->image_url }}" alt="{{ $blogTitle }}"
                                     loading="lazy">
@@ -452,7 +461,7 @@
                                         <time datetime="{{ $blog['date'] ?? '' }}">{{ $blogDate }}</time>
                                     </div>
                                 </div>
-                            </article>
+                            </a>
                         @endforeach
                     </div>
                 </section>
