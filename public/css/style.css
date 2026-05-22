@@ -425,7 +425,10 @@ body {
         background 0.3s ease,
         box-shadow 0.3s ease,
         border-color 0.3s ease,
-        transform 0.3s ease;
+        transform 0.3s ease,
+        width 0.3s ease,
+        border-radius 0.3s ease,
+        margin 0.3s ease;
     height: 8vh;
 }
 div.container.st-nav-inner {
@@ -441,6 +444,29 @@ div.container.st-nav-inner {
     background: rgb(255 202 202 / 62%);
     border-color: rgba(17, 17, 17, 0.06);
     box-shadow: var(--brand-shadow-strong);
+}
+
+.st-header.st-header-nav-fixed {
+    padding-top: var(--st-nav-fixed-offset, 0px);
+}
+
+.st-nav-shell.st-shell-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1040;
+    padding-top: 0;
+}
+
+.st-nav-shell.st-shell-fixed .st-navbar {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
 }
 
 .st-nav-inner {
@@ -798,7 +824,7 @@ div.container.st-nav-inner {
     box-shadow: -30px 0 60px rgba(17, 17, 17, 0.16);
     transform: translateX(100%);
     transition: transform 0.3s ease;
-    z-index: 1039;
+    z-index: 1050;
     display: flex;
     flex-direction: column;
     gap: 20px;

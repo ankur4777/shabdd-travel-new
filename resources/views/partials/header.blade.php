@@ -250,6 +250,9 @@
         const openBtn = document.getElementById('stMobileToggle');
         const closeBtn = document.getElementById('stMobileClose');
         const navbar = document.getElementById('stNavbar');
+        const navShell = navbar ? navbar.closest('.st-nav-shell') : null;
+        const headerEl = navbar ? navbar.closest('.st-header') : null;
+        const desktopMq = window.matchMedia('(min-width: 1200px)');
 
         if (!overlay || !drawer || !openBtn || !closeBtn || !navbar) {
             return;
@@ -323,8 +326,32 @@
             }
         };
 
+        const updateFixedOffset = function () {
+            if (!headerEl || !navShell) {
+                return;
+            }
+
+            headerEl.style.setProperty('--st-nav-fixed-offset', `${navShell.offsetHeight}px`);
+        };
+
         const setScrolledState = function () {
-            navbar.classList.toggle('st-scrolled', window.scrollY > 10);
+            const isScrolled = window.scrollY > 10;
+            const shouldFixNavbar = isScrolled;
+            navbar.classList.toggle('st-scrolled', isScrolled);
+
+            if (navShell) {
+                navShell.classList.toggle('st-shell-fixed', shouldFixNavbar);
+            }
+
+            if (headerEl) {
+                headerEl.classList.toggle('st-header-nav-fixed', shouldFixNavbar);
+
+                if (shouldFixNavbar) {
+                    updateFixedOffset();
+                } else {
+                    headerEl.style.removeProperty('--st-nav-fixed-offset');
+                }
+            }
         };
 
         const open = function () {
@@ -408,6 +435,14 @@
 
         setScrolledState();
         window.addEventListener('scroll', setScrolledState, { passive: true });
+        window.addEventListener('resize', setScrolledState, { passive: true });
+
+        if (desktopMq.addEventListener) {
+            desktopMq.addEventListener('change', setScrolledState);
+        } else if (desktopMq.addListener) {
+            desktopMq.addListener(setScrolledState);
+        }
+
         openBtn.addEventListener('click', open);
         closeBtn.addEventListener('click', close);
         overlay.addEventListener('click', close);
