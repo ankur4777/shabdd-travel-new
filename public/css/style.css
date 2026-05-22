@@ -755,7 +755,6 @@ div.container.st-nav-inner {
 .CTA-section-container {
     position: relative;
     margin: 32px 0;
-    border-radius: 24px;
     overflow: hidden;
     min-height: 520px;
     display: flex;
@@ -771,20 +770,17 @@ div.container.st-nav-inner {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(
-        135deg,
-        rgba(20, 20, 30, 0.75) 0%,
-        rgba(30, 30, 50, 0.65) 50%,
-        rgba(20, 20, 30, 0.75) 100%
-    );
+    background: rgb(0 0 0 / 25%);
     z-index: 1;
 }
-
+.CTA-section-info-box,
 .CTA-section-content {
     position: relative;
     z-index: 2;
     width: 100%;
-    padding: 40px 48px;
+    padding: 40px;
+    padding-left: 48px;
+    padding-right: 0px;
     color: white;
 }
 
@@ -829,7 +825,7 @@ div.container.st-nav-inner {
 
 .CTA-section-columns {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1fr;
     gap: 40px;
     margin-bottom: 28px;
 }
@@ -842,11 +838,21 @@ div.container.st-nav-inner {
 .CTA-section-col-left {
     padding-right: 20px;
 }
+.CTA-section-main {
+    justify-content: center;
+    align-items: center;
+}
 
 .CTA-section-col-right {
     display: grid;
     grid-template-rows: auto auto;
     gap: 20px;
+    justify-content: end;
+}
+@media (max-width: 557px) {
+    .CTA-section-col-right {
+        justify-content: center;
+    }
 }
 
 .CTA-section-subtitle {
@@ -1021,7 +1027,6 @@ div.container.st-nav-inner {
     .CTA-section-container {
         min-height: 600px;
         margin: 16px 0;
-        border-radius: 16px;
     }
 
     .CTA-section-content {
@@ -2941,12 +2946,12 @@ div.container.st-nav-inner {
     color: #0077ff;
     padding: 0px 14px;
 }
-.View-package-btn:hover{
+.View-package-btn:hover {
     color: #fff;
     background: #0077ff;
 }
 
-#why .seo-dd-feature-card{
+#why .seo-dd-feature-card {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -2955,10 +2960,16 @@ div.container.st-nav-inner {
     padding: 24px 20px 22px;
     border: 1px solid #d7e1ee;
     border-radius: 14px;
-    background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 250, 255, 0.95));
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.98),
+        rgba(246, 250, 255, 0.95)
+    );
     box-shadow: 0 10px 24px rgba(17, 37, 63, 0.06);
-    transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+    transition:
+        transform 0.24s ease,
+        box-shadow 0.24s ease,
+        border-color 0.24s ease;
 }
 
 #why .seo-dd-feature-card::before {
@@ -8669,7 +8680,7 @@ div.container.st-nav-inner {
     font-size: 1.08rem;
     box-shadow: 0 12px 20px
         color-mix(in srgb, var(--dd-primary) 30%, transparent);
-        color: red;
+    color: red;
 }
 
 .seo-dd-icon::after {
@@ -9071,7 +9082,10 @@ div.container.st-nav-inner {
     border: 1px solid #d9e5f3;
     background: linear-gradient(165deg, #ffffff, #f5f9ff);
     box-shadow: 0 14px 28px rgba(13, 34, 57, 0.09);
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
 }
 
 .seo-dd-testimonial-card.swiper-slide-active {
@@ -9693,7 +9707,6 @@ div.container.st-nav-inner {
 .xpkd-hero-media-card {
     background: #fff;
     border: 1px solid #d9e4f7;
-    border-radius: 14px;
     overflow: hidden;
 }
 
@@ -9862,6 +9875,7 @@ div.container.st-nav-inner {
     border-radius: 10px;
     border: 1px solid #d8e5f6;
     padding: 12px;
+    color: white;
 }
 
 .xpkd-inclexc-box h3 {
@@ -9880,13 +9894,14 @@ div.container.st-nav-inner {
 }
 
 .xpkd-inclexc-box-in {
-    background: #f5fffb;
+    background: #02bf73;
     border-color: #bfe9db;
 }
 
 .xpkd-inclexc-box-ex {
-    background: #fff9f9;
-    border-color: #f1d2d2;
+    background: #ff2323;
+    border-color: #e3adad;
+    color: white;
 }
 
 .xpkd-other-pack-grid {
@@ -9955,7 +9970,7 @@ div.container.st-nav-inner {
     margin: 4px 0 0;
     font-size: 2rem;
     line-height: 1;
-    color: #0f172a;
+    color: #4fb36a;
     font-weight: 800;
 }
 
@@ -9982,8 +9997,7 @@ div.container.st-nav-inner {
     border-radius: 10px;
     text-decoration: none;
     font-weight: 800;
-    color: #fff;
-    background: linear-gradient(90deg, #1f67ce, #3182f7);
+    color: #0d6efd;
     border: 1px solid #1b5fbe;
     margin-bottom: 8px;
 }
