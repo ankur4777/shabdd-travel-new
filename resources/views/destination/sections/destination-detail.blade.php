@@ -236,7 +236,7 @@
                     </div>
                 </section>
 
-                <section id="places" class="seo-dd-section">
+                {{-- <section id="places" class="seo-dd-section">
                     <div class="seo-dd-title-wrap">
                         <p class="seo-dd-kicker">Places To Explore</p>
                         <h2 class="seo-dd-title">Top Places To Explore In {{ $destination->name }}</h2>
@@ -262,7 +262,7 @@
                             </article>
                         @endforeach
                     </div>
-                </section>
+                </section> --}}
 
                 <section id="packages" class="seo-dd-section">
                     <div class="seo-dd-title-wrap">
@@ -273,21 +273,41 @@
                     <div class="swiper seo-dd-swiper" data-swiper-packages>
                         <div class="swiper-wrapper">
                             @foreach($packages as $package)
+                                @php
+                                    $packageDuration = $package['duration'] ?? '4D/3N';
+                                    $packageRating = number_format((float) ($package['rating'] ?? 4.5), 1);
+                                    $packageOldPrice = $package['price'] ?? $destination->formatted_price;
+                                    $packageNewPrice = $package['discounted price'] ?? '';
+                                    $packageType = $popularFor[0] ?? 'Leisure';
+                                    $inclusionOne = $package['inclusion_one'] ?? 'Hotel stay included';
+                                    $inclusionTwo = $package['inclusion_two'] ?? 'Local transfers covered';
+                                    $inclusionThree = $package['inclusion_three'] ?? 'Top sightseeing spots';
+                                @endphp
                                 <article class="swiper-slide seo-dd-card seo-dd-package-card">
                                     <img src="{{ $package['image'] ?? $destination->image_url }}"
                                         alt="{{ $package['name'] }}" loading="lazy">
+                                    <div class="seo-dd-package-media-bar">
+                                        <span class="seo-dd-package-chip">{{ $packageType }}</span>
+                                        <span
+                                            class="seo-dd-package-chip seo-dd-package-chip-muted">{{ $packageDuration }}</span>
+                                    </div>
                                     <div class="seo-dd-card-body">
                                         <h3>{{ $package['name'] }}</h3>
                                         <div class="seo-dd-package-meta">
-                                            <span><i class="bi bi-clock"></i> {{ $package['duration'] ?? '4D/3N' }}</span>
-                                            <span><i class="bi bi-star-fill"></i>
-                                                {{ number_format((float) ($package['rating'] ?? 4.5), 1) }}</span>
+                                            <span>{{ $packageDuration }}</span>
+                                            <span>★ {{ $packageRating }} Rating</span>
                                         </div>
-                                        <div class="seo-dd-row-between">
-                                            <p class="seo-dd-price normal-price">
-                                                {{ $package['price'] ?? $destination->formatted_price }}</p>
-                                            <p class="seo-dd-price discounted-price">
-                                                {{ $package['discounted price'] ?? '' }}</p>
+                                        <ul class="seo-dd-package-points">
+                                            <li>{{ $inclusionOne }}</li>
+                                            <li>{{ $inclusionTwo }}</li>
+                                            <li>{{ $inclusionThree }}</li>
+                                        </ul>
+                                        <div class="seo-dd-package-footer">
+                                            <div class="seo-dd-package-price-wrap">
+                                                <p class="seo-dd-price normal-price">{{ $packageOldPrice }}</p>
+                                                <p class="seo-dd-price discounted-price">{{ $packageNewPrice }}</p>
+                                                <span class="seo-dd-price-note">Per person on twin sharing</span>
+                                            </div>
                                             <a href="{{ $package['url'] ?? '#' }}"
                                                 class="seo-dd-btn View-package-btn seo-dd-btn-primary">View Details</a>
                                         </div>
@@ -312,23 +332,28 @@
                     <div class="seo-dd-card-grid seo-dd-feature-grid">
                         <article class="seo-dd-card seo-dd-feature-card">
                             <h3>Handpicked Destinations</h3>
-                            <p>From mountains and beaches to international adventures, we offer thoughtfully selected destinations for every traveler.</p>
+                            <p>From mountains and beaches to international adventures, we offer thoughtfully selected
+                                destinations for every traveler.</p>
                         </article>
                         <article class="seo-dd-card seo-dd-feature-card">
                             <h3>Customized Tour Packages</h3>
-                            <p>Whether you are planning a honeymoon, family trip, group tour, or solo adventure, we personalize every journey to match your needs.</p>
+                            <p>Whether you are planning a honeymoon, family trip, group tour, or solo adventure, we
+                                personalize every journey to match your needs.</p>
                         </article>
                         <article class="seo-dd-card seo-dd-feature-card">
                             <h3>24/7 Travel Assistance</h3>
-                            <p>Our support team is always available to help you before, during, and after your trip for a stress-free experience.</p>
+                            <p>Our support team is always available to help you before, during, and after your trip for
+                                a stress-free experience.</p>
                         </article>
                         <article class="seo-dd-card seo-dd-feature-card">
                             <h3>Experienced Travel Experts</h3>
-                            <p>Our travel specialists have deep destination knowledge and help you plan the perfect vacation with expert guidance.</p>
+                            <p>Our travel specialists have deep destination knowledge and help you plan the perfect
+                                vacation with expert guidance.</p>
                         </article>
                         <article class="seo-dd-card seo-dd-feature-card">
                             <h3>Safe & Comfortable Travel</h3>
-                            <p>We prioritize your safety and comfort with trusted hotel partners, reliable transport, and verified services.</p>
+                            <p>We prioritize your safety and comfort with trusted hotel partners, reliable transport,
+                                and verified services.</p>
                         </article>
                     </div>
                 </section>
@@ -340,16 +365,34 @@
                     </div>
                     <div class="seo-dd-card-grid seo-dd-season-grid">
                         @foreach($seasons as $season)
+                            @php
+                                $seasonName = $season['name'] ?? 'Best Season';
+                                $seasonWeather = $season['weather'] ?? 'Comfortable weather';
+                                $seasonActivities = $season['activities'] ?? [];
+                                $activityLine = !empty($seasonActivities) ? implode(', ', $seasonActivities) : 'Sightseeing, local exploration';
+                                $seasonRecommendation = $season['recommendation'] ?? 'Great for balanced travel plans.';
+                                $seasonNameLower = strtolower($seasonName . ' ' . $seasonWeather);
+                                $crowdLevel = str_contains($seasonNameLower, 'peak') || str_contains($seasonNameLower, 'july') || str_contains($seasonNameLower, 'november') || str_contains($seasonNameLower, 'december') ? 'High - book ahead' : (str_contains($seasonNameLower, 'off') || str_contains($seasonNameLower, 'monsoon') ? 'Low to medium' : 'Moderate');
+                                $packingTip = str_contains($seasonNameLower, 'winter') || str_contains($seasonNameLower, 'snow') || str_contains($seasonNameLower, '-') ? 'Carry warm layers and comfortable boots' : (str_contains($seasonNameLower, 'summer') || str_contains($seasonNameLower, 'warm') ? 'Light cottons, sunscreen, and sunglasses' : 'Layered clothing and comfortable walking shoes');
+                                $seasonHighlight = !empty($seasonActivities) ? ($seasonActivities[0] . ' and scenic local experiences') : 'Balanced weather and flexible sightseeing plans';
+                            @endphp
                             <article class="seo-dd-card seo-dd-season-card">
-                                <span class="seo-dd-icon"><i class="{{ $season['icon'] ?? 'bi bi-cloud-sun' }}"></i></span>
-                                <h3>{{ $season['name'] }}</h3>
-                                <p class="seo-dd-weather">{{ $season['weather'] }}</p>
+                                <span class="seo-dd-season-icon"><i
+                                        class="{{ $season['icon'] ?? 'bi bi-cloud-sun' }}"></i></span>
+                                <h3>{{ $seasonName }}</h3>
+                                <p class="seo-dd-weather">{{ $seasonWeather }}</p>
                                 <div class="seo-dd-badges">
-                                    @foreach(($season['activities'] ?? []) as $activity)
+                                    @foreach($seasonActivities as $activity)
                                         <span class="seo-dd-badge">{{ $activity }}</span>
                                     @endforeach
                                 </div>
-                                <p class="seo-dd-reco">{{ $season['recommendation'] }}</p>
+                                <p class="seo-dd-reco">{{ $seasonRecommendation }}</p>
+                                <div class="seo-dd-season-details">
+                                    <p><strong>Best activities:</strong> {{ $activityLine }}</p>
+                                    <p><strong>Packing tip:</strong> {{ $packingTip }}</p>
+                                    <p><strong>Crowd level:</strong> {{ $crowdLevel }}</p>
+                                    <p><strong>Highlight:</strong> {{ $seasonHighlight }}</p>
+                                </div>
                             </article>
                         @endforeach
                     </div>
@@ -360,17 +403,50 @@
                         <p class="seo-dd-kicker">Content Hub</p>
                         <h2 class="seo-dd-title">Travel Guides & Blogs</h2>
                     </div>
+                    @php
+                        $blogCards = collect($blogs)->values();
+                        if ($blogCards->isNotEmpty() && $blogCards->count() < 5) {
+                            $seedBlogs = $blogCards->all();
+                            $fillIndex = 1;
+                            while ($blogCards->count() < 5) {
+                                $clone = $seedBlogs[($fillIndex - 1) % count($seedBlogs)];
+                                $clone['title'] = ($clone['title'] ?? 'Travel Guide') . ' ' . $fillIndex;
+                                $blogCards->push($clone);
+                                $fillIndex++;
+                            }
+                        }
+                    @endphp
                     <div class="seo-dd-card-grid seo-dd-blog-grid">
-                        @foreach($blogs as $blog)
-                            <article class="seo-dd-card seo-dd-blog-card">
-                                <img src="{{ $blog['image'] ?? $destination->image_url }}" alt="{{ $blog['title'] }}"
+                        @foreach($blogCards as $index => $blog)
+                            @php
+                                $isFeaturedBlog = $index < 2;
+                                $blogTitle = $blog['title'] ?? 'Travel Guide';
+                                $blogDate = !empty($blog['date']) ? \Carbon\Carbon::parse($blog['date'])->format('d M') : '02 May';
+                                $blogAuthor = $blog['author'] ?? 'Travel Team';
+                                $blogRole = $blog['role'] ?? 'Verified writer';
+                            @endphp
+                            <article
+                                class="seo-dd-card seo-dd-blog-card {{ $isFeaturedBlog ? 'is-featured' : 'is-compact' }}">
+                                <img src="{{ $blog['image'] ?? $destination->image_url }}" alt="{{ $blogTitle }}"
                                     loading="lazy">
-                                <div class="seo-dd-card-body">
-                                    <time
-                                        datetime="{{ $blog['date'] }}">{{ \Carbon\Carbon::parse($blog['date'])->format('M d, Y') }}</time>
-                                    <h3>{{ $blog['title'] }}</h3>
-                                    <p>{{ $blog['excerpt'] }}</p>
-                                    <a href="{{ $blog['url'] ?? '#' }}" class="seo-dd-btn seo-dd-btn-ghost">Read More</a>
+                                <div class="seo-dd-blog-overlay"></div>
+                                <div class="seo-dd-blog-content">
+                                    @if($isFeaturedBlog)
+                                        <span class="seo-dd-blog-pill">Featured</span>
+                                    @endif
+                                    <h3>{{ $blogTitle }}</h3>
+                                    <p>{{ $blog['excerpt'] ?? '' }}</p>
+                                    <div class="seo-dd-blog-meta">
+                                        <div class="seo-dd-blog-author">
+                                            <span
+                                                class="seo-dd-blog-avatar">{{ strtoupper(substr($blogAuthor, 0, 1)) }}</span>
+                                            <div>
+                                                <strong>{{ $blogAuthor }}</strong>
+                                                <small>{{ $blogRole }}</small>
+                                            </div>
+                                        </div>
+                                        <time datetime="{{ $blog['date'] ?? '' }}">{{ $blogDate }}</time>
+                                    </div>
                                 </div>
                             </article>
                         @endforeach
@@ -378,26 +454,40 @@
                 </section>
 
                 <section id="testimonials" class="seo-dd-section">
-                    <div class="seo-dd-title-wrap">
-                        <p class="seo-dd-kicker">Social Proof</p>
-                        <h2 class="seo-dd-title">Traveler Testimonials</h2>
+                    <div class="seo-dd-title-wrap seo-dd-testimonial-head">
+                        <div>
+                            <p class="seo-dd-kicker">Social Proof</p>
+                            <h2 class="seo-dd-title">Traveler Testimonials</h2>
+                        </div>
+                        <div class="seo-dd-testimonial-stats">
+                            <span>4.9 Avg Rating</span>
+                            <span>2k+ Happy Travelers</span>
+                        </div>
                     </div>
 
                     <div class="swiper seo-dd-swiper" data-swiper-testimonials>
                         <div class="swiper-wrapper">
                             @foreach($testimonials as $testimonial)
                                 <article class="swiper-slide seo-dd-card seo-dd-testimonial-card">
+                                    <span class="seo-dd-quote-mark">“</span>
+                                    <p class="seo-dd-review">{{ $testimonial['text'] }}</p>
                                     <div class="seo-dd-user">
                                         <img src="{{ $testimonial['image'] }}" alt="{{ $testimonial['name'] }}">
-                                        <div>
+                                        <div class="seo-dd-user-meta">
                                             <h3>{{ $testimonial['name'] }}</h3>
                                             <p>{{ $testimonial['location'] }}</p>
                                         </div>
+                                        <p class="seo-dd-stars">★ {{ number_format((float) $testimonial['rating'], 1) }}</p>
                                     </div>
-                                    <p class="seo-dd-stars">★ {{ number_format((float) $testimonial['rating'], 1) }}</p>
-                                    <p class="seo-dd-review">{{ $testimonial['text'] }}</p>
                                 </article>
                             @endforeach
+                        </div>
+                        <div class="seo-dd-testimonial-controls">
+                            <button class="seo-dd-swiper-btn seo-dd-testimonial-prev" type="button"
+                                aria-label="Previous testimonial"><i class="bi bi-arrow-left"></i></button>
+                            <div class="seo-dd-testimonial-pagination"></div>
+                            <button class="seo-dd-swiper-btn seo-dd-testimonial-next" type="button"
+                                aria-label="Next testimonial"><i class="bi bi-arrow-right"></i></button>
                         </div>
                     </div>
                 </section>
@@ -620,11 +710,26 @@
                 const testimonialSwiperElement = document.querySelector('[data-swiper-testimonials]');
                 if (testimonialSwiperElement) {
                     new Swiper(testimonialSwiperElement, {
-                        slidesPerView: 1.05,
-                        spaceBetween: 16,
+                        slidesPerView: 1.08,
+                        centeredSlides: true,
+                        spaceBetween: 18,
+                        loop: true,
+                        speed: 700,
+                        autoplay: {
+                            delay: 3200,
+                            disableOnInteraction: false,
+                        },
+                        navigation: {
+                            nextEl: '.seo-dd-testimonial-next',
+                            prevEl: '.seo-dd-testimonial-prev',
+                        },
+                        pagination: {
+                            el: '.seo-dd-testimonial-pagination',
+                            clickable: true,
+                        },
                         breakpoints: {
-                            768: { slidesPerView: 2 },
-                            1200: { slidesPerView: 2.5 }
+                            768: { slidesPerView: 1.8, centeredSlides: false },
+                            1200: { slidesPerView: 2.35, centeredSlides: false }
                         }
                     });
                 }
@@ -633,7 +738,7 @@
     </script>
 
     <script type="application/ld+json">
-            {!! json_encode([
+                {!! json_encode([
         '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => array_map(function ($faq) {
@@ -647,5 +752,5 @@
             ];
         }, $faqs),
     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
-        </script>
+            </script>
 @endpush
