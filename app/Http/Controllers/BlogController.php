@@ -61,10 +61,18 @@ class BlogController extends Controller
             'post' => $post,
             'relatedPosts' => $relatedPosts,
             'destinationBlogs' => $destinationBlogs,
+            'blogs' => $blogs,
+            'highlights' => $blogs->take(5)->values(),
+            'destinations' => $blogs
+                ->pluck('destination_name')
+                ->filter()
+                ->unique()
+                ->sort()
+                ->values(),
         ]);
     }
 
-    private function buildBlogCollection(): Collection
+    public function buildBlogCollection(): Collection
     {
         return Destination::query()
             ->active()
@@ -107,6 +115,9 @@ class BlogController extends Controller
             'role' => $blogData['role'] ?? 'Verified travel writer',
             'content_paragraphs' => $this->buildContentParagraphs($destination, $title, $excerpt),
             'highlights' => $this->buildHighlights($destination),
+            'quick_facts' => $this->buildQuickFacts($destination),
+            'itinerary' => $this->buildSuggestedItinerary($destination),
+            'faqs' => $this->buildFaqs($destination, $title),
             'url' => route('blog.show', [
                 'destination' => $destination->slug,
                 'blog' => $slug,
@@ -164,5 +175,43 @@ class BlogController extends Controller
             Str::contains($haystack, ['family']) => 'Family Trips',
             default => 'Destination Guide',
         };
+    }
+
+    private function buildQuickFacts(Destination $destination): array
+    {
+        return [
+            'Best Season' => 'Oct to Mar',
+            'Ideal Duration' => '4 to 6 days',
+            'Trip Style' => 'Family, Couple, Solo',
+            'Starting Budget' => 'Moderate',
+        ];
+    }
+
+    private function buildSuggestedItinerary(Destination $destination): array
+    {
+        return [
+            'Day 1' => 'Arrival and local market walk in ' . $destination->name,
+            'Day 2' => 'Top sightseeing spots and local food experiences',
+            'Day 3' => 'Signature activity plus sunset viewpoint',
+            'Day 4' => 'Flexible day for shopping and hidden gems',
+        ];
+    }
+
+    private function buildFaqs(Destination $destination, string $title): array
+    {
+        return [
+            [
+                'question' => 'What is the best time to visit ' . $destination->name . '?',
+                'answer' => 'The most comfortable period is usually between October and March for pleasant weather and easier sightseeing.',
+            ],
+            [
+                'question' => 'How many days are enough for ' . $destination->name . '?',
+                'answer' => 'Most travelers enjoy a balanced trip in 4 to 6 days depending on pace and activity preferences.',
+            ],
+            [
+                'question' => 'Is this guide suitable for first-time travelers?',
+                'answer' => 'Yes. ' . $title . ' is written to help first-time travelers plan routes, stays, and daily plans with clarity.',
+            ],
+        ];
     }
 }

@@ -26,6 +26,25 @@ class DestinationSeeder extends Seeder
                 'about' => 'Santorini is one of the most loved Greek islands for couples and luxury travelers.',
                 'highlights' => ['Sunset in Oia', 'Catamaran cruise', 'Cliffside stays'],
                 'is_trending' => true,
+                'blogs' => [
+                    [
+                        'title' => 'Complete Santorini Travel Guide 2026',
+                        'slug' => 'complete-santorini-travel-guide-2026',
+                        'excerpt' => 'Everything you need to know about planning your perfect Santorini honeymoon, from best hotels to sunset spots.',
+                        'date' => '2026-05-15',
+                        'reading_time' => 8,
+                        'category' => 'Destination Guide',
+                        'author' => 'Shabdd Travel Team',
+                    ],
+                    [
+                        'title' => 'Best Time to Visit Santorini',
+                        'slug' => 'best-time-to-visit-santorini',
+                        'excerpt' => 'Discover the ideal months to visit Santorini for perfect weather and fewer crowds.',
+                        'date' => '2026-05-10',
+                        'reading_time' => 5,
+                        'category' => 'Travel Tips',
+                    ],
+                ],
             ],
             [
                 'name' => 'Bali',
@@ -40,6 +59,24 @@ class DestinationSeeder extends Seeder
                 'about' => 'Bali offers a balanced mix of budget and premium experiences for every traveler type.',
                 'highlights' => ['Ubud day tour', 'Nusa Penida', 'Beach sunset dinners'],
                 'is_trending' => true,
+                'blogs' => [
+                    [
+                        'title' => 'Bali Under ₹40,000: Complete 7-Day Budget Itinerary',
+                        'slug' => 'bali-budget-itinerary',
+                        'excerpt' => 'Experience the best of Bali without breaking the bank. Complete guide to affordable stays, food, and activities.',
+                        'date' => '2026-05-12',
+                        'reading_time' => 10,
+                        'category' => 'Budget Travel',
+                    ],
+                    [
+                        'title' => 'Hidden Waterfalls of Bali',
+                        'slug' => 'hidden-waterfalls-bali',
+                        'excerpt' => 'Explore Bali\'s most stunning and lesser-known waterfalls away from tourist crowds.',
+                        'date' => '2026-05-08',
+                        'reading_time' => 6,
+                        'category' => 'Adventure',
+                    ],
+                ],
             ],
             [
                 'name' => 'Maldives',
@@ -54,6 +91,16 @@ class DestinationSeeder extends Seeder
                 'about' => 'The Maldives is ideal for premium, relaxed, and honeymoon-focused beach vacations.',
                 'highlights' => ['Water villa stay', 'Snorkeling safari', 'Sunset cruise'],
                 'is_trending' => true,
+                'blogs' => [
+                    [
+                        'title' => '10 Reasons Why Maldives is the Ultimate Honeymoon Destination',
+                        'slug' => 'maldives-honeymoon-guide',
+                        'excerpt' => 'From overwater villas to private island experiences, discover why Maldives tops every honeymoon list.',
+                        'date' => '2026-05-14',
+                        'reading_time' => 7,
+                        'category' => 'Honeymoon',
+                    ],
+                ],
             ],
             [
                 'name' => 'Kashmir',
@@ -68,6 +115,24 @@ class DestinationSeeder extends Seeder
                 'about' => 'Kashmir is a versatile destination for couples, families, and adventure lovers.',
                 'highlights' => ['Srinagar houseboat', 'Gulmarg gondola', 'Pahalgam valleys'],
                 'is_trending' => true,
+                'blogs' => [
+                    [
+                        'title' => 'Kashmir Great Lakes Trek: Complete Guide for First-Timers',
+                        'slug' => 'kashmir-great-lakes-trek',
+                        'excerpt' => 'Everything you need to know about one of India\'s most beautiful treks, from preparation to best season.',
+                        'date' => '2026-05-11',
+                        'reading_time' => 9,
+                        'category' => 'Adventure',
+                    ],
+                    [
+                        'title' => 'Kashmir in Winter: Snow Paradise Guide',
+                        'slug' => 'kashmir-winter-guide',
+                        'excerpt' => 'Experience the magical winter wonderland of Kashmir with snow activities and cozy stays.',
+                        'date' => '2026-05-06',
+                        'reading_time' => 6,
+                        'category' => 'Destination Guide',
+                    ],
+                ],
             ],
             [
                 'name' => 'Switzerland',
@@ -82,6 +147,16 @@ class DestinationSeeder extends Seeder
                 'about' => 'Switzerland delivers unmatched scenic routes and premium European experiences.',
                 'highlights' => ['Jungfrau region', 'Scenic train rides', 'Lake Lucerne'],
                 'is_trending' => true,
+                'blogs' => [
+                    [
+                        'title' => 'Switzerland in Winter: Ultimate Alps & Snow Trains Guide',
+                        'slug' => 'switzerland-winter-guide',
+                        'excerpt' => 'From golden Bernese Oberland to icy Zermatt peaks, discover Switzerland\'s winter magic with best rail routes.',
+                        'date' => '2026-05-13',
+                        'reading_time' => 12,
+                        'category' => 'Destination Guide',
+                    ],
+                ],
             ],
             [
                 'name' => 'Thailand',
@@ -96,6 +171,24 @@ class DestinationSeeder extends Seeder
                 'about' => 'Thailand remains one of the strongest value-for-money international tours.',
                 'highlights' => ['Phi Phi islands', 'Bangkok city tour', 'Krabi beaches'],
                 'is_trending' => true,
+                'blogs' => [
+                    [
+                        'title' => 'Thailand Visa on Arrival 2026: Everything Indians Need to Know',
+                        'slug' => 'thailand-visa-guide',
+                        'excerpt' => 'Complete guide to Thailand visa process, requirements, and tips for Indian travelers.',
+                        'date' => '2026-05-09',
+                        'reading_time' => 5,
+                        'category' => 'Travel Tips',
+                    ],
+                    [
+                        'title' => 'Island Hopping in Thailand: 10-Day Itinerary',
+                        'slug' => 'thailand-island-hopping',
+                        'excerpt' => 'Explore the best islands of Thailand from Phuket to Koh Samui with this detailed itinerary.',
+                        'date' => '2026-05-04',
+                        'reading_time' => 8,
+                        'category' => 'Destination Guide',
+                    ],
+                ],
             ],
             [
                 'name' => 'Dubai',
@@ -110,6 +203,16 @@ class DestinationSeeder extends Seeder
                 'about' => 'Dubai blends ultra-modern attractions with memorable desert experiences.',
                 'highlights' => ['Burj Khalifa', 'Desert safari', 'Marina cruise'],
                 'is_trending' => true,
+                'blogs' => [
+                    [
+                        'title' => 'Dubai in 3 Days: Perfect First-Timer Itinerary',
+                        'slug' => 'dubai-3-day-itinerary',
+                        'excerpt' => 'Make the most of your Dubai trip with this action-packed 3-day itinerary covering all major attractions.',
+                        'date' => '2026-05-07',
+                        'reading_time' => 7,
+                        'category' => 'Destination Guide',
+                    ],
+                ],
             ],
             [
                 'name' => 'Goa',
@@ -124,6 +227,24 @@ class DestinationSeeder extends Seeder
                 'about' => 'Goa is a quick and flexible destination for short domestic getaways.',
                 'highlights' => ['North beach circuit', 'South Goa escape', 'Water sports'],
                 'is_trending' => true,
+                'blogs' => [
+                    [
+                        'title' => 'North Goa vs South Goa: Which Side Should You Stay On?',
+                        'slug' => 'north-vs-south-goa',
+                        'excerpt' => 'Detailed comparison to help you choose between North Goa\'s party scene and South Goa\'s peaceful beaches.',
+                        'date' => '2026-05-05',
+                        'reading_time' => 6,
+                        'category' => 'Destination Guide',
+                    ],
+                    [
+                        'title' => 'Goa Weekend Getaway: 2-Day Perfect Plan',
+                        'slug' => 'goa-weekend-getaway',
+                        'excerpt' => 'Quick weekend escape to Goa with the best beaches, restaurants, and activities packed in 2 days.',
+                        'date' => '2026-05-02',
+                        'reading_time' => 5,
+                        'category' => 'Travel Tips',
+                    ],
+                ],
             ],
         ];
 
