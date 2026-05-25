@@ -6164,6 +6164,17 @@ div.container.st-nav-inner {
     opacity: 0.25;
     cursor: not-allowed;
 }
+.blog-section-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #ff3b30;
+    font-size: 1.15rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+}
 
 /* View All */
 .tb-view-all {
@@ -6195,6 +6206,10 @@ div.container.st-nav-inner {
     flex-shrink: 0;
 }
 
+.bi-fire::before{
+    content: "\f7f6";
+    color: red;
+}
 .tb-view-all:hover {
     background: var(--tb-red);
     border-color: var(--tb-red);
@@ -10112,7 +10127,7 @@ div.container.st-nav-inner {
 
 .pilgrimage-container {
     display: grid;
-    grid-template-columns: 420px minmax(0, 1fr);
+    grid-template-columns: 500px minmax(0, 1fr);
     gap: 24px;
     align-items: stretch;
 }
@@ -10120,11 +10135,11 @@ div.container.st-nav-inner {
 /* ── Left Promotional Panel ── */
 .pilgrimage-promo {
     position: relative;
-    background: linear-gradient(145deg, #fef8f0 0%, #f9f1e7 100%);
+    background: none;
     border-radius: 28px;
     overflow: hidden;
     box-shadow: 0 8px 32px rgba(17, 17, 17, 0.08);
-    border: 1px solid rgba(255, 140, 0, 0.12);
+    border: none;
 }
 
 .pilgrimage-promo-inner {
@@ -10537,5 +10552,268 @@ div.container.st-nav-inner {
     .pilgrimage-btn {
         font-size: 12px;
         padding: 10px 16px;
+    }
+}
+/* ================= Pilgrimage Section (Homepage, refined layout) ================= */
+.pilgrimage-section {
+    background: #ffeddf;
+    padding: 28px 0 34px;
+}
+
+.pilgrimage-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 22px;
+    display: grid;
+    grid-template-columns: 500px minmax(0, 1fr);
+    gap: 26px;
+    align-items: stretch;
+}
+
+.pilgrimage-promo {
+    min-height: 430px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+.pilgrimage-pattern {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+}
+
+.pilgrimage-traveler {
+    position: absolute;
+    left: -36px;
+    bottom: -10px;
+    width: 292px;
+    height: 392px;
+    opacity: 1;
+}
+
+.pilgrimage-traveler img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: none;
+}
+
+.pilgrimage-content {
+    position: relative;
+    z-index: 2;
+    margin-left: 52px;
+    margin-top: 92px;
+    max-width: 360px;
+}
+
+.pilgrimage-small-heading {
+    margin: 0 0 6px;
+    color: #283444;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.pilgrimage-main-heading {
+    margin: 0;
+    color: #834247;
+    font-size: clamp(2.1rem, 4.8vw, 3.9rem);
+    line-height: 0.95;
+    font-weight: 900;
+}
+
+.pilgrimage-subheading {
+    margin: 12px 0 0;
+    color: #252b34;
+    font-size: clamp(1.5rem, 2.2vw, 2.15rem);
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+.pilgrimage-slider-wrap {
+    position: relative;
+    overflow: hidden;
+    padding-top: 48px;
+}
+
+.pilgrimage-slider {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 2px 0 6px;
+}
+
+.pilgrimage-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.pilgrimage-card {
+    flex: 0 0 255px;
+    border: 1px solid #cfd3d7;
+    border-radius: 10px;
+    background: #efefef;
+    overflow: hidden;
+    box-shadow: none;
+}
+
+.pilgrimage-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.pilgrimage-card-img-wrap {
+    height: 168px;
+}
+
+.pilgrimage-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pilgrimage-card-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.18), transparent);
+}
+
+.pilgrimage-card-body {
+    background: white;
+    padding: 12px 12px 14px;
+}
+
+.pilgrimage-card-title {
+    margin: 0 0 8px;
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    font-weight: 800;
+    color: #3f3f45;
+    text-transform: uppercase;
+}
+
+.pilgrimage-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.pilgrimage-tag {
+    font-size: 0.74rem;
+    line-height: 1.1;
+    border: 1px solid #1984ff;
+    color: #1474e5;
+    background: #fff;
+    padding: 5px 9px;
+    border-radius: 4px;
+}
+
+.pilgrimage-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    color: #1474e5;
+    border: 1px solid #1474e5;
+    border-radius: 0;
+    font-size: 0.9rem;
+    letter-spacing: 0;
+    padding: 8px 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.pilgrimage-btn:hover {
+    background: #1474e5;
+    color: #fff;
+}
+
+.pilgrimage-btn svg {
+    display: none;
+}
+
+.pilgrimage-arrow {
+    top: 8px;
+    transform: none;
+    width: 44px;
+    height: 44px;
+    border: 1px solid #d5d9dd;
+    border-radius: 999px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    background: #fff;
+    color: #1383ff;
+}
+
+.pilgrimage-arrow-left {
+    left: auto;
+    right: 56px;
+}
+
+.pilgrimage-arrow-right {
+    right: 4px;
+}
+
+.pilgrimage-arrow:hover {
+    transform: none;
+    background: #f5f9ff;
+}
+
+.pilgrimage-arrow:disabled {
+    opacity: 0.45;
+}
+
+@media (max-width: 1199.98px) {
+    .pilgrimage-container {
+        grid-template-columns: 1fr;
+    }
+
+    .pilgrimage-content {
+        margin-left: 44px;
+        margin-top: 78px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .pilgrimage-section {
+        padding: 20px 0 28px;
+    }
+
+    .pilgrimage-container {
+        padding: 0 14px;
+        gap: 16px;
+    }
+
+    .pilgrimage-promo {
+        min-height: 286px;
+    }
+
+    .pilgrimage-traveler {
+        width: 182px;
+        height: 250px;
+        left: -12px;
+    }
+
+    .pilgrimage-content {
+        margin-left: 0px;
+        margin-top: 0px;
+        max-width: 250px;
+    }
+
+    .pilgrimage-main-heading {
+        font-size: 2.1rem;
+    }
+
+    .pilgrimage-subheading {
+        font-size: 1.2rem;
+    }
+
+    .pilgrimage-card {
+        flex-basis: 220px;
     }
 }

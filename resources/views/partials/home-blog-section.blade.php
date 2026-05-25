@@ -2,10 +2,11 @@
 @if(isset($blogs) && $blogs->isNotEmpty())
 <section class="home-blog-section">
     <div class="container">
-        <div class="section-header text-center mb-5">
-            <span class="section-badge">Travel Insights</span>
-            <h2 class="section-title">Latest Travel Stories</h2>
-            <p class="section-subtitle">Expert tips, destination guides, and travel inspiration from around the world</p>
+        
+        <div class="blog-section-header mb-5">
+            <span class="blog-section-badge">Travel Insights</span>
+            <h2 class="section-title">Stories from the <em>Road</em></h2>
+            <p class="section-subtitle">Expert tips, destination guides, and travel inspiration to fuel your next adventure.</p>
         </div>
 
         <div class="row g-4 mb-4">
@@ -45,31 +46,52 @@
     background: #f9fafb;
 }
 
+.section-header {
+    max-width: 760px;
+    margin: 0 auto 56px;
+    text-align: left;
+}
+
 .section-badge {
-    display: inline-block;
-    padding: 6px 16px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    border-radius: 20px;
-    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #ff3b30;
+    font-size: 1.65rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 16px;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+}
+
+.section-badge::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff6a5f;
 }
 
 .section-title {
-    font-size: 2.5rem;
+    font-size: clamp(1.4rem, 4.2vw, 3rem);
     font-weight: 900;
-    color: #1f2937;
-    margin-bottom: 12px;
+    color: #15151a;
+    margin-bottom: 8px;
+    line-height: 1.08;
+}
+
+.section-title em {
+    color: #ff3b30;
+    font-style: italic;
+    font-weight: 800;
 }
 
 .section-subtitle {
-    font-size: 1.1rem;
-    color: #6b7280;
-    max-width: 600px;
-    margin: 0 auto;
+    font-size: clamp(0.45rem, 1.5vw, 1rem);
+    color: #8a8a8a;
+    max-width: 760px;
+    margin: 0;
+    line-height: 1.4;
 }
 
 .home-blog-card {
@@ -114,7 +136,7 @@
     top: 16px;
     left: 16px;
     padding: 6px 14px;
-    background: rgba(102, 126, 234, 0.95);
+    background: #ff6271;
     color: white;
     border-radius: 16px;
     font-size: 0.75rem;
@@ -157,6 +179,22 @@
 
 .blog-card-meta i {
     color: #667eea;
+}
+
+@media (max-width: 767.98px) {
+    .section-header {
+        text-align: left;
+        margin-bottom: 34px;
+    }
+
+    .section-badge {
+        font-size: 0.82rem;
+        margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+    }
 }
 </style>
 @endif

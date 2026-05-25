@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @push('styles')
+<link rel="stylesheet" href="{{ asset('css/blog-filter.css') }}">
 <style>
 .blog-hero {
     position: relative;
@@ -197,7 +198,7 @@
 }
 .featured-img {
     width: 100%;
-    height: 450px;
+    height: 611px;
     object-fit: cover;
     transition: transform 0.5s;
 }
@@ -205,7 +206,8 @@
     transform: scale(1.05);
 }
 .featured-content {
-    padding: 50px;
+    padding: 26px;
+    padding-bottom:0px;
 }
 .featured-badge {
     display: inline-flex;
@@ -382,6 +384,7 @@
 </div>
 
 @push('scripts')
+<script src="{{ asset('js/blog-filter.js') }}"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const filterBtns = document.querySelectorAll('.filter-btn');
