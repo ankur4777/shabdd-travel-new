@@ -34,7 +34,7 @@ class HomeController extends Controller
             (object)[
                 'title' => 'Bali Explorer Package',
                 'slug' => 'bali-explorer-package',
-                'image' => 'images/bali.jpg',
+                'image' => 'images/Himachal.jpg',
                 'category' => 'Luxury',
                 'days' => 6,
                 'duration_text' => '6D/5N',

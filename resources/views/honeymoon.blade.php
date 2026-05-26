@@ -42,138 +42,121 @@
     </section>
 
     {{-- FILTER SECTION --}}
-<section class="honeymoon-filter-section">
-    <div class="container">
+    <section class="honeymoon-filter-section">
+        <div class="container">
 
-        <form method="GET" action="{{ route('honeymoon') }}">
+            <form method="GET" action="{{ route('honeymoon') }}">
 
-            <div class="honeymoon-filters">
+                <div class="honeymoon-filters">
 
-                {{-- SORT --}}
-                <select name="sort" onchange="this.form.submit()">
-                    <option value="">Sort By</option>
-                    <option value="low_to_high"
-                        {{ request('sort') == 'low_to_high' ? 'selected' : '' }}>
-                        Price Low to High
-                    </option>
+                    {{-- SORT --}}
+                    <select name="sort" onchange="this.form.submit()">
+                        <option value="">Sort By</option>
+                        <option value="low_to_high" {{ request('sort') == 'low_to_high' ? 'selected' : '' }}>
+                            Price Low to High
+                        </option>
 
-                    <option value="high_to_low"
-                        {{ request('sort') == 'high_to_low' ? 'selected' : '' }}>
-                        Price High to Low
-                    </option>
+                        <option value="high_to_low" {{ request('sort') == 'high_to_low' ? 'selected' : '' }}>
+                            Price High to Low
+                        </option>
 
-                    <option value="rating"
-                        {{ request('sort') == 'rating' ? 'selected' : '' }}>
-                        Top Rated
-                    </option>
-                </select>
+                        <option value="rating" {{ request('sort') == 'rating' ? 'selected' : '' }}>
+                            Top Rated
+                        </option>
+                    </select>
 
-                {{-- PACKAGE TYPE --}}
-                <select name="type" onchange="this.form.submit()">
-                    <option value="">Package Type</option>
+                    {{-- PACKAGE TYPE --}}
+                    <select name="type" onchange="this.form.submit()">
+                        <option value="">Package Type</option>
 
-                    <option value="Luxury"
-                        {{ request('type') == 'Luxury' ? 'selected' : '' }}>
-                        Luxury
-                    </option>
+                        <option value="Luxury" {{ request('type') == 'Luxury' ? 'selected' : '' }}>
+                            Luxury
+                        </option>
 
-                    <option value="Budget"
-                        {{ request('type') == 'Budget' ? 'selected' : '' }}>
-                        Budget
-                    </option>
+                        <option value="Budget" {{ request('type') == 'Budget' ? 'selected' : '' }}>
+                            Budget
+                        </option>
 
-                    <option value="Premium"
-                        {{ request('type') == 'Premium' ? 'selected' : '' }}>
-                        Premium
-                    </option>
-                </select>
+                        <option value="Premium" {{ request('type') == 'Premium' ? 'selected' : '' }}>
+                            Premium
+                        </option>
+                    </select>
 
-                {{-- PRICE --}}
-                <select name="price" onchange="this.form.submit()">
-                    <option value="">Price</option>
+                    {{-- PRICE --}}
+                    <select name="price" onchange="this.form.submit()">
+                        <option value="">Price</option>
 
-                    <option value="50000"
-                        {{ request('price') == '50000' ? 'selected' : '' }}>
-                        Under ₹50K
-                    </option>
+                        <option value="50000" {{ request('price') == '50000' ? 'selected' : '' }}>
+                            Under ₹50K
+                        </option>
 
-                    <option value="100000"
-                        {{ request('price') == '100000' ? 'selected' : '' }}>
-                        Under ₹1L
-                    </option>
+                        <option value="100000" {{ request('price') == '100000' ? 'selected' : '' }}>
+                            Under ₹1L
+                        </option>
 
-                    <option value="200000"
-                        {{ request('price') == '200000' ? 'selected' : '' }}>
-                        Luxury ₹2L+
-                    </option>
-                </select>
+                        <option value="200000" {{ request('price') == '200000' ? 'selected' : '' }}>
+                            Luxury ₹2L+
+                        </option>
+                    </select>
 
-                {{-- DURATION --}}
-                <select name="duration" onchange="this.form.submit()">
-                    <option value="">Duration</option>
+                    {{-- DURATION --}}
+                    <select name="duration" onchange="this.form.submit()">
+                        <option value="">Duration</option>
 
-                    <option value="3-5"
-                        {{ request('duration') == '3-5' ? 'selected' : '' }}>
-                        3-5 Days
-                    </option>
+                        <option value="3-5" {{ request('duration') == '3-5' ? 'selected' : '' }}>
+                            3-5 Days
+                        </option>
 
-                    <option value="6-8"
-                        {{ request('duration') == '6-8' ? 'selected' : '' }}>
-                        6-8 Days
-                    </option>
+                        <option value="6-8" {{ request('duration') == '6-8' ? 'selected' : '' }}>
+                            6-8 Days
+                        </option>
 
-                    <option value="9-12"
-                        {{ request('duration') == '9-12' ? 'selected' : '' }}>
-                        9-12 Days
-                    </option>
-                </select>
+                        <option value="9-12" {{ request('duration') == '9-12' ? 'selected' : '' }}>
+                            9-12 Days
+                        </option>
+                    </select>
 
-                {{-- FLIGHT --}}
-                <select name="flight" onchange="this.form.submit()">
-                    <option value="">Flight</option>
+                    {{-- FLIGHT --}}
+                    <select name="flight" onchange="this.form.submit()">
+                        <option value="">Flight</option>
 
-                    <option value="included"
-                        {{ request('flight') == 'included' ? 'selected' : '' }}>
-                        Included
-                    </option>
+                        <option value="included" {{ request('flight') == 'included' ? 'selected' : '' }}>
+                            Included
+                        </option>
 
-                    <option value="excluded"
-                        {{ request('flight') == 'excluded' ? 'selected' : '' }}>
-                        Excluded
-                    </option>
-                </select>
+                        <option value="excluded" {{ request('flight') == 'excluded' ? 'selected' : '' }}>
+                            Excluded
+                        </option>
+                    </select>
 
-                {{-- THEMES --}}
-                <select name="theme" onchange="this.form.submit()">
-                    <option value="">Themes</option>
+                    {{-- THEMES --}}
+                    <select name="theme" onchange="this.form.submit()">
+                        <option value="">Themes</option>
 
-                    <option value="Beach"
-                        {{ request('theme') == 'Beach' ? 'selected' : '' }}>
-                        Beach
-                    </option>
+                        <option value="Beach" {{ request('theme') == 'Beach' ? 'selected' : '' }}>
+                            Beach
+                        </option>
 
-                    <option value="Mountain"
-                        {{ request('theme') == 'Mountain' ? 'selected' : '' }}>
-                        Mountain
-                    </option>
+                        <option value="Mountain" {{ request('theme') == 'Mountain' ? 'selected' : '' }}>
+                            Mountain
+                        </option>
 
-                    <option value="Island"
-                        {{ request('theme') == 'Island' ? 'selected' : '' }}>
-                        Island
-                    </option>
-                </select>
+                        <option value="Island" {{ request('theme') == 'Island' ? 'selected' : '' }}>
+                            Island
+                        </option>
+                    </select>
 
-                {{-- RESET --}}
-                <a href="{{ route('honeymoon') }}" class="reset-filter">
-                    Reset All
-                </a>
+                    {{-- RESET --}}
+                    <a href="{{ route('honeymoon') }}" class="reset-filter">
+                        Reset All
+                    </a>
 
-            </div>
+                </div>
 
-        </form>
+            </form>
 
-    </div>
-</section>
+        </div>
+    </section>
 
 
     <section class="honeymoon-packages-section">
@@ -188,7 +171,7 @@
 
                 @foreach($packages as $package)
 
-                    <div class="col-12 col-md-6 col-lg-6">
+                    <div class="col-12 col-md-6 col-lg-4">
 
                         <div class="honeymoon-package-card">
 
