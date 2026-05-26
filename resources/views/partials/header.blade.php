@@ -126,17 +126,20 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="nav-item"><a class="nav-link st-navlink" href="#">Honeymoon</a></li>
+                        <li class="nav-item"><a class="nav-link st-navlink"
+                                href="{{ route('honeymoon') }}">Honeymoon</a></li>
+
                         <li class="nav-item"><a class="nav-link st-navlink" href="#">Family Trips</a></li>
                         <li class="nav-item"><a class="nav-link st-navlink" href="#">Adventure</a></li>
                         <li class="nav-item"><a class="nav-link st-navlink" href="#">Luxury Holidays</a></li>
-                        <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('blog.index') }}">Blogs</a></li>
+                        <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('blog.index') }}">Blogs</a>
+                        </li>
 
                         <li class="nav-item"><a class="nav-link st-navlink" href="#">Contact</a></li>
                     </ul>
                 </div>
 
-                <div class="st-nav-actions st-desktop-only">    
+                <div class="st-nav-actions st-desktop-only">
                     <button class="st-iconbtn" type="button" aria-label="Search">
                         <svg viewBox="0 0 24 24" fill="none">
                             <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.7" />
@@ -188,18 +191,21 @@
 
         <div class="st-mobile-links" id="stMobileLinksMain">
             <div class="st-mobile-menu-item st-has-submenu">
-                <button class="st-mobile-link st-mobile-menu-toggle" type="button" data-submenu="domestic" aria-expanded="false">
+                <button class="st-mobile-link st-mobile-menu-toggle" type="button" data-submenu="domestic"
+                    aria-expanded="false">
                     Domestic Tours <span aria-hidden="true">›</span>
                 </button>
             </div>
 
             <div class="st-mobile-menu-item st-has-submenu">
-                <button class="st-mobile-link st-mobile-menu-toggle" type="button" data-submenu="international" aria-expanded="false">
+                <button class="st-mobile-link st-mobile-menu-toggle" type="button" data-submenu="international"
+                    aria-expanded="false">
                     International Tours <span aria-hidden="true">›</span>
                 </button>
             </div>
 
-            <a href="#" class="st-mobile-link">Honeymoon</a>
+            <a href="{{ route('honeymoon') }}" class="st-mobile-link">Honeymoon</a>
+
             <a href="#" class="st-mobile-link">Family Trips</a>
             <a href="#" class="st-mobile-link">Adventure</a>
             <a href="#" class="st-mobile-link">Luxury Holidays</a>
@@ -211,9 +217,11 @@
 
         <div class="st-mobile-submenu" id="stMobileSubmenu">
             <div class="st-mobile-submenu-header">
-                <button class="st-mobile-submenu-close" id="stMobileSubmenuClose" type="button" aria-label="Close submenu">
+                <button class="st-mobile-submenu-close" id="stMobileSubmenuClose" type="button"
+                    aria-label="Close submenu">
                     <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M6 6 18 18M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                        <path d="M6 6 18 18M18 6 6 18" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" />
                     </svg>
                 </button>
                 <h3 class="st-mobile-submenu-title-main" id="stMobileSubmenuTitle"></h3>

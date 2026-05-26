@@ -551,13 +551,13 @@
 
 
     {{--
-============================================================
-SECTION: Recommended Destinations Card Slider
-FILE: resources/views/partials/recommended-destinations.blade.php
-INCLUDE: @include('partials.recommended-destinations') in your page
-CSS: paste recommended-destinations.css into your main stylesheet
-============================================================
---}}
+    ============================================================
+    SECTION: Recommended Destinations Card Slider
+    FILE: resources/views/partials/recommended-destinations.blade.php
+    INCLUDE: @include('partials.recommended-destinations') in your page
+    CSS: paste recommended-destinations.css into your main stylesheet
+    ============================================================
+    --}}
  
 <section class="rd-section">
     <div class="rd-container rd-container--trending">
@@ -2366,11 +2366,6 @@ CSS: <link rel="stylesheet" href="{{ asset('assets/css/blog-section.css') }}">
 ============================================================
 --}}
  
-
-
-
-    {{-- Pilgrimage Tours Section --}}
-    @include('partials.pilgrimage-section')
 
     {{-- Dynamic Blog Section --}}
     @include('partials.home-blog-section')

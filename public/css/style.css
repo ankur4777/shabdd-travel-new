@@ -3913,6 +3913,9 @@ div.container.st-nav-inner {
     scrollbar-width: none;
 }
 
+.df-cards2 {
+    flex-wrap: wrap;
+}
 .df-cards-grid::-webkit-scrollbar {
     display: none;
 }
@@ -6164,7 +6167,7 @@ div.container.st-nav-inner {
     opacity: 0.25;
     cursor: not-allowed;
 }
-.blog-section-badge{
+.blog-section-badge {
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -6206,7 +6209,7 @@ div.container.st-nav-inner {
     flex-shrink: 0;
 }
 
-.bi-fire::before{
+.bi-fire::before {
     content: "\f7f6";
     color: red;
 }
@@ -10113,707 +10116,557 @@ div.container.st-nav-inner {
     }
 }
 
+/* =========================
+   HERO SECTION
+========================= */
 
-/* =========================================================
-   PILGRIMAGE TOURS SECTION
-   Modern horizontal slider with promotional left panel
-   ========================================================= */
-
-.pilgrimage-section {
-    width: min(100% - 24px, 1320px);
-    margin: 0 auto 64px;
-    font-family: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.pilgrimage-container {
-    display: grid;
-    grid-template-columns: 500px minmax(0, 1fr);
-    gap: 24px;
-    align-items: stretch;
-}
-
-/* ── Left Promotional Panel ── */
-.pilgrimage-promo {
-    position: relative;
-    background: none;
-    border-radius: 28px;
+.honeymoon-hero {
+    padding: 90px 0;
+    background: #f7f7f7;
+    background-image: url("/images/couple-bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     overflow: hidden;
-    box-shadow: 0 8px 32px rgba(17, 17, 17, 0.08);
-    border: none;
-}
-
-.pilgrimage-promo-inner {
     position: relative;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 36px 32px;
-    min-height: 520px;
 }
 
-/* Mandala Background Pattern */
-.pilgrimage-mandala {
+.honeymoon-hero::before {
+    content: "";
     position: absolute;
-    top: -20px;
-    right: -20px;
-    width: 280px;
-    height: 280px;
-    opacity: 0.4;
-    pointer-events: none;
+    inset: 0;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.05;
 }
 
-.pilgrimage-mandala svg {
-    width: 100%;
-    height: 100%;
-}
-
-/* Traveler Image */
-.pilgrimage-traveler-img {
+.honeymoon-hero-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
     position: relative;
     z-index: 2;
-    width: 100%;
-    max-width: 320px;
-    margin: 0 auto 24px;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 16px 48px rgba(255, 140, 0, 0.2);
 }
 
-.pilgrimage-traveler-img img {
+/* LEFT CONTENT */
+
+.honeymoon-content {
+    max-width: 580px;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #ffffff;
+    padding: 10px 18px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.hero-badge span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ff574d;
+}
+
+.honeymoon-title {
+    font-size: 64px;
+    line-height: 1.1;
+    font-weight: 800;
+    color: #111;
+    margin-bottom: 24px;
+}
+
+.honeymoon-desc {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 35px;
+}
+
+/* BUTTONS */
+
+.honeymoon-buttons {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.hero-btn-primary,
+.hero-btn-outline {
+    padding: 14px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s ease;
+}
+
+.hero-btn-primary {
+    background: #ff5a50;
+    color: #fff;
+}
+
+.hero-btn-primary:hover {
+    background: #74ab37;
+    color: #fff;
+}
+
+.hero-btn-outline {
+    border: 2px solid #8bc34a;
+    color: #8bc34a;
+}
+
+.hero-btn-outline:hover {
+    background: #8bc34a;
+    color: #fff;
+}
+
+/* RIGHT IMAGE */
+
+.honeymoon-image {
+    position: relative;
+    flex: 1;
+    text-align: center;
+}
+
+.honeymoon-image img {
+    max-width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.circle-bg {
+    position: absolute;
+    width: 480px;
+    height: 480px;
+    background: #8bc34a;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.15;
+}
+
+/* =========================
+   DESTINATION CARDS
+========================= */
+
+.honeymoon-picks {
+    padding: 80px 0;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-heading span {
+    color: #8bc34a;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.section-heading h2 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-top: 10px;
+}
+
+.honeymoon-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: 0.3s ease;
+    height: 100%;
+}
+
+.honeymoon-card:hover {
+    transform: translateY(-8px);
+}
+
+.honeymoon-card-img img {
     width: 100%;
-    height: auto;
-    display: block;
+    height: 260px;
     object-fit: cover;
 }
 
-/* Promo Content */
-.pilgrimage-promo-content {
-    position: relative;
-    z-index: 2;
+.honeymoon-card-content {
+    padding: 24px;
 }
 
-.pilgrimage-eyebrow {
-    display: inline-block;
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0.15em;
-    color: #ff8c00;
+.honeymoon-card-content h3 {
+    font-size: 24px;
+    font-weight: 700;
     margin-bottom: 12px;
 }
 
-.pilgrimage-promo-title {
-    margin: 0 0 16px;
-    font-size: clamp(2rem, 3vw, 2.8rem);
-    font-weight: 900;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: #2c1810;
+.honeymoon-card-content a {
+    color: #8bc34a;
+    font-weight: 700;
+    text-decoration: none;
 }
 
-.pilgrimage-promo-text {
-    margin: 0;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.65;
-    color: rgba(44, 24, 16, 0.75);
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 991px) {
+    .honeymoon-hero-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .honeymoon-content {
+        max-width: 100%;
+    }
+
+    .honeymoon-buttons {
+        justify-content: center;
+    }
+
+    .honeymoon-title {
+        font-size: 48px;
+    }
+
+    .circle-bg {
+        width: 360px;
+        height: 360px;
+    }
 }
 
-/* ── Right Slider Wrapper ── */
-.pilgrimage-slider-wrap {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+@media (max-width: 767px) {
+    .honeymoon-hero {
+        padding: 70px 0;
+    }
+
+    .honeymoon-title {
+        font-size: 38px;
+    }
+
+    .honeymoon-desc {
+        font-size: 16px;
+    }
+
+    .section-heading h2 {
+        font-size: 32px;
+    }
+
+    .circle-bg {
+        width: 280px;
+        height: 280px;
+    }
 }
 
-/* Navigation Arrows */
-.pilgrimage-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 1.5px solid rgba(17, 17, 17, 0.12);
+/* =========================================
+   HONEYMOON PACKAGE CARDS
+========================================= */
+
+.honeymoon-packages-section {
+    padding: 80px 0;
+    background: #f8fafc;
+}
+
+.honeymoon-package-card {
     background: #fff;
-    color: #111;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 8px 24px rgba(17, 17, 17, 0.12);
-    transition: all 0.25s ease;
-    flex-shrink: 0;
-}
-
-.pilgrimage-arrow:hover {
-    transform: translateY(-50%) scale(1.08);
-    border-color: rgba(255, 140, 0, 0.3);
-    background: #fff;
-    color: #ff8c00;
-    box-shadow: 0 12px 32px rgba(255, 140, 0, 0.2);
-}
-
-.pilgrimage-arrow svg {
-    width: 20px;
-    height: 20px;
-}
-
-.pilgrimage-arrow-left {
-    left: -24px;
-}
-
-.pilgrimage-arrow-right {
-    right: -24px;
-}
-
-/* Track Container */
-.pilgrimage-track-outer {
-    flex: 1;
+    border-radius: 28px;
     overflow: hidden;
-    min-width: 0;
+    border: 1px solid #dbe4ef;
+    transition: 0.35s ease;
+    height: 100%;
+    box-shadow: 0 10px 35px rgba(15, 23, 42, 0.06);
 }
 
-.pilgrimage-track {
-    display: flex;
-    gap: 20px;
-    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
-}
-
-/* ── Destination Card ── */
-.pilgrimage-card {
-    flex: 0 0 280px;
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(17, 17, 17, 0.08);
-    box-shadow: 0 8px 28px rgba(17, 17, 17, 0.08);
-    transition: all 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.pilgrimage-card:hover {
+.honeymoon-package-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(255, 140, 0, 0.24);
-    box-shadow: 0 24px 56px rgba(17, 17, 17, 0.14);
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
 }
 
-/* Card Image */
-.pilgrimage-card-img-wrap {
+/* IMAGE */
+
+.package-image {
     position: relative;
-    aspect-ratio: 4 / 3;
+    height: 280px;
     overflow: hidden;
-    flex-shrink: 0;
 }
 
-.pilgrimage-card-img {
+.package-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: 0.5s ease;
 }
 
-.pilgrimage-card:hover .pilgrimage-card-img {
+.honeymoon-package-card:hover .package-image img {
     transform: scale(1.08);
 }
 
-.pilgrimage-card-overlay {
+/* TOP BADGES */
+
+.package-tag,
+.package-duration {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.3) 100%);
-    z-index: 1;
-}
-
-/* Card Body */
-.pilgrimage-card-body {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 20px 18px 18px;
-    flex: 1;
-}
-
-.pilgrimage-card-title {
-    margin: 0;
-    font-size: 1.15rem;
-    font-weight: 900;
-    color: #0f1115;
-    letter-spacing: -0.01em;
-    line-height: 1.2;
-}
-
-/* Tags */
-.pilgrimage-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-
-.pilgrimage-tag {
-    padding: 5px 10px;
-    border-radius: 999px;
-    background: rgba(255, 140, 0, 0.08);
-    border: 1px solid rgba(255, 140, 0, 0.18);
-    color: #d97706;
-    font-size: 11px;
-    font-weight: 700;
-    white-space: nowrap;
-    transition: all 0.2s ease;
-}
-
-.pilgrimage-card:hover .pilgrimage-tag {
-    background: rgba(255, 140, 0, 0.14);
-    border-color: rgba(255, 140, 0, 0.3);
-}
-
-/* View More Button */
-.pilgrimage-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: auto;
-    padding: 12px 18px;
-    border-radius: 12px;
-    border: 1.5px solid #ff8c00;
-    background: transparent;
-    color: #ff8c00;
-    font-size: 13px;
-    font-weight: 800;
-    text-decoration: none;
-    letter-spacing: 0.02em;
-    transition: all 0.25s ease;
-}
-
-.pilgrimage-btn svg {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-}
-
-.pilgrimage-btn:hover {
-    background: #ff8c00;
+    top: 18px;
+    background: rgba(15, 23, 42, 0.88);
     color: #fff;
-    box-shadow: 0 12px 28px rgba(255, 140, 0, 0.3);
-    transform: translateY(-2px);
-}
-
-/* Empty State */
-.pilgrimage-empty {
-    padding: 60px 20px;
-    text-align: center;
-    color: rgba(17, 17, 17, 0.5);
-}
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 1199.98px) {
-    .pilgrimage-container {
-        grid-template-columns: 360px minmax(0, 1fr);
-        gap: 20px;
-    }
-
-    .pilgrimage-promo-inner {
-        padding: 28px 24px;
-        min-height: 480px;
-    }
-
-    .pilgrimage-card {
-        flex: 0 0 260px;
-    }
-}
-
-@media (max-width: 991.98px) {
-    .pilgrimage-container {
-        grid-template-columns: 1fr;
-        gap: 24px;
-    }
-
-    .pilgrimage-promo-inner {
-        min-height: auto;
-        padding: 32px 28px;
-    }
-
-    .pilgrimage-traveler-img {
-        max-width: 280px;
-    }
-
-    .pilgrimage-arrow-left {
-        left: -20px;
-    }
-
-    .pilgrimage-arrow-right {
-        right: -20px;
-    }
-}
-
-@media (max-width: 767.98px) {
-    .pilgrimage-section {
-        width: min(100% - 16px, 1320px);
-        margin-bottom: 48px;
-    }
-
-    .pilgrimage-promo {
-        border-radius: 20px;
-    }
-
-    .pilgrimage-promo-inner {
-        padding: 24px 20px;
-    }
-
-    .pilgrimage-traveler-img {
-        max-width: 240px;
-        margin-bottom: 20px;
-    }
-
-    .pilgrimage-promo-title {
-        font-size: 1.8rem;
-    }
-
-    .pilgrimage-arrow {
-        width: 42px;
-        height: 42px;
-    }
-
-    .pilgrimage-arrow-left {
-        left: -16px;
-    }
-
-    .pilgrimage-arrow-right {
-        right: -16px;
-    }
-
-    .pilgrimage-card {
-        flex: 0 0 240px;
-    }
-
-    .pilgrimage-track {
-        gap: 16px;
-    }
-}
-
-@media (max-width: 575.98px) {
-    .pilgrimage-section {
-        width: min(100% - 12px, 1320px);
-        margin-bottom: 40px;
-    }
-
-    .pilgrimage-promo {
-        border-radius: 16px;
-    }
-
-    .pilgrimage-promo-inner {
-        padding: 20px 16px;
-    }
-
-    .pilgrimage-traveler-img {
-        max-width: 200px;
-    }
-
-    .pilgrimage-promo-title {
-        font-size: 1.6rem;
-        margin-bottom: 12px;
-    }
-
-    .pilgrimage-promo-text {
-        font-size: 14px;
-    }
-
-    .pilgrimage-arrow {
-        width: 38px;
-        height: 38px;
-    }
-
-    .pilgrimage-arrow svg {
-        width: 18px;
-        height: 18px;
-    }
-
-    .pilgrimage-card {
-        flex: 0 0 220px;
-    }
-
-    .pilgrimage-card-title {
-        font-size: 1rem;
-    }
-
-    .pilgrimage-tag {
-        font-size: 10px;
-        padding: 4px 8px;
-    }
-
-    .pilgrimage-btn {
-        font-size: 12px;
-        padding: 10px 16px;
-    }
-}
-/* ================= Pilgrimage Section (Homepage, refined layout) ================= */
-.pilgrimage-section {
-    background: #ffeddf;
-    padding: 28px 0 34px;
-}
-
-.pilgrimage-container {
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 0 22px;
-    display: grid;
-    grid-template-columns: 500px minmax(0, 1fr);
-    gap: 26px;
-    align-items: stretch;
-}
-
-.pilgrimage-promo {
-    min-height: 430px;
-    border-radius: 16px;
-    overflow: hidden;
-    position: relative;
-    background: none;
-    border: none;
-    box-shadow: none;
-}
-
-.pilgrimage-pattern {
-    position: absolute;
-    inset: 0;
-    background: transparent;
-}
-
-.pilgrimage-traveler {
-    position: absolute;
-    left: -36px;
-    bottom: -10px;
-    width: 292px;
-    height: 392px;
-    opacity: 1;
-}
-
-.pilgrimage-traveler img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: none;
-}
-
-.pilgrimage-content {
-    position: relative;
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
     z-index: 2;
-    margin-left: 52px;
-    margin-top: 92px;
-    max-width: 360px;
 }
 
-.pilgrimage-small-heading {
-    margin: 0 0 6px;
-    color: #283444;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    font-weight: 700;
+.package-tag {
+    left: 18px;
 }
 
-.pilgrimage-main-heading {
-    margin: 0;
-    color: #834247;
-    font-size: clamp(2.1rem, 4.8vw, 3.9rem);
-    line-height: 0.95;
-    font-weight: 900;
-}
-
-.pilgrimage-subheading {
-    margin: 12px 0 0;
-    color: #252b34;
-    font-size: clamp(1.5rem, 2.2vw, 2.15rem);
-    line-height: 1.1;
-    font-weight: 700;
-}
-
-.pilgrimage-slider-wrap {
-    position: relative;
-    overflow: hidden;
-    padding-top: 48px;
-}
-
-.pilgrimage-slider {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding: 2px 0 6px;
-}
-
-.pilgrimage-slider::-webkit-scrollbar {
-    display: none;
-}
-
-.pilgrimage-card {
-    flex: 0 0 255px;
-    border: 1px solid #cfd3d7;
-    border-radius: 10px;
-    background: #efefef;
-    overflow: hidden;
-    box-shadow: none;
-}
-
-.pilgrimage-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-}
-
-.pilgrimage-card-img-wrap {
-    height: 168px;
-}
-
-.pilgrimage-card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.pilgrimage-card-overlay {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.18), transparent);
-}
-
-.pilgrimage-card-body {
-    background: white;
-    padding: 12px 12px 14px;
-}
-
-.pilgrimage-card-title {
-    margin: 0 0 8px;
-    text-align: center;
-    font-size: 0.95rem;
-    line-height: 1.2;
-    font-weight: 800;
-    color: #3f3f45;
-    text-transform: uppercase;
-}
-
-.pilgrimage-card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
-    margin-bottom: 12px;
-}
-
-.pilgrimage-tag {
-    font-size: 0.74rem;
-    line-height: 1.1;
-    border: 1px solid #1984ff;
-    color: #1474e5;
+.package-duration {
+    right: 18px;
     background: #fff;
-    padding: 5px 9px;
-    border-radius: 4px;
+    color: #0f172a;
 }
 
-.pilgrimage-btn {
+/* CONTENT */
+
+.package-content {
+    padding: 28px;
+}
+
+.package-content h3 {
+    font-size: 25px;
+    line-height: 1.3;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #ff3b30;
+}
+
+/* BADGES */
+
+.package-badges {
     display: flex;
-    justify-content: center;
     align-items: center;
-    background: transparent;
-    color: #1474e5;
-    border: 1px solid #1474e5;
-    border-radius: 0;
-    font-size: 0.9rem;
-    letter-spacing: 0;
-    padding: 8px 10px;
-    font-weight: 800;
-    text-transform: uppercase;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
 }
 
-.pilgrimage-btn:hover {
-    background: #1474e5;
+.package-badges span {
+    border: 1px solid #d9e2ec;
+    padding: 8px 12px;
+    border-radius: 0px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #64748b;
+    background: #f8fafc;
+}
+
+/* FEATURES */
+
+.package-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 20px;
+}
+
+.package-features li {
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 14px;
+    color: #526581;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.package-features li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+}
+
+/* FOOTER */
+
+.package-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.package-price del {
+    display: block;
+    font-size: 15px;
+    color: #2a2a2a;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.package-price h4 {
+    font-size: 25px;
+    font-weight: 900;
+    color: #22c55e;
+    margin-bottom: 6px;
+}
+
+.package-price p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* BUTTON */
+
+.package-btn {
+    padding: 16px 16px;
+    border-radius: 10px;
+    border: 1px solid #cdd8e5;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: #0d6efd;
+    transition: 0.3s ease;
+    white-space: nowrap;
+}
+
+.package-btn:hover {
+    background: #2563eb;
     color: #fff;
+    border-color: #2563eb;
 }
 
-.pilgrimage-btn svg {
-    display: none;
+/* RESPONSIVE */
+
+@media (max-width: 991px) {
+    .package-content h3 {
+        font-size: 28px;
+    }
+
+    .package-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .package-btn {
+        width: 100%;
+        text-align: center;
+    }
 }
 
-.pilgrimage-arrow {
-    top: 8px;
-    transform: none;
-    width: 44px;
-    height: 44px;
-    border: 1px solid #d5d9dd;
-    border-radius: 999px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+@media (max-width: 767px) {
+    .honeymoon-packages-section {
+        padding: 60px 0;
+    }
+
+    .package-image {
+        height: 240px;
+    }
+
+    .package-content {
+        padding: 22px;
+    }
+
+    .package-content h3 {
+        font-size: 24px;
+    }
+
+    .package-price h4 {
+        font-size: 28px;
+    }
+}
+/* =========================================
+   FILTER SECTION
+========================================= */
+
+.honeymoon-filter-section {
+    padding: 30px 0 10px;
     background: #fff;
-    color: #1383ff;
 }
 
-.pilgrimage-arrow-left {
-    left: auto;
-    right: 56px;
+.honeymoon-filters {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    padding: 18px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.04);
 }
 
-.pilgrimage-arrow-right {
-    right: 4px;
+.honeymoon-filters select {
+    border: 1px solid #dbe4ef;
+    background: #f8fafc;
+    border-radius: 50px;
+    padding: 14px 22px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #0f172a;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+    min-width: 160px;
 }
 
-.pilgrimage-arrow:hover {
-    transform: none;
-    background: #f5f9ff;
+.honeymoon-filters select:hover {
+    border-color: #2563eb;
 }
 
-.pilgrimage-arrow:disabled {
-    opacity: 0.45;
+.reset-filter {
+    margin-left: auto;
+    color: #ef4444;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 17px;
 }
 
-@media (max-width: 1199.98px) {
-    .pilgrimage-container {
-        grid-template-columns: 1fr;
+.reset-filter:hover {
+    color: #dc2626;
+}
+
+/* MOBILE */
+
+@media(max-width: 991px) {
+
+    .honeymoon-filters {
+        gap: 12px;
     }
 
-    .pilgrimage-content {
-        margin-left: 44px;
-        margin-top: 78px;
+    .honeymoon-filters select {
+        min-width: calc(50% - 6px);
+        flex: 1;
+    }
+
+    .reset-filter {
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+        margin-top: 10px;
     }
 }
 
-@media (max-width: 767.98px) {
-    .pilgrimage-section {
-        padding: 20px 0 28px;
+@media(max-width: 767px) {
+
+    .honeymoon-filters {
+        padding: 14px;
+        border-radius: 18px;
     }
 
-    .pilgrimage-container {
-        padding: 0 14px;
-        gap: 16px;
-    }
-
-    .pilgrimage-promo {
-        min-height: 286px;
-    }
-
-    .pilgrimage-traveler {
-        width: 182px;
-        height: 250px;
-        left: -12px;
-    }
-
-    .pilgrimage-content {
-        margin-left: 0px;
-        margin-top: 0px;
-        max-width: 250px;
-    }
-
-    .pilgrimage-main-heading {
-        font-size: 2.1rem;
-    }
-
-    .pilgrimage-subheading {
-        font-size: 1.2rem;
-    }
-
-    .pilgrimage-card {
-        flex-basis: 220px;
+    .honeymoon-filters select {
+        width: 100%;
+        min-width: 100%;
     }
 }

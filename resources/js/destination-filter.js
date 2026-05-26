@@ -804,34 +804,45 @@
             });
         }
 
-        // Bind OC chips
-        container.querySelectorAll('.df-chip[data-filter^="oc-"]').forEach(chip => {
+        // Bind OC chips (delegated binding for reliable mobile/touch behavior)
+        container.addEventListener('click', function (event) {
+            const chip = event.target.closest('.df-chip[data-filter^="oc-"]');
+            if (!chip) return;
+
             const filterKey = chip.dataset.filter.replace('oc-', ''); // duration, style, season, rating
-            chip.addEventListener('click', function () {
-                const val = this.dataset.value;
-                if (filterKey === 'rating') {
-                    const rVal = parseFloat(val);
-                    if (state.rating === rVal) {
-                        state.rating = null;
-                        this.classList.remove('df-chip--active');
-                        this.setAttribute('aria-pressed', 'false');
-                    } else {
-                        container.querySelectorAll('[data-filter="oc-rating"]').forEach(c => {
-                            c.classList.remove('df-chip--active'); c.setAttribute('aria-pressed', 'false');
-                        });
-                        state.rating = rVal;
-                        this.classList.add('df-chip--active');
-                        this.setAttribute('aria-pressed', 'true');
-                    }
+            const val = chip.dataset.value;
+
+            if (filterKey === 'rating') {
+                const rVal = parseFloat(val);
+                if (state.rating === rVal) {
+                    state.rating = null;
+                    chip.classList.remove('df-chip--active');
+                    chip.setAttribute('aria-pressed', 'false');
                 } else {
-                    const arr = state[filterKey];
-                    const idx = arr.indexOf(val);
-                    if (idx === -1) { arr.push(val); this.classList.add('df-chip--active'); this.setAttribute('aria-pressed', 'true'); }
-                    else { arr.splice(idx, 1); this.classList.remove('df-chip--active'); this.setAttribute('aria-pressed', 'false'); }
+                    container.querySelectorAll('[data-filter="oc-rating"]').forEach(c => {
+                        c.classList.remove('df-chip--active');
+                        c.setAttribute('aria-pressed', 'false');
+                    });
+                    state.rating = rVal;
+                    chip.classList.add('df-chip--active');
+                    chip.setAttribute('aria-pressed', 'true');
                 }
-                applyFilters();
-                updateActiveFilterPills();
-            });
+            } else {
+                const arr = state[filterKey];
+                const idx = arr.indexOf(val);
+                if (idx === -1) {
+                    arr.push(val);
+                    chip.classList.add('df-chip--active');
+                    chip.setAttribute('aria-pressed', 'true');
+                } else {
+                    arr.splice(idx, 1);
+                    chip.classList.remove('df-chip--active');
+                    chip.setAttribute('aria-pressed', 'false');
+                }
+            }
+
+            applyFilters();
+            updateActiveFilterPills();
         });
 
         // Bind OC trip toggle

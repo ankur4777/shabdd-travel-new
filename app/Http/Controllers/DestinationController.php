@@ -19,6 +19,31 @@ class DestinationController extends Controller
         return view('destination.index', compact('destinations'));
     }
 
+    public function packages(): View
+    {
+        $destinations = Destination::query()
+            ->active()
+            ->latest()
+            ->get();
+
+        $allPackages = [];
+
+        foreach ($destinations as $destination) {
+            $destinationProfile = $this->buildDestinationProfile($destination);
+            $packages = $this->resolvePackageCollection($destination, $destinationProfile);
+
+            foreach ($packages as $package) {
+                $allPackages[] = array_merge($package, [
+                    'destination' => $destination,
+                    'destination_name' => $destination->name,
+                    'destination_country' => $destination->country,
+                ]);
+            }
+        }
+
+        return view('destination.packages', compact('allPackages'));
+    }
+
     public function show(Destination $destination): View
     {
         abort_unless($destination->is_active, 404);
