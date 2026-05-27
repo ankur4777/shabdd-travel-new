@@ -171,14 +171,14 @@
 
                 @foreach($packages as $package)
 
-                    <div class="col-12 col-md-6 col-lg-4">
+                    <div class="col-12 col-md-6 col-lg-4 honeymoon-package-card2">
 
                         <div class="honeymoon-package-card">
 
                             {{-- IMAGE --}}
                             <div class="package-image">
 
-                                <img src="{{ asset($package->image) }}" alt="{{ $package->title }}">
+                                <img src="{{ asset('storage/' . $package->image) }}" alt="{{ $package->title }}">
 
                                 {{-- CATEGORY --}}
                                 <span class="package-tag">
@@ -187,7 +187,7 @@
 
                                 {{-- DAYS --}}
                                 <span class="package-duration">
-                                    {{ $package->days }}
+                                    ⭐ {{ $package->rating }}
                                 </span>
 
                             </div>
@@ -203,11 +203,11 @@
                                 <div class="package-badges">
 
                                     <span>
-                                        {{ $package->days }}
+                                        {{ $package->duration_text }}
                                     </span>
 
                                     <span>
-                                        ⭐ {{ $package->rating }}
+                                        {{ $package->travel_style }}
                                     </span>
 
                                 </div>
@@ -251,7 +251,7 @@
                                     </div>
 
                                     {{-- BUTTON --}}
-                                    <a href="#" class="package-btn">
+                                    <a href="{{ route('packages.show', $package->slug) }}" class="package-btn">
 
                                         View Details
 
