@@ -2982,6 +2982,11 @@ div.container.st-nav-inner {
     border-radius: 18px 18px 0 0;
     background: linear-gradient(90deg, #ff3b30 0%, #ff7a45 100%);
 }
+@media (min-width: 992px) {
+    .honeymoon-package5 {
+        width: 320px !important;
+    }
+}
 
 #why .seo-dd-feature-card:hover {
     transform: translateY(-6px);

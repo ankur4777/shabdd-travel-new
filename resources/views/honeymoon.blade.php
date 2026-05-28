@@ -171,7 +171,7 @@
 
                 @foreach($packages as $package)
 
-                    <div class="col-12 col-md-6 col-lg-4">
+                    <div class="col-12 col-md-6 col-lg-4 honeymoon-package5">
 
                         <div class="honeymoon-package-card">
 

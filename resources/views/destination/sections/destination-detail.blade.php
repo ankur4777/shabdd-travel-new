@@ -751,7 +751,7 @@
     </script>
 
     <script type="application/ld+json">
-                        {!! json_encode([
+                            {!! json_encode([
         '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => array_map(function ($faq) {
@@ -765,5 +765,5 @@
             ];
         }, $faqs),
     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
-                    </script>
+                        </script>
 @endpush
