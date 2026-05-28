@@ -171,7 +171,7 @@
 
                 @foreach($packages as $package)
 
-                    <div class="col-12 col-md-6 col-lg-4 honeymoon-card3">
+                    <div class="col-12 col-md-6 col-lg-4">
 
                         <div class="honeymoon-package-card">
 
@@ -207,10 +207,7 @@
                                     </span>
 
                                     <span>
-                                        {{ $package->travel_style }}
-                                    </span>
-                                    <span>
-                                        {{ $package->country }}
+                                        ⭐ {{ $package->rating }}
                                     </span>
 
                                 </div>
@@ -254,7 +251,7 @@
                                     </div>
 
                                     {{-- BUTTON --}}
-                                    <a href="#" class="package-btn">
+                                    <a href="{{ route('packages.show', $package->slug) }}" class="package-btn">
 
                                         View Details
 

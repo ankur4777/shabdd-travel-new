@@ -84,4 +84,10 @@ class HomeController extends Controller
 
         return view('honeymoon', compact('packages'));
     }
+   public function packageDetails($slug)
+{
+    $package = Package::where('slug', $slug)->firstOrFail();
+
+    return view('package-details', compact('package'));
+}
 }

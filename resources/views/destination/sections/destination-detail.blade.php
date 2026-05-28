@@ -247,23 +247,23 @@
                     </div>
                     <div class="seo-dd-card-grid seo-dd-place-grid">
                         @foreach($places as $place)
-                            <article class="seo-dd-card seo-dd-place-card">
-                                <img src="{{ $place['image'] ?? $destination->image_url }}" alt="{{ $place['name'] }}"
-                                    loading="lazy">
-                                <div class="seo-dd-card-body">
-                                    <div class="seo-dd-row-between">
-                                        <h3>{{ $place['name'] }}</h3>
-                                        <span class="seo-dd-duration">{{ $place['duration'] ?? '2-4 Days' }}</span>
-                                    </div>
-                                    <p>{{ $place['description'] ?? '' }}</p>
-                                    <div class="seo-dd-badges">
-                                        @foreach(array_slice(($place['attractions'] ?? []), 0, 3) as $attraction)
-                                            <span class="seo-dd-badge">{{ $attraction }}</span>
-                                        @endforeach
-                                    </div>
-                                    <a href="#" class="seo-dd-btn seo-dd-btn-ghost">Explore {{ $place['name'] }}</a>
+                        <article class="seo-dd-card seo-dd-place-card">
+                            <img src="{{ $place['image'] ?? $destination->image_url }}" alt="{{ $place['name'] }}"
+                                loading="lazy">
+                            <div class="seo-dd-card-body">
+                                <div class="seo-dd-row-between">
+                                    <h3>{{ $place['name'] }}</h3>
+                                    <span class="seo-dd-duration">{{ $place['duration'] ?? '2-4 Days' }}</span>
                                 </div>
-                            </article>
+                                <p>{{ $place['description'] ?? '' }}</p>
+                                <div class="seo-dd-badges">
+                                    @foreach(array_slice(($place['attractions'] ?? []), 0, 3) as $attraction)
+                                    <span class="seo-dd-badge">{{ $attraction }}</span>
+                                    @endforeach
+                                </div>
+                                <a href="#" class="seo-dd-btn seo-dd-btn-ghost">Explore {{ $place['name'] }}</a>
+                            </div>
+                        </article>
                         @endforeach
                     </div>
                 </section> --}}
@@ -751,7 +751,7 @@
     </script>
 
     <script type="application/ld+json">
-                {!! json_encode([
+                        {!! json_encode([
         '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => array_map(function ($faq) {
@@ -765,5 +765,5 @@
             ];
         }, $faqs),
     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
-            </script>
+                    </script>
 @endpush
