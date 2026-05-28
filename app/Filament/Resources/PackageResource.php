@@ -57,25 +57,44 @@ class PackageResource extends Resource
 
                         FileUpload::make('image')
                             ->image()
-                            ->directory('packages'),
+                            ->disk('public')
+                            ->directory('packages')
+                            ->visibility('public')
+                            ->required(),
 
                         Select::make('category')
                             ->options([
+                                'Trending' => 'Trending',
+                                'Popular' => 'Popular',
+                                'Featured' => 'Featured',
                                 'Luxury' => 'Luxury',
-                                'Budget' => 'Budget',
-                                'Premium' => 'Premium',
+                            ])
+                            ->required(),
+                        Select::make('type')
+                            ->options([
+                                'Domestic' => 'Domestic',
+                                'International' => 'International',
                             ]),
 
                         Select::make('travel_style')
                             ->options([
                                 'honeymoon' => 'Honeymoon',
-                                'pilgrimage' => 'Pilgrimage',
+                                'religiuos' => 'Religious',
                                 'family' => 'Family',
                                 'adventure' => 'Adventure',
+                                'friends' => 'Friends',
+                                'solo' => 'Solo',
+                                'nature' => 'Nature',
+                                'wildlife' => 'Wildlife',
+                                'water activities' => 'Water Activities',
+
                             ]),
 
                         TextInput::make('days')
                             ->numeric(),
+                        TextInput::make('country'),
+                        TextInput::make('state'),
+                        TextInput::make('city'),
 
                         TextInput::make('duration_text'),
 
