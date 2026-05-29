@@ -531,7 +531,7 @@
                             <p class="st-viewall-text">Explore 130+<br>destinations<br>worldwide</p>
                         </div>
                         <div class="st-theme-card-body">
-                            <a href="#" class="st-viewall-btn">View All</a>
+                            <a href="{{ route('destinations.index') }}" class="st-viewall-btn">View All</a>
                         </div>
                     </div>
 

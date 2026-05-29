@@ -66,8 +66,8 @@ class PackageResource extends Resource
                             ->options([
                                 'Trending' => 'Trending',
                                 'Popular' => 'Popular',
-                                'Featured' => 'Featured',
-                                'Luxury' => 'Luxury',
+                                'Budget Friendly' => 'Budget Friendly',
+                                'Premium' => 'Premium',
                             ])
                             ->required(),
                         Select::make('type')

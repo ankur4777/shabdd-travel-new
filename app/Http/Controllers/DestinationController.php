@@ -3,20 +3,210 @@
 namespace App\Http\Controllers;
 
 use App\Models\Destination;
+use App\Models\Package;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class DestinationController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $destinations = Destination::query()
-            ->active()
-            ->latest()
-            ->paginate(12);
+        $basePackages = Package::query()
+            ->whereNotNull('price')
+            ->get();
 
-        return view('destination.index', compact('destinations'));
+        $destinationOptions = $this->buildPackageDestinationOptions($basePackages);
+
+        $packagesForPriceRange = $basePackages
+            ->when($request->filled('destination'), function ($packages) use ($request) {
+                return $packages->filter(
+                    fn (Package $package) => $this->packageDestinationSlug($package) === $request->input('destination')
+                );
+            })
+            ->when($request->filled('travel_style'), function ($packages) use ($request) {
+                $travelStyle = (string) $request->input('travel_style');
+
+                if (!array_key_exists($travelStyle, $this->travelStyleOptions())) {
+                    return $packages;
+                }
+
+                return $packages->filter(fn (Package $package) => $package->travel_style === $travelStyle);
+            })
+            ->when($request->filled('rating'), function ($packages) use ($request) {
+                $rating = (int) $request->input('rating');
+
+                if (!in_array($rating, [3, 4, 5], true)) {
+                    return $packages;
+                }
+
+                return $packages->filter(fn (Package $package) => (float) $package->rating >= $rating);
+            })
+            ->when($request->filled('duration'), function ($packages) use ($request) {
+                return match ($request->input('duration')) {
+                    '1-3' => $packages->filter(fn (Package $package) => (int) $package->days >= 1 && (int) $package->days <= 3),
+                    '4-6' => $packages->filter(fn (Package $package) => (int) $package->days >= 4 && (int) $package->days <= 6),
+                    '7-plus' => $packages->filter(fn (Package $package) => (int) $package->days >= 7),
+                    default => $packages,
+                };
+            });
+
+        $priceBounds = [
+            'min' => (int) ($packagesForPriceRange->min('price') ?? 0),
+            'max' => (int) ($packagesForPriceRange->max('price') ?? 0),
+        ];
+
+        if ($priceBounds['max'] < $priceBounds['min']) {
+            $priceBounds['max'] = $priceBounds['min'];
+        }
+
+        $selectedMinPrice = $this->sanitizePrice(
+            $request->input('min_price'),
+            $priceBounds['min'],
+            $priceBounds['min'],
+            $priceBounds['max']
+        );
+
+        $selectedMaxPrice = $this->sanitizePrice(
+            $request->input('max_price'),
+            $priceBounds['max'],
+            $priceBounds['min'],
+            $priceBounds['max']
+        );
+
+        if ($selectedMinPrice > $selectedMaxPrice) {
+            [$selectedMinPrice, $selectedMaxPrice] = [$selectedMaxPrice, $selectedMinPrice];
+        }
+
+        $filteredPackages = $packagesForPriceRange
+            ->filter(fn (Package $package) => $package->price >= $selectedMinPrice && $package->price <= $selectedMaxPrice);
+
+        $destinationCards = $this->buildPackageDestinationCards($filteredPackages, (string) $request->input('sort', 'newest'));
+        $destinationCount = $destinationCards->count();
+        $travelStyleOptions = $this->travelStyleOptions();
+
+        return view('destination.index', compact(
+            'destinationCards',
+            'destinationCount',
+            'destinationOptions',
+            'travelStyleOptions',
+            'priceBounds',
+            'selectedMinPrice',
+            'selectedMaxPrice'
+        ));
+    }
+
+    private function travelStyleOptions(): array
+    {
+        return [
+            'honeymoon' => 'Honeymoon',
+            'religiuos' => 'Religious',
+            'family' => 'Family',
+            'adventure' => 'Adventure',
+            'friends' => 'Friends',
+            'solo' => 'Solo',
+            'nature' => 'Nature',
+            'wildlife' => 'Wildlife',
+            'water activities' => 'Water Activities',
+        ];
+    }
+
+    private function buildPackageDestinationOptions(Collection $packages): Collection
+    {
+        return $packages
+            ->map(function (Package $package) {
+                $name = $this->packageDestinationName($package);
+
+                return [
+                    'name' => $name,
+                    'slug' => Str::slug($name),
+                    'country' => $package->country,
+                ];
+            })
+            ->unique('slug')
+            ->sortBy('name')
+            ->values();
+    }
+
+    private function buildPackageDestinationCards(Collection $packages, string $sort): Collection
+    {
+        $cards = $packages
+            ->groupBy(fn (Package $package) => $this->packageDestinationSlug($package))
+            ->map(function (Collection $destinationPackages) {
+                $sortedByPrice = $destinationPackages->sortBy('price')->values();
+                $representative = $sortedByPrice->first();
+                $destinationName = $this->packageDestinationName($representative);
+                $minPrice = (int) $destinationPackages->min('price');
+                $maxPrice = (int) $destinationPackages->max('price');
+                $minDays = (int) $destinationPackages->filter(fn (Package $package) => $package->days)->min('days');
+                $maxDays = (int) $destinationPackages->filter(fn (Package $package) => $package->days)->max('days');
+                $travelStyles = $destinationPackages
+                    ->pluck('travel_style')
+                    ->filter()
+                    ->unique()
+                    ->take(3)
+                    ->values();
+
+                return [
+                    'name' => $destinationName,
+                    'slug' => Str::slug($destinationName),
+                    'country' => $representative->country,
+                    'image' => $representative->image
+                        ? asset('storage/' . $representative->image)
+                        : asset('images/couple-bg.jpg'),
+                    'rating' => round((float) $destinationPackages->avg('rating'), 1),
+                    'package_count' => $destinationPackages->count(),
+                    'min_price' => $minPrice,
+                    'max_price' => $maxPrice,
+                    'min_days' => $minDays,
+                    'max_days' => $maxDays,
+                    'travel_styles' => $travelStyles,
+                    'featured_package_slug' => $representative->slug,
+                    'latest_package_id' => (int) $destinationPackages->max('id'),
+                    'featured_score' => (int) $destinationPackages->max('featured'),
+                ];
+            })
+            ->values();
+
+        return match ($sort) {
+            'low_to_high' => $cards->sortBy('min_price')->values(),
+            'high_to_low' => $cards->sortByDesc('max_price')->values(),
+            'highest_rated' => $cards->sortByDesc('rating')->values(),
+            'most_popular' => $cards
+                ->sortByDesc('latest_package_id')
+                ->sortByDesc('featured_score')
+                ->values(),
+            default => $cards->sortByDesc('latest_package_id')->values(),
+        };
+    }
+
+    private function packageDestinationName(Package $package): string
+    {
+        $location = collect([
+            $package->city,
+            $package->state,
+            $package->country,
+        ])
+            ->map(fn ($value) => trim((string) $value))
+            ->first(fn (string $value) => $value !== '');
+
+        return $location ?: $package->title;
+    }
+
+    private function packageDestinationSlug(Package $package): string
+    {
+        return Str::slug($this->packageDestinationName($package));
+    }
+
+    private function sanitizePrice(mixed $value, int $fallback, int $min, int $max): int
+    {
+        if (!is_numeric($value)) {
+            return $fallback;
+        }
+
+        return max($min, min((int) $value, $max));
     }
 
     public function packages(): View

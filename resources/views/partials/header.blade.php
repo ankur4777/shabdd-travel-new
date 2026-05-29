@@ -129,7 +129,11 @@
                         <li class="nav-item"><a class="nav-link st-navlink"
                                 href="{{ route('honeymoon') }}">Honeymoon</a></li>
 
-                        <li class="nav-item"><a class="nav-link st-navlink" href="#">Family Trips</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link st-navlink" href="{{ route('family-trips') }}">
+                                Family Trips
+                            </a>
+                        </li>
                         <li class="nav-item"><a class="nav-link st-navlink" href="#">Adventure</a></li>
                         <li class="nav-item"><a class="nav-link st-navlink" href="#">Luxury Holidays</a></li>
                         <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('blog.index') }}">Blogs</a>
@@ -206,7 +210,9 @@
 
             <a href="{{ route('honeymoon') }}" class="st-mobile-link">Honeymoon</a>
 
-            <a href="#" class="st-mobile-link">Family Trips</a>
+            <a href="{{ route('family-trips') }}" class="st-mobile-link">
+                Family Trips
+            </a>
             <a href="#" class="st-mobile-link">Adventure</a>
             <a href="#" class="st-mobile-link">Luxury Holidays</a>
             <a href="{{ route('blog.index') }}" class="st-mobile-link">Blogs</a>
