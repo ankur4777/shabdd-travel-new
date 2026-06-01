@@ -187,7 +187,7 @@
                 <div class="st-themes-track" id="themesTrack">
 
                     {{-- Card 1: Honeymoon --}}
-                    <div class="st-theme-card" data-theme="honeymoon">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'honeymoon']) }}" class="st-theme-card" data-theme="honeymoon">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#f472b6 0%,#ec4899 40%,#be185d 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -216,10 +216,10 @@
                             <span class="st-theme-name">Honeymoon / Romantic</span>
                             <span class="st-theme-count">60+ destinations</span>
                         </div>
-                    </div>
+                    </a>
 
                     {{-- Card 2: Family --}}
-                    <div class="st-theme-card" data-theme="family">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'family']) }}" class="st-theme-card" data-theme="family">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#fde68a 0%,#f59e0b 45%,#d97706 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -244,10 +244,10 @@
                             <span class="st-theme-name">Family</span>
                             <span class="st-theme-count">70+ destinations</span>
                         </div>
-                    </div>
+                    </a>
 
                     {{-- Card 3: Friends / Group --}}
-                    <div class="st-theme-card" data-theme="friends">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'friends']) }}" class="st-theme-card" data-theme="friends">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#6ee7b7 0%,#34d399 40%,#059669 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -277,10 +277,10 @@
                             <span class="st-theme-name">Friends / Group</span>
                             <span class="st-theme-count">10+ destinations</span>
                         </div>
-                    </div>
+                    </a>
 
                     {{-- Card 4: Solo --}}
-                    <div class="st-theme-card" data-theme="solo">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'solo']) }}" class="st-theme-card" data-theme="solo">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#fcd34d 0%,#f97316 45%,#b45309 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -313,10 +313,10 @@
                             <span class="st-theme-name">Solo</span>
                             <span class="st-theme-count">130+ destinations</span>
                         </div>
-                    </div>
+                    </a>
 
                     {{-- Card 5: Adventure --}}
-                    <div class="st-theme-card" data-theme="adventure">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'adventure']) }}" class="st-theme-card" data-theme="adventure">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#7dd3fc 0%,#0284c7 45%,#075985 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -355,10 +355,10 @@
                             <span class="st-theme-name">Adventure</span>
                             <span class="st-theme-count">30+ destinations</span>
                         </div>
-                    </div>
+                    </a>
 
                     {{-- Card 6: Nature --}}
-                    <div class="st-theme-card" data-theme="nature">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'nature']) }}" class="st-theme-card" data-theme="nature">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#a7f3d0 0%,#10b981 45%,#065f46 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -390,10 +390,10 @@
                             <span class="st-theme-name">Nature</span>
                             <span class="st-theme-count">100+ destinations</span>
                         </div>
-                    </div>
+                    </a>
 
                     {{-- Card 7: Religious --}}
-                    <div class="st-theme-card" data-theme="religious">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'religiuos']) }}" class="st-theme-card" data-theme="religious">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#fbbf24 0%,#d97706 45%,#92400e 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -424,10 +424,10 @@
                             <span class="st-theme-name">Religious</span>
                             <span class="st-theme-count">60+ destinations</span>
                         </div>
-                    </div>
+                    </a>
 
                     {{-- Card 8: Wildlife --}}
-                    <div class="st-theme-card" data-theme="wildlife">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'wildlife']) }}" class="st-theme-card" data-theme="wildlife">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#fef3c7 0%,#b45309 50%,#78350f 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -470,10 +470,10 @@
                             <span class="st-theme-name">Wildlife</span>
                             <span class="st-theme-count">20+ destinations</span>
                         </div>
-                    </div>
+                    </a>
 
                     {{-- Card 9: Water Activities --}}
-                    <div class="st-theme-card" data-theme="water">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'water activities']) }}" class="st-theme-card" data-theme="water">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#67e8f9 0%,#0891b2 45%,#164e63 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -516,7 +516,7 @@
                             <span class="st-theme-name">Water Activities</span>
                             <span class="st-theme-count">20+ destinations</span>
                         </div>
-                    </div>
+                    </a>
 
                     {{-- "View All" end card --}}
                     <div class="st-theme-card st-theme-viewall" id="themeViewAllCard">

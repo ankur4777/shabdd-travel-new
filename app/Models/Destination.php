@@ -41,6 +41,30 @@ class Destination extends Model
         'testimonials',
         'faqs',
         'popular_for',
+        'gallery',
+        'testimonials',
+        'faqs',
+        'location',
+        'language',
+        'currency',
+        'ideal_duration',
+        'offer_title',
+        'offer_description',
+        'discount_percentage',
+        'gallery',
+        'testimonials',
+        'faqs',
+        'location',
+        'language',
+        'currency',
+        'ideal_duration',
+        'offer_title',
+        'offer_description',
+        'discount_percentage',
+        'image_url',
+        'country',
+        'price_from',
+        'slug',
     ];
 
     protected $casts = [
@@ -59,6 +83,8 @@ class Destination extends Model
         'testimonials' => 'array',
         'faqs' => 'array',
         'popular_for' => 'array',
+        'gallery' => 'array',
+
 
     ];
 

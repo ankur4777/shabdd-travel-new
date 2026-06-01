@@ -123,6 +123,11 @@
                             @foreach($destinationCards as $destination)
                                 <div class="col">
                                     <article class="dst-card">
+                                        <a
+                                            href="{{ route('destinations.show', $destination['slug']) }}"
+                                            class="dst-card-detail-link"
+                                            aria-label="View details for {{ $destination['name'] }}"
+                                        ></a>
                                         <div class="dst-card-media">
                                             <img src="{{ $destination['image'] }}" alt="{{ $destination['name'] }}" loading="lazy">
                                             <span class="dst-card-count">

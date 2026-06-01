@@ -63,6 +63,60 @@
             ])
             ->all();
     }
+
+    $galleryImages = collect([$destination->image_url])
+        ->merge(collect($places)->map(fn ($place) => is_array($place) ? ($place['image'] ?? null) : null))
+        ->merge(collect($packages)->map(fn ($package) => is_array($package) ? ($package['image'] ?? null) : null))
+        ->merge(collect($blogs)->map(fn ($blog) => is_array($blog) ? ($blog['image'] ?? null) : null))
+        ->merge(collect($relatedItems)->map(fn ($item) => $item['image'] ?? null))
+        ->filter()
+        ->unique()
+        ->values()
+        ->pad(12, $destination->image_url)
+        ->take(12)
+        ->values();
+
+    $galleryLabels = [
+        'Signature View',
+        'Culture',
+        'Stay Mood',
+        'Food Scene',
+        'Experiences',
+        'Local Charm',
+        'Nature',
+        'Architecture',
+        'Sunsets',
+        'Night Views',
+        'Adventure',
+        'Local Life',
+    ];
+
+    $gallerySpans = [
+        ['cols' => 3, 'rows' => 4],
+        ['cols' => 5, 'rows' => 4],
+        ['cols' => 4, 'rows' => 4],
+        ['cols' => 4, 'rows' => 4],
+        ['cols' => 3, 'rows' => 4],
+        ['cols' => 5, 'rows' => 4],
+        ['cols' => 4, 'rows' => 4],
+        ['cols' => 3, 'rows' => 4],
+        ['cols' => 4, 'rows' => 4],
+        ['cols' => 5, 'rows' => 4],
+        ['cols' => 3, 'rows' => 4],
+        ['cols' => 4, 'rows' => 4],
+    ];
+
+    $galleryItems = $galleryImages
+        ->take(12)
+        ->values()
+        ->map(function ($image, int $index) use ($galleryLabels, $gallerySpans) {
+            return [
+                'image' => $image,
+                'label' => $galleryLabels[$index] ?? ('Scene ' . ($index + 1)),
+                'cols' => $gallerySpans[$index]['cols'] ?? 4,
+                'rows' => $gallerySpans[$index]['rows'] ?? 4,
+            ];
+        });
 @endphp
 
 @push('styles')
@@ -131,12 +185,12 @@
                 <article class="seo-dd-card seo-dd-quick-facts">
                     <h4>Quick Destination Facts</h4>
                     <ul>
-                        <li><span>Location</span><strong>{{ $destination->country ?? 'India' }}</strong></li>
-                        <li><span>Best Time</span><strong>{{ $displayBestSeason }}</strong></li>
+                        <li><span>Popular For</span><strong>{{ implode(', ', array_slice($popularFor, 0, 3)) }}</strong></li>
+                        <li><span>Best Season</span><strong>{{ $displayBestSeason }}</strong></li>
                         <li><span>Ideal Duration</span><strong>{{ $displayIdealDays }}</strong></li>
                         <li><span>Rating</span><strong>{{ number_format((float) $destination->rating, 1) }}/5</strong>
                         </li>
-                        <li><span>Starting From</span><strong>{{ $displayPrice }}</strong></li>
+                        <li><span>Package Options</span><strong>{{ count($destinationPackages ?? []) }} Curated Trips</strong></li>
                     </ul>
                 </article>
             </div>
@@ -155,8 +209,8 @@
                     <h4>On This Page</h4>
                     <nav>
                         <a href="#overview" class="seo-dd-anchor is-active" data-seo-offcanvas-anchor>Overview</a>
+                        <a href="#gallery" class="seo-dd-anchor" data-seo-offcanvas-anchor>Gallery</a>
                         <a href="#city-packages" class="seo-dd-anchor" data-seo-offcanvas-anchor>City Packages</a>
-                        <a href="#places" class="seo-dd-anchor" data-seo-offcanvas-anchor>Places</a>
                         <a href="#packages" class="seo-dd-anchor" data-seo-offcanvas-anchor>Packages</a>
                         <a href="#besttime" class="seo-dd-anchor" data-seo-offcanvas-anchor>Best Time</a>
                         <a href="{{ route('blog.index') }}" class="seo-dd-anchor" data-seo-offcanvas-anchor>Blogs</a>
@@ -212,6 +266,39 @@
                     @if($hasLongOverview)
                         <button type="button" class="seo-dd-link" data-seo-toggle aria-expanded="false">Read More</button>
                     @endif
+                </section>
+
+                <section id="gallery" class="seo-dd-section seo-dd-gallery-section">
+                    <div class="seo-dd-gallery-head">
+                        <div class="seo-dd-title-wrap">
+                            <p class="seo-dd-kicker">Visual Journey</p>
+                            <h2 class="seo-dd-title">{{ $destination->name }} Gallery</h2>
+                            <p class="seo-dd-lead">
+                                A visual moodboard of landscapes, stays, and local moments that define this destination.
+                            </p>
+                        </div>
+                        <div class="seo-dd-gallery-stats">
+                            <strong>{{ count($galleryImages) }} shots</strong>
+                            <span>Curated from destination visuals</span>
+                        </div>
+                    </div>
+
+                    <div class="seo-dd-gallery-grid">
+                        @foreach($galleryItems as $item)
+                            <button
+                                type="button"
+                                class="seo-dd-gallery-card {{ $loop->first ? 'is-featured' : '' }}"
+                                style="--gallery-cols: {{ $item['cols'] }}; --gallery-rows: {{ $item['rows'] }};"
+                                data-gallery-index="{{ $loop->index }}"
+                                aria-label="Open gallery image {{ $loop->iteration }}: {{ $item['label'] }}"
+                            >
+                                <img src="{{ $item['image'] }}" alt="{{ $destination->name }} gallery image {{ $loop->iteration }}"
+                                    loading="lazy">
+                                <div class="seo-dd-gallery-overlay"></div>
+                                <span class="seo-dd-gallery-chip">{{ $item['label'] }}</span>
+                            </button>
+                        @endforeach
+                    </div>
                 </section>
 
                 <section id="city-packages" class="seo-dd-section">
@@ -483,9 +570,11 @@
                             @foreach($testimonials as $testimonial)
                                 <article class="swiper-slide seo-dd-card seo-dd-testimonial-card">
                                     <span class="seo-dd-quote-mark">“</span>
-                                    <p class="seo-dd-review">{{ $testimonial['text'] }}</p>
+                                    <p class="seo-dd-review">{{ $testimonial['review'] ?? '' }}</p>
                                     <div class="seo-dd-user">
-                                        <img src="{{ $testimonial['image'] }}" alt="{{ $testimonial['name'] }}">
+                                        @if(!empty($testimonial['image']))
+    <img src="{{ asset('storage/' . $testimonial['image']) }}" alt="{{ $testimonial['name'] }}">
+@endif
                                         <div class="seo-dd-user-meta">
                                             <h3>{{ $testimonial['name'] }}</h3>
                                             <p>{{ $testimonial['location'] }}</p>
@@ -517,12 +606,12 @@
                                 itemtype="https://schema.org/Question">
                                 <button class="seo-dd-faq-btn {{ $index === 0 ? 'is-open' : '' }}" type="button"
                                     data-faq-toggle>
-                                    <span itemprop="name">{{ $faq['q'] }}</span>
+                                    <span itemprop="name">{{ $faq['question'] ?? '' }}</span>
                                     <i class="bi bi-plus-lg"></i>
                                 </button>
                                 <div class="seo-dd-faq-panel {{ $index === 0 ? 'is-open' : '' }}" itemscope
                                     itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                    <p itemprop="text">{{ $faq['a'] }}</p>
+                                    <p itemprop="text">{{ $faq['answer'] ?? '' }}</p>
                                 </div>
                             </article>
                         @endforeach
@@ -587,12 +676,12 @@
                     <article class="seo-dd-card seo-dd-quick-facts">
                         <h4>Quick Destination Facts</h4>
                         <ul>
-                            <li><span>Location</span><strong>{{ $destination->country ?? 'India' }}</strong></li>
-                            <li><span>Best Time</span><strong>{{ $displayBestSeason }}</strong></li>
+                            <li><span>Popular For</span><strong>{{ implode(', ', array_slice($popularFor, 0, 3)) }}</strong></li>
+                            <li><span>Best Season</span><strong>{{ $displayBestSeason }}</strong></li>
                             <li><span>Ideal Duration</span><strong>{{ $displayIdealDays }}</strong></li>
                             <li><span>Rating</span><strong>{{ number_format((float) $destination->rating, 1) }}/5</strong>
                             </li>
-                            <li><span>Starting From</span><strong>{{ $displayPrice }}</strong></li>
+                            <li><span>Package Options</span><strong>{{ count($destinationPackages ?? []) }} Curated Trips</strong></li>
                         </ul>
                     </article>
 
@@ -600,8 +689,8 @@
                         <h4>On This Page</h4>
                         <nav>
                             <a href="#overview" class="seo-dd-anchor is-active">Overview</a>
+                            <a href="#gallery" class="seo-dd-anchor">Gallery</a>
                             <a href="#city-packages" class="seo-dd-anchor">City Packages</a>
-                            <a href="#places" class="seo-dd-anchor">Places</a>
                             <a href="#packages" class="seo-dd-anchor">Packages</a>
                             <a href="#besttime" class="seo-dd-anchor">Best Time</a>
                             <a href="#blogs" class="seo-dd-anchor">Blogs</a>
@@ -620,6 +709,53 @@
         </div>
     </div>
 </section>
+
+<div class="seo-dd-gallery-modal" id="seoGalleryModal" aria-hidden="true">
+    <div class="seo-dd-gallery-modal-backdrop" data-gallery-close></div>
+
+    <div class="seo-dd-gallery-modal-panel" role="dialog" aria-modal="true"
+        aria-label="{{ $destination->name }} gallery viewer">
+        <div class="seo-dd-gallery-modal-top">
+            <div>
+                <p class="seo-dd-kicker">Gallery Viewer</p>
+                <h3>{{ $destination->name }}</h3>
+            </div>
+
+            <button type="button" class="seo-dd-gallery-modal-close" data-gallery-close aria-label="Close gallery">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <div class="seo-dd-gallery-modal-shell">
+            <button type="button" class="seo-dd-gallery-nav seo-dd-gallery-nav-prev" aria-label="Previous image">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+
+            <div class="swiper seo-dd-gallery-swiper" data-swiper-gallery>
+                <div class="swiper-wrapper">
+                    @foreach($galleryItems as $item)
+                        <div class="swiper-slide seo-dd-gallery-slide">
+                            <img src="{{ $item['image'] }}" alt="{{ $destination->name }} gallery image {{ $loop->iteration }}"
+                                loading="lazy">
+                            <div class="seo-dd-gallery-slide-caption">
+                                <span>{{ $item['label'] }}</span>
+                                <strong>{{ $destination->name }}</strong>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <button type="button" class="seo-dd-gallery-nav seo-dd-gallery-nav-next" aria-label="Next image">
+                <i class="bi bi-arrow-right"></i>
+            </button>
+        </div>
+
+        <div class="seo-dd-gallery-modal-footer">
+            <span>Swipe or use arrows to explore all {{ count($galleryItems) }} images</span>
+        </div>
+    </div>
+</div>
 
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -659,7 +795,7 @@
                 });
             });
 
-            const sections = Array.from(document.querySelectorAll('#overview, #city-packages, #places, #packages, #besttime, #blogs, #faq'));
+            const sections = Array.from(document.querySelectorAll('#overview, #gallery, #city-packages, #packages, #besttime, #blogs, #faq'));
             const anchors = Array.from(document.querySelectorAll('.seo-dd-anchor'));
 
             if (sections.length && anchors.length && 'IntersectionObserver' in window) {
@@ -700,6 +836,67 @@
                         panel.classList.add('is-open');
                     }
                 });
+            });
+
+            const galleryModal = document.getElementById('seoGalleryModal');
+            const galleryTriggers = Array.from(document.querySelectorAll('[data-gallery-index]'));
+            const galleryCloseButtons = Array.from(document.querySelectorAll('[data-gallery-close]'));
+            const gallerySwiperElement = document.querySelector('[data-swiper-gallery]');
+            let gallerySwiper = null;
+
+            const openGalleryModal = function (index) {
+                if (!galleryModal || !gallerySwiperElement) {
+                    return;
+                }
+
+                galleryModal.classList.add('is-open');
+                galleryModal.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('seo-dd-gallery-modal-open');
+
+                if (!gallerySwiper && typeof Swiper !== 'undefined') {
+                    gallerySwiper = new Swiper(gallerySwiperElement, {
+                        slidesPerView: 1,
+                        spaceBetween: 0,
+                        speed: 550,
+                        navigation: {
+                            nextEl: '.seo-dd-gallery-nav-next',
+                            prevEl: '.seo-dd-gallery-nav-prev',
+                        },
+                        keyboard: {
+                            enabled: true,
+                        },
+                    });
+                }
+
+                if (gallerySwiper) {
+                    gallerySwiper.slideTo(index, 0);
+                }
+            };
+
+            const closeGalleryModal = function () {
+                if (!galleryModal) {
+                    return;
+                }
+
+                galleryModal.classList.remove('is-open');
+                galleryModal.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('seo-dd-gallery-modal-open');
+            };
+
+            galleryTriggers.forEach(function (trigger) {
+                trigger.addEventListener('click', function () {
+                    openGalleryModal(Number(trigger.dataset.galleryIndex || 0));
+                });
+            });
+
+            galleryCloseButtons.forEach(function (button) {
+                button.addEventListener('click', closeGalleryModal);
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    closeGalleryModal();
+                }
             });
 
             if (typeof Swiper !== 'undefined') {
@@ -757,11 +954,12 @@
         'mainEntity' => array_map(function ($faq) {
             return [
                 '@type' => 'Question',
-                'name' => $faq['q'],
-                'acceptedAnswer' => [
-                    '@type' => 'Answer',
-                    'text' => $faq['a'],
-                ],
+                'name' => $faq['question'] ?? '',
+
+'acceptedAnswer' => [
+    '@type' => 'Answer',
+    'text' => $faq['answer'] ?? '',
+],
             ];
         }, $faqs),
     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}

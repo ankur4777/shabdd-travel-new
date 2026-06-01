@@ -234,8 +234,10 @@ class DestinationController extends Controller
         return view('destination.packages', compact('allPackages'));
     }
 
-    public function show(Destination $destination): View
+    public function show(string $destination): View
     {
+        $destination = $this->resolveDestinationForDetailPage($destination);
+
         abort_unless($destination->is_active, 404);
 
         $locationOptions = $this->getLocationOptions($destination);
@@ -271,6 +273,62 @@ class DestinationController extends Controller
             'destinationProfile',
             'destinationPackages'
         ));
+    }
+
+    private function resolveDestinationForDetailPage(string $slug): Destination
+    {
+        $destination = Destination::query()
+            ->where('slug', $slug)
+            ->first();
+
+        if ($destination) {
+            return $destination;
+        }
+
+        $destinationCard = $this->buildPackageDestinationCards(
+            Package::query()->whereNotNull('price')->get(),
+            'newest'
+        )->firstWhere('slug', $slug);
+
+        abort_if($destinationCard === null, 404);
+
+        return $this->makeSyntheticDestination($destinationCard);
+    }
+
+    private function makeSyntheticDestination(array $destinationCard): Destination
+    {
+        $destination = new Destination();
+        $travelStyles = collect($destinationCard['travel_styles'] ?? [])
+            ->filter()
+            ->values()
+            ->all();
+        $durationLabel = !empty($destinationCard['min_days']) && !empty($destinationCard['max_days'])
+            ? $destinationCard['min_days'] . '-' . $destinationCard['max_days'] . ' Days'
+            : null;
+
+        $destination->forceFill([
+            'name' => $destinationCard['name'],
+            'slug' => $destinationCard['slug'],
+            'country' => $destinationCard['country'] ?: 'Curated destination',
+            'image_url' => $destinationCard['image'] ?? asset('images/couple-bg.jpg'),
+            'badge_label' => 'Popular',
+            'badge_type' => 'hot',
+            'rating' => $destinationCard['rating'] ?: 4.5,
+            'tags' => array_values(array_filter(array_merge($travelStyles, [$durationLabel]))),
+            'price_from' => (int) ($destinationCard['min_price'] ?? 0),
+            'price_unit' => '/Adult',
+            'short_description' => 'Curated package collection for ' . $destinationCard['name'] . '.',
+            'about' => 'Discover curated tours for ' . $destinationCard['name'] . ' with flexible stays, sightseeing, and trip styles that match different budgets and travel moods.',
+            'highlights' => [
+                $destinationCard['package_count'] . ' package options',
+                'Starting from ₹' . number_format((int) ($destinationCard['min_price'] ?? 0)),
+                ucfirst((string) ($travelStyles[0] ?? 'Curated travel')),
+            ],
+            'is_trending' => true,
+            'is_active' => true,
+        ]);
+
+        return $destination;
     }
 
     public function packageShow(Destination $destination, string $packageSlug): View
