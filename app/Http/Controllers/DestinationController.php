@@ -407,33 +407,17 @@ class DestinationController extends Controller
             ->map(fn (int $offset) => now()->startOfMonth()->addMonths($offset)->format('F, Y'))
             ->all();
 
-        $relatedDestinations = Destination::query()
-            ->active()
-            ->where('country', $destination->country)
-            ->where('id', '!=', $destination->id)
-            ->latest()
-            ->take(4)
-            ->get();
-
-        if ($relatedDestinations->isEmpty()) {
-            $relatedDestinations = Destination::query()
-                ->active()
-                ->where('id', '!=', $destination->id)
-                ->latest()
-                ->take(4)
-                ->get();
-        }
-
         $destinationProfile = $this->buildDestinationProfile($destination);
         $destinationPackages = $this->resolvePackageCollection($destination, $destinationProfile);
+        $relatedPackages = $this->resolveRelatedPackageCollection($destination, $destinationPackages);
 
         return view('destination.show', compact(
             'destination',
-            'relatedDestinations',
             'locationOptions',
             'monthOptions',
             'destinationProfile',
-            'destinationPackages'
+            'destinationPackages',
+            'relatedPackages'
         ));
     }
 
@@ -602,42 +586,132 @@ class DestinationController extends Controller
 
     private function resolvePackageCollection(Destination $destination, array $destinationProfile): array
     {
-        $rawPackages = !empty($destination->packages)
-            ? $destination->packages
-            : ($destinationProfile['packages'] ?? []);
+        $searchTerms = $this->destinationPackageSearchTerms($destination);
 
-        $usedSlugs = [];
+        if (empty($searchTerms)) {
+            return [];
+        }
 
-        return collect($rawPackages)
+        return Package::query()
+            ->where(function ($query) use ($searchTerms) {
+                foreach ($searchTerms as $term) {
+                    $query->orWhere('title', 'like', '%' . $term . '%');
+                }
+            })
+            ->latest()
+            ->get()
+            ->map(fn (Package $package) => $this->normalizeAdminPackageForDestination($package, $destination))
+            ->all();
+    }
+
+    private function destinationPackageSearchTerms(Destination $destination): array
+    {
+        $genericWords = [
+            'adventure',
+            'beauty',
+            'destination',
+            'family',
+            'friends',
+            'holiday',
+            'honeymoon',
+            'package',
+            'packages',
+            'religious',
+            'tour',
+            'travel',
+            'trip',
+            'vacation',
+        ];
+
+        return collect([$destination->name, $destination->slug])
+            ->flatMap(fn ($value) => preg_split('/[^a-z0-9]+/i', Str::lower((string) $value)) ?: [])
+            ->map(fn ($term) => trim((string) $term))
+            ->filter(fn ($term) => $term !== '' && strlen($term) >= 3)
+            ->reject(fn ($term) => in_array($term, $genericWords, true))
+            ->unique()
             ->values()
-            ->map(function ($package, int $index) use ($destination, &$usedSlugs) {
-                $packageData = is_array($package) ? $package : ['name' => (string) $package];
-                $packageName = trim((string) ($packageData['name'] ?? 'Package ' . ($index + 1)));
-                $baseSlug = Str::slug($packageName) ?: 'package-' . ($index + 1);
-                $packageSlug = $baseSlug;
-                $counter = 2;
+            ->all();
+    }
 
-                while (isset($usedSlugs[$packageSlug])) {
-                    $packageSlug = $baseSlug . '-' . $counter;
-                    $counter++;
+    private function normalizeAdminPackageForDestination(Package $package, Destination $destination): array
+    {
+        $duration = trim((string) $package->duration_text);
+
+        if ($duration === '' && $package->days) {
+            $duration = (int) $package->days . 'D/' . max(0, ((int) $package->days) - 1) . 'N';
+        }
+
+        return [
+            'name' => $package->title,
+            'duration' => $duration !== '' ? $duration : '4D/3N',
+            'rating' => $package->rating ?: $destination->rating ?: 4.5,
+            'price' => $package->old_price ? '₹' . number_format((int) $package->old_price) : '',
+            'discounted_price' => '₹' . number_format((int) $package->price),
+            'image' => $package->image ?: $destination->image_url,
+            'package_slug' => $package->slug,
+            'inclusion_one' => $package->feature_1 ?: 'Hotel stay included',
+            'inclusion_two' => $package->feature_2 ?: 'Local transfers covered',
+            'inclusion_three' => $package->feature_3 ?: 'Top sightseeing spots',
+            'overview' => $package->description,
+            'detail_url' => route('destinations.packages.show', [
+                'destination' => $destination,
+                'packageSlug' => $package->slug,
+            ]),
+        ];
+    }
+
+    private function resolveRelatedPackageCollection(Destination $destination, array $destinationPackages): array
+    {
+        $category = trim((string) $destination->category);
+        $travelStyles = collect($destination->travel_styles ?? [])
+            ->filter()
+            ->map(fn ($style) => (string) $style)
+            ->values();
+        $currentPackageSlugs = collect($destinationPackages)
+            ->pluck('package_slug')
+            ->filter()
+            ->all();
+
+        if ($category === '' && $travelStyles->isEmpty()) {
+            return [];
+        }
+
+        return Package::query()
+            ->when(!empty($currentPackageSlugs), fn ($query) => $query->whereNotIn('slug', $currentPackageSlugs))
+            ->where(function ($query) use ($category, $travelStyles) {
+                if ($category !== '') {
+                    $query->orWhere('category', $category);
                 }
 
-                $usedSlugs[$packageSlug] = true;
-
-                $packageData['name'] = $packageName;
-                $packageData['duration'] = $packageData['duration'] ?? '5D/4N';
-                $packageData['price'] = $packageData['price'] ?? ($destination->formatted_price ?: '₹39,999');
-                $packageData['discounted_price'] = $packageData['discounted price'] ?? ($packageData['discounted_price'] ?? '');
-                $packageData['image'] = $packageData['image'] ?? $destination->image_url;
-                $packageData['package_slug'] = $packageSlug;
-                $packageData['detail_url'] = route('destinations.packages.show', [
-                    'destination' => $destination,
-                    'packageSlug' => $packageSlug,
-                ]);
-
-                return $packageData;
+                foreach ($travelStyles as $style) {
+                    $query->orWhere('travel_style', $style);
+                }
             })
+            ->latest()
+            ->take(6)
+            ->get()
+            ->map(fn (Package $package) => $this->normalizeRelatedAdminPackage($package))
             ->all();
+    }
+
+    private function normalizeRelatedAdminPackage(Package $package): array
+    {
+        $duration = trim((string) $package->duration_text);
+
+        if ($duration === '' && $package->days) {
+            $duration = (int) $package->days . 'D/' . max(0, ((int) $package->days) - 1) . 'N';
+        }
+
+        return [
+            'name' => $package->title,
+            'category' => $package->category,
+            'travel_style' => $package->travel_style,
+            'duration' => $duration !== '' ? $duration : null,
+            'rating' => $package->rating,
+            'price' => $package->price ? '₹' . number_format((int) $package->price) : '',
+            'image' => $package->image,
+            'url' => route('packages.show', $package->slug),
+        ];
     }
 
     private function buildPackagePageData(

@@ -11,6 +11,7 @@ use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\TagsInput;
 
 class DestinationForm
 {
@@ -118,8 +119,39 @@ class DestinationForm
                 Section::make('Season Guide')
                     ->schema([
                         TextInput::make('best_season'),
-                        // TextInput::make('weather'),
-                        // TextInput::make('recommended_months'),
+                        TagsInput::make('popular_for')
+                            ->label('Popular for')
+                            ->placeholder('Culture, Scenic Views, Local Experiences')
+                            ->columnSpanFull(),
+                        Repeater::make('seasons')
+                            ->label('Season guide cards')
+                            ->schema([
+                                TextInput::make('name')
+                                    ->label('Season name')
+                                    ->placeholder('Peak Season')
+                                    ->required(),
+                                TextInput::make('icon')
+                                    ->label('Bootstrap icon class')
+                                    ->placeholder('bi bi-sun-fill'),
+                                Textarea::make('weather')
+                                    ->label('Weather / short description')
+                                    ->rows(2)
+                                    ->required(),
+                                TagsInput::make('activities')
+                                    ->label('Activities')
+                                    ->placeholder('Sightseeing, Outdoor tours, Local exploration')
+                                    ->columnSpanFull(),
+                                Textarea::make('recommendation')
+                                    ->rows(2),
+                                Textarea::make('packing_tip')
+                                    ->rows(2),
+                                TextInput::make('crowd_level')
+                                    ->placeholder('High - book ahead'),
+                                Textarea::make('highlight')
+                                    ->rows(2),
+                            ])
+                            ->columns(2)
+                            ->columnSpanFull(),
                     ]),
                 Section::make('Traveller Testimonials')
                     ->schema([

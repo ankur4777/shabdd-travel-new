@@ -52,7 +52,11 @@
     $blogs = !empty($destination->blogs) ? $destination->blogs : ($profile['blogs'] ?? []);
     $testimonials = !empty($destination->testimonials) ? $destination->testimonials : ($profile['testimonials'] ?? []);
     $faqs = !empty($destination->faqs) ? $destination->faqs : ($profile['faqs'] ?? []);
-    $popularFor = !empty($destination->popular_for) ? $destination->popular_for : ($profile['popular_for'] ?? ['Culture', 'Sightseeing']);
+    $popularFor = collect(!empty($destination->popular_for) ? $destination->popular_for : ($profile['popular_for'] ?? ['Culture', 'Sightseeing']))
+        ->map(fn ($item) => is_array($item) ? ($item['value'] ?? $item['label'] ?? '') : $item)
+        ->filter(fn ($item) => trim((string) $item) !== '')
+        ->values()
+        ->all();
 
     $quickFacts = collect([
         ['label' => 'Location', 'value' => $destination->location ?: $destination->country],
@@ -122,35 +126,7 @@
     $offerDescription = $destination->offer_description ?: ('Unlock seasonal deals and custom routes for your next ' . $destination->name . ' holiday.');
     $offerDiscount = trim((string) ($destination->discount_percentage ?? ''));
 
-    $relatedItems = [];
-
-    if (isset($relatedDestinations) && $relatedDestinations->isNotEmpty()) {
-        $relatedItems = $relatedDestinations->take(4)->map(function ($item) use ($mediaUrl) {
-            return [
-                'name' => $item->name,
-                'country' => $item->country,
-                'image' => $mediaUrl($item->image_url),
-                'url' => route('destinations.show', $item),
-            ];
-        })->values()->all();
-    }
-
-    if (empty($relatedItems)) {
-        $relatedByRegion = [
-            'india' => ['Kashmir', 'Goa', 'Himachal', 'Kerala'],
-            'international' => ['Bali', 'Maldives', 'Dubai', 'Santorini'],
-        ];
-        $bucket = str_contains(strtolower((string) $destination->country), 'india') ? 'india' : 'international';
-
-        $relatedItems = collect($relatedByRegion[$bucket])
-            ->map(fn(string $name) => [
-                'name' => $name,
-                'country' => $bucket === 'india' ? 'India' : 'International',
-                'image' => $destinationImage,
-                'url' => route('destinations.index', ['search' => strtolower($name)]),
-            ])
-            ->all();
-    }
+    $relatedPackageItems = $relatedPackages ?? [];
 
     $gallerySpans = [
         ['cols' => 3, 'rows' => 4],
@@ -413,6 +389,12 @@
                         <h2 class="seo-dd-title">Explore More {{ $destination->name }} Packages</h2>
                     </div>
 
+                    @if(empty($packages))
+                        <article class="seo-dd-card seo-dd-empty-card">
+                            <h3>No packages uploaded yet</h3>
+                            <p>Packages added from the admin panel with {{ $destination->name }} in the package name will appear here.</p>
+                        </article>
+                    @else
                     <div class="swiper seo-dd-swiper" data-swiper-packages>
                         <div class="swiper-wrapper">
                             @foreach($packages as $package)
@@ -469,6 +451,7 @@
                                     class="bi bi-arrow-right"></i></button>
                         </div>
                     </div>
+                    @endif
                 </section>
 
                 <section id="why" class="seo-dd-section">
@@ -498,13 +481,17 @@
                             @php
                                 $seasonName = $season['name'] ?? 'Best Season';
                                 $seasonWeather = $season['weather'] ?? 'Comfortable weather';
-                                $seasonActivities = $season['activities'] ?? [];
+                                $seasonActivities = collect($season['activities'] ?? [])
+                                    ->map(fn ($activity) => is_array($activity) ? ($activity['value'] ?? $activity['label'] ?? '') : $activity)
+                                    ->filter(fn ($activity) => trim((string) $activity) !== '')
+                                    ->values()
+                                    ->all();
                                 $activityLine = !empty($seasonActivities) ? implode(', ', $seasonActivities) : 'Sightseeing, local exploration';
                                 $seasonRecommendation = $season['recommendation'] ?? 'Great for balanced travel plans.';
                                 $seasonNameLower = strtolower($seasonName . ' ' . $seasonWeather);
-                                $crowdLevel = str_contains($seasonNameLower, 'peak') || str_contains($seasonNameLower, 'july') || str_contains($seasonNameLower, 'november') || str_contains($seasonNameLower, 'december') ? 'High - book ahead' : (str_contains($seasonNameLower, 'off') || str_contains($seasonNameLower, 'monsoon') ? 'Low to medium' : 'Moderate');
-                                $packingTip = str_contains($seasonNameLower, 'winter') || str_contains($seasonNameLower, 'snow') || str_contains($seasonNameLower, '-') ? 'Carry warm layers and comfortable boots' : (str_contains($seasonNameLower, 'summer') || str_contains($seasonNameLower, 'warm') ? 'Light cottons, sunscreen, and sunglasses' : 'Layered clothing and comfortable walking shoes');
-                                $seasonHighlight = !empty($seasonActivities) ? ($seasonActivities[0] . ' and scenic local experiences') : 'Balanced weather and flexible sightseeing plans';
+                                $crowdLevel = $season['crowd_level'] ?? (str_contains($seasonNameLower, 'peak') || str_contains($seasonNameLower, 'july') || str_contains($seasonNameLower, 'november') || str_contains($seasonNameLower, 'december') ? 'High - book ahead' : (str_contains($seasonNameLower, 'off') || str_contains($seasonNameLower, 'monsoon') ? 'Low to medium' : 'Moderate'));
+                                $packingTip = $season['packing_tip'] ?? (str_contains($seasonNameLower, 'winter') || str_contains($seasonNameLower, 'snow') || str_contains($seasonNameLower, '-') ? 'Carry warm layers and comfortable boots' : (str_contains($seasonNameLower, 'summer') || str_contains($seasonNameLower, 'warm') ? 'Light cottons, sunscreen, and sunglasses' : 'Layered clothing and comfortable walking shoes'));
+                                $seasonHighlight = $season['highlight'] ?? (!empty($seasonActivities) ? ($seasonActivities[0] . ' and scenic local experiences') : 'Balanced weather and flexible sightseeing plans');
                             @endphp
                             <article class="seo-dd-card seo-dd-season-card">
                                 <span class="seo-dd-season-icon"><i
@@ -655,20 +642,32 @@
 
                 <section id="related" class="seo-dd-section">
                     <div class="seo-dd-title-wrap">
-                        <p class="seo-dd-kicker">Related Destinations</p>
-                        <h2 class="seo-dd-title">Explore More Destinations Like {{ $destination->name }}</h2>
+                        <p class="seo-dd-kicker">Related Packages</p>
+                        <h2 class="seo-dd-title">Explore Packages With Similar Travel Style</h2>
                     </div>
-                    <div class="seo-dd-card-grid seo-dd-related-grid">
-                        @foreach($relatedItems as $related)
-                            <a href="{{ $related['url'] ?? '#' }}" class="seo-dd-card seo-dd-related-card">
-                                <img src="{{ $related['image'] ?? $destination->image_url }}" alt="{{ $related['name'] }}">
+                    @if(empty($relatedPackageItems))
+                        <article class="seo-dd-card seo-dd-empty-card">
+                            <h3>No related packages found</h3>
+                            <p>Packages with the same category or travel style will appear here after they are uploaded from admin.</p>
+                        </article>
+                    @else
+                        <div class="seo-dd-card-grid seo-dd-related-grid">
+                            @foreach($relatedPackageItems as $related)
+                                <a href="{{ $related['url'] ?? '#' }}" class="seo-dd-card seo-dd-related-card">
+                                    <img src="{{ $mediaUrl($related['image'] ?? $destinationImage) }}" alt="{{ $related['name'] }}">
                                 <div class="seo-dd-card-body">
                                     <h3>{{ $related['name'] }}</h3>
-                                    <p>{{ $related['country'] ?? 'India' }}</p>
+                                    <p>
+                                        {{ collect([$related['category'] ?? null, $related['travel_style'] ?? null, $related['duration'] ?? null])->filter()->implode(' • ') }}
+                                    </p>
+                                    @if(!empty($related['price']))
+                                        <strong>{{ $related['price'] }}</strong>
+                                    @endif
                                 </div>
-                            </a>
-                        @endforeach
-                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+                    @endif
                 </section>
             </main>
 
