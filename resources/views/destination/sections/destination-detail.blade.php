@@ -4,17 +4,37 @@
     // Guard to prevent IDE/static warnings when the section is included in isolation.
     $primaryColor = isset($destination) && $destination ? ($destination->theme_color ?: ($profile['primary_color'] ?? '#2563eb')) : ($profile['primary_color'] ?? '#2563eb');
 
+    $mediaUrl = function ($path) {
+        $path = trim((string) $path);
+
+        if ($path === '') {
+            return asset('images/couple-bg.jpg');
+        }
+
+        if (\Illuminate\Support\Str::startsWith($path, ['http://', 'https://', '//', 'data:'])) {
+            return $path;
+        }
+
+        if (\Illuminate\Support\Str::startsWith($path, ['/storage/', 'storage/', '/images/', 'images/'])) {
+            return asset(ltrim($path, '/'));
+        }
+
+        return asset('storage/' . ltrim($path, '/'));
+    };
+
+    $destinationImage = $mediaUrl($destination->image_url);
 
     $displayPrice = $destination->formatted_price ?: '₹18,999';
-    $displayIdealDays = $destination->ideal_days ?: ($profile['ideal_days'] ?? '5-7 Days');
+    $displayIdealDays = $destination->ideal_duration ?: ($destination->ideal_days ?: ($profile['ideal_days'] ?? '5-7 Days'));
     $displayBestSeason = $destination->best_season ?: ($profile['best_season'] ?? 'All year');
 
-    $overviewText = trim((string) ($destination->about ?? ''));
-    if (\Illuminate\Support\Str::length(strip_tags($overviewText)) < 380 && !empty($profile['overview'])) {
+    $hasAdminOverview = trim(strip_tags((string) ($destination->overview ?? ''))) !== '';
+    $overviewText = trim((string) ($destination->overview ?: ($destination->about ?? '')));
+    if (!$hasAdminOverview && \Illuminate\Support\Str::length(strip_tags($overviewText)) < 380 && !empty($profile['overview'])) {
         $overviewText = trim((string) $profile['overview']);
     }
     if ($overviewText === '') {
-        $overviewText = $destination->name . ' is a well-rounded destination for sightseeing, local culture, and memorable experiences planned around your travel style.';
+        $overviewText = e($destination->name) . ' is a well-rounded destination for sightseeing, local culture, and memorable experiences planned around your travel style.';
     }
     $hasLongOverview = \Illuminate\Support\Str::length(strip_tags($overviewText)) > 420;
 
@@ -34,14 +54,82 @@
     $faqs = !empty($destination->faqs) ? $destination->faqs : ($profile['faqs'] ?? []);
     $popularFor = !empty($destination->popular_for) ? $destination->popular_for : ($profile['popular_for'] ?? ['Culture', 'Sightseeing']);
 
+    $quickFacts = collect([
+        ['label' => 'Location', 'value' => $destination->location ?: $destination->country],
+        ['label' => 'Language', 'value' => $destination->language],
+        ['label' => 'Currency', 'value' => $destination->currency],
+        ['label' => 'Ideal Duration', 'value' => $displayIdealDays],
+        ['label' => 'Best Season', 'value' => $displayBestSeason],
+        ['label' => 'Popular For', 'value' => implode(', ', array_slice($popularFor, 0, 3))],
+    ])->filter(fn ($fact) => trim((string) $fact['value']) !== '')->values()->all();
+
+    $whyChooseItems = collect([
+        $destination->why_choose_1,
+        $destination->why_choose_2,
+        $destination->why_choose_3,
+        $destination->why_choose_4,
+    ])
+        ->filter(fn ($item) => trim((string) $item) !== '')
+        ->map(function ($item, int $index) {
+            $lines = preg_split('/\r\n|\r|\n/', trim((string) $item));
+            $title = trim((string) ($lines[0] ?? ''));
+            $description = trim(implode(' ', array_filter(array_slice($lines, 1))));
+
+            return [
+                'title' => $title !== '' ? $title : 'Why Choose ' . ($index + 1),
+                'description' => $description,
+            ];
+        })
+        ->values()
+        ->all();
+
+    if (empty($whyChooseItems)) {
+        $whyChooseItems = [
+            [
+                'title' => 'Handpicked Destinations',
+                'description' => 'Thoughtfully selected destinations for every traveler.',
+            ],
+            [
+                'title' => 'Customized Tour Packages',
+                'description' => 'Personalized journeys matched to your travel needs.',
+            ],
+            [
+                'title' => '24/7 Travel Assistance',
+                'description' => 'Support before, during, and after your trip.',
+            ],
+            [
+                'title' => 'Experienced Travel Experts',
+                'description' => 'Destination guidance from travel specialists.',
+            ],
+            [
+                'title' => 'Safe & Comfortable Travel',
+                'description' => 'Trusted stays, reliable transport, and verified services.',
+            ],
+        ];
+    }
+
+    if (empty($seasons) && trim((string) $displayBestSeason) !== '') {
+        $seasons = [[
+            'name' => $displayBestSeason,
+            'weather' => $destination->weather ?: 'Recommended travel season',
+            'activities' => array_slice($popularFor, 0, 3),
+            'recommendation' => 'Best suited for a comfortable ' . $destination->name . ' trip.',
+            'icon' => 'bi bi-cloud-sun',
+        ]];
+    }
+
+    $offerTitle = $destination->offer_title ?: ('Get Free Expert ' . $destination->name . ' Itinerary');
+    $offerDescription = $destination->offer_description ?: ('Unlock seasonal deals and custom routes for your next ' . $destination->name . ' holiday.');
+    $offerDiscount = trim((string) ($destination->discount_percentage ?? ''));
+
     $relatedItems = [];
 
     if (isset($relatedDestinations) && $relatedDestinations->isNotEmpty()) {
-        $relatedItems = $relatedDestinations->take(4)->map(function ($item) {
+        $relatedItems = $relatedDestinations->take(4)->map(function ($item) use ($mediaUrl) {
             return [
                 'name' => $item->name,
                 'country' => $item->country,
-                'image' => $item->image_url,
+                'image' => $mediaUrl($item->image_url),
                 'url' => route('destinations.show', $item),
             ];
         })->values()->all();
@@ -58,38 +146,11 @@
             ->map(fn(string $name) => [
                 'name' => $name,
                 'country' => $bucket === 'india' ? 'India' : 'International',
-                'image' => $destination->image_url,
+                'image' => $destinationImage,
                 'url' => route('destinations.index', ['search' => strtolower($name)]),
             ])
             ->all();
     }
-
-    $galleryImages = collect([$destination->image_url])
-        ->merge(collect($places)->map(fn ($place) => is_array($place) ? ($place['image'] ?? null) : null))
-        ->merge(collect($packages)->map(fn ($package) => is_array($package) ? ($package['image'] ?? null) : null))
-        ->merge(collect($blogs)->map(fn ($blog) => is_array($blog) ? ($blog['image'] ?? null) : null))
-        ->merge(collect($relatedItems)->map(fn ($item) => $item['image'] ?? null))
-        ->filter()
-        ->unique()
-        ->values()
-        ->pad(12, $destination->image_url)
-        ->take(12)
-        ->values();
-
-    $galleryLabels = [
-        'Signature View',
-        'Culture',
-        'Stay Mood',
-        'Food Scene',
-        'Experiences',
-        'Local Charm',
-        'Nature',
-        'Architecture',
-        'Sunsets',
-        'Night Views',
-        'Adventure',
-        'Local Life',
-    ];
 
     $gallerySpans = [
         ['cols' => 3, 'rows' => 4],
@@ -106,17 +167,27 @@
         ['cols' => 4, 'rows' => 4],
     ];
 
-    $galleryItems = $galleryImages
-        ->take(12)
-        ->values()
-        ->map(function ($image, int $index) use ($galleryLabels, $gallerySpans) {
+    $galleryItems = collect($destination->gallery ?? [])
+        ->map(function ($item, int $index) use ($mediaUrl, $gallerySpans) {
+            $image = '';
+            $label = '';
+
+            if (is_array($item)) {
+                $image = $item['image'] ?? $item['path'] ?? $item['url'] ?? '';
+                $label = $item['caption'] ?? $item['text'] ?? $item['title'] ?? $item['label'] ?? '';
+            } else {
+                $image = (string) $item;
+            }
+
             return [
-                'image' => $image,
-                'label' => $galleryLabels[$index] ?? ('Scene ' . ($index + 1)),
+                'image' => trim((string) $image) !== '' ? $mediaUrl($image) : '',
+                'label' => trim((string) $label),
                 'cols' => $gallerySpans[$index]['cols'] ?? 4,
                 'rows' => $gallerySpans[$index]['rows'] ?? 4,
             ];
-        });
+        })
+        ->filter(fn ($item) => $item['image'] !== '')
+        ->values();
 @endphp
 
 @push('styles')
@@ -185,12 +256,10 @@
                 <article class="seo-dd-card seo-dd-quick-facts">
                     <h4>Quick Destination Facts</h4>
                     <ul>
-                        <li><span>Popular For</span><strong>{{ implode(', ', array_slice($popularFor, 0, 3)) }}</strong></li>
-                        <li><span>Best Season</span><strong>{{ $displayBestSeason }}</strong></li>
-                        <li><span>Ideal Duration</span><strong>{{ $displayIdealDays }}</strong></li>
-                        <li><span>Rating</span><strong>{{ number_format((float) $destination->rating, 1) }}/5</strong>
-                        </li>
-                        <li><span>Package Options</span><strong>{{ count($destinationPackages ?? []) }} Curated Trips</strong></li>
+                        @foreach($quickFacts as $fact)
+                            <li><span>{{ $fact['label'] }}</span><strong>{{ $fact['value'] }}</strong></li>
+                        @endforeach
+                        <li><span>Rating</span><strong>{{ number_format((float) $destination->rating, 1) }}/5</strong></li>
                     </ul>
                 </article>
             </div>
@@ -219,8 +288,11 @@
                 </article>
                 <article class="seo-dd-card seo-dd-cta-card">
                     <p class="seo-dd-kicker">Limited Offer</p>
-                    <h4>Get Free Expert {{ $destination->name }} Itinerary</h4>
-                    <p>Unlock seasonal deals and custom routes for your next {{ $destination->name }} holiday.</p>
+                    <h4>{{ $offerTitle }}</h4>
+                    <p>{{ $offerDescription }}</p>
+                    @if($offerDiscount !== '')
+                        <span class="seo-dd-badge">{{ $offerDiscount }} Off</span>
+                    @endif
                     <a href="#" class="seo-dd-btn seo-dd-btn-primary seo-dd-btn-block">Claim Offer</a>
                 </article>
             </div>
@@ -232,20 +304,20 @@
                 <strong>{{ $displayPrice }}</strong>
             </article>
             <article class="seo-dd-quick-card">
-                <p>Ideal Duration</p>
-                <strong>{{ $displayIdealDays }}</strong>
+                <p>Location</p>
+                <strong>{{ $destination->location ?: $destination->country }}</strong>
             </article>
             <article class="seo-dd-quick-card">
                 <p>Best Time To Visit</p>
                 <strong>{{ $displayBestSeason }}</strong>
             </article>
             <article class="seo-dd-quick-card">
-                <p>Traveler Rating</p>
-                <strong>{{ number_format((float) $destination->rating, 1) }}/5</strong>
+                <p>Ideal Duration</p>
+                <strong>{{ $displayIdealDays }}</strong>
             </article>
             <article class="seo-dd-quick-card">
-                <p>Popular For</p>
-                <strong>{{ implode(', ', $popularFor) }}</strong>
+                <p>{{ $destination->language ? 'Language' : 'Popular For' }}</p>
+                <strong>{{ $destination->language ?: implode(', ', $popularFor) }}</strong>
             </article>
         </section>
 
@@ -261,25 +333,26 @@
                     </div>
                     <div class="seo-dd-copy {{ $hasLongOverview ? 'is-collapsed' : '' }}" data-seo-readmore
                         itemprop="description">
-                        {{ $overviewText }}
+                        {!! $overviewText !!}
                     </div>
                     @if($hasLongOverview)
                         <button type="button" class="seo-dd-link" data-seo-toggle aria-expanded="false">Read More</button>
                     @endif
                 </section>
 
+                @if($galleryItems->isNotEmpty())
                 <section id="gallery" class="seo-dd-section seo-dd-gallery-section">
                     <div class="seo-dd-gallery-head">
                         <div class="seo-dd-title-wrap">
                             <p class="seo-dd-kicker">Visual Journey</p>
                             <h2 class="seo-dd-title">{{ $destination->name }} Gallery</h2>
                             <p class="seo-dd-lead">
-                                A visual moodboard of landscapes, stays, and local moments that define this destination.
+                                Gallery images uploaded from admin for this destination.
                             </p>
                         </div>
                         <div class="seo-dd-gallery-stats">
-                            <strong>{{ count($galleryImages) }} shots</strong>
-                            <span>Curated from destination visuals</span>
+                            <strong>{{ count($galleryItems) }} shots</strong>
+                            <span>Uploaded destination visuals</span>
                         </div>
                     </div>
 
@@ -295,37 +368,16 @@
                                 <img src="{{ $item['image'] }}" alt="{{ $destination->name }} gallery image {{ $loop->iteration }}"
                                     loading="lazy">
                                 <div class="seo-dd-gallery-overlay"></div>
-                                <span class="seo-dd-gallery-chip">{{ $item['label'] }}</span>
+                                @if($item['label'] !== '')
+                                    <span class="seo-dd-gallery-chip">{{ $item['label'] }}</span>
+                                @endif
                             </button>
                         @endforeach
                     </div>
                 </section>
+                @endif
 
-                <section id="city-packages" class="seo-dd-section">
-                    <div class="seo-dd-title-wrap">
-                        <p class="seo-dd-kicker">Internal Package Links</p>
-                        <h2 class="seo-dd-title">{{ $destination->name }} Packages By Cities</h2>
-                    </div>
-                    <div class="seo-dd-pills" aria-label="City specific {{ $destination->name }} tour package links">
-                        @foreach($cityPackages as $packageCity)
-                            @php
-                                if (is_string($packageCity)) {
-                                    $cityName = $packageCity;
-                                    $cityUrl = route('destinations.index', ['city' => \Illuminate\Support\Str::slug($packageCity)]);
-                                } elseif (is_array($packageCity)) {
-                                    $cityName = $packageCity['city_name'] ?? '';
-                                    $cityUrl = $packageCity['url'] ?? '#';
-                                } else {
-                                    $cityName = $packageCity->city_name ?? '';
-                                    $cityUrl = $packageCity->url ?? '#';
-                                }
-                            @endphp
-                            <a href="{{ $cityUrl }}" class="seo-dd-pill" title="{{ $cityName }} Tour Packages">
-                                {{ $cityName }} Tour Packages
-                            </a>
-                        @endforeach
-                    </div>
-                </section>
+
 
                 {{-- <section id="places" class="seo-dd-section">
                     <div class="seo-dd-title-wrap">
@@ -379,7 +431,7 @@
                                     ]);
                                 @endphp
                                 <article class="swiper-slide seo-dd-card seo-dd-package-card">
-                                    <img src="{{ $package['image'] ?? $destination->image_url }}"
+                                    <img src="{{ $mediaUrl($package['image'] ?? $destinationImage) }}"
                                         alt="{{ $package['name'] }}" loading="lazy">
                                     <div class="seo-dd-package-media-bar">
                                         <span class="seo-dd-package-chip">{{ $packageType }}</span>
@@ -425,31 +477,14 @@
                         <h2 class="seo-dd-title">What Makes Us Special</h2>
                     </div>
                     <div class="seo-dd-card-grid seo-dd-feature-grid">
-                        <article class="seo-dd-card seo-dd-feature-card">
-                            <h3>Handpicked Destinations</h3>
-                            <p>From mountains and beaches to international adventures, we offer thoughtfully selected
-                                destinations for every traveler.</p>
-                        </article>
-                        <article class="seo-dd-card seo-dd-feature-card">
-                            <h3>Customized Tour Packages</h3>
-                            <p>Whether you are planning a honeymoon, family trip, group tour, or solo adventure, we
-                                personalize every journey to match your needs.</p>
-                        </article>
-                        <article class="seo-dd-card seo-dd-feature-card">
-                            <h3>24/7 Travel Assistance</h3>
-                            <p>Our support team is always available to help you before, during, and after your trip for
-                                a stress-free experience.</p>
-                        </article>
-                        <article class="seo-dd-card seo-dd-feature-card">
-                            <h3>Experienced Travel Experts</h3>
-                            <p>Our travel specialists have deep destination knowledge and help you plan the perfect
-                                vacation with expert guidance.</p>
-                        </article>
-                        <article class="seo-dd-card seo-dd-feature-card">
-                            <h3>Safe & Comfortable Travel</h3>
-                            <p>We prioritize your safety and comfort with trusted hotel partners, reliable transport,
-                                and verified services.</p>
-                        </article>
+                        @foreach($whyChooseItems as $item)
+                            <article class="seo-dd-card seo-dd-feature-card">
+                                <h3>{{ $item['title'] }}</h3>
+                                @if($item['description'] !== '')
+                                    <p>{{ $item['description'] }}</p>
+                                @endif
+                            </article>
+                        @endforeach
                     </div>
                 </section>
 
@@ -527,7 +562,7 @@
                             @endphp
                             <a href="{{ $blogUrl }}"
                                 class="seo-dd-card seo-dd-blog-card {{ $isFeaturedBlog ? 'is-featured' : 'is-compact' }}">
-                                <img src="{{ $blog['image'] ?? $destination->image_url }}" alt="{{ $blogTitle }}"
+                                <img src="{{ $mediaUrl($blog['image'] ?? $destinationImage) }}" alt="{{ $blogTitle }}"
                                     loading="lazy">
                                 <div class="seo-dd-blog-overlay"></div>
                                 <div class="seo-dd-blog-content">
@@ -570,16 +605,16 @@
                             @foreach($testimonials as $testimonial)
                                 <article class="swiper-slide seo-dd-card seo-dd-testimonial-card">
                                     <span class="seo-dd-quote-mark">“</span>
-                                    <p class="seo-dd-review">{{ $testimonial['review'] ?? '' }}</p>
+                                    <p class="seo-dd-review">{{ $testimonial['review'] ?? ($testimonial['text'] ?? '') }}</p>
                                     <div class="seo-dd-user">
                                         @if(!empty($testimonial['image']))
-    <img src="{{ asset('storage/' . $testimonial['image']) }}" alt="{{ $testimonial['name'] }}">
-@endif
+                                            <img src="{{ $mediaUrl($testimonial['image']) }}" alt="{{ $testimonial['name'] ?? 'Traveler' }}">
+                                        @endif
                                         <div class="seo-dd-user-meta">
-                                            <h3>{{ $testimonial['name'] }}</h3>
-                                            <p>{{ $testimonial['location'] }}</p>
+                                            <h3>{{ $testimonial['name'] ?? 'Traveler' }}</h3>
+                                            <p>{{ $testimonial['location'] ?? '' }}</p>
                                         </div>
-                                        <p class="seo-dd-stars">★ {{ number_format((float) $testimonial['rating'], 1) }}</p>
+                                        <p class="seo-dd-stars">★ {{ number_format((float) ($testimonial['rating'] ?? 5), 1) }}</p>
                                     </div>
                                 </article>
                             @endforeach
@@ -606,12 +641,12 @@
                                 itemtype="https://schema.org/Question">
                                 <button class="seo-dd-faq-btn {{ $index === 0 ? 'is-open' : '' }}" type="button"
                                     data-faq-toggle>
-                                    <span itemprop="name">{{ $faq['question'] ?? '' }}</span>
+                                    <span itemprop="name">{{ $faq['question'] ?? ($faq['q'] ?? '') }}</span>
                                     <i class="bi bi-plus-lg"></i>
                                 </button>
                                 <div class="seo-dd-faq-panel {{ $index === 0 ? 'is-open' : '' }}" itemscope
                                     itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                    <p itemprop="text">{{ $faq['answer'] ?? '' }}</p>
+                                    <p itemprop="text">{{ $faq['answer'] ?? ($faq['a'] ?? '') }}</p>
                                 </div>
                             </article>
                         @endforeach
@@ -676,12 +711,10 @@
                     <article class="seo-dd-card seo-dd-quick-facts">
                         <h4>Quick Destination Facts</h4>
                         <ul>
-                            <li><span>Popular For</span><strong>{{ implode(', ', array_slice($popularFor, 0, 3)) }}</strong></li>
-                            <li><span>Best Season</span><strong>{{ $displayBestSeason }}</strong></li>
-                            <li><span>Ideal Duration</span><strong>{{ $displayIdealDays }}</strong></li>
-                            <li><span>Rating</span><strong>{{ number_format((float) $destination->rating, 1) }}/5</strong>
-                            </li>
-                            <li><span>Package Options</span><strong>{{ count($destinationPackages ?? []) }} Curated Trips</strong></li>
+                            @foreach($quickFacts as $fact)
+                                <li><span>{{ $fact['label'] }}</span><strong>{{ $fact['value'] }}</strong></li>
+                            @endforeach
+                            <li><span>Rating</span><strong>{{ number_format((float) $destination->rating, 1) }}/5</strong></li>
                         </ul>
                     </article>
 
@@ -700,8 +733,11 @@
 
                     <article class="seo-dd-card seo-dd-cta-card">
                         <p class="seo-dd-kicker">Limited Offer</p>
-                        <h4>Get Free Expert {{ $destination->name }} Itinerary</h4>
-                        <p>Unlock seasonal deals and custom routes for your next {{ $destination->name }} holiday.</p>
+                        <h4>{{ $offerTitle }}</h4>
+                        <p>{{ $offerDescription }}</p>
+                        @if($offerDiscount !== '')
+                            <span class="seo-dd-badge">{{ $offerDiscount }} Off</span>
+                        @endif
                         <a href="#" class="seo-dd-btn seo-dd-btn-primary seo-dd-btn-block">Claim Offer</a>
                     </article>
                 </div>
@@ -710,6 +746,7 @@
     </div>
 </section>
 
+@if($galleryItems->isNotEmpty())
 <div class="seo-dd-gallery-modal" id="seoGalleryModal" aria-hidden="true">
     <div class="seo-dd-gallery-modal-backdrop" data-gallery-close></div>
 
@@ -737,10 +774,11 @@
                         <div class="swiper-slide seo-dd-gallery-slide">
                             <img src="{{ $item['image'] }}" alt="{{ $destination->name }} gallery image {{ $loop->iteration }}"
                                 loading="lazy">
-                            <div class="seo-dd-gallery-slide-caption">
-                                <span>{{ $item['label'] }}</span>
-                                <strong>{{ $destination->name }}</strong>
-                            </div>
+                            @if($item['label'] !== '')
+                                <div class="seo-dd-gallery-slide-caption">
+                                    <span>{{ $item['label'] }}</span>
+                                </div>
+                            @endif
                         </div>
                     @endforeach
                 </div>
@@ -756,6 +794,7 @@
         </div>
     </div>
 </div>
+@endif
 
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -954,11 +993,11 @@
         'mainEntity' => array_map(function ($faq) {
             return [
                 '@type' => 'Question',
-                'name' => $faq['question'] ?? '',
+                'name' => $faq['question'] ?? ($faq['q'] ?? ''),
 
 'acceptedAnswer' => [
     '@type' => 'Answer',
-    'text' => $faq['answer'] ?? '',
+    'text' => $faq['answer'] ?? ($faq['a'] ?? ''),
 ],
             ];
         }, $faqs),

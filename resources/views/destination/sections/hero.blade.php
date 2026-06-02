@@ -1,5 +1,27 @@
+@php
+    $heroMediaUrl = function ($path) {
+        $path = trim((string) $path);
+
+        if ($path === '') {
+            return asset('images/couple-bg.jpg');
+        }
+
+        if (\Illuminate\Support\Str::startsWith($path, ['http://', 'https://', '//', 'data:'])) {
+            return $path;
+        }
+
+        if (\Illuminate\Support\Str::startsWith($path, ['/storage/', 'storage/', '/images/', 'images/'])) {
+            return asset(ltrim($path, '/'));
+        }
+
+        return asset('storage/' . ltrim($path, '/'));
+    };
+
+    $heroImage = $heroMediaUrl($destination->hero_image ?: $destination->image_url);
+@endphp
+
 <section class="destination-st-hero" data-hero-media="image">
-    <div class="hero-3d" style="background-image:url('{{ asset('storage/' . $destination->hero_image) }}')"
+    <div class="hero-3d" style="background-image:url('{{ $heroImage }}')"
         aria-hidden="true">
         <div class="hero-layer hero-layer--back"></div>
         <div class="hero-layer hero-layer--mid"></div>

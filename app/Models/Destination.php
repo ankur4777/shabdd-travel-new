@@ -12,6 +12,8 @@ class Destination extends Model
         'name',
         'slug',
         'country',
+        'category',
+        'travel_styles',
         'image_url',
         'badge_label',
         'badge_type',
@@ -65,6 +67,16 @@ class Destination extends Model
         'country',
         'price_from',
         'slug',
+        'hero_subtitle',
+        'overview',
+
+        'why_choose_1',
+        'why_choose_2',
+        'why_choose_3',
+        'why_choose_4',
+
+        'weather',
+        'recommended_months',
     ];
 
     protected $casts = [
@@ -83,6 +95,7 @@ class Destination extends Model
         'testimonials' => 'array',
         'faqs' => 'array',
         'popular_for' => 'array',
+        'travel_styles' => 'array',
         'gallery' => 'array',
 
 

@@ -2,6 +2,7 @@
 
 @php
     $selectedDestination = $destinationOptions->firstWhere('slug', request('destination'));
+    $selectedCategory = request('category');
     $ratingLabels = [
         '5' => '5 Star',
         '4' => '4+ Rating',
@@ -25,6 +26,10 @@
 
     if ($selectedDestination) {
         $activeFilters[] = ['label' => 'Destination', 'value' => $selectedDestination['name']];
+    }
+
+    if ($selectedCategory && isset($categoryOptions[$selectedCategory])) {
+        $activeFilters[] = ['label' => 'Category', 'value' => $categoryOptions[$selectedCategory]];
     }
 
     if (request('travel_style') && isset($travelStyleOptions[request('travel_style')])) {
@@ -65,7 +70,7 @@
             <div class="pkg-listing-top">
                 <div class="section-heading text-start pkg-section-heading">
                     <span>All Destinations</span>
-                    <h2>Explore Package Destinations</h2>
+                    <h2>Explore Destination Pages</h2>
                 </div>
 
                 <div class="pkg-count-card">
@@ -115,7 +120,7 @@
                         <div class="pkg-empty-state">
                             <span><i class="bi bi-search-heart"></i></span>
                             <h3>No destinations found</h3>
-                            <p>Upload packages from admin or clear filters to see destination cards here.</p>
+                            <p>Create active destinations from admin or clear filters to see destination cards here.</p>
                             <a href="{{ route('destinations.index') }}">Clear Filters</a>
                         </div>
                     @else
@@ -173,7 +178,7 @@
                                                 </strong>
                                             </div>
 
-                                            <a href="{{ route('packages.show', $destination['featured_package_slug']) }}" class="dst-card-link">
+                                            <a href="{{ $destination['detail_url'] }}" class="dst-card-link">
                                                 View Packages
                                                 <i class="bi bi-arrow-right"></i>
                                             </a>

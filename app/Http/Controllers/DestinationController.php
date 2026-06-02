@@ -14,48 +14,23 @@ class DestinationController extends Controller
 {
     public function index(Request $request): View
     {
-        $basePackages = Package::query()
-            ->whereNotNull('price')
+        $destinations = Destination::query()
+            ->active()
+            ->latest()
             ->get();
 
-        $destinationOptions = $this->buildPackageDestinationOptions($basePackages);
-
-        $packagesForPriceRange = $basePackages
-            ->when($request->filled('destination'), function ($packages) use ($request) {
-                return $packages->filter(
-                    fn (Package $package) => $this->packageDestinationSlug($package) === $request->input('destination')
-                );
-            })
-            ->when($request->filled('travel_style'), function ($packages) use ($request) {
-                $travelStyle = (string) $request->input('travel_style');
-
-                if (!array_key_exists($travelStyle, $this->travelStyleOptions())) {
-                    return $packages;
-                }
-
-                return $packages->filter(fn (Package $package) => $package->travel_style === $travelStyle);
-            })
-            ->when($request->filled('rating'), function ($packages) use ($request) {
-                $rating = (int) $request->input('rating');
-
-                if (!in_array($rating, [3, 4, 5], true)) {
-                    return $packages;
-                }
-
-                return $packages->filter(fn (Package $package) => (float) $package->rating >= $rating);
-            })
-            ->when($request->filled('duration'), function ($packages) use ($request) {
-                return match ($request->input('duration')) {
-                    '1-3' => $packages->filter(fn (Package $package) => (int) $package->days >= 1 && (int) $package->days <= 3),
-                    '4-6' => $packages->filter(fn (Package $package) => (int) $package->days >= 4 && (int) $package->days <= 6),
-                    '7-plus' => $packages->filter(fn (Package $package) => (int) $package->days >= 7),
-                    default => $packages,
-                };
-            });
+        $destinationOptions = $this->buildDestinationOptions($destinations);
+        $travelStyleOptions = $this->travelStyleOptions();
+        $categoryOptions = $this->categoryOptions();
+        $destinationsForPriceRange = $this->filterDestinationCollection(
+            $destinations,
+            $request,
+            includePrice: false
+        );
 
         $priceBounds = [
-            'min' => (int) ($packagesForPriceRange->min('price') ?? 0),
-            'max' => (int) ($packagesForPriceRange->max('price') ?? 0),
+            'min' => (int) ($destinationsForPriceRange->min('price_from') ?? 0),
+            'max' => (int) ($destinationsForPriceRange->max('price_from') ?? 0),
         ];
 
         if ($priceBounds['max'] < $priceBounds['min']) {
@@ -80,22 +55,40 @@ class DestinationController extends Controller
             [$selectedMinPrice, $selectedMaxPrice] = [$selectedMaxPrice, $selectedMinPrice];
         }
 
-        $filteredPackages = $packagesForPriceRange
-            ->filter(fn (Package $package) => $package->price >= $selectedMinPrice && $package->price <= $selectedMaxPrice);
+        $filteredDestinations = $this->filterDestinationCollection(
+            $destinations,
+            $request,
+            includePrice: true,
+            selectedMinPrice: $selectedMinPrice,
+            selectedMaxPrice: $selectedMaxPrice
+        );
 
-        $destinationCards = $this->buildPackageDestinationCards($filteredPackages, (string) $request->input('sort', 'newest'));
+        $destinationCards = $this->buildAdminDestinationCards(
+            $filteredDestinations,
+            (string) $request->input('sort', 'newest')
+        );
         $destinationCount = $destinationCards->count();
-        $travelStyleOptions = $this->travelStyleOptions();
 
         return view('destination.index', compact(
             'destinationCards',
             'destinationCount',
             'destinationOptions',
             'travelStyleOptions',
+            'categoryOptions',
             'priceBounds',
             'selectedMinPrice',
             'selectedMaxPrice'
         ));
+    }
+
+    private function categoryOptions(): array
+    {
+        return [
+            'Trending' => 'Trending',
+            'Popular' => 'Popular',
+            'Budget Friendly' => 'Budget Friendly',
+            'Premium' => 'Premium',
+        ];
     }
 
     private function travelStyleOptions(): array
@@ -111,6 +104,175 @@ class DestinationController extends Controller
             'wildlife' => 'Wildlife',
             'water activities' => 'Water Activities',
         ];
+    }
+
+    private function buildDestinationOptions(Collection $destinations): Collection
+    {
+        return $destinations
+            ->map(fn (Destination $destination) => [
+                'name' => $destination->name,
+                'slug' => $destination->slug,
+                'country' => $destination->country,
+            ])
+            ->sortBy('name')
+            ->values();
+    }
+
+    private function filterDestinationCollection(
+        Collection $destinations,
+        Request $request,
+        bool $includePrice,
+        int $selectedMinPrice = 0,
+        int $selectedMaxPrice = 0
+    ): Collection {
+        return $destinations
+            ->when($request->filled('destination'), function (Collection $destinations) use ($request) {
+                return $destinations->filter(
+                    fn (Destination $destination) => $destination->slug === $request->input('destination')
+                );
+            })
+            ->when($request->filled('category'), function (Collection $destinations) use ($request) {
+                $category = (string) $request->input('category');
+
+                if (!array_key_exists($category, $this->categoryOptions())) {
+                    return $destinations;
+                }
+
+                return $destinations->filter(
+                    fn (Destination $destination) => (string) $destination->category === $category
+                );
+            })
+            ->when($request->filled('travel_style'), function (Collection $destinations) use ($request) {
+                $travelStyle = (string) $request->input('travel_style');
+
+                if (!array_key_exists($travelStyle, $this->travelStyleOptions())) {
+                    return $destinations;
+                }
+
+                return $destinations->filter(
+                    fn (Destination $destination) => $this->destinationMatchesTravelStyle($destination, $travelStyle)
+                );
+            })
+            ->when($request->filled('rating'), function (Collection $destinations) use ($request) {
+                $rating = (int) $request->input('rating');
+
+                if (!in_array($rating, [3, 4, 5], true)) {
+                    return $destinations;
+                }
+
+                return $destinations->filter(fn (Destination $destination) => (float) $destination->rating >= $rating);
+            })
+            ->when($request->filled('duration'), function (Collection $destinations) use ($request) {
+                return match ($request->input('duration')) {
+                    '1-3' => $destinations->filter(fn (Destination $destination) => $this->destinationDayCount($destination) >= 1 && $this->destinationDayCount($destination) <= 3),
+                    '4-6' => $destinations->filter(fn (Destination $destination) => $this->destinationDayCount($destination) >= 4 && $this->destinationDayCount($destination) <= 6),
+                    '7-plus' => $destinations->filter(fn (Destination $destination) => $this->destinationDayCount($destination) >= 7),
+                    default => $destinations,
+                };
+            })
+            ->when($includePrice, function (Collection $destinations) use ($selectedMinPrice, $selectedMaxPrice) {
+                return $destinations->filter(
+                    fn (Destination $destination) => (int) $destination->price_from >= $selectedMinPrice
+                        && (int) $destination->price_from <= $selectedMaxPrice
+                );
+            })
+            ->values();
+    }
+
+    private function destinationMatchesTravelStyle(Destination $destination, string $travelStyle): bool
+    {
+        $needle = Str::slug($travelStyle);
+
+        return collect()
+            ->merge($destination->travel_styles ?? [])
+            ->merge($destination->popular_for ?? [])
+            ->merge($destination->tags ?? [])
+            ->filter()
+            ->map(fn ($value) => Str::slug((string) $value))
+            ->contains($needle);
+    }
+
+    private function destinationDayCount(Destination $destination): int
+    {
+        $duration = (string) ($destination->ideal_duration ?: $destination->ideal_days);
+
+        return $duration !== '' ? $this->extractDayCount($duration) : 0;
+    }
+
+    private function buildAdminDestinationCards(Collection $destinations, string $sort): Collection
+    {
+        $cards = $destinations
+            ->map(fn (Destination $destination) => [
+                'name' => $destination->name,
+                'slug' => $destination->slug,
+                'country' => $destination->location ?: $destination->country,
+                'category' => $destination->category,
+                'image' => $this->destinationImageUrl($destination),
+                'rating' => $destination->rating ? (float) $destination->rating : null,
+                'package_count' => $this->destinationPackageCount($destination),
+                'min_price' => (int) $destination->price_from,
+                'max_price' => (int) $destination->price_from,
+                'min_days' => $this->destinationDayCount($destination),
+                'max_days' => $this->destinationDayCount($destination),
+                'travel_styles' => $this->destinationTravelStyles($destination),
+                'detail_url' => route('destinations.show', $destination),
+                'latest_package_id' => (int) $destination->id,
+                'featured_score' => $destination->category === 'Trending' ? 1 : 0,
+            ])
+            ->values();
+
+        return $this->sortDestinationCards($cards, $sort);
+    }
+
+    private function destinationImageUrl(Destination $destination): string
+    {
+        $path = $destination->image_url ?: $destination->hero_image;
+
+        if (!$path) {
+            return asset('images/couple-bg.jpg');
+        }
+
+        if (Str::startsWith($path, ['http://', 'https://'])) {
+            return $path;
+        }
+
+        if (Str::startsWith($path, ['storage/', 'images/'])) {
+            return asset(ltrim($path, '/'));
+        }
+
+        return asset('storage/' . ltrim($path, '/'));
+    }
+
+    private function destinationPackageCount(Destination $destination): int
+    {
+        $packages = collect($destination->packages ?? [])->filter();
+
+        return max(1, $packages->count());
+    }
+
+    private function destinationTravelStyles(Destination $destination): Collection
+    {
+        return collect($destination->travel_styles ?? [])
+            ->merge($destination->popular_for ?? [])
+            ->merge($destination->tags ?? [])
+            ->filter()
+            ->unique()
+            ->take(2)
+            ->values();
+    }
+
+    private function sortDestinationCards(Collection $cards, string $sort): Collection
+    {
+        return match ($sort) {
+            'low_to_high' => $cards->sortBy('min_price')->values(),
+            'high_to_low' => $cards->sortByDesc('min_price')->values(),
+            'highest_rated' => $cards->sortByDesc('rating')->values(),
+            'most_popular' => $cards
+                ->sortByDesc('latest_package_id')
+                ->sortByDesc('featured_score')
+                ->values(),
+            default => $cards->sortByDesc('latest_package_id')->values(),
+        };
     }
 
     private function buildPackageDestinationOptions(Collection $packages): Collection

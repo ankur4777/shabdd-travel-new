@@ -6,6 +6,8 @@ use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Repeater;
@@ -30,6 +32,31 @@ class DestinationForm
                         TextInput::make('country')
                             ->required(),
 
+                        Select::make('category')
+                            ->label('Category')
+                            ->options([
+                                'Trending' => 'Trending',
+                                'Popular' => 'Popular',
+                                'Budget Friendly' => 'Budget Friendly',
+                                'Premium' => 'Premium',
+                            ]),
+
+                        CheckboxList::make('travel_styles')
+                            ->label('Travel style')
+                            ->options([
+                                'honeymoon' => 'Honeymoon',
+                                'religiuos' => 'Religious',
+                                'family' => 'Family',
+                                'adventure' => 'Adventure',
+                                'friends' => 'Friends',
+                                'solo' => 'Solo',
+                                'nature' => 'Nature',
+                                'wildlife' => 'Wildlife',
+                                'water activities' => 'Water Activities',
+                            ])
+                            ->columns(2)
+                            ->columnSpanFull(),
+
                         TextInput::make('price_from')
                             ->numeric()
                             ->required(),
@@ -37,11 +64,13 @@ class DestinationForm
                         TextInput::make('hero_subtitle'),
 
                         FileUpload::make('image_url')
+                            ->disk('public')
                             ->image()
                             ->directory('destinations')
                             ->required(),
 
                         FileUpload::make('hero_image')
+                            ->disk('public')
                             ->image()
                             ->directory('destinations'),
 
@@ -49,10 +78,22 @@ class DestinationForm
 
                 Section::make('Gallery')
                     ->schema([
-                        FileUpload::make('gallery')
-                            ->multiple()
-                            ->image()
-                            ->directory('destinations/gallery')
+                        Repeater::make('gallery')
+                            ->label('Gallery images')
+                            ->schema([
+                                FileUpload::make('image')
+                                    ->label('Image')
+                                    ->disk('public')
+                                    ->image()
+                                    ->directory('destinations/gallery')
+                                    ->required(),
+
+                                Textarea::make('caption')
+                                    ->label('Text')
+                                    ->rows(2),
+                            ])
+                            ->columns(2)
+                            ->columnSpanFull()
                     ]),
 
 
@@ -64,10 +105,14 @@ class DestinationForm
 
                 Section::make('Why Choose Us')
                     ->schema([
-                        TextInput::make('why_choose_1'),
-                        TextInput::make('why_choose_2'),
-                        TextInput::make('why_choose_3'),
-                        TextInput::make('why_choose_4'),
+                        Textarea::make('why_choose_1')
+                            ->rows(3),
+                        Textarea::make('why_choose_2')
+                            ->rows(3),
+                        Textarea::make('why_choose_3')
+                            ->rows(3),
+                        Textarea::make('why_choose_4')
+                            ->rows(3),
                     ]),
 
                 Section::make('Season Guide')

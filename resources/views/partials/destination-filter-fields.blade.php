@@ -3,6 +3,7 @@
     $currentRating = request('rating');
     $currentDuration = request('duration');
     $currentTravelStyle = request('travel_style');
+    $currentCategory = request('category');
     $priceMin = (int) ($priceBounds['min'] ?? 0);
     $priceMax = (int) ($priceBounds['max'] ?? 0);
 @endphp
@@ -10,7 +11,19 @@
 <div class="pkg-filter-panel-head">
     <span>Smart Filters</span>
     <h3>Find destinations</h3>
-    <p>Filter package-backed destination cards by place, budget, rating, and duration.</p>
+    <p>Filter admin-created destination cards by category, place, budget, rating, and duration.</p>
+</div>
+
+<div class="pkg-filter-group">
+    <label for="{{ $fieldPrefix }}Category">Category</label>
+    <select id="{{ $fieldPrefix }}Category" name="category" class="form-select" data-package-auto-submit>
+        <option value="">All Categories</option>
+        @foreach($categoryOptions as $value => $label)
+            <option value="{{ $value }}" {{ $currentCategory === $value ? 'selected' : '' }}>
+                {{ $label }}
+            </option>
+        @endforeach
+    </select>
 </div>
 
 <div class="pkg-filter-group">
