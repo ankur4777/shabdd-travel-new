@@ -398,7 +398,7 @@
         <!-- Overview Section -->
         <div class="section">
             <h2>Package Overview</h2>
-            <p class="overview-text">{{ $packagePageData['overview_text'] }}</p>
+            <div class="overview-text">{!! $packagePageData['overview_text'] !!}</div>
             @if(!empty($packagePageData['highlight_points']))
                 <div class="highlight-badges">
                     @foreach($packagePageData['highlight_points'] as $point)

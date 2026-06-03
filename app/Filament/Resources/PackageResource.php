@@ -23,6 +23,7 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\RichEditor;
@@ -131,6 +132,92 @@ class PackageResource extends Resource
 
                         Toggle::make('featured'),
 
+                    ])
+                    ->columns(2),
+
+                Section::make('Package Detail Page Content')
+                    ->schema([
+                        RichEditor::make('detail_overview')
+                            ->label('Package overview')
+                            ->helperText('Shown in the Package Overview section. If empty, the package description is used.')
+                            ->columnSpanFull(),
+
+                        FileUpload::make('detail_gallery')
+                            ->label('Detail page gallery')
+                            ->disk('public')
+                            ->directory('packages/gallery')
+                            ->visibility('public')
+                            ->image()
+                            ->multiple()
+                            ->reorderable()
+                            ->columnSpanFull(),
+
+                        FileUpload::make('pdf_file')
+                            ->label('Package PDF')
+                            ->disk('public')
+                            ->directory('packages/pdfs')
+                            ->visibility('public')
+                            ->acceptedFileTypes(['application/pdf'])
+                            ->downloadable()
+                            ->openable()
+                            ->columnSpanFull(),
+
+                        Repeater::make('detail_highlights')
+                            ->label('Overview highlight badges')
+                            ->simple(TextInput::make('highlight'))
+                            ->columnSpanFull(),
+                    ])
+                    ->columns(2),
+
+                Section::make('Hotel Details')
+                    ->schema([
+                        TextInput::make('hotel_name'),
+
+                        TextInput::make('hotel_category')
+                            ->placeholder('4 Star Hotel'),
+
+                        TextInput::make('hotel_area')
+                            ->placeholder('Central Area'),
+
+                        FileUpload::make('hotel_image')
+                            ->disk('public')
+                            ->directory('packages/hotels')
+                            ->visibility('public')
+                            ->image(),
+
+                        Repeater::make('hotel_highlights')
+                            ->simple(TextInput::make('highlight'))
+                            ->columnSpanFull(),
+                    ])
+                    ->columns(2),
+
+                Section::make('Day Wise Itinerary')
+                    ->schema([
+                        Repeater::make('itinerary')
+                            ->schema([
+                                TextInput::make('day')
+                                    ->numeric()
+                                    ->placeholder('1'),
+                                TextInput::make('title')
+                                    ->required(),
+                                Textarea::make('summary')
+                                    ->rows(3)
+                                    ->required()
+                                    ->columnSpanFull(),
+                            ])
+                            ->columns(2)
+                            ->columnSpanFull(),
+                    ]),
+
+                Section::make('Inclusions / Exclusions')
+                    ->schema([
+                        Repeater::make('inclusions')
+                            ->simple(TextInput::make('item'))
+                            ->columnSpanFull(),
+
+                        Repeater::make('exclusions')
+                            ->simple(TextInput::make('item'))
+                            ->columnSpanFull(),
                     ])
                     ->columns(2),
 

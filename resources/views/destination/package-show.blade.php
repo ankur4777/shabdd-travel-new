@@ -5,6 +5,7 @@
         $pd = $packagePageData;
         $galleryImages = $pd['gallery_images'] ?? [];
         $mainImage = $galleryImages[0] ?? $destination->image_url;
+        $hotelImage = $pd['hotel_image'] ?: $mainImage;
         $packageUrl = url()->current();
     @endphp
 
@@ -32,12 +33,18 @@
                 <main class="xpkd-main-column">
                     <section class="xpkd-hero-media-card">
                         <div class="xpkd-hero-media-main">
-                            <img src="{{ $mainImage }}" alt="{{ $pd['package_title'] }}" loading="lazy">
+                            <button type="button" class="xpkd-gallery-trigger xpkd-gallery-trigger-main"
+                                data-gallery-index="0" aria-label="Open {{ $pd['package_title'] }} gallery image 1">
+                                <img src="{{ $mainImage }}" alt="{{ $pd['package_title'] }}" loading="lazy">
+                            </button>
                         </div>
                         @if(count($galleryImages) > 1)
                             <div class="xpkd-hero-media-strip">
-                                @foreach(array_slice($galleryImages, 1, 3) as $image)
-                                    <img src="{{ $image }}" alt="{{ $pd['package_title'] }} gallery image" loading="lazy">
+                                @foreach(array_slice($galleryImages, 1, 3) as $index => $image)
+                                    <button type="button" class="xpkd-gallery-trigger" data-gallery-index="{{ $index + 1 }}"
+                                        aria-label="Open {{ $pd['package_title'] }} gallery image {{ $index + 2 }}">
+                                        <img src="{{ $image }}" alt="{{ $pd['package_title'] }} gallery image" loading="lazy">
+                                    </button>
                                 @endforeach
                             </div>
                         @endif
@@ -54,7 +61,7 @@
 
                     <section id="xpkd-overview-block" class="xpkd-content-card">
                         <h2>Package Overview</h2>
-                        <p>{{ $pd['overview_text'] }}</p>
+                        <div class="xpkd-overview-copy">{!! $pd['overview_text'] !!}</div>
 
                         <div class="xpkd-highlight-badges">
                             @foreach($pd['highlight_points'] as $point)
@@ -67,7 +74,7 @@
                         <h2>Hotel Details</h2>
                         <article class="xpkd-hotel-panel">
                             <div class="xpkd-hotel-image">
-                                <img src="{{ $mainImage }}" alt="{{ $pd['hotel_name'] }}" loading="lazy">
+                                <img src="{{ $hotelImage }}" alt="{{ $pd['hotel_name'] }}" loading="lazy">
                             </div>
                             <div class="xpkd-hotel-copy">
                                 <h3>{{ $pd['hotel_name'] }}</h3>
@@ -136,16 +143,18 @@
                 <aside class="xpkd-side-column">
                     <article class="xpkd-package-info-card">
 
-                        <div class="xpkd-pdf-download-section">
-                            <a href="{{ route('destinations.packages.pdf', ['destination' => $destination, 'packageSlug' => $selectedPackage['package_slug']]) }}" class="xpkd-pdf-btn" download>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                    <polyline points="7 10 12 15 17 10"></polyline>
-                                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                                </svg>
-                                Download PDF
-                            </a>
-                        </div>
+                        @if(!empty($pd['pdf_url']))
+                            <div class="xpkd-pdf-download-section">
+                                <a href="{{ $pd['pdf_url'] }}" class="xpkd-pdf-btn" download>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
+                                    Download PDF
+                                </a>
+                            </div>
+                        @endif
 
                         <div class="xpkd-includes-section">
                             <h4>Package Includes</h4>
@@ -221,7 +230,7 @@
 
                             <div class="CTA-section-main">
                                 <h2 class="CTA-section-title">{{ $pd['package_title'] }}</h2>
-                                <p class="CTA-section-description">{{ $pd['overview_text'] }}</p>
+                                <p class="CTA-section-description">{{ strip_tags($pd['overview_text']) }}</p>
 
                                 <div class="CTA-section-columns">
 
@@ -245,4 +254,104 @@
                             </div>
                         </div>
                     </section>
+    @if(count($galleryImages) > 0)
+        <div class="xpkd-gallery-modal" id="xpkdGalleryModal" aria-hidden="true">
+            <div class="xpkd-gallery-modal-backdrop" data-xpkd-gallery-close></div>
+            <div class="xpkd-gallery-modal-panel" role="dialog" aria-modal="true"
+                aria-label="{{ $pd['package_title'] }} gallery">
+                <button type="button" class="xpkd-gallery-modal-close" data-xpkd-gallery-close aria-label="Close gallery">
+                    <span>&times;</span>
+                </button>
+                <button type="button" class="xpkd-gallery-modal-nav xpkd-gallery-modal-prev"
+                    data-xpkd-gallery-prev aria-label="Previous gallery image">
+                    <span>&lsaquo;</span>
+                </button>
+                <img src="{{ $mainImage }}" alt="{{ $pd['package_title'] }} gallery image"
+                    class="xpkd-gallery-modal-image" data-xpkd-gallery-image>
+                <button type="button" class="xpkd-gallery-modal-nav xpkd-gallery-modal-next"
+                    data-xpkd-gallery-next aria-label="Next gallery image">
+                    <span>&rsaquo;</span>
+                </button>
+                <div class="xpkd-gallery-modal-caption">
+                    <strong>{{ $pd['package_title'] }}</strong>
+                    <span data-xpkd-gallery-count>1 / {{ count($galleryImages) }}</span>
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const galleryImages = @json(array_values($galleryImages));
+            const modal = document.getElementById('xpkdGalleryModal');
+
+            if (!modal || galleryImages.length === 0) {
+                return;
+            }
+
+            const modalImage = modal.querySelector('[data-xpkd-gallery-image]');
+            const counter = modal.querySelector('[data-xpkd-gallery-count]');
+            const previousButton = modal.querySelector('[data-xpkd-gallery-prev]');
+            const nextButton = modal.querySelector('[data-xpkd-gallery-next]');
+            let activeIndex = 0;
+
+            function renderImage(index) {
+                activeIndex = (index + galleryImages.length) % galleryImages.length;
+                modalImage.src = galleryImages[activeIndex];
+                modalImage.alt = '{{ addslashes($pd['package_title']) }} gallery image ' + (activeIndex + 1);
+                counter.textContent = (activeIndex + 1) + ' / ' + galleryImages.length;
+            }
+
+            function openGallery(index) {
+                renderImage(index);
+                modal.classList.add('is-open');
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('xpkd-gallery-modal-open');
+            }
+
+            function closeGallery() {
+                modal.classList.remove('is-open');
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('xpkd-gallery-modal-open');
+            }
+
+            document.querySelectorAll('[data-gallery-index]').forEach(function (trigger) {
+                trigger.addEventListener('click', function () {
+                    openGallery(Number(trigger.dataset.galleryIndex || 0));
+                });
+            });
+
+            modal.querySelectorAll('[data-xpkd-gallery-close]').forEach(function (button) {
+                button.addEventListener('click', closeGallery);
+            });
+
+            previousButton.addEventListener('click', function () {
+                renderImage(activeIndex - 1);
+            });
+
+            nextButton.addEventListener('click', function () {
+                renderImage(activeIndex + 1);
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (!modal.classList.contains('is-open')) {
+                    return;
+                }
+
+                if (event.key === 'Escape') {
+                    closeGallery();
+                }
+
+                if (event.key === 'ArrowLeft') {
+                    renderImage(activeIndex - 1);
+                }
+
+                if (event.key === 'ArrowRight') {
+                    renderImage(activeIndex + 1);
+                }
+            });
+        });
+    </script>
+@endpush

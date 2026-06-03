@@ -12,8 +12,6 @@ Route::get('/destinations', [DestinationController::class, 'index'])->name('dest
 Route::get('/packages', [DestinationController::class, 'packages'])->name('packages.index');
 Route::get('/destinations/{destination}/packages/{packageSlug}', [DestinationController::class, 'packageShow'])
     ->name('destinations.packages.show');
-Route::get('/destinations/{destination}/packages/{packageSlug}/pdf', [DestinationController::class, 'packagePdf'])
-    ->name('destinations.packages.pdf');
 Route::get('/destinations/{destination}', [DestinationController::class, 'show'])->name('destinations.show');
 
 Route::view('/honeymoon', 'honeymoon')->name('honeymoon');

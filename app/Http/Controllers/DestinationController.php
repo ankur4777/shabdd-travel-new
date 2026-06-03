@@ -662,12 +662,27 @@ class DestinationController extends Controller
             'rating' => $package->rating ?: $destination->rating ?: 4.5,
             'price' => $package->old_price ? '₹' . number_format((int) $package->old_price) : '',
             'discounted_price' => '₹' . number_format((int) $package->price),
-            'image' => $package->image ?: $destination->image_url,
+            'image' => $this->mediaUrl($package->image ?: $destination->image_url),
             'package_slug' => $package->slug,
             'inclusion_one' => $package->feature_1 ?: 'Hotel stay included',
             'inclusion_two' => $package->feature_2 ?: 'Local transfers covered',
             'inclusion_three' => $package->feature_3 ?: 'Top sightseeing spots',
-            'overview' => $package->description,
+            'overview' => $package->detail_overview ?: $package->description,
+            'gallery_images' => collect($package->detail_gallery ?? [])
+                ->map(fn($image) => $this->mediaUrl($image))
+                ->filter()
+                ->values()
+                ->all(),
+            'hotel_name' => $package->hotel_name,
+            'hotel_category' => $package->hotel_category,
+            'hotel_area' => $package->hotel_area,
+            'hotel_image' => $package->hotel_image ? $this->mediaUrl($package->hotel_image) : null,
+            'hotel_highlights' => $package->hotel_highlights ?? [],
+            'itinerary' => $package->itinerary ?? [],
+            'inclusions' => $package->inclusions ?? [],
+            'exclusions' => $package->exclusions ?? [],
+            'highlight_points' => $package->detail_highlights ?? [],
+            'pdf_url' => $package->pdf_file ? $this->mediaUrl($package->pdf_file) : null,
             'detail_url' => route('destinations.packages.show', [
                 'destination' => $destination,
                 'packageSlug' => $package->slug,
@@ -724,7 +739,7 @@ class DestinationController extends Controller
             'duration' => $duration !== '' ? $duration : null,
             'rating' => $package->rating,
             'price' => $package->price ? '₹' . number_format((int) $package->price) : '',
-            'image' => $package->image,
+            'image' => $this->mediaUrl($package->image),
             'url' => route('packages.show', $package->slug),
         ];
     }
@@ -747,7 +762,8 @@ class DestinationController extends Controller
                 ' covering top highlights with smooth stays, transfers, and guided local experiences.';
         }
 
-        $galleryImages = collect([$selectedPackage['image'] ?? null, $destination->image_url ?? null])
+        $galleryImages = collect($selectedPackage['gallery_images'] ?? [])
+            ->merge([$selectedPackage['image'] ?? null, $destination->image_url ?? null])
             ->merge(
                 collect($places)
                     ->map(fn($place) => is_array($place) ? ($place['image'] ?? null) : null)
@@ -785,6 +801,7 @@ class DestinationController extends Controller
         $hotelName = trim((string) ($selectedPackage['hotel_name'] ?? ($destination->name . ' Signature Stay')));
         $hotelArea = trim((string) ($selectedPackage['hotel_area'] ?? ($destination->name . ' Central Area')));
         $hotelCategory = trim((string) ($selectedPackage['hotel_category'] ?? '4 Star Hotel'));
+        $hotelImage = trim((string) ($selectedPackage['hotel_image'] ?? ''));
         $hotelHighlights = $this->normalizeStringList($selectedPackage['hotel_highlights'] ?? []);
 
         if (empty($hotelHighlights)) {
@@ -803,12 +820,16 @@ class DestinationController extends Controller
         $originalPrice = (string) ($selectedPackage['price'] ?? '');
         $rating = number_format((float) ($selectedPackage['rating'] ?? $destination->rating ?? 4.6), 1);
         $reviewCount = (int) ($selectedPackage['review_count'] ?? (400 + ($dayCount * 53)));
-        $highlights = collect($features)
-            ->map(fn($feature) => is_array($feature) ? ($feature['title'] ?? null) : null)
-            ->filter()
-            ->take(4)
-            ->values()
-            ->all();
+        $highlights = $this->normalizeStringList($selectedPackage['highlight_points'] ?? []);
+
+        if (empty($highlights)) {
+            $highlights = collect($features)
+                ->map(fn($feature) => is_array($feature) ? ($feature['title'] ?? null) : null)
+                ->filter()
+                ->take(4)
+                ->values()
+                ->all();
+        }
 
         if (empty($highlights)) {
             $highlights = [
@@ -865,6 +886,7 @@ class DestinationController extends Controller
             'hotel_name' => $hotelName,
             'hotel_area' => $hotelArea,
             'hotel_category' => $hotelCategory,
+            'hotel_image' => $hotelImage,
             'hotel_highlights' => $hotelHighlights,
             'highlight_points' => $highlights,
             'attractions' => $attractions,
@@ -873,6 +895,7 @@ class DestinationController extends Controller
             'distance' => $distance,
             'why_visit' => $this->buildWhyVisit($destination, $selectedPackage, $dayCount),
             'main_image' => $galleryImages[0] ?? $destination->image_url,
+            'pdf_url' => $selectedPackage['pdf_url'] ?? null,
             'contact_phone' => '+91-98280-65555',
             'contact_email' => 'support@shabddtravel.com',
             'other_packages' => collect($destinationPackages)
@@ -1032,7 +1055,19 @@ class DestinationController extends Controller
         }
 
         return collect($items)
-            ->map(fn($item) => trim((string) $item))
+            ->map(function ($item) {
+                if (is_array($item)) {
+                    $item = $item['item']
+                        ?? $item['highlight']
+                        ?? $item['text']
+                        ?? $item['title']
+                        ?? $item['summary']
+                        ?? $item['value']
+                        ?? '';
+                }
+
+                return trim((string) $item);
+            })
             ->filter()
             ->values()
             ->all();
