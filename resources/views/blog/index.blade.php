@@ -262,7 +262,7 @@
         flex-direction: column;
     }
     .blog-sidebar-area {
-        width: 100%;
+        display: none;
     }
     .blog-hero h1 {
         font-size: 2.5rem;
@@ -315,6 +315,16 @@
             </div>
         </div>
     </div>
+
+    <details class="blog-mobile-sidebar">
+        <summary>
+            <span><i class="bi bi-sliders"></i> Blog Filters</span>
+            <i class="bi bi-chevron-down"></i>
+        </summary>
+        <div class="blog-mobile-sidebar-body">
+            @include('partials.blog-sidebar')
+        </div>
+    </details>
 
     <div class="blog-main-content">
         <div class="blog-posts-area">

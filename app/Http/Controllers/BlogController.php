@@ -39,20 +39,20 @@ class BlogController extends Controller
         abort_if($post === null, 404);
 
         $relatedPosts = $blogs
-            ->reject(fn (array $item) => $item['url'] === $post['url'])
-            ->filter(fn (array $item) => $item['destination_slug'] === $destination->slug || $item['category'] === $post['category'])
+            ->reject(fn(array $item) => $item['url'] === $post['url'])
+            ->filter(fn(array $item) => $item['destination_slug'] === $destination->slug || $item['category'] === $post['category'])
             ->take(3)
             ->values();
 
         if ($relatedPosts->isEmpty()) {
             $relatedPosts = $blogs
-                ->reject(fn (array $item) => $item['url'] === $post['url'])
+                ->reject(fn(array $item) => $item['url'] === $post['url'])
                 ->take(3)
                 ->values();
         }
 
         $destinationBlogs = $blogs
-            ->filter(fn (array $item) => $item['destination_slug'] === $destination->slug)
+            ->filter(fn(array $item) => $item['destination_slug'] === $destination->slug)
             ->take(4)
             ->values();
 
@@ -76,10 +76,13 @@ class BlogController extends Controller
     {
         return Destination::query()
             ->active()
+            ->with(['blogPosts' => function ($query) {
+                $query->where('is_active', true)->orderBy('published_at', 'desc');
+            }])
             ->latest()
             ->get()
             ->flatMap(function (Destination $destination) {
-                return collect($destination->blogs ?? [])
+                return $destination->blogPosts
                     ->values()
                     ->map(function ($blog, int $index) use ($destination) {
                         return $this->normalizeBlog($destination, $blog, $index);
@@ -89,15 +92,18 @@ class BlogController extends Controller
             ->values();
     }
 
-    private function normalizeBlog(Destination $destination, mixed $blog, int $index): array
+    private function normalizeBlog(Destination $destination, $blog, int $index): array
     {
-        $blogData = is_array($blog) ? $blog : ['title' => (string) $blog];
+        // Handle Blog model instances
+        $blogData = $blog instanceof \App\Models\Blog ? $blog->toArray() : (is_array($blog) ? $blog : ['title' => (string) $blog]);
+
         $title = trim((string) ($blogData['title'] ?? 'Travel Story'));
         $excerpt = trim((string) ($blogData['excerpt'] ?? ''));
-        $publishedAt = (string) ($blogData['date'] ?? now()->subDays($index + 1)->toDateString());
-        $slug = Str::slug($blogData['slug'] ?? $title) ?: 'travel-story-' . ($index + 1);
+        $publishedAt = (string) ($blogData['published_at'] ?? now()->subDays($index + 1)->toDateString());
+        $slug = $blogData['slug'] ?? Str::slug($title) ?: 'travel-story-' . ($index + 1);
         $readingTime = (int) ($blogData['reading_time'] ?? max(3, min(9, 4 + (int) (strlen($excerpt) / 120))));
         $category = $blogData['category'] ?? $this->inferCategory($destination->name, $title);
+        $image = $this->mediaUrl($blogData['image'] ?? $destination->image_url);
 
         return [
             'slug' => $slug,
@@ -106,7 +112,7 @@ class BlogController extends Controller
             'country' => $destination->country,
             'title' => $title,
             'excerpt' => $excerpt !== '' ? $excerpt : $this->buildExcerpt($destination->name, $title),
-            'image' => $blogData['image'] ?? $destination->image_url,
+            'image' => $image,
             'published_at' => $publishedAt,
             'published_timestamp' => strtotime($publishedAt) ?: now()->timestamp,
             'category' => $category,
@@ -114,10 +120,10 @@ class BlogController extends Controller
             'author' => $blogData['author'] ?? 'Shabdd Travel Team',
             'role' => $blogData['role'] ?? 'Verified travel writer',
             'content_paragraphs' => $this->buildContentParagraphs($destination, $title, $excerpt),
-            'highlights' => $this->buildHighlights($destination),
-            'quick_facts' => $this->buildQuickFacts($destination),
-            'itinerary' => $this->buildSuggestedItinerary($destination),
-            'faqs' => $this->buildFaqs($destination, $title),
+            'highlights' => $blogData['highlights'] ?? $this->buildHighlights($destination),
+            'quick_facts' => $blogData['quick_facts'] ?? $this->buildQuickFacts($destination),
+            'itinerary' => $blogData['itinerary'] ?? $this->buildSuggestedItinerary($destination),
+            'faqs' => $blogData['faqs'] ?? $this->buildFaqs($destination, $title),
             'url' => route('blog.show', [
                 'destination' => $destination->slug,
                 'blog' => $slug,
@@ -128,6 +134,25 @@ class BlogController extends Controller
     private function buildExcerpt(string $destinationName, string $title): string
     {
         return $title . ' is a practical guide to plan your ' . $destinationName . ' trip with better timing, smoother logistics, and the right travel style.';
+    }
+
+    private function mediaUrl(?string $path): string
+    {
+        $path = trim((string) $path);
+
+        if ($path === '') {
+            return asset('images/couple-bg.jpg');
+        }
+
+        if (Str::startsWith($path, ['http://', 'https://'])) {
+            return $path;
+        }
+
+        if (Str::startsWith($path, ['/storage/', 'storage/', '/images/', 'images/'])) {
+            return asset(ltrim($path, '/'));
+        }
+
+        return asset('storage/' . ltrim($path, '/'));
     }
 
     private function buildContentParagraphs(Destination $destination, string $title, string $excerpt): array

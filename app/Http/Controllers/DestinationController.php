@@ -109,7 +109,7 @@ class DestinationController extends Controller
     private function buildDestinationOptions(Collection $destinations): Collection
     {
         return $destinations
-            ->map(fn (Destination $destination) => [
+            ->map(fn(Destination $destination) => [
                 'name' => $destination->name,
                 'slug' => $destination->slug,
                 'country' => $destination->country,
@@ -128,7 +128,7 @@ class DestinationController extends Controller
         return $destinations
             ->when($request->filled('destination'), function (Collection $destinations) use ($request) {
                 return $destinations->filter(
-                    fn (Destination $destination) => $destination->slug === $request->input('destination')
+                    fn(Destination $destination) => $destination->slug === $request->input('destination')
                 );
             })
             ->when($request->filled('category'), function (Collection $destinations) use ($request) {
@@ -139,7 +139,7 @@ class DestinationController extends Controller
                 }
 
                 return $destinations->filter(
-                    fn (Destination $destination) => (string) $destination->category === $category
+                    fn(Destination $destination) => (string) $destination->category === $category
                 );
             })
             ->when($request->filled('travel_style'), function (Collection $destinations) use ($request) {
@@ -150,7 +150,7 @@ class DestinationController extends Controller
                 }
 
                 return $destinations->filter(
-                    fn (Destination $destination) => $this->destinationMatchesTravelStyle($destination, $travelStyle)
+                    fn(Destination $destination) => $this->destinationMatchesTravelStyle($destination, $travelStyle)
                 );
             })
             ->when($request->filled('rating'), function (Collection $destinations) use ($request) {
@@ -160,19 +160,19 @@ class DestinationController extends Controller
                     return $destinations;
                 }
 
-                return $destinations->filter(fn (Destination $destination) => (float) $destination->rating >= $rating);
+                return $destinations->filter(fn(Destination $destination) => (float) $destination->rating >= $rating);
             })
             ->when($request->filled('duration'), function (Collection $destinations) use ($request) {
                 return match ($request->input('duration')) {
-                    '1-3' => $destinations->filter(fn (Destination $destination) => $this->destinationDayCount($destination) >= 1 && $this->destinationDayCount($destination) <= 3),
-                    '4-6' => $destinations->filter(fn (Destination $destination) => $this->destinationDayCount($destination) >= 4 && $this->destinationDayCount($destination) <= 6),
-                    '7-plus' => $destinations->filter(fn (Destination $destination) => $this->destinationDayCount($destination) >= 7),
+                    '1-3' => $destinations->filter(fn(Destination $destination) => $this->destinationDayCount($destination) >= 1 && $this->destinationDayCount($destination) <= 3),
+                    '4-6' => $destinations->filter(fn(Destination $destination) => $this->destinationDayCount($destination) >= 4 && $this->destinationDayCount($destination) <= 6),
+                    '7-plus' => $destinations->filter(fn(Destination $destination) => $this->destinationDayCount($destination) >= 7),
                     default => $destinations,
                 };
             })
             ->when($includePrice, function (Collection $destinations) use ($selectedMinPrice, $selectedMaxPrice) {
                 return $destinations->filter(
-                    fn (Destination $destination) => (int) $destination->price_from >= $selectedMinPrice
+                    fn(Destination $destination) => (int) $destination->price_from >= $selectedMinPrice
                         && (int) $destination->price_from <= $selectedMaxPrice
                 );
             })
@@ -188,7 +188,7 @@ class DestinationController extends Controller
             ->merge($destination->popular_for ?? [])
             ->merge($destination->tags ?? [])
             ->filter()
-            ->map(fn ($value) => Str::slug((string) $value))
+            ->map(fn($value) => Str::slug((string) $value))
             ->contains($needle);
     }
 
@@ -202,7 +202,7 @@ class DestinationController extends Controller
     private function buildAdminDestinationCards(Collection $destinations, string $sort): Collection
     {
         $cards = $destinations
-            ->map(fn (Destination $destination) => [
+            ->map(fn(Destination $destination) => [
                 'name' => $destination->name,
                 'slug' => $destination->slug,
                 'country' => $destination->location ?: $destination->country,
@@ -226,9 +226,14 @@ class DestinationController extends Controller
 
     private function destinationImageUrl(Destination $destination): string
     {
-        $path = $destination->image_url ?: $destination->hero_image;
+        return $this->mediaUrl($destination->image_url ?: $destination->hero_image);
+    }
 
-        if (!$path) {
+    private function mediaUrl(?string $path): string
+    {
+        $path = trim((string) $path);
+
+        if ($path === '') {
             return asset('images/couple-bg.jpg');
         }
 
@@ -236,7 +241,7 @@ class DestinationController extends Controller
             return $path;
         }
 
-        if (Str::startsWith($path, ['storage/', 'images/'])) {
+        if (Str::startsWith($path, ['/storage/', 'storage/', '/images/', 'images/'])) {
             return asset(ltrim($path, '/'));
         }
 
@@ -295,15 +300,15 @@ class DestinationController extends Controller
     private function buildPackageDestinationCards(Collection $packages, string $sort): Collection
     {
         $cards = $packages
-            ->groupBy(fn (Package $package) => $this->packageDestinationSlug($package))
+            ->groupBy(fn(Package $package) => $this->packageDestinationSlug($package))
             ->map(function (Collection $destinationPackages) {
                 $sortedByPrice = $destinationPackages->sortBy('price')->values();
                 $representative = $sortedByPrice->first();
                 $destinationName = $this->packageDestinationName($representative);
                 $minPrice = (int) $destinationPackages->min('price');
                 $maxPrice = (int) $destinationPackages->max('price');
-                $minDays = (int) $destinationPackages->filter(fn (Package $package) => $package->days)->min('days');
-                $maxDays = (int) $destinationPackages->filter(fn (Package $package) => $package->days)->max('days');
+                $minDays = (int) $destinationPackages->filter(fn(Package $package) => $package->days)->min('days');
+                $maxDays = (int) $destinationPackages->filter(fn(Package $package) => $package->days)->max('days');
                 $travelStyles = $destinationPackages
                     ->pluck('travel_style')
                     ->filter()
@@ -351,8 +356,8 @@ class DestinationController extends Controller
             $package->state,
             $package->country,
         ])
-            ->map(fn ($value) => trim((string) $value))
-            ->first(fn (string $value) => $value !== '');
+            ->map(fn($value) => trim((string) $value))
+            ->first(fn(string $value) => $value !== '');
 
         return $location ?: $package->title;
     }
@@ -404,12 +409,21 @@ class DestinationController extends Controller
 
         $locationOptions = $this->getLocationOptions($destination);
         $monthOptions = collect(range(0, 11))
-            ->map(fn (int $offset) => now()->startOfMonth()->addMonths($offset)->format('F, Y'))
+            ->map(fn(int $offset) => now()->startOfMonth()->addMonths($offset)->format('F, Y'))
             ->all();
 
         $destinationProfile = $this->buildDestinationProfile($destination);
         $destinationPackages = $this->resolvePackageCollection($destination, $destinationProfile);
         $relatedPackages = $this->resolveRelatedPackageCollection($destination, $destinationPackages);
+
+        // Fetch database blogs for this destination
+        $databaseBlogs = $destination->blogPosts()
+            ->where('is_active', true)
+            ->orderBy('published_at', 'desc')
+            ->get()
+            ->map(fn($blog) => $this->normalizeDatabaseBlog($blog, $destination))
+            ->values()
+            ->all();
 
         return view('destination.show', compact(
             'destination',
@@ -417,7 +431,8 @@ class DestinationController extends Controller
             'monthOptions',
             'destinationProfile',
             'destinationPackages',
-            'relatedPackages'
+            'relatedPackages',
+            'databaseBlogs'
         ));
     }
 
@@ -534,7 +549,7 @@ class DestinationController extends Controller
                     'url' => route('destinations.index', ['city' => Str::slug((string) $city)]),
                 ];
             })
-            ->filter(fn (array $city) => !empty($city['city_name']))
+            ->filter(fn(array $city) => !empty($city['city_name']))
             ->values()
             ->all();
 
@@ -600,7 +615,7 @@ class DestinationController extends Controller
             })
             ->latest()
             ->get()
-            ->map(fn (Package $package) => $this->normalizeAdminPackageForDestination($package, $destination))
+            ->map(fn(Package $package) => $this->normalizeAdminPackageForDestination($package, $destination))
             ->all();
     }
 
@@ -624,10 +639,10 @@ class DestinationController extends Controller
         ];
 
         return collect([$destination->name, $destination->slug])
-            ->flatMap(fn ($value) => preg_split('/[^a-z0-9]+/i', Str::lower((string) $value)) ?: [])
-            ->map(fn ($term) => trim((string) $term))
-            ->filter(fn ($term) => $term !== '' && strlen($term) >= 3)
-            ->reject(fn ($term) => in_array($term, $genericWords, true))
+            ->flatMap(fn($value) => preg_split('/[^a-z0-9]+/i', Str::lower((string) $value)) ?: [])
+            ->map(fn($term) => trim((string) $term))
+            ->filter(fn($term) => $term !== '' && strlen($term) >= 3)
+            ->reject(fn($term) => in_array($term, $genericWords, true))
             ->unique()
             ->values()
             ->all();
@@ -665,7 +680,7 @@ class DestinationController extends Controller
         $category = trim((string) $destination->category);
         $travelStyles = collect($destination->travel_styles ?? [])
             ->filter()
-            ->map(fn ($style) => (string) $style)
+            ->map(fn($style) => (string) $style)
             ->values();
         $currentPackageSlugs = collect($destinationPackages)
             ->pluck('package_slug')
@@ -677,7 +692,7 @@ class DestinationController extends Controller
         }
 
         return Package::query()
-            ->when(!empty($currentPackageSlugs), fn ($query) => $query->whereNotIn('slug', $currentPackageSlugs))
+            ->when(!empty($currentPackageSlugs), fn($query) => $query->whereNotIn('slug', $currentPackageSlugs))
             ->where(function ($query) use ($category, $travelStyles) {
                 if ($category !== '') {
                     $query->orWhere('category', $category);
@@ -690,7 +705,7 @@ class DestinationController extends Controller
             ->latest()
             ->take(6)
             ->get()
-            ->map(fn (Package $package) => $this->normalizeRelatedAdminPackage($package))
+            ->map(fn(Package $package) => $this->normalizeRelatedAdminPackage($package))
             ->all();
     }
 
@@ -735,7 +750,7 @@ class DestinationController extends Controller
         $galleryImages = collect([$selectedPackage['image'] ?? null, $destination->image_url ?? null])
             ->merge(
                 collect($places)
-                    ->map(fn ($place) => is_array($place) ? ($place['image'] ?? null) : null)
+                    ->map(fn($place) => is_array($place) ? ($place['image'] ?? null) : null)
                     ->filter()
                     ->take(3)
             )
@@ -789,7 +804,7 @@ class DestinationController extends Controller
         $rating = number_format((float) ($selectedPackage['rating'] ?? $destination->rating ?? 4.6), 1);
         $reviewCount = (int) ($selectedPackage['review_count'] ?? (400 + ($dayCount * 53)));
         $highlights = collect($features)
-            ->map(fn ($feature) => is_array($feature) ? ($feature['title'] ?? null) : null)
+            ->map(fn($feature) => is_array($feature) ? ($feature['title'] ?? null) : null)
             ->filter()
             ->take(4)
             ->values()
@@ -807,12 +822,12 @@ class DestinationController extends Controller
         // Extract attractions from places and itinerary
         $attractions = array_merge(
             collect($places)
-                ->map(fn ($place) => is_array($place) ? ($place['name'] ?? null) : null)
+                ->map(fn($place) => is_array($place) ? ($place['name'] ?? null) : null)
                 ->filter()
                 ->take(5)
                 ->all(),
             collect($places)
-                ->map(fn ($place) => is_array($place) ? 
+                ->map(fn($place) => is_array($place) ?
                     (collect($place['attractions'] ?? [])->first() ?? null) : null)
                 ->filter()
                 ->take(2)
@@ -825,7 +840,7 @@ class DestinationController extends Controller
 
         // Get seasons info
         $seasonsInfo = $this->getDestinationSeasons($destinationProfile);
-        
+
         // Build difficulty level based on day count
         $difficulty = $this->buildDifficultyLevel($dayCount);
 
@@ -861,7 +876,7 @@ class DestinationController extends Controller
             'contact_phone' => '+91-98280-65555',
             'contact_email' => 'support@shabddtravel.com',
             'other_packages' => collect($destinationPackages)
-                ->reject(fn (array $package) => ($package['package_slug'] ?? '') === ($selectedPackage['package_slug'] ?? ''))
+                ->reject(fn(array $package) => ($package['package_slug'] ?? '') === ($selectedPackage['package_slug'] ?? ''))
                 ->take(3)
                 ->values()
                 ->all(),
@@ -890,7 +905,7 @@ class DestinationController extends Controller
             ];
         }
         return array_slice(
-            array_map(fn ($s) => ['name' => $s['name'] ?? '', 'note' => $s['recommendation'] ?? ''], $seasons),
+            array_map(fn($s) => ['name' => $s['name'] ?? '', 'note' => $s['recommendation'] ?? ''], $seasons),
             0,
             2
         );
@@ -924,14 +939,14 @@ class DestinationController extends Controller
     private function buildWhyVisit(Destination $destination, array $selectedPackage, int $dayCount): string
     {
         $overview = $selectedPackage['why_visit'] ?? null;
-        
+
         if ($overview) {
             return $overview;
         }
 
         $destinationName = $destination->name;
         $packageName = $selectedPackage['name'] ?? 'This package';
-        
+
         return "$packageName offers an unparalleled opportunity to experience {$destinationName}'s diverse landscapes, rich culture, and authentic local experiences in a single journey. Over {$dayCount} days, you'll discover hidden gems, iconic landmarks, and create lasting memories with expert guidance and comfortable stays throughout your adventure.";
     }
 
@@ -961,7 +976,7 @@ class DestinationController extends Controller
         }
 
         $placeNames = collect($places)
-            ->map(fn ($place) => is_array($place) ? ($place['name'] ?? null) : null)
+            ->map(fn($place) => is_array($place) ? ($place['name'] ?? null) : null)
             ->filter()
             ->values()
             ->all();
@@ -1017,7 +1032,7 @@ class DestinationController extends Controller
         }
 
         return collect($items)
-            ->map(fn ($item) => trim((string) $item))
+            ->map(fn($item) => trim((string) $item))
             ->filter()
             ->values()
             ->all();
@@ -1526,5 +1541,29 @@ class DestinationController extends Controller
         }
 
         return [$destination->name];
+    }
+
+    private function normalizeDatabaseBlog($blog, Destination $destination): array
+    {
+        return [
+            'title' => $blog->title,
+            'slug' => $blog->slug,
+            'excerpt' => $blog->excerpt,
+            'image' => $this->mediaUrl($blog->image ?: $destination->image_url),
+            'date' => $blog->published_at->format('d M'),
+            'author' => $blog->author,
+            'role' => $blog->role,
+            'category' => $blog->category,
+            'reading_time' => $blog->reading_time,
+            'content' => $blog->content,
+            'highlights' => $blog->highlights,
+            'quick_facts' => $blog->quick_facts,
+            'itinerary' => $blog->itinerary,
+            'faqs' => $blog->faqs,
+            'url' => route('blog.show', [
+                'destination' => $destination->slug,
+                'blog' => $blog->slug,
+            ]),
+        ];
     }
 }

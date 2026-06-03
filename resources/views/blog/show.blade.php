@@ -346,6 +346,66 @@
             margin-top: 60px;
         }
 
+        .related-card {
+            height: 100%;
+            overflow: hidden;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 28px rgba(15, 23, 42, .08);
+        }
+
+        .related-card-img-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            background: #e5e7eb;
+        }
+
+        .related-card-img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .related-card-body {
+            padding: 20px;
+        }
+
+        .related-card-category {
+            display: inline-flex;
+            margin-bottom: 12px;
+            padding: 6px 12px;
+            border-radius: 16px;
+            background: #667eea;
+            color: #fff;
+            font-size: .72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .related-card-title {
+            margin-bottom: 14px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            line-height: 1.35;
+        }
+
+        .related-card-title a {
+            color: #1f2937;
+            text-decoration: none;
+        }
+
+        .related-card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            color: #6b7280;
+            font-size: .86rem;
+        }
+
         @media (max-width: 991px) {
             .blog-content-wrapper {
                 flex-direction: column;
@@ -353,7 +413,7 @@
             }
 
             .blog-content-sidebar {
-                width: 100%;
+                display: none;
             }
 
             .blog-content-main {
@@ -406,6 +466,18 @@
     </div>
 
     <div class="container">
+        <details class="blog-mobile-sidebar">
+            <summary>
+                <span><i class="bi bi-sliders"></i> Blog Filters</span>
+                <i class="bi bi-chevron-down"></i>
+            </summary>
+            <div class="blog-mobile-sidebar-body">
+                @include('partials.blog-sidebar')
+            </div>
+        </details>
+    </div>
+
+    <div class="container">
         <div class="blog-content-wrapper">
             <div class="blog-content-main">
                 <div class="blog-content">
@@ -423,17 +495,31 @@
                     </div>
 
                     <div class="blog-facts-grid">
-                        @foreach($post['quick_facts'] as $label => $value)
-                            <div class="blog-fact-card"><span class="blog-fact-label">{{ $label }}</span><span
-                                    class="blog-fact-value">{{ $value }}</span></div>
+                        @foreach($post['quick_facts'] as $fact)
+                            @php
+                                // Handle both array of objects and key-value format
+                                $factLabel = is_array($fact) ? ($fact['label'] ?? '') : '';
+                                $factValue = is_array($fact) ? ($fact['value'] ?? '') : $fact;
+                            @endphp
+                            @if($factLabel || $factValue)
+                                <div class="blog-fact-card"><span class="blog-fact-label">{{ $factLabel }}</span><span
+                                        class="blog-fact-value">{{ $factValue }}</span></div>
+                            @endif
                         @endforeach
                     </div>
 
                     <div class="blog-itinerary">
                         <h3>Suggested Itinerary</h3>
                         <div class="itinerary-list">
-                            @foreach($post['itinerary'] as $day => $plan)
-                                <div class="itinerary-item"><strong>{{ $day }}:</strong> {{ $plan }}</div>
+                            @foreach($post['itinerary'] as $item)
+                                @php
+                                    // Handle both array of objects and key-value format
+                                    $day = is_array($item) ? ($item['day'] ?? '') : $item;
+                                    $plan = is_array($item) ? ($item['plan'] ?? '') : '';
+                                @endphp
+                                @if($day || $plan)
+                                    <div class="itinerary-item"><strong>{{ $day }}:</strong> {{ $plan }}</div>
+                                @endif
                             @endforeach
                         </div>
                     </div>

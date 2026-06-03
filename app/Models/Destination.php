@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Destination extends Model
@@ -117,6 +118,11 @@ class Destination extends Model
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true);
+    }
+
+    public function blogPosts(): HasMany
+    {
+        return $this->hasMany(Blog::class);
     }
 
     public function scopeTrending(Builder $query): Builder

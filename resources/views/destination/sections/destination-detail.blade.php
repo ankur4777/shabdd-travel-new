@@ -49,7 +49,8 @@
     $packages = $destinationPackages ?? (!empty($destination->packages) ? $destination->packages : ($profile['packages'] ?? []));
     $features = !empty($destination->features) ? $destination->features : ($profile['features'] ?? []);
     $seasons = !empty($destination->seasons) ? $destination->seasons : ($profile['seasons'] ?? []);
-    $blogs = !empty($destination->blogs) ? $destination->blogs : ($profile['blogs'] ?? []);
+    // Use database blogs if available, otherwise fall back to JSON blogs or profile blogs
+    $blogs = !empty($databaseBlogs) ? $databaseBlogs : (!empty($destination->blogs) ? $destination->blogs : ($profile['blogs'] ?? []));
     $testimonials = !empty($destination->testimonials) ? $destination->testimonials : ($profile['testimonials'] ?? []);
     $faqs = !empty($destination->faqs) ? $destination->faqs : ($profile['faqs'] ?? []);
     $popularFor = collect(!empty($destination->popular_for) ? $destination->popular_for : ($profile['popular_for'] ?? ['Culture', 'Sightseeing']))

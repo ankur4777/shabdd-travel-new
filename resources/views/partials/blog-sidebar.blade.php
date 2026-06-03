@@ -111,10 +111,45 @@
     </div>
 </aside>
 
+@once
 <style>
 .blog-sidebar {
     position: sticky;
     top: 100px;
+}
+
+.blog-mobile-sidebar {
+    display: none;
+}
+
+.blog-mobile-sidebar summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    list-style: none;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    color: #1f2937;
+    font-weight: 800;
+}
+
+.blog-mobile-sidebar summary::-webkit-details-marker {
+    display: none;
+}
+
+.blog-mobile-sidebar summary span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.blog-mobile-sidebar-body {
+    margin-top: 16px;
 }
 
 .sidebar-widget {
@@ -412,9 +447,24 @@
 }
 
 @media (max-width: 991px) {
+    .blog-mobile-sidebar {
+        display: block;
+        margin-bottom: 28px;
+    }
+
+    .blog-mobile-sidebar .blog-sidebar {
+        position: static;
+        margin-top: 0;
+    }
+
+    .blog-mobile-sidebar .sidebar-widget {
+        margin-bottom: 16px;
+    }
+
     .blog-sidebar {
         position: static;
         margin-top: 40px;
     }
 }
 </style>
+@endonce
