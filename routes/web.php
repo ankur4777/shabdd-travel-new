@@ -17,7 +17,7 @@ Route::get('/destinations/{destination}', [DestinationController::class, 'show']
 Route::view('/honeymoon', 'honeymoon')->name('honeymoon');
 Route::get('/honeymoon', [HomeController::class, 'honeymoon'])
     ->name('honeymoon');
-Route::get('/package/{slug}', [HomeController::class, 'packageDetails'])
+Route::get('/package/{slug}', [DestinationController::class, 'packageShowBySlug'])
     ->name('packages.show');
 Route::view('/destination-detail', 'destination.sections.destination-detail');
 Route::get('/family-trips', [HomeController::class, 'familyTrips'])

@@ -9,9 +9,9 @@
 @endphp
 
 <div class="pkg-filter-panel-head">
-    <span>Smart Filters</span>
-    <h3>Find destinations</h3>
-    <p>Filter admin-created destination cards by category, place, budget, rating, and duration.</p>
+    <h3>Find Your Perfect Escape</h3>
+    <p>Discover destinations that match your budget,
+travel style, and dream experience.</p>
 </div>
 
 <div class="pkg-filter-group">

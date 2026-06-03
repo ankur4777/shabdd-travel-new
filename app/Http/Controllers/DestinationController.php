@@ -518,6 +518,79 @@ class DestinationController extends Controller
         ));
     }
 
+    public function packageShowBySlug(string $slug): View
+    {
+        $package = Package::query()
+            ->where('slug', $slug)
+            ->firstOrFail();
+        $destination = $this->resolveDestinationForPackage($package);
+
+        abort_if($destination === null, 404);
+
+        $destinationProfile = $this->buildDestinationProfile($destination);
+        $selectedPackage = $this->normalizeAdminPackageForDestination($package, $destination);
+        $destinationPackages = collect($this->resolvePackageCollection($destination, $destinationProfile))
+            ->reject(fn(array $destinationPackage) => ($destinationPackage['package_slug'] ?? '') === $package->slug)
+            ->prepend($selectedPackage)
+            ->values()
+            ->all();
+
+        $packagePageData = $this->buildPackagePageData(
+            $destination,
+            $destinationProfile,
+            $selectedPackage,
+            $destinationPackages
+        );
+
+        return view('destination.package-show', compact(
+            'destination',
+            'destinationProfile',
+            'destinationPackages',
+            'selectedPackage',
+            'packagePageData'
+        ));
+    }
+
+    private function resolveDestinationForPackage(Package $package): ?Destination
+    {
+        $destinations = Destination::query()
+            ->active()
+            ->get();
+
+        if ($destinations->isEmpty()) {
+            return null;
+        }
+
+        return $destinations
+            ->sortByDesc(fn(Destination $destination) => $this->packageDestinationMatchScore($package, $destination))
+            ->first();
+    }
+
+    private function packageDestinationMatchScore(Package $package, Destination $destination): int
+    {
+        $packageHaystack = Str::lower(collect([
+            $package->title,
+            $package->slug,
+            $package->city,
+            $package->state,
+            $package->country,
+        ])->filter()->implode(' '));
+
+        $score = 0;
+
+        foreach ($this->destinationPackageSearchTerms($destination) as $term) {
+            if (Str::contains($packageHaystack, $term)) {
+                $score += 10;
+            }
+        }
+
+        if ($package->country && Str::lower($package->country) === Str::lower((string) $destination->country)) {
+            $score += 1;
+        }
+
+        return $score;
+    }
+
     private function buildDestinationProfile(Destination $destination): array
     {
         $slug = Str::lower($destination->slug ?: $destination->name);

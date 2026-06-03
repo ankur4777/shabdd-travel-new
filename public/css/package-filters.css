@@ -1,7 +1,6 @@
 .pkg-listing-section {
     padding: 72px 0 86px;
-    background:
-        linear-gradient(180deg, #fffaf7 0%, #ffffff 34%, #f6f9fb 100%);
+    background: linear-gradient(180deg, #fffaf7 0%, #ffffff 34%, #f6f9fb 100%);
 }
 
 .pkg-listing-top {
@@ -50,8 +49,11 @@
     padding: 18px;
     border: 1px solid rgba(177, 124, 42, 0.18);
     border-radius: 22px;
-    background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 250, 244, 0.92));
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.96),
+        rgba(255, 250, 244, 0.92)
+    );
     box-shadow: 0 24px 58px rgba(40, 33, 27, 0.11);
 }
 
@@ -85,7 +87,8 @@
     margin: 5px 0 0;
     color: #111827;
     font-size: 1.16rem;
-    font-weight: 800;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
 }
 
 .pkg-filter-panel-head p {
@@ -236,7 +239,10 @@
     color: #3b4656;
     font-size: 0.9rem;
     font-weight: 750;
-    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
 }
 
 .pkg-segment-option span::after {
@@ -447,7 +453,10 @@
     border-radius: 24px;
     background: #fff;
     box-shadow: 0 18px 42px rgba(15, 23, 42, 0.07);
-    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+    transition:
+        transform 0.28s ease,
+        box-shadow 0.28s ease,
+        border-color 0.28s ease;
 }
 
 .dst-card-detail-link {
@@ -491,7 +500,11 @@
     position: absolute;
     inset: auto 0 0;
     height: 62%;
-    background: linear-gradient(180deg, rgba(17, 24, 39, 0), rgba(17, 24, 39, 0.66));
+    background: linear-gradient(
+        180deg,
+        rgba(17, 24, 39, 0),
+        rgba(17, 24, 39, 0.66)
+    );
 }
 
 .dst-card-count,
