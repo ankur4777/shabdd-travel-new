@@ -69,7 +69,7 @@ travel style, and dream experience.</p>
             name="min_price"
             min="{{ $priceMin }}"
             max="{{ $priceMax }}"
-            step="1000"
+            step="1"
             value="{{ $selectedMinPrice }}"
             aria-label="Minimum price"
             data-package-range-min
@@ -79,7 +79,7 @@ travel style, and dream experience.</p>
             name="max_price"
             min="{{ $priceMin }}"
             max="{{ $priceMax }}"
-            step="1000"
+            step="1"
             value="{{ $selectedMaxPrice }}"
             aria-label="Maximum price"
             data-package-range-max

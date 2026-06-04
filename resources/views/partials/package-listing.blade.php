@@ -54,8 +54,9 @@
             </div>
 
             <div class="pkg-count-card">
-                <strong>{{ $packageCount }}</strong>
-                <span>{{ \Illuminate\Support\Str::plural('package', $packageCount) }} found</span>
+
+                <span><strong>{{ $packageCount }}</strong>{{ \Illuminate\Support\Str::plural('package', $packageCount) }}
+                    found</span>
             </div>
         </div>
 
@@ -64,13 +65,8 @@
                 <strong>{{ $packageCount }}</strong>
                 <span>{{ \Illuminate\Support\Str::plural('package', $packageCount) }} available</span>
             </div>
-            <button
-                class="pkg-mobile-filter-btn"
-                type="button"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#{{ $listingKey }}FilterOffcanvas"
-                aria-controls="{{ $listingKey }}FilterOffcanvas"
-            >
+            <button class="pkg-mobile-filter-btn" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#{{ $listingKey }}FilterOffcanvas" aria-controls="{{ $listingKey }}FilterOffcanvas">
                 <i class="bi bi-sliders"></i>
                 Filters
             </button>
@@ -114,21 +110,25 @@
 
                             <div class="col">
                                 <div class="honeymoon-package-card pkg-tour-card">
-                                    <div class="package-image">
-                                        <img src="{{ $packageImage }}" alt="{{ $package->title }}" loading="lazy">
+                                    <a href="{{ route('packages.show', $package->slug) }}">
+                                        <div class="package-image">
+                                            <img src="{{ $packageImage }}" alt="{{ $package->title }}" loading="lazy">
 
-                                        <span class="package-tag">
-                                            {{ $package->category ?? $defaultTag }}
-                                        </span>
+                                            <span class="package-tag">
+                                                {{ $package->category ?? $defaultTag }}
+                                            </span>
 
-                                        <span class="package-duration">
-                                            <i class="bi bi-star-fill"></i>
-                                            {{ $package->rating ? number_format((float) $package->rating, 1) : 'New' }}
-                                        </span>
-                                    </div>
+                                            <span class="package-duration">
+                                                <i class="bi bi-star-fill"></i>
+                                                {{ $package->rating ? number_format((float) $package->rating, 1) : 'New' }}
+                                            </span>
+                                        </div>
+                                    </a>
 
                                     <div class="package-content">
-                                        <h3>{{ $package->title }}</h3>
+                                        <a href="{{ route('packages.show', $package->slug) }}" style="text-decoration: none;">
+                                            <h3>{{ $package->title }}</h3>
+                                        </a>
 
                                         <div class="package-badges">
                                             @if($package->duration_text)
@@ -184,12 +184,8 @@
         </div>
     </div>
 
-    <div
-        class="offcanvas offcanvas-end pkg-filter-offcanvas d-lg-none"
-        tabindex="-1"
-        id="{{ $listingKey }}FilterOffcanvas"
-        aria-labelledby="{{ $listingKey }}FilterOffcanvasLabel"
-    >
+    <div class="offcanvas offcanvas-end pkg-filter-offcanvas d-lg-none" tabindex="-1"
+        id="{{ $listingKey }}FilterOffcanvas" aria-labelledby="{{ $listingKey }}FilterOffcanvasLabel">
         <div class="offcanvas-header">
             <div>
                 <span class="pkg-offcanvas-kicker">Travel filters</span>
@@ -199,7 +195,8 @@
         </div>
 
         <div class="offcanvas-body">
-            <form method="GET" action="{{ $listingRoute }}" class="pkg-filter-panel pkg-filter-panel-mobile" data-package-filter-form>
+            <form method="GET" action="{{ $listingRoute }}" class="pkg-filter-panel pkg-filter-panel-mobile"
+                data-package-filter-form>
                 @include('partials.package-filter-fields', ['fieldPrefix' => $listingKey . 'Mobile'])
             </form>
         </div>

@@ -1,5 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Manrope:wght@300;400;500;600;700;800;900&family=Merriweather:wght@300;400;700;900&display=swap");
+
+/* === 01. GLOBAL TOKENS & RESET === */
 :root {
+    --font-primary:
+        "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    --font-serif: "Merriweather", Georgia, "Times New Roman", Times, serif;
+    --font-display: "Manrope", var(--font-primary);
+
     --brand-primary: #ff3b30;
+    --brand-primary-soft: color-mix(in srgb, var(--brand-primary) 8%, #ffffff);
+    --brand-primary-tint: color-mix(in srgb, var(--brand-primary) 84%, #ffffff);
+    --brand-primary-hover: color-mix(
+        in srgb,
+        var(--brand-primary) 82%,
+        #111111
+    );
+    --brand-primary-dark: color-mix(in srgb, var(--brand-primary) 72%, #111111);
+    --brand-primary-glow: rgba(255, 59, 48, 0.22);
     --brand-black: #111111;
     --brand-white: #ffffff;
     --brand-dark: #2a2a2a;
@@ -8,18 +26,36 @@
     --brand-border-strong: rgba(17, 17, 17, 0.14);
     --brand-shadow: 0 20px 60px rgba(17, 17, 17, 0.08);
     --brand-shadow-strong: 0 24px 70px rgba(17, 17, 17, 0.14);
-}
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Merriweather:wght@300;400;700;900&display=swap");
+    --form-accent-bg: var(--brand-primary);
+    --form-accent-color: var(--brand-white);
+    --form-neutral-bg: #f8fafc;
+    --form-neutral-color: #0f172a;
+    --form-neutral-border: #dbe4ef;
 
-:root {
-    --font-primary:
-        "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
-        Arial, "Noto Sans", "Liberation Sans", sans-serif;
-    --font-serif: "Merriweather", Georgia, "Times New Roman", Times, serif;
+    --df-red: var(--brand-primary);
+    --df-red-dk: var(--brand-primary-dark);
+    --df-red-lt: var(--brand-primary-soft);
+    --df-red-glow: var(--brand-primary-glow);
+    --df-black: var(--brand-black);
+    --df-dark: #1a1a1a;
+    --df-mid: #555555;
+    --df-muted: rgba(17, 17, 17, 0.45);
+    --df-border: rgba(17, 17, 17, 0.09);
+    --df-border-md: var(--brand-border-strong);
+    --df-bg: var(--brand-bg);
+    --df-white: var(--brand-white);
+    --df-shadow: 0 8px 32px rgba(17, 17, 17, 0.08);
+    --df-shadow-lg: 0 20px 60px rgba(17, 17, 17, 0.12);
+    --df-radius: 24px;
+    --df-radius-sm: 14px;
+    --df-sidebar-w: 296px;
+    --df-transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --df-font: var(--font-display);
+
     --fs-base: 16px;
-    --fs-paragraph: 1rem; /* 16px */
-    --fs-subheading: 1.0625rem; /* 17px */
+    --fs-paragraph: 1rem;
+    --fs-subheading: 1.0625rem;
     --fs-h1: clamp(2rem, 4.5vw, 3.25rem);
     --fs-h2: clamp(1.5rem, 3.8vw, 2.25rem);
     --fs-h3: clamp(1.25rem, 2.8vw, 1.5rem);
@@ -34,6 +70,12 @@ body {
     font-family: var(--font-primary);
     font-size: var(--fs-base);
     color: #111;
+    background: linear-gradient(180deg, #fff 0%, #fff 360px, #fafafa 100%);
+    overflow-x: hidden;
+}
+
+html {
+    overflow-x: hidden;
 }
 
 button,
@@ -42,14 +84,8 @@ select,
 textarea {
     font-family: inherit;
 }
-html {
-    overflow-x: hidden;
-}
 
-body {
-    background: linear-gradient(180deg, #fff 0%, #fff 360px, #fafafa 100%);
-    overflow-x: hidden;
-}
+/* === 02. HERO CHASSIS === */
 
 .st-hero {
     --hero-image: none;
@@ -177,13 +213,13 @@ body {
 
 .st-hero-btn-outline {
     border: 1.5px solid rgba(255, 59, 48, 0.95);
-    color: #ff584f;
+    color: var(--brand-primary-tint);
     background: rgba(17, 17, 17, 0.26);
 }
 
 .st-hero-btn-outline:hover {
     transform: translateY(-2px);
-    border-color: #ff6a62;
+    border-color: var(--brand-primary-tint);
     color: #fff;
     background: rgba(255, 59, 48, 0.26);
 }
@@ -375,6 +411,7 @@ input[type="submit"],
     font-weight: var(--fw-bold);
 }
 
+/* === 03. HEADER & NAVIGATION === */
 .st-header a {
     text-decoration: none;
 }
@@ -645,11 +682,6 @@ div.container.st-nav-inner {
     overflow: visible;
 }
 
-/* @media (max-width: 991.98px) {
-  .navbar-brand img{
-    margin-right:50px;
-  }
-} */
 .st-nav-links {
     display: flex;
     align-items: center;
@@ -702,7 +734,11 @@ div.container.st-nav-inner {
     bottom: 10px;
     height: 2px;
     border-radius: 999px;
-    background: linear-gradient(90deg, var(--brand-primary), #ff776b);
+    background: linear-gradient(
+        90deg,
+        var(--brand-primary),
+        var(--brand-primary-tint)
+    );
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.28s ease;
@@ -789,7 +825,7 @@ div.container.st-nav-inner {
     border-radius: 16px;
     background: linear-gradient(
         135deg,
-        #ff574d 0%,
+        var(--brand-primary-tint) 0%,
         var(--brand-primary) 100%
     ) !important;
     color: var(--brand-white) !important;
@@ -854,9 +890,7 @@ div.container.st-nav-inner {
     text-transform: uppercase;
 }
 
-/* =============================================
-   CTA Section - Package Detail Card Styles
-   ============================================= */
+/* === 04. CTA PACKAGE DETAIL CARD === */
 
 .CTA-section-container {
     position: relative;
@@ -1420,9 +1454,9 @@ div.container.st-nav-inner {
 }
 
 .seo-dd-btn-enquiry:hover {
-    border-color: #ff3b30;
+    border-color: var(--brand-primary);
     background: #ffeceb;
-    color: #ff3b30 !important;
+    color: var(--brand-primary) !important;
 }
 .st-mobile-submenu-close {
     width: 40px;
@@ -1981,6 +2015,7 @@ div.container.st-nav-inner {
     font-size: clamp(1.3rem, 2.8vw, 2.6rem);
     font-weight: 900;
     letter-spacing: -0.02em;
+    color: white;
 }
 
 .st-offers-slide-text {
@@ -1996,7 +2031,7 @@ div.container.st-nav-inner {
     width: fit-content;
     background: linear-gradient(
         135deg,
-        #ff574d 0%,
+        var(--brand-primary-tint) 0%,
         var(--brand-primary) 100%
     ) !important;
     border: 1px solid rgba(255, 59, 48, 0.18);
@@ -2057,22 +2092,13 @@ div.container.st-nav-inner {
     }
 }
 
-/* =========================================
-   SEASONAL JOURNEYS
-========================================= */
-
-/* =========================================================
-   SEASONAL JOURNEYS  –  seasonal-journeys.css
-   Include this file in your layout:
-     <link rel="stylesheet" href="{{ asset('css/seasonal-journeys.css') }}">
-   Or paste the contents into your main stylesheet.
-   ========================================================= */
+/* === 05. SEASONAL JOURNEYS === */
 
 /* ── Section wrapper ── */
 .sj-section {
     width: min(100% - 24px, 1320px);
     margin: 0 auto 56px;
-    font-family: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-display);
 }
 
 /* ── Header ── */
@@ -2400,17 +2426,13 @@ div.container.st-nav-inner {
     }
 }
 
-/* =========================================================
-   FOOTER  –  footer.css
-   Link in your layout head:
-     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-   ========================================================= */
+/* === 06. FOOTER === */
 
 /* ── Root / Tokens ── */
 .st-footer {
     background: #161616;
     color: rgba(255, 255, 255, 0.78);
-    font-family: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-display);
     font-size: 14.5px;
     line-height: 1.6;
 }
@@ -2591,7 +2613,7 @@ div.container.st-nav-inner {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    color: #ff3b30 !important;
+    color: var(--brand-primary) !important;
     font-weight: 700 !important;
 }
 
@@ -2599,7 +2621,7 @@ div.container.st-nav-inner {
     width: 16px;
     height: 16px;
     flex-shrink: 0;
-    color: #ff3b30;
+    color: var(--brand-primary);
 }
 
 .st-footer-fraud-link:hover {
@@ -2729,23 +2751,19 @@ div.container.st-nav-inner {
     }
 }
 
-/* =========================================================
-   POPULAR DESTINATIONS  –  popular-destinations.css
-   Paste into your main stylesheet OR link separately.
-   ========================================================= */
+/* === 07. POPULAR DESTINATIONS === */
 
 /* ── Section ── */
 .pd-section {
     width: min(100% - 24px, 1320px);
     margin: 0 auto 56px;
-    font-family: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-display);
 }
 
 .pd-container {
     background: #f7f8fa;
     border: 1px solid rgba(17, 17, 17, 0.07);
     box-shadow: 0 8px 40px rgba(17, 17, 17, 0.06);
-    /* border-radius: 28px; */
     padding: 36px 36px 28px;
 }
 
@@ -2816,8 +2834,8 @@ div.container.st-nav-inner {
 }
 
 .pd-nav-btn:hover:not(:disabled) {
-    background: var(--brand-primary, #ff3b30);
-    border-color: var(--brand-primary, #ff3b30);
+    background: var(--brand-primary);
+    border-color: var(--brand-primary);
     color: #fff;
     transform: scale(1.08);
 }
@@ -2937,7 +2955,7 @@ div.container.st-nav-inner {
 }
 
 .pd-badge--hot {
-    background: #ff3b30;
+    background: var(--brand-primary);
     color: #fff;
 }
 
@@ -3014,26 +3032,12 @@ div.container.st-nav-inner {
     white-space: nowrap;
 }
 
-/* ── Amenity tags ── */
-/* .pd-amenities {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    padding: 6px 14px;
-    border-radius: 999px;
-    border: 1.5px solid rgba(255, 59, 48, 0.18);
-    background: rgba(255, 59, 48, 0.06);
-    color: #ff3b30 !important;
-    font-size: 12px;
-    font-weight: 700;
-} */
-
 .pd-amenity {
     padding: 5px 12px;
     border-radius: 999px;
     border: 1px solid rgba(255, 255, 255, 0.12);
     background: rgba(255, 59, 48, 0.06);
-    color: #ff3b30;
+    color: var(--brand-primary);
     font-size: 12px;
     font-weight: 700;
     white-space: nowrap;
@@ -3086,7 +3090,11 @@ div.container.st-nav-inner {
     right: 0;
     height: 4px;
     border-radius: 18px 18px 0 0;
-    background: linear-gradient(90deg, #ff3b30 0%, #ff7a45 100%);
+    background: linear-gradient(
+        90deg,
+        var(--brand-primary) 0%,
+        var(--brand-primary-tint) 100%
+    );
 }
 @media (min-width: 992px) {
     .honeymoon-package5 {
@@ -3122,8 +3130,8 @@ div.container.st-nav-inner {
     gap: 8px;
     margin-top: auto; /* always at bottom */
     background: transparent;
-    border: 1.5px solid #ff3b30;
-    color: #ff3b30;
+    border: 1.5px solid var(--brand-primary);
+    color: var(--brand-primary);
     font-size: 14px;
     font-weight: 800;
     border-radius: 14px;
@@ -3139,8 +3147,8 @@ div.container.st-nav-inner {
 }
 
 .pd-btn:hover {
-    background: var(--brand-primary, #ff3b30);
-    border-color: var(--brand-primary, #ff3b30);
+    background: var(--brand-primary);
+    border-color: var(--brand-primary);
     color: #fff;
     box-shadow: 0 12px 28px rgba(255, 59, 48, 0.28);
     transform: translateY(-2px);
@@ -3168,7 +3176,7 @@ div.container.st-nav-inner {
 }
 
 .pd-dot--active {
-    background: var(--brand-primary, #ff3b30);
+    background: var(--brand-primary);
     width: 42px;
 }
 
@@ -3203,8 +3211,8 @@ div.container.st-nav-inner {
 }
 
 .pd-view-all:hover {
-    background: var(--brand-primary, #ff3b30);
-    border-color: var(--brand-primary, #ff3b30);
+    background: var(--brand-primary);
+    border-color: var(--brand-primary);
     color: #fff;
     box-shadow: 0 12px 28px rgba(255, 59, 48, 0.22);
     transform: translateY(-2px);
@@ -3296,25 +3304,7 @@ div.container.st-nav-inner {
     }
 }
 
-/* =========================================================
-   CARD PRICE BLOCK STYLES
-   Paste at the end of your popular-destinations.css
-   (or your main stylesheet)
-   =========================================================
-
-   HTML structure expected inside .pd-card-top:
-
-   <div class="pd-card-price-wrap">
-       <div class="pd-price-top">
-           <span class="pd-price-original">INR 4,21,913</span>
-           <span class="pd-price-save">SAVE INR 1,04,610</span>
-       </div>
-       <div class="pd-price-bottom">
-           <span class="pd-price-final">INR 3,17,303</span>
-           <span class="pd-price-per">/Adult</span>
-       </div>
-   </div>
-   ========================================================= */
+/* === 07A. POPULAR DESTINATION PRICE BLOCK === */
 
 /* ── Wrapper: stacks top row + bottom row ── */
 .pd-card-price-wrap {
@@ -3434,34 +3424,8 @@ div.container.st-nav-inner {
         font-size: 11px;
     }
 }
-/* =========================================================
-   DESTINATION FILTER SECTION  –  destination-filter.css
-   SHABDD TRAVEL  |  Premium Tourism UI
-   Link: <link rel="stylesheet" href="{{ asset('assets/css/destination-filter.css') }}">
-   ========================================================= */
-
-/* ── CSS Variables ── */
-:root {
-    --df-red: #ff3b30;
-    --df-red-dk: #d92e24;
-    --df-red-lt: rgba(255, 59, 48, 0.08);
-    --df-red-glow: rgba(255, 59, 48, 0.22);
-    --df-black: #111111;
-    --df-dark: #1a1a1a;
-    --df-mid: #555555;
-    --df-muted: rgba(17, 17, 17, 0.45);
-    --df-border: rgba(17, 17, 17, 0.09);
-    --df-border-md: rgba(17, 17, 17, 0.14);
-    --df-bg: #f7f7f7;
-    --df-white: #ffffff;
-    --df-shadow: 0 8px 32px rgba(17, 17, 17, 0.08);
-    --df-shadow-lg: 0 20px 60px rgba(17, 17, 17, 0.12);
-    --df-radius: 24px;
-    --df-radius-sm: 14px;
-    --df-sidebar-w: 296px;
-    --df-transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    --df-font: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
+/* === 08. DESTINATION FILTER SECTION === */
+/* Premium tourism filter UI. */
 
 /* =========================================================
    SECTION SHELL
@@ -3524,7 +3488,11 @@ div.container.st-nav-inner {
     width: 42px;
     height: 42px;
     border-radius: 14px;
-    background: linear-gradient(135deg, #ff574d 0%, var(--df-red) 100%);
+    background: linear-gradient(
+        135deg,
+        var(--brand-primary-tint) 0%,
+        var(--df-red) 100%
+    );
     color: #fff;
     display: flex;
     align-items: center;
@@ -3789,7 +3757,11 @@ div.container.st-nav-inner {
     padding: 14px 20px;
     border-radius: var(--df-radius-sm);
     border: none;
-    background: linear-gradient(135deg, #ff574d 0%, var(--df-red) 100%);
+    background: linear-gradient(
+        135deg,
+        var(--brand-primary-tint) 0%,
+        var(--df-red) 100%
+    );
     color: #fff;
     font-family: var(--df-font);
     font-size: 14px;
@@ -4153,7 +4125,7 @@ div.container.st-nav-inner {
 }
 
 .df-badge--trending {
-    background: #ff3b30;
+    background: var(--brand-primary);
     color: #fff;
     box-shadow: 0 6px 16px rgba(255, 59, 48, 0.35);
 }
@@ -4791,17 +4763,13 @@ div.container.st-nav-inner {
     }
 }
 
-/* ============================================================
-   HONEYMOON BANNER  –  honeymoon-banner.css
-   Paste into your main stylesheet or link separately.
-   Set --hb-bg inline on <section> to your image URL.
-   ============================================================ */
+/* === 09. HONEYMOON BANNER === */
 
 /* ── Section Shell ── */
 .hb-section {
     --hb-bg: none;
-    --hb-red: #ff3b30;
-    --hb-red-dk: #c0392b;
+    --hb-red: var(--brand-primary);
+    --hb-red-dk: var(--brand-primary-dark);
     --hb-pink: #ff6b9d;
     --hb-rose: #ff1744;
 
@@ -4815,7 +4783,7 @@ div.container.st-nav-inner {
     align-items: center;
     justify-content: center;
     isolation: isolate;
-    font-family: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-display);
 
     /* Background image */
     background: var(--hb-bg) center / cover no-repeat;
@@ -5151,7 +5119,7 @@ div.container.st-nav-inner {
 
 .hb-title em {
     font-style: italic;
-    background: linear-gradient(135deg, #ff6b9d, #ff3b30, #ff1744);
+    background: linear-gradient(135deg, #ff6b9d, var(--brand-primary), #ff1744);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -5254,7 +5222,12 @@ div.container.st-nav-inner {
 
 /* Primary CTA */
 .hb-btn--primary {
-    background: linear-gradient(135deg, #ff574d 0%, #ff3b30 60%, #c0392b 100%);
+    background: linear-gradient(
+        135deg,
+        var(--brand-primary-tint) 0%,
+        var(--brand-primary) 60%,
+        var(--brand-primary-dark) 100%
+    );
     color: #fff;
     border: 1px solid rgba(255, 87, 77, 0.4);
     box-shadow:
@@ -5361,7 +5334,12 @@ div.container.st-nav-inner {
 .hb-heart-3d {
     font-size: 7rem;
     line-height: 1;
-    background: linear-gradient(135deg, #ff6b9d 0%, #ff3b30 50%, #c0392b 100%);
+    background: linear-gradient(
+        135deg,
+        #ff6b9d 0%,
+        var(--brand-primary) 50%,
+        var(--brand-primary-dark) 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -5546,16 +5524,13 @@ div.container.st-nav-inner {
         font-size: 0.95rem;
     }
 }
-/* =========================================================
-   RECOMMENDED DESTINATIONS  –  recommended-destinations.css
-   SHABDD TRAVEL  |  Paste into your main stylesheet or link separately.
-   ========================================================= */
+/* === 10. RECOMMENDED DESTINATIONS === */
 
 /* ── Section ── */
 .rd-section {
     width: min(100% - 24px, 1320px);
     margin: 0 auto 64px;
-    font-family: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-display);
 }
 
 /* ── Container (subtle background panel) ── */
@@ -5642,8 +5617,8 @@ div.container.st-nav-inner {
 }
 
 .rd-nav-btn:hover:not(:disabled) {
-    background: var(--brand-primary, #ff3b30);
-    border-color: var(--brand-primary, #ff3b30);
+    background: var(--brand-primary);
+    border-color: var(--brand-primary);
     color: #fff;
     transform: scale(1.08);
     box-shadow: 0 8px 20px rgba(255, 59, 48, 0.3);
@@ -5679,8 +5654,8 @@ div.container.st-nav-inner {
 }
 
 .rd-view-all-link:hover {
-    background: var(--brand-primary, #ff3b30);
-    border-color: var(--brand-primary, #ff3b30);
+    background: var(--brand-primary);
+    border-color: var(--brand-primary);
     color: #fff;
     transform: translateY(-2px);
     box-shadow: 0 10px 24px rgba(255, 59, 48, 0.25);
@@ -5781,7 +5756,7 @@ div.container.st-nav-inner {
 }
 
 .rd-badge--hot {
-    background: #ff3b30;
+    background: var(--brand-primary);
     color: #fff;
     box-shadow: 0 4px 14px rgba(255, 59, 48, 0.4);
 }
@@ -5832,7 +5807,7 @@ div.container.st-nav-inner {
 
 .rd-wishlist:hover,
 .rd-wishlist--saved {
-    background: #ff3b30;
+    background: var(--brand-primary);
     color: #fff;
     transform: scale(1.1);
     box-shadow: 0 6px 18px rgba(255, 59, 48, 0.35);
@@ -5977,7 +5952,7 @@ div.container.st-nav-inner {
     gap: 5px;
     padding: 9px 16px;
     border-radius: 10px;
-    background: var(--brand-primary, #ff3b30);
+    background: var(--brand-primary);
     color: #fff;
     font-size: 12.5px;
     font-weight: 800;
@@ -6022,7 +5997,7 @@ div.container.st-nav-inner {
 }
 
 .rd-dot--active {
-    background: var(--brand-primary, #ff3b30);
+    background: var(--brand-primary);
     width: 44px;
 }
 
@@ -6107,31 +6082,27 @@ div.container.st-nav-inner {
         font-size: 12.5px;
     }
 }
-/* =========================================================
-   TRAVEL BLOG SECTION  –  blog-section.css
-   SHABDD TRAVEL  |  Paste into your main stylesheet or link:
-   <link rel="stylesheet" href="{{ asset('assets/css/blog-section.css') }}">
-   ========================================================= */
+/* === 11. TRAVEL BLOG SECTION === */
 
 /* ── CSS Variables (inherits brand vars, fallbacks provided) ── */
 .tb-section {
-    --tb-red: #ff3b30;
-    --tb-red-dk: #d92e24;
-    --tb-red-lt: rgba(255, 59, 48, 0.08);
-    --tb-red-glow: rgba(255, 59, 48, 0.22);
-    --tb-black: #111111;
+    --tb-red: var(--brand-primary);
+    --tb-red-dk: var(--brand-primary-dark);
+    --tb-red-lt: var(--brand-primary-soft);
+    --tb-red-glow: var(--brand-primary-glow);
+    --tb-black: var(--brand-black);
     --tb-dark: #1a1a1a;
     --tb-mid: #555555;
     --tb-muted: rgba(17, 17, 17, 0.45);
     --tb-border: rgba(17, 17, 17, 0.08);
     --tb-border-md: rgba(17, 17, 17, 0.13);
-    --tb-bg: #f7f7f7;
-    --tb-white: #ffffff;
+    --tb-bg: var(--brand-bg);
+    --tb-white: var(--brand-white);
     --tb-shadow: 0 8px 32px rgba(17, 17, 17, 0.08);
     --tb-shadow-lg: 0 20px 60px rgba(17, 17, 17, 0.13);
     --tb-radius: 22px;
     --tb-radius-sm: 14px;
-    --tb-font: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    --tb-font: var(--font-display);
     --tb-transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -6282,7 +6253,7 @@ div.container.st-nav-inner {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    color: #ff3b30;
+    color: var(--brand-primary);
     font-size: 1.15rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -6635,7 +6606,11 @@ div.container.st-nav-inner {
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #ff574d 0%, var(--tb-red) 100%);
+    background: linear-gradient(
+        135deg,
+        var(--brand-primary-tint) 0%,
+        var(--tb-red) 100%
+    );
     color: #fff;
     font-size: 15px;
     font-weight: 900;
@@ -6954,7 +6929,11 @@ div.container.st-nav-inner {
     padding: 11px 26px;
     border-radius: 12px;
     border: none;
-    background: linear-gradient(135deg, #ff574d 0%, var(--tb-red) 100%);
+    background: linear-gradient(
+        135deg,
+        var(--brand-primary-tint) 0%,
+        var(--tb-red) 100%
+    );
     color: #fff;
     font-family: var(--tb-font);
     font-size: 14px;
@@ -7463,6 +7442,7 @@ div.container.st-nav-inner {
         font-size: 0.85rem;
     }
 }
+/* === 12. DESTINATION PAGE LEGACY MODULES === */
 .destination-page {
     width: 100%;
 }
@@ -7535,9 +7515,7 @@ div.container.st-nav-inner {
     padding: 30px;
     border-radius: 20px;
 }
-/* ════════════════════════════════════════════════
-   HERO SECTION
-════════════════════════════════════════════════ */
+/* === 12A. DESTINATION HERO SEARCH === */
 .destination-st-hero {
     position: relative;
     min-height: 100vh;
@@ -7549,7 +7527,7 @@ div.container.st-nav-inner {
     background-position: center 30%;
     overflow: visible; /* allow searchbar to overlap */
     padding-bottom: 120px; /* space for search bar */
-    font-family: "Manrope", "Segoe UI", Tahoma, sans-serif;
+    font-family: var(--font-display);
 }
 
 /* Video background */
@@ -8289,11 +8267,9 @@ div.container.st-nav-inner {
     }
 }
 
-/* =========================================================
-   SEO Destination Details (Post-Hero)
-   Reusable dynamic destination template
-========================================================= */
+/* === 13. SEO DESTINATION DETAILS === */
 .seo-dd {
+    --dd-primary: var(--brand-primary);
     --dd-bg: #f4f8ff;
     --dd-bg-soft: #fff9f3;
     --dd-text: #10253e;
@@ -8401,7 +8377,7 @@ div.container.st-nav-inner {
 }
 
 .seo-dd-quick-card:hover {
-    border-color: #ff3b30;
+    border-color: var(--brand-primary);
     box-shadow: var(--brand-shadow-strong);
     transform: translateY(-4px);
 }
@@ -8446,7 +8422,7 @@ div.container.st-nav-inner {
 .seo-dd-quick-card strong {
     font-size: 0.92rem;
     font-weight: 800;
-    color: #ff3b30;
+    color: var(--brand-primary);
 }
 
 .seo-dd-section {
@@ -8494,7 +8470,7 @@ div.container.st-nav-inner {
 
 .seo-dd-kicker {
     margin: 0 0 8px;
-    color: #ff3b30;
+    color: var(--brand-primary);
     font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 0.1em;
@@ -9024,7 +9000,7 @@ body.seo-dd-gallery-modal-open {
 .seo-dd-badge {
     border: 1px solid color-mix(in srgb, var(--dd-primary) 18%, #dce5f0);
     color: #ffffff;
-    background: #ff574d;
+    background: var(--brand-primary-tint);
 }
 
 .seo-dd-tag {
@@ -9057,7 +9033,7 @@ body.seo-dd-gallery-modal-open {
         color-mix(in srgb, var(--dd-primary) 28%, transparent);
 }
 .seo-dd-btn-enquiry {
-    border-color: #ff3b30;
+    border-color: var(--brand-primary);
     background: #ffeceb;
 }
 
@@ -9188,7 +9164,7 @@ body.seo-dd-gallery-modal-open {
 
 #besttime .seo-dd-badge {
     border: 0;
-    background: #ff4a49;
+    background: var(--brand-primary-tint);
     color: #fff;
     font-size: 0.82rem;
     font-weight: 700;
@@ -9780,15 +9756,31 @@ body.seo-dd-gallery-modal-open {
 }
 
 .seo-dd-form select {
+    --select-bg: var(--form-accent-bg);
+    --select-color: var(--form-accent-color);
+    --select-border: var(--dd-border);
     height: 42px;
     border-radius: 13px;
-    border: 1px solid var(--dd-border);
+    border: 1px solid var(--select-border);
     padding: 0 10px;
     outline: 0;
-    background: #ff4949;
-    color: white;
+    background: var(--select-bg);
+    color: var(--select-color);
     padding-right: 20px;
 }
+
+.seo-dd-form select.--accent {
+    --select-bg: var(--form-accent-bg);
+    --select-color: var(--form-accent-color);
+    --select-border: var(--dd-border);
+}
+
+.seo-dd-form select.--neutral {
+    --select-bg: var(--form-neutral-bg);
+    --select-color: var(--form-neutral-color);
+    --select-border: var(--form-neutral-border);
+}
+
 .seo-dd-form select option {
     background-color: white;
     height: 42px;
@@ -10148,7 +10140,7 @@ body.seo-dd-gallery-modal-open {
     }
 }
 
-/* Package details page (unique namespace) */
+/* === 14. PACKAGE DETAILS PAGE === */
 #xpkd-root-shell {
     padding: 28px 0 42px;
 }
@@ -10758,9 +10750,7 @@ body.seo-dd-gallery-modal-open {
     }
 }
 
-/* =========================
-   HERO SECTION
-========================= */
+/* === 15. HONEYMOON PACKAGE PAGE === */
 
 .honeymoon-hero {
     padding: 20px 0;
@@ -10812,7 +10802,7 @@ body.seo-dd-gallery-modal-open {
 .hero-badge span {
     font-size: 11px;
     font-weight: 600;
-    color: #ff574d;
+    color: var(--brand-primary-tint);
 }
 
 .honeymoon-title {
@@ -10849,22 +10839,22 @@ body.seo-dd-gallery-modal-open {
 }
 
 .hero-btn-primary {
-    background: #ff5a50;
+    background: var(--brand-primary-tint);
     color: #fff;
 }
 
 .hero-btn-primary:hover {
-    background: #dc3545;
+    background: var(--brand-primary-hover);
     color: #ffff;
 }
 
 .hero-btn-outline {
-    border: 2px solid #dc3545;
-    color: #dc3545;
+    border: 2px solid var(--brand-primary-hover);
+    color: var(--brand-primary-hover);
 }
 
 .hero-btn-outline:hover {
-    background: #dc3545;
+    background: var(--brand-primary-hover);
     color: #fff;
 }
 
@@ -10908,7 +10898,7 @@ body.seo-dd-gallery-modal-open {
 }
 
 .section-heading span {
-    color: #dc3545;
+    color: var(--brand-primary-hover);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -10918,7 +10908,7 @@ body.seo-dd-gallery-modal-open {
     font-size: 42px;
     font-weight: 800;
     margin-top: 10px;
-    font-family: none;
+    font-family: var(--font-serif);
 }
 
 .honeymoon-card {
@@ -11018,17 +11008,15 @@ body.seo-dd-gallery-modal-open {
 
 .honeymoon-package-card {
     background: #fff;
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     border: 1px solid #dbe4ef;
     transition: 0.35s ease;
     height: 100%;
-    box-shadow: 0 10px 35px rgba(15, 23, 42, 0.06);
 }
 
 .honeymoon-package-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.05);
 }
 
 /* IMAGE */
@@ -11047,7 +11035,7 @@ body.seo-dd-gallery-modal-open {
 }
 
 .honeymoon-package-card:hover .package-image img {
-    transform: scale(1.08);
+    transform: scale(1.05);
 }
 
 /* TOP BADGES */
@@ -11055,16 +11043,16 @@ body.seo-dd-gallery-modal-open {
 .package-tag,
 .package-duration {
     position: absolute;
-    top: 18px;
+    top: 12px;
     z-index: 2;
 
     display: inline-flex;
     align-items: center;
     color: rgb(255, 255, 255);
-    font-size: 0.74rem;
+    font-size: 0.64rem;
     font-weight: 700;
     line-height: 1;
-    border-radius: 999px;
+    border-radius: 15px;
     padding: 6px 10px;
     background: rgba(15, 24, 38, 0.84);
 }
@@ -11095,7 +11083,7 @@ body.seo-dd-gallery-modal-open {
     line-height: 1.3;
     font-weight: 800;
     margin-bottom: 5px;
-    color: #ff3b30;
+    color: var(--brand-primary);
 }
 
 /* BADGES */
@@ -11105,7 +11093,7 @@ body.seo-dd-gallery-modal-open {
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 
 .package-badges span {
@@ -11116,12 +11104,12 @@ body.seo-dd-gallery-modal-open {
     font-weight: 700;
     color: #64748b; */
     color: #5f728b;
-    font-size: 0.8rem;
+    font-size: 0.6rem;
     font-weight: 600;
 
     border: 1px solid #dde6f2;
-    border-radius: 999px;
-    padding: 4px 10px;
+    border-radius: 15px;
+    padding: 4px 7px;
     background: #f8fbff;
 }
 
@@ -11147,7 +11135,7 @@ body.seo-dd-gallery-modal-open {
     content: "";
     position: absolute;
     left: 0;
-    top: 10px;
+    top: 6px;
     width: 8px;
     height: 8px;
     border-radius: 50%;
@@ -11188,11 +11176,11 @@ body.seo-dd-gallery-modal-open {
 /* BUTTON */
 
 .package-btn {
-    padding: 10px 16px;
+    padding: 6px 7px;
     border-radius: 10px;
     border: 1px solid #cdd8e5;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     color: #0d6efd;
     transition: 0.3s ease;
@@ -11222,12 +11210,13 @@ body.seo-dd-gallery-modal-open {
 
 @media (max-width: 991px) {
     .package-content h3 {
-        font-size: 28px;
+        font-size: 23px;
     }
 
     .package-footer {
         flex-direction: column;
         align-items: flex-start;
+        align-items: center;
     }
 
     .package-btn {
@@ -11279,17 +11268,32 @@ body.seo-dd-gallery-modal-open {
 }
 
 .honeymoon-filters select {
-    border: 1px solid #dbe4ef;
-    background: #f8fafc;
+    --select-bg: var(--form-neutral-bg);
+    --select-color: var(--form-neutral-color);
+    --select-border: var(--form-neutral-border);
+    border: 1px solid var(--select-border);
+    background: var(--select-bg);
     border-radius: 50px;
     padding: 14px 22px;
     font-size: 16px;
     font-weight: 600;
-    color: #0f172a;
+    color: var(--select-color);
     outline: none;
     cursor: pointer;
     transition: 0.3s ease;
     min-width: 160px;
+}
+
+.honeymoon-filters select.--accent {
+    --select-bg: var(--form-accent-bg);
+    --select-color: var(--form-accent-color);
+    --select-border: var(--form-accent-bg);
+}
+
+.honeymoon-filters select.--neutral {
+    --select-bg: var(--form-neutral-bg);
+    --select-color: var(--form-neutral-color);
+    --select-border: var(--form-neutral-border);
 }
 
 .honeymoon-filters select:hover {
