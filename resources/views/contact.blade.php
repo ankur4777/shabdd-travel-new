@@ -2,7 +2,8 @@
 
 @section('meta')
     <title>Contact SHABDD Travel</title>
-    <meta name="description" content="Contact SHABDD Travel for curated holiday packages, destination planning, support, and partnership enquiries.">
+    <meta name="description"
+        content="Contact SHABDD Travel for curated holiday packages, destination planning, support, and partnership enquiries.">
 @endsection
 
 @push('styles')
@@ -15,15 +16,13 @@
         .contact-hero {
             position: relative;
             overflow: hidden;
+            align-items: center;
             min-height: min(560px, 74vh);
             display: flex;
-            align-items: flex-end;
             margin: 0 auto;
             isolation: isolate;
             color: #fff;
-            background:
-                linear-gradient(90deg, rgba(17, 17, 17, 0.78), rgba(17, 17, 17, 0.36)),
-                url("{{ asset('images/world-map.avif') }}") center/cover no-repeat;
+            background: linear-gradient(90deg, rgb(17 17 17 / 61%), rgb(17 17 17 / 0%)), url(https://amplify-wrought-tamer.ngrok-free.dev/images/contact-us-bg.jpg) center / cover no-repeat
         }
 
         .contact-hero::after {
@@ -33,12 +32,14 @@
             height: 44%;
             background: linear-gradient(180deg, rgba(17, 17, 17, 0), rgba(17, 17, 17, 0.68));
             z-index: -1;
+            align-items: center;
         }
 
         .contact-hero-inner {
             width: min(100% - 32px, 1180px);
-            margin: 0 auto;
-            padding: 84px 0 58px;
+            margin-left: 20px;
+            margin-right: 240px;
+            padding: 26px 0 26px;
         }
 
         .contact-kicker {
@@ -68,6 +69,7 @@
             font-weight: 900;
             line-height: 0.98;
             letter-spacing: 0;
+            color: #ffecee;
         }
 
         .contact-copy {
@@ -318,6 +320,7 @@
         }
 
         @media (max-width: 991.98px) {
+
             .contact-quick-grid,
             .contact-main-grid {
                 grid-template-columns: 1fr;
@@ -331,10 +334,12 @@
         @media (max-width: 575.98px) {
             .contact-hero {
                 min-height: 500px;
+                align-items: center;
             }
 
             .contact-hero-inner {
                 padding-bottom: 44px;
+                margin-right: 40px;
             }
 
             .contact-form {
@@ -425,7 +430,8 @@
 
                         <div class="contact-field contact-field-full">
                             <label for="contactMessage">Message</label>
-                            <textarea id="contactMessage" name="message" placeholder="Destination, dates, budget, travellers, and anything else we should know"></textarea>
+                            <textarea id="contactMessage" name="message"
+                                placeholder="Destination, dates, budget, travellers, and anything else we should know"></textarea>
                         </div>
 
                         <button class="contact-submit" type="submit">
@@ -455,7 +461,8 @@
                             <span class="contact-info-icon"><i class="bi bi-geo-alt"></i></span>
                             <div>
                                 <p class="contact-info-title">Service area</p>
-                                <p class="contact-info-copy">India tours, international holidays, group departures, and curated custom trips.</p>
+                                <p class="contact-info-copy">India tours, international holidays, group departures, and
+                                    curated custom trips.</p>
                             </div>
                         </div>
 
@@ -463,7 +470,8 @@
                             <span class="contact-info-icon"><i class="bi bi-envelope-paper"></i></span>
                             <div>
                                 <p class="contact-info-title">Support mailbox</p>
-                                <p class="contact-info-copy"><a href="mailto:support@shabddtravel.com">support@shabddtravel.com</a></p>
+                                <p class="contact-info-copy"><a
+                                        href="mailto:support@shabddtravel.com">support@shabddtravel.com</a></p>
                             </div>
                         </div>
                     </div>
