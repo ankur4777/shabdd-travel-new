@@ -14,14 +14,9 @@ class HomeController extends Controller
     {
         $destinations = Destination::query()
             ->active()
-            ->trending()
+            ->whereRaw("LOWER(TRIM(COALESCE(category, ''))) = ?", ['trending'])
             ->latest()
             ->take(12)
-            ->get();
-
-        $trendingPackages = Package::where('category', 'Trending')
-            ->latest()
-            ->take(8)
             ->get();
 
         $blogController = new BlogController();
@@ -29,8 +24,7 @@ class HomeController extends Controller
 
         return view('home', compact(
             'destinations',
-            'blogs',
-            'trendingPackages'
+            'blogs'
         ));
     }
 

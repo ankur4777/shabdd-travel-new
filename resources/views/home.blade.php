@@ -187,7 +187,8 @@
                 <div class="st-themes-track" id="themesTrack">
 
                     {{-- Card 1: Honeymoon --}}
-                    <a href="{{ route('destinations.index', ['travel_style' => 'honeymoon']) }}" class="st-theme-card" data-theme="honeymoon">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'honeymoon']) }}" class="st-theme-card"
+                        data-theme="honeymoon">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#f472b6 0%,#ec4899 40%,#be185d 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -219,7 +220,8 @@
                     </a>
 
                     {{-- Card 2: Family --}}
-                    <a href="{{ route('destinations.index', ['travel_style' => 'family']) }}" class="st-theme-card" data-theme="family">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'family']) }}" class="st-theme-card"
+                        data-theme="family">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#fde68a 0%,#f59e0b 45%,#d97706 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -247,7 +249,8 @@
                     </a>
 
                     {{-- Card 3: Friends / Group --}}
-                    <a href="{{ route('destinations.index', ['travel_style' => 'friends']) }}" class="st-theme-card" data-theme="friends">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'friends']) }}" class="st-theme-card"
+                        data-theme="friends">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#6ee7b7 0%,#34d399 40%,#059669 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -280,7 +283,8 @@
                     </a>
 
                     {{-- Card 4: Solo --}}
-                    <a href="{{ route('destinations.index', ['travel_style' => 'solo']) }}" class="st-theme-card" data-theme="solo">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'solo']) }}" class="st-theme-card"
+                        data-theme="solo">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#fcd34d 0%,#f97316 45%,#b45309 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -316,7 +320,8 @@
                     </a>
 
                     {{-- Card 5: Adventure --}}
-                    <a href="{{ route('destinations.index', ['travel_style' => 'adventure']) }}" class="st-theme-card" data-theme="adventure">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'adventure']) }}" class="st-theme-card"
+                        data-theme="adventure">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#7dd3fc 0%,#0284c7 45%,#075985 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -358,7 +363,8 @@
                     </a>
 
                     {{-- Card 6: Nature --}}
-                    <a href="{{ route('destinations.index', ['travel_style' => 'nature']) }}" class="st-theme-card" data-theme="nature">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'nature']) }}" class="st-theme-card"
+                        data-theme="nature">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#a7f3d0 0%,#10b981 45%,#065f46 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -393,7 +399,8 @@
                     </a>
 
                     {{-- Card 7: Religious --}}
-                    <a href="{{ route('destinations.index', ['travel_style' => 'religiuos']) }}" class="st-theme-card" data-theme="religious">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'religiuos']) }}" class="st-theme-card"
+                        data-theme="religious">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#fbbf24 0%,#d97706 45%,#92400e 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -427,7 +434,8 @@
                     </a>
 
                     {{-- Card 8: Wildlife --}}
-                    <a href="{{ route('destinations.index', ['travel_style' => 'wildlife']) }}" class="st-theme-card" data-theme="wildlife">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'wildlife']) }}" class="st-theme-card"
+                        data-theme="wildlife">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#fef3c7 0%,#b45309 50%,#78350f 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -473,7 +481,8 @@
                     </a>
 
                     {{-- Card 9: Water Activities --}}
-                    <a href="{{ route('destinations.index', ['travel_style' => 'water activities']) }}" class="st-theme-card" data-theme="water">
+                    <a href="{{ route('destinations.index', ['travel_style' => 'water activities']) }}"
+                        class="st-theme-card" data-theme="water">
                         <div class="st-theme-card-img"
                             style="background: linear-gradient(160deg,#67e8f9 0%,#0891b2 45%,#164e63 100%);">
                             <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -592,14 +601,15 @@
             {{-- ── Slider Track ── --}}
             <div class="rd-slider-outer">
                 <div class="rd-track" id="rdTrack">
-                    @forelse ($trendingPackages as $package)
-                        <article class="rd-card" style="--rd-card-bg: url('{{ asset('storage/' . $package->image) }}');">
+                    @forelse ($destinations as $destination)
+                        <article class="rd-card"
+                            style="--rd-card-bg: url('{{ $destination->image_url ? asset('storage/' . $destination->image_url) : asset('images/himachal.jpg') }}');">
                             <div class="rd-card-img"></div>
                             <div class="rd-card-overlay"></div>
-                            <div class="rd-card-badge {{ $package->badge_class }}">
-                                {{ $package->badge_label ?: '🔥 Trending' }}
+                            <div class="rd-card-badge {{ $destination->badge_class }}">
+                                {{ $destination->badge_label ?: '🔥 Trending' }}
                             </div>
-                            <button class="rd-wishlist" aria-label="Save {{ $package->name }}" data-saved="false">
+                            <button class="rd-wishlist" aria-label="Save {{ $destination->name }}" data-saved="false">
                                 <svg viewBox="0 0 24 24" fill="none">
                                     <path
                                         d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
@@ -613,7 +623,7 @@
                                         <path
                                             d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                                     </svg>
-                                    {{ number_format((float) $package->rating, 1) }}
+                                    {{ number_format((float) $destination->rating, 1) }}
                                 </div>
                                 <div class="rd-card-info">
                                     <div class="rd-card-location">
@@ -622,17 +632,18 @@
                                             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
                                                 stroke="currentColor" stroke-width="1.6" />
                                         </svg>
-                                        <span class="rd-tag">{{ $package->city }}</span>
-                                        <span class="rd-tag">{{ $package->days }} Days</span>
-                                        <span class="rd-tag">{{ $package->travel_style }}</span>
-
-
-
+                                        <span class="rd-tag">{{ $destination->country }}</span>
+                                        @if(!empty($destination->ideal_days))
+                                            <span class="rd-tag">{{ $destination->ideal_days }} Days</span>
+                                        @endif
+                                        @if(!empty($destination->travel_styles) && is_array($destination->travel_styles))
+                                            <span class="rd-tag">{{ $destination->travel_styles[0] ?? '' }}</span>
+                                        @endif
                                     </div>
-                                    <h3 class="rd-card-name">{{ $package->title }}</h3>
-                                    @if (!empty($package->tags))
+                                    <h3 class="rd-card-name">{{ $destination->name }}</h3>
+                                    @if (!empty($destination->tags))
                                         <div class="rd-card-tags">
-                                            @foreach (array_slice($package->tags, 0, 3) as $tag)
+                                            @foreach (array_slice($destination->tags, 0, 3) as $tag)
                                                 <span class="rd-tag">{{ $tag }}</span>
                                             @endforeach
                                         </div>
@@ -640,13 +651,12 @@
                                     <div class="rd-card-footer">
                                         <div class="rd-price-block">
                                             <span class="rd-price-from">From</span>
-                                            <span class="rd-price-from">₹{{ number_format($package->old_price) }}</span>
-
-
-                                            <span class="rd-price">₹{{ number_format($package->price) }}</span>
-                                            <span class="rd-price-per">{{ $package->price_unit }}</span>
+                                            <span
+                                                class="rd-price-from">{{ $destination->formatted_price ?? ($destination->price_from ? '₹' . number_format($destination->price_from) : '') }}</span>
+                                            <span class="rd-price">&nbsp;</span>
+                                            <span class="rd-price-per">{{ $destination->price_unit ?? '' }}</span>
                                         </div>
-                                        <a href="{{ route('packages.show', $package->slug) }}" class="rd-card-btn">Explore
+                                        <a href="{{ route('destinations.show', $destination) }}" class="rd-card-btn">Explore
                                             <span>→</span></a>
                                     </div>
                                 </div>
@@ -680,8 +690,8 @@
     {{-- ── Styles ── --}}
     <style>
         /* ═══════════════════════════════════════════════
-                                                                               SECTION WRAPPER
-                                                                            ════════════════════════════════════════════════*/
+                                                                                   SECTION WRAPPER
+                                                                                ════════════════════════════════════════════════*/
         .st-themes-section {
             width: min(100% - 24px, 1320px);
             margin: 0 auto 48px;
@@ -689,8 +699,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-                                                                               HEADER ROW
-                                                                            ════════════════════════════════════════════════*/
+                                                                                   HEADER ROW
+                                                                                ════════════════════════════════════════════════*/
         .st-themes-header {
             display: flex;
             align-items: center;
@@ -742,8 +752,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-                                                                               SLIDER OUTER  (the visible window + arrows)
-                                                                            ════════════════════════════════════════════════*/
+                                                                                   SLIDER OUTER  (the visible window + arrows)
+                                                                                ════════════════════════════════════════════════*/
         .st-themes-slider-outer {
             position: relative;
             display: flex;
@@ -752,8 +762,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-                                                                               ARROW BUTTONS
-                                                                            ════════════════════════════════════════════════*/
+                                                                                   ARROW BUTTONS
+                                                                                ════════════════════════════════════════════════*/
         .st-themes-arrow {
             position: absolute;
             top: 50%;
@@ -796,8 +806,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-                                                                               TRACK  (the scrolling row of cards)
-                                                                            ════════════════════════════════════════════════*/
+                                                                                   TRACK  (the scrolling row of cards)
+                                                                                ════════════════════════════════════════════════*/
         .st-themes-track {
             display: flex;
             gap: 14px;
@@ -816,8 +826,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-                                                                               INDIVIDUAL THEME CARD
-                                                                            ════════════════════════════════════════════════*/
+                                                                                   INDIVIDUAL THEME CARD
+                                                                                ════════════════════════════════════════════════*/
         .st-theme-card {
             flex: 0 0 auto;
             width: 176px;
@@ -870,8 +880,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-                                                                               VIEW ALL CARD
-                                                                            ════════════════════════════════════════════════*/
+                                                                                   VIEW ALL CARD
+                                                                                ════════════════════════════════════════════════*/
         .st-theme-viewall .st-theme-card-img {
             background: #fff !important;
             border: 1.5px dashed rgba(17, 17, 17, .16);
@@ -935,8 +945,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-                                                                               RESPONSIVE
-                                                                            ════════════════════════════════════════════════*/
+                                                                                   RESPONSIVE
+                                                                                ════════════════════════════════════════════════*/
         @media (max-width: 767.98px) {
             .st-themes-header {
                 flex-direction: column;
