@@ -22,3 +22,4 @@ Route::get('/package/{slug}', [DestinationController::class, 'packageShowBySlug'
 Route::view('/destination-detail', 'destination.sections.destination-detail');
 Route::get('/family-trips', [HomeController::class, 'familyTrips'])
     ->name('family-trips');
+Route::get('/religious', [HomeController::class, 'religious'])->name('religious');

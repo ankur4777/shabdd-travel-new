@@ -32,7 +32,6 @@ class HomeController extends Controller
             'blogs',
             'trendingPackages'
         ));
-
     }
 
     public function familyTrips(Request $request): View
@@ -43,6 +42,11 @@ class HomeController extends Controller
     public function honeymoon(Request $request): View
     {
         return $this->packageListing($request, 'honeymoon', 'honeymoon');
+    }
+
+    public function religious(Request $request): View
+    {
+        return $this->packageListing($request, 'religious', 'religious');
     }
 
     private function packageListing(Request $request, string $travelStyle, string $view): View

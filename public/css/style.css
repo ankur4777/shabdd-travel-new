@@ -40,7 +40,7 @@
     --df-black: var(--brand-black);
     --df-dark: #1a1a1a;
     --df-mid: #555555;
-    --df-muted: rgba(17, 17, 17, 0.45);
+    --df-muted: rgba(8, 8, 8, 0.796);
     --df-border: rgba(17, 17, 17, 0.09);
     --df-border-md: var(--brand-border-strong);
     --df-bg: var(--brand-bg);
@@ -3075,10 +3075,8 @@ div.container.st-nav-inner {
         rgba(255, 255, 255, 0.98),
         rgba(246, 250, 255, 0.95)
     );
-    box-shadow: 0 10px 24px rgba(17, 37, 63, 0.06);
     transition:
         transform 0.24s ease,
-        box-shadow 0.24s ease,
         border-color 0.24s ease;
 }
 
@@ -3110,10 +3108,11 @@ div.container.st-nav-inner {
 
 #why .seo-dd-feature-card h3 {
     margin: 0 0 10px;
-    font-size: clamp(1.15rem, 1.05rem + 0.22vw, 1.35rem);
-    line-height: 1.3;
+    font-size: 1rem !important;
+    line-height: 1.5rem;
     letter-spacing: -0.01em;
     color: #102843;
+    font-weight: 600;
 }
 
 #why .seo-dd-feature-card p {
@@ -7756,14 +7755,11 @@ div.container.st-nav-inner {
 ════════════════════════════════════════════════ */
 .st-searchbar {
     background: var(--sb-bg);
-    border-radius: 20px;
+    border-radius: 9px;
     display: flex;
     align-items: center;
     padding: 8px 8px 8px 4px;
     gap: 0;
-    box-shadow:
-        0 24px 70px rgba(0, 0, 0, 0.35),
-        0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
 /* ── Individual Field ── */
@@ -8048,7 +8044,7 @@ div.container.st-nav-inner {
 
 /* Hero typography */
 .destination-hero-word {
-    font-size: clamp(3.2rem, 9vw, 9.5rem);
+    font-size: clamp(1.2rem, 7vw, 6.5rem);
     font-weight: 900;
     line-height: 0.9;
     letter-spacing: -0.03em;
@@ -8169,11 +8165,8 @@ div.container.st-nav-inner {
     border-radius: 14px;
     padding: 6px;
     background: rgba(255, 255, 255, 0.95);
-    box-shadow:
-        0 28px 60px rgba(3, 10, 25, 0.45),
-        0 6px 18px rgba(0, 0, 0, 0.12);
-    backdrop-filter: blur(6px) saturate(120%);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+
+    border: 1px solid #0f172a;
 }
 
 .st-sb-field {
@@ -8276,7 +8269,7 @@ div.container.st-nav-inner {
     --dd-muted: #516882;
     --dd-border: color-mix(in srgb, var(--dd-primary) 18%, #d8e4f4);
     --dd-card: rgba(255, 255, 255, 0.85);
-    --dd-shadow: 0 18px 38px rgba(18, 40, 66, 0.11);
+    --dd-shadow: 0px 0px 38px rgba(18, 40, 66, 0.11);
     --dd-soft: color-mix(in srgb, var(--dd-primary) 14%, #ffffff);
     --dd-soft-strong: color-mix(in srgb, var(--dd-primary) 24%, #ffffff);
     --dd-primary-dark: color-mix(in srgb, var(--dd-primary) 75%, #10243d);
@@ -8361,10 +8354,9 @@ div.container.st-nav-inner {
 .seo-dd-quick-card {
     background-color: var(--brand-white);
     border: 1px solid rgb(17 17 17 / 21%);
-    border-radius: 12px;
+    border-radius: 9px;
     padding: 24px 20px;
     transition: all 0.3s ease;
-    box-shadow: var(--brand-shadow);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8378,8 +8370,6 @@ div.container.st-nav-inner {
 
 .seo-dd-quick-card:hover {
     border-color: var(--brand-primary);
-    box-shadow: var(--brand-shadow-strong);
-    transform: translateY(-4px);
 }
 
 .seo-dd-quick-card i {
@@ -8427,13 +8417,8 @@ div.container.st-nav-inner {
 
 .seo-dd-section {
     margin-bottom: 20px;
-    border-radius: 22px;
+    border-radius: 9px;
     border: 1px solid var(--dd-border);
-    background: linear-gradient(
-        160deg,
-        rgba(255, 255, 255, 0.95),
-        rgba(247, 251, 255, 0.86)
-    );
     box-shadow: var(--dd-shadow);
     padding: 28px;
 }
@@ -8446,7 +8431,7 @@ div.container.st-nav-inner {
         rgba(255, 255, 255, 0.96),
         color-mix(in srgb, var(--dd-primary) 5%, #fffdf8)
     );
-    backdrop-filter: blur(8px);
+    box-shadow: none;
 }
 
 .seo-dd-glass::before {
@@ -8634,10 +8619,9 @@ div.container.st-nav-inner {
     position: relative;
     display: block;
     overflow: hidden;
-    border-radius: 22px;
+    border-radius: 5px;
     text-decoration: none;
     color: #fff;
-    box-shadow: 0 18px 34px rgba(15, 33, 58, 0.12);
     grid-column: span var(--gallery-cols, 4);
     grid-row: span var(--gallery-rows, 4);
     min-height: 0;
@@ -8647,10 +8631,6 @@ div.container.st-nav-inner {
     cursor: pointer;
     appearance: none;
     text-align: left;
-}
-
-.seo-dd-gallery-card.is-featured {
-    box-shadow: 0 22px 42px rgba(15, 33, 58, 0.18);
 }
 
 .seo-dd-gallery-card:focus-visible {
@@ -8667,17 +8647,12 @@ div.container.st-nav-inner {
 }
 
 .seo-dd-gallery-card:hover img {
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 .seo-dd-gallery-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        180deg,
-        rgba(10, 18, 33, 0.05),
-        rgba(10, 18, 33, 0.68)
-    );
     z-index: 1;
 }
 
@@ -8695,7 +8670,7 @@ div.container.st-nav-inner {
     display: inline-flex;
     width: fit-content;
     padding: 6px 10px;
-    border-radius: 999px;
+    border-radius: 9px;
     background: rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(10px);
     font-size: 0.72rem;
@@ -8913,7 +8888,7 @@ body.seo-dd-gallery-modal-open {
     font-weight: 700 !important;
 }
 .seo-dd-card {
-    border-radius: 10px;
+    border-radius: 9px;
     border: 1px solid var(--dd-border);
     background: linear-gradient(
         160deg,
@@ -8929,8 +8904,6 @@ body.seo-dd-gallery-modal-open {
 }
 
 .seo-dd-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 18px 34px rgba(15, 33, 58, 0.14);
     border-color: color-mix(in srgb, var(--dd-primary) 36%, #d6e1f2);
 }
 
@@ -8943,7 +8916,7 @@ body.seo-dd-gallery-modal-open {
 }
 
 .seo-dd-card:hover img {
-    transform: scale(1.04);
+    transform: scale(1.02);
 }
 
 .seo-dd-card-body {
@@ -9016,7 +8989,7 @@ body.seo-dd-gallery-modal-open {
     font-size: 0.84rem;
     font-weight: 700;
     transition: all 0.2s ease;
-    border: 1px solid transparent;
+    border: 1px solid #0d6efd;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -9031,6 +9004,7 @@ body.seo-dd-gallery-modal-open {
     color: #0d6efd;
     box-shadow: 0 10px 20px
         color-mix(in srgb, var(--dd-primary) 28%, transparent);
+    margin-top: 5px;
 }
 .seo-dd-btn-enquiry {
     border-color: var(--brand-primary);
@@ -9074,9 +9048,12 @@ body.seo-dd-gallery-modal-open {
 }
 
 .seo-dd-package-meta span {
+    color: #5f728b;
+    font-size: 0.6rem;
+    font-weight: 600;
     border: 1px solid #dde6f2;
-    border-radius: 999px;
-    padding: 4px 10px;
+    border-radius: 15px;
+    padding: 4px 7px;
     background: #f8fbff;
 }
 
@@ -9122,13 +9099,14 @@ body.seo-dd-gallery-modal-open {
 
 #besttime .seo-dd-season-card {
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 9px;
     border: 1px solid rgba(255, 255, 255, 0.12);
     background: linear-gradient(145deg, #2f3135 0%, #232529 100%);
-    box-shadow: 0 16px 30px rgba(8, 14, 25, 0.28);
     color: #f5f5f5;
 }
-
+#blogs {
+    box-shadow: none;
+}
 #besttime .seo-dd-season-icon {
     width: 42px;
     height: 42px;
@@ -9166,10 +9144,10 @@ body.seo-dd-gallery-modal-open {
     border: 0;
     background: var(--brand-primary-tint);
     color: #fff;
-    font-size: 0.82rem;
+    font-size: 0.72rem;
     font-weight: 700;
-    border-radius: 999px;
-    padding: 8px 14px;
+    border-radius: 9px;
+    padding: 8px 8px;
 }
 
 #besttime .seo-dd-reco {
@@ -9361,11 +9339,10 @@ body.seo-dd-gallery-modal-open {
     flex-direction: column;
     height: 100%;
     width: 100%;
-    border-radius: 20px;
+    border-radius: 5px;
     overflow: hidden;
     border: 1px solid #d5deea;
     background: #ffffff;
-    box-shadow: 0 14px 28px rgba(16, 40, 67, 0.08);
 }
 
 .seo-dd-package-card .seo-dd-card-body {
@@ -9389,11 +9366,11 @@ body.seo-dd-gallery-modal-open {
 .seo-dd-package-chip {
     display: inline-flex;
     align-items: center;
-    border-radius: 999px;
+    border-radius: 15px;
     padding: 6px 10px;
     background: rgba(15, 24, 38, 0.84);
     color: #fff;
-    font-size: 0.74rem;
+    font-size: 0.64rem;
     font-weight: 700;
     line-height: 1;
 }
@@ -9406,7 +9383,9 @@ body.seo-dd-gallery-modal-open {
 .seo-dd-package-card h3 {
     font-size: 1.12rem;
     line-height: 1.3;
-    margin-bottom: 8px;
+    font-weight: 800;
+    margin-bottom: 5px;
+    color: var(--brand-primary);
 }
 
 .seo-dd-package-points {
@@ -9458,13 +9437,14 @@ body.seo-dd-gallery-modal-open {
 }
 
 .seo-dd-package-card .View-package-btn {
-    min-height: 40px;
-    padding: 8px 14px;
-    border-radius: 12px;
-    border: 1px solid #d9e4f0;
-    color: #0f67da;
-    font-size: 0.95rem;
-    font-weight: 800;
+    padding: 6px 7px;
+    border-radius: 10px;
+    border: 1px solid #cdd8e5;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0d6efd;
+    transition: 0.3s ease;
     white-space: nowrap;
 }
 .seo-dd-package-card .View-package-btn:hover {
@@ -9507,7 +9487,6 @@ body.seo-dd-gallery-modal-open {
     border-radius: 18px;
     border: 1px solid #d9e5f3;
     background: linear-gradient(165deg, #ffffff, #f5f9ff);
-    box-shadow: 0 14px 28px rgba(13, 34, 57, 0.09);
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease,
@@ -9517,7 +9496,6 @@ body.seo-dd-gallery-modal-open {
 .seo-dd-testimonial-card.swiper-slide-active {
     transform: translateY(-6px);
     border-color: #c3d7ef;
-    box-shadow: 0 20px 34px rgba(13, 34, 57, 0.16);
 }
 
 .seo-dd-quote-mark {
@@ -9553,16 +9531,18 @@ body.seo-dd-gallery-modal-open {
 .seo-dd-user h3 {
     margin: 0;
     font-size: 0.98rem;
+    color: #dc3545;
 }
 
 .seo-dd-user p {
     margin: 2px 0 0;
     font-size: 0.8rem;
+    color: #050505;
 }
 
 .seo-dd-stars {
     margin: 0;
-    color: #0f5cb8;
+    color: #050505;
     font-weight: 800;
     font-size: 0.9rem;
     padding: 5px 9px;
@@ -9571,10 +9551,13 @@ body.seo-dd-gallery-modal-open {
     background: #f2f7ff;
     white-space: nowrap;
 }
+.seo-dd-stars span {
+    color: goldenrod;
+}
 
 .seo-dd-review {
     margin: 0;
-    color: #415f81;
+    color: #3e3e3e !important;
     font-size: 1rem;
     line-height: 1.68;
 }
@@ -9596,9 +9579,9 @@ body.seo-dd-gallery-modal-open {
     display: inline-flex;
     align-items: center;
     border-radius: 999px;
-    border: 1px solid #d6e3f3;
-    background: #f8fbff;
-    color: #2c4d70;
+    border: 1px solid #ff3b30;
+    background: #ff3b301c;
+    color: #282828;
     font-size: 0.78rem;
     font-weight: 700;
     padding: 7px 11px;
@@ -10072,7 +10055,7 @@ body.seo-dd-gallery-modal-open {
     }
 
     .seo-dd-section {
-        border-radius: 16px;
+        border-radius: 9px;
         padding: 18px;
     }
 
@@ -10534,6 +10517,10 @@ body.seo-dd-gallery-modal-open {
     margin: 0 0 8px;
     font-size: 15px;
     font-weight: 800;
+    color: white;
+}
+.xpkd-inclexc-box ul li {
+    color: white;
 }
 
 .xpkd-inclexc-box ul {
@@ -10655,8 +10642,8 @@ body.seo-dd-gallery-modal-open {
 }
 
 .xpkd-cta-btn-lite {
-    color: #114ea6;
-    background: #e9f2ff;
+    color: white;
+    background: #25d366;
     border-color: #c8dcff;
 }
 

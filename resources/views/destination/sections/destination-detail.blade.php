@@ -327,10 +327,10 @@
                                 Gallery images uploaded from admin for this destination.
                             </p>
                         </div>
-                        <div class="seo-dd-gallery-stats">
+                        {{-- <div class="seo-dd-gallery-stats">
                             <strong>{{ count($galleryItems) }} shots</strong>
                             <span>Uploaded destination visuals</span>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="seo-dd-gallery-grid">
@@ -602,7 +602,7 @@
                                             <h3>{{ $testimonial['name'] ?? 'Traveler' }}</h3>
                                             <p>{{ $testimonial['location'] ?? '' }}</p>
                                         </div>
-                                        <p class="seo-dd-stars">★ {{ number_format((float) ($testimonial['rating'] ?? 5), 1) }}</p>
+                                        <p class="seo-dd-stars"><span>★</span> {{ number_format((float) ($testimonial['rating'] ?? 5), 1) }}</p>
                                     </div>
                                 </article>
                             @endforeach

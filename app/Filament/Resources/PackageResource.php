@@ -80,7 +80,7 @@ class PackageResource extends Resource
                         Select::make('travel_style')
                             ->options([
                                 'honeymoon' => 'Honeymoon',
-                                'religiuos' => 'Religious',
+                                'religious' => 'Religious',
                                 'family' => 'Family',
                                 'adventure' => 'Adventure',
                                 'friends' => 'Friends',
