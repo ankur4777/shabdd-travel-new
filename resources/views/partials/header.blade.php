@@ -145,7 +145,7 @@
                 </div>
 
                 <div class="st-nav-actions st-desktop-only">
-                    <button class="st-iconbtn" type="button" aria-label="Search">
+                    <button class="st-iconbtn" type="button" aria-label="Search" data-st-search-open>
                         <svg viewBox="0 0 24 24" fill="none">
                             <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.7" />
                             <path d="m20 20-4.35-4.35" stroke="currentColor" stroke-width="1.7"
@@ -174,6 +174,34 @@
             </div>
         </nav>
     </div>
+
+    <div class="st-search-overlay" id="stSearchOverlay" aria-hidden="true"></div>
+    <section class="st-search-panel" id="stSearchPanel" aria-hidden="true" aria-label="Site search">
+        <div class="st-search-dialog" role="search">
+            <div class="st-search-head">
+                <form class="st-search-form" id="stSearchForm" autocomplete="off">
+                    <span class="st-search-form-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.7" />
+                            <path d="m20 20-4.35-4.35" stroke="currentColor" stroke-width="1.7"
+                                stroke-linecap="round" />
+                        </svg>
+                    </span>
+                    <input type="search" id="stSearchInput" name="q" placeholder="Search packages, destinations, blogs"
+                        aria-label="Search packages, destinations, blogs" aria-describedby="stSearchStatus">
+                    <button class="st-search-submit" type="submit">Search</button>
+                </form>
+                <button class="st-search-close" id="stSearchClose" type="button" aria-label="Close search">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M6 6 18 18M18 6 6 18" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+            <p class="st-search-status" id="stSearchStatus">Type at least 2 characters to search.</p>
+            <div class="st-search-results" id="stSearchResults" role="list"></div>
+        </div>
+    </section>
 
     <div class="st-mobile-overlay" id="stMobileOverlay" aria-hidden="true"></div>
 
@@ -243,12 +271,12 @@
                 <span class="st-cta-arrow" aria-hidden="true">→</span>
             </a>
             <div class="st-mobile-mini-actions">
-                <a href="#" class="st-iconbtn" aria-label="Search">
+                <button class="st-iconbtn" type="button" aria-label="Search" data-st-search-open>
                     <svg viewBox="0 0 24 24" fill="none">
                         <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.7" />
                         <path d="m20 20-4.35-4.35" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
                     </svg>
-                </a>
+                </button>
                 <a href="#" class="st-iconbtn" aria-label="Login">
                     <svg viewBox="0 0 24 24" fill="none">
                         <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="1.7" />
@@ -271,6 +299,19 @@
         const navShell = navbar ? navbar.closest('.st-nav-shell') : null;
         const headerEl = navbar ? navbar.closest('.st-header') : null;
         const desktopMq = window.matchMedia('(min-width: 1200px)');
+        const searchEndpoint = @json(route('search.live', [], false));
+        const searchOverlay = document.getElementById('stSearchOverlay');
+        const searchPanel = document.getElementById('stSearchPanel');
+        const searchDialog = searchPanel ? searchPanel.querySelector('.st-search-dialog') : null;
+        const searchInput = document.getElementById('stSearchInput');
+        const searchForm = document.getElementById('stSearchForm');
+        const searchResults = document.getElementById('stSearchResults');
+        const searchStatus = document.getElementById('stSearchStatus');
+        const searchClose = document.getElementById('stSearchClose');
+        const searchOpeners = document.querySelectorAll('[data-st-search-open]');
+        let searchTimer = null;
+        let searchAbortController = null;
+        let latestSearchResults = [];
 
         if (!overlay || !drawer || !openBtn || !closeBtn || !navbar) {
             return;
@@ -388,6 +429,137 @@
             closeSubmenu();
         };
 
+        const setSearchMessage = function (message) {
+            if (searchStatus) {
+                searchStatus.textContent = message;
+            }
+        };
+
+        const clearSearchResults = function () {
+            latestSearchResults = [];
+
+            if (searchResults) {
+                searchResults.innerHTML = '';
+            }
+        };
+
+        const createSearchResult = function (item) {
+            const link = document.createElement('a');
+            link.className = 'st-search-result';
+            link.href = item.url;
+            link.setAttribute('role', 'listitem');
+
+            const media = document.createElement('span');
+            media.className = 'st-search-result-media';
+
+            const image = document.createElement('img');
+            image.src = item.image;
+            image.alt = '';
+            image.loading = 'lazy';
+            media.appendChild(image);
+
+            const content = document.createElement('span');
+            content.className = 'st-search-result-content';
+
+            const meta = document.createElement('span');
+            meta.className = 'st-search-result-meta';
+            meta.textContent = item.type + (item.subtitle ? ' • ' + item.subtitle : '');
+
+            const title = document.createElement('span');
+            title.className = 'st-search-result-title';
+            title.textContent = item.title;
+
+            const description = document.createElement('span');
+            description.className = 'st-search-result-desc';
+            description.textContent = item.price || item.description || 'View details';
+
+            content.appendChild(meta);
+            content.appendChild(title);
+            content.appendChild(description);
+
+            link.appendChild(media);
+            link.appendChild(content);
+
+            return link;
+        };
+
+        const renderSearchResults = function (items, query) {
+            clearSearchResults();
+            latestSearchResults = items;
+
+            if (!searchResults) {
+                return;
+            }
+
+            if (!items.length) {
+                setSearchMessage(query ? `No results found for "${query}".` : 'Type at least 2 characters to search.');
+                return;
+            }
+
+            setSearchMessage(`${items.length} result${items.length === 1 ? '' : 's'} found.`);
+            items.forEach(item => searchResults.appendChild(createSearchResult(item)));
+        };
+
+        const runSearch = function () {
+            const query = searchInput ? searchInput.value.trim() : '';
+
+            if (searchAbortController) {
+                searchAbortController.abort();
+            }
+
+            if (query.length < 2) {
+                clearSearchResults();
+                setSearchMessage('Type at least 2 characters to search.');
+                return;
+            }
+
+            searchAbortController = new AbortController();
+            setSearchMessage('Searching...');
+
+            fetch(`${searchEndpoint}?q=${encodeURIComponent(query)}`, {
+                signal: searchAbortController.signal,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+                .then(response => response.ok ? response.json() : Promise.reject(response))
+                .then(data => renderSearchResults(data.results || [], data.query || query))
+                .catch(error => {
+                    if (error.name === 'AbortError') {
+                        return;
+                    }
+
+                    clearSearchResults();
+                    setSearchMessage('Search is unavailable right now. Please try again.');
+                });
+        };
+
+        const openSearch = function () {
+            if (!searchOverlay || !searchPanel || !searchInput) {
+                return;
+            }
+
+            close();
+            searchOverlay.classList.add('show');
+            searchPanel.classList.add('show');
+            searchOverlay.setAttribute('aria-hidden', 'false');
+            searchPanel.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            window.setTimeout(() => searchInput.focus(), 80);
+        };
+
+        const closeSearch = function () {
+            if (!searchOverlay || !searchPanel) {
+                return;
+            }
+
+            searchOverlay.classList.remove('show');
+            searchPanel.classList.remove('show');
+            searchOverlay.setAttribute('aria-hidden', 'true');
+            searchPanel.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        };
+
         const showSubmenu = function (submenuId) {
             const submenuEl = document.getElementById('stMobileSubmenu');
             const mainLinksEl = document.getElementById('stMobileLinksMain');
@@ -450,6 +622,48 @@
         if (closeSubmenuBtn) {
             closeSubmenuBtn.addEventListener('click', closeSubmenu);
         }
+
+        searchOpeners.forEach(button => {
+            button.addEventListener('click', openSearch);
+        });
+
+        if (searchInput) {
+            searchInput.addEventListener('input', function () {
+                window.clearTimeout(searchTimer);
+                searchTimer = window.setTimeout(runSearch, 220);
+            });
+        }
+
+        if (searchForm) {
+            searchForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                if (latestSearchResults[0]) {
+                    window.location.href = latestSearchResults[0].url;
+                    return;
+                }
+
+                runSearch();
+            });
+        }
+
+        if (searchClose) {
+            searchClose.addEventListener('click', closeSearch);
+        }
+
+        if (searchOverlay) {
+            searchOverlay.addEventListener('click', closeSearch);
+        }
+
+        if (searchDialog) {
+            searchDialog.addEventListener('click', event => event.stopPropagation());
+        }
+
+        window.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeSearch();
+            }
+        });
 
         setScrolledState();
         window.addEventListener('scroll', setScrolledState, { passive: true });
