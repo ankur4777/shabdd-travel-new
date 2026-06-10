@@ -1193,340 +1193,42 @@
     ============================================================
     --}}
 
-    <section class="pd-section">
-        <div class="pd-container">
+    {{-- resources/views/sections/seasonal-journeys.blade.php --}}
 
-            {{-- ── Section Header ── --}}
-            <div class="pd-header">
-                <div class="pd-header-left">
-                    <p class="pd-eyebrow">Where To Next?</p>
-                    <h2 class="pd-title">Popular Destinations</h2>
-                </div>
-                <div class="pd-header-right">
-                    <span class="pd-count" id="pdCount">1 of 6</span>
-                    <div class="pd-nav-btns">
-                        <button class="pd-nav-btn" id="pdPrev" aria-label="Previous">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </button>
-                        <button class="pd-nav-btn" id="pdNext" aria-label="Next">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
+{{-- resources/views/sections/seasonal-journeys.blade.php --}}
 
-            {{-- ── Cards Track ── --}}
-            <div class="pd-track-outer">
-                <div class="pd-track" id="pdTrack">
+<section class="sj-section">
+    <div class="container-fluid px-0">
 
-                    {{-- CARD 1: Dubai --}}
-                    <article class="pd-card">
-                        <div class="pd-card-img-wrap">
-                            <img src="{{ asset('images/dubai.jpg') }}" alt="Dubai" class="pd-card-img" loading="lazy">
-                            <div class="pd-card-img-overlay"></div>
-                            <span class="pd-rating">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path
-                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                </svg>
-                                4.7
-                            </span>
-                            <span class="pd-badge pd-badge--hot">Hot Deal</span>
-                        </div>
-                        <div class="pd-card-body">
-                            <div class="pd-card-top">
-                                <div>
-                                    <h3 class="pd-card-name">Dubai</h3>
-                                    <p class="pd-card-region">
-                                        <svg viewBox="0 0 24 24" fill="none">
-                                            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6" />
-                                            <path
-                                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
-                                                stroke="currentColor" stroke-width="1.6" />
-                                        </svg>
-                                        UAE
-                                    </p>
-                                </div>
-                                <div class="pd-card-price-wrap">
-                                    <div class="pd-price-top">
-                                        <span class="pd-price-original">INR 4,21,913</span>
-                                        <span class="pd-price-save">SAVE INR 1,04,610</span>
-                                    </div>
-                                    <div class="pd-price-bottom">
-                                        <span class="pd-price-final">INR 3,17,303</span>
-                                        <span class="pd-price-per">/Adult</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pd-amenities">
-                                <span class="pd-amenity">4 nights</span>
-                                <span class="pd-amenity">Desert</span>
-                                <span class="pd-amenity">Shopping</span>
-                            </div>
-                            <a href="#" class="pd-btn">View packages <span aria-hidden="true">→</span></a>
-                        </div>
-                    </article>
-
-                    {{-- CARD 2: Switzerland --}}
-                    <article class="pd-card">
-                        <div class="pd-card-img-wrap">
-                            <img src="{{ asset('images/switzerland.jpg') }}" alt="Switzerland" class="pd-card-img"
-                                loading="lazy">
-                            <div class="pd-card-img-overlay"></div>
-                            <span class="pd-rating">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path
-                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                </svg>
-                                4.9
-                            </span>
-                            <span class="pd-badge pd-badge--new">New</span>
-                        </div>
-                        <div class="pd-card-body">
-                            <div class="pd-card-top">
-                                <div>
-                                    <h3 class="pd-card-name">Switzerland</h3>
-                                    <p class="pd-card-region">
-                                        <svg viewBox="0 0 24 24" fill="none">
-                                            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6" />
-                                            <path
-                                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
-                                                stroke="currentColor" stroke-width="1.6" />
-                                        </svg>
-                                        Europe
-                                    </p>
-                                </div>
-                                <div class="pd-card-price-wrap">
-                                    <div class="pd-price-top">
-                                        <span class="pd-price-original">INR 4,21,913</span>
-                                        <span class="pd-price-save">SAVE INR 1,04,610</span>
-                                    </div>
-                                    <div class="pd-price-bottom">
-                                        <span class="pd-price-final">INR 3,17,303</span>
-                                        <span class="pd-price-per">/Adult</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pd-amenities">
-                                <span class="pd-amenity">8 nights</span>
-                                <span class="pd-amenity">Mountains</span>
-                                <span class="pd-amenity">Snow</span>
-                            </div>
-                            <a href="#" class="pd-btn">View packages <span aria-hidden="true">→</span></a>
-                        </div>
-                    </article>
-
-                    {{-- CARD 3: Japan --}}
-                    <article class="pd-card">
-                        <div class="pd-card-img-wrap">
-                            <img src="{{ asset('images/japan.jpg') }}" alt="Japan" class="pd-card-img" loading="lazy">
-                            <div class="pd-card-img-overlay"></div>
-                            <span class="pd-rating">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path
-                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                </svg>
-                                4.8
-                            </span>
-                            <span class="pd-badge pd-badge--seasonal">Seasonal</span>
-                        </div>
-                        <div class="pd-card-body">
-                            <div class="pd-card-top">
-                                <div>
-                                    <h3 class="pd-card-name">Japan</h3>
-                                    <p class="pd-card-region">
-                                        <svg viewBox="0 0 24 24" fill="none">
-                                            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6" />
-                                            <path
-                                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
-                                                stroke="currentColor" stroke-width="1.6" />
-                                        </svg>
-                                        East Asia
-                                    </p>
-                                </div>
-                                <div class="pd-card-price-wrap">
-                                    <div class="pd-price-top">
-                                        <span class="pd-price-original">INR 4,21,913</span>
-                                        <span class="pd-price-save">SAVE INR 1,04,610</span>
-                                    </div>
-                                    <div class="pd-price-bottom">
-                                        <span class="pd-price-final">INR 3,17,303</span>
-                                        <span class="pd-price-per">/Adult</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pd-amenities">
-                                <span class="pd-amenity">10 nights</span>
-                                <span class="pd-amenity">Culture</span>
-                                <span class="pd-amenity">Cherry</span>
-                            </div>
-                            <a href="#" class="pd-btn">View packages <span aria-hidden="true">→</span></a>
-                        </div>
-                    </article>
-
-                    {{-- CARD 4: Bali --}}
-                    <article class="pd-card">
-                        <div class="pd-card-img-wrap">
-                            <img src="{{ asset('images/bali.jpg') }}" alt="Bali" class="pd-card-img" loading="lazy">
-                            <div class="pd-card-img-overlay"></div>
-                            <span class="pd-rating">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path
-                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                </svg>
-                                4.6
-                            </span>
-                            <span class="pd-badge pd-badge--hot">Hot Deal</span>
-                        </div>
-                        <div class="pd-card-body">
-                            <div class="pd-card-top">
-                                <div>
-                                    <h3 class="pd-card-name">Bali</h3>
-                                    <p class="pd-card-region">
-                                        <svg viewBox="0 0 24 24" fill="none">
-                                            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6" />
-                                            <path
-                                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
-                                                stroke="currentColor" stroke-width="1.6" />
-                                        </svg>
-                                        Indonesia
-                                    </p>
-                                </div>
-                                <div class="pd-card-price-wrap">
-                                    <div class="pd-price-top">
-                                        <span class="pd-price-original">INR 4,21,913</span>
-                                        <span class="pd-price-save">SAVE INR 1,04,610</span>
-                                    </div>
-                                    <div class="pd-price-bottom">
-                                        <span class="pd-price-final">INR 3,17,303</span>
-                                        <span class="pd-price-per">/Adult</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pd-amenities">
-                                <span class="pd-amenity">6 nights</span>
-                                <span class="pd-amenity">Beach</span>
-                                <span class="pd-amenity">Temples</span>
-                            </div>
-                            <a href="#" class="pd-btn">View packages <span aria-hidden="true">→</span></a>
-                        </div>
-                    </article>
-
-                    {{-- CARD 5: Maldives --}}
-                    <article class="pd-card">
-                        <div class="pd-card-img-wrap">
-                            <img src="{{ asset('images/maldives.jpg') }}" alt="Maldives" class="pd-card-img" loading="lazy">
-                            <div class="pd-card-img-overlay"></div>
-                            <span class="pd-rating">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path
-                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                </svg>
-                                5.0
-                            </span>
-                            <span class="pd-badge pd-badge--new">New</span>
-                        </div>
-                        <div class="pd-card-body">
-                            <div class="pd-card-top">
-                                <div>
-                                    <h3 class="pd-card-name">Maldives</h3>
-                                    <p class="pd-card-region">
-                                        <svg viewBox="0 0 24 24" fill="none">
-                                            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6" />
-                                            <path
-                                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
-                                                stroke="currentColor" stroke-width="1.6" />
-                                        </svg>
-                                        South Asia
-                                    </p>
-                                </div>
-                                <div class="pd-card-price-wrap">
-                                    <div class="pd-price-top">
-                                        <span class="pd-price-original">INR 4,21,913</span>
-                                        <span class="pd-price-save">SAVE INR 1,04,610</span>
-                                    </div>
-                                    <div class="pd-price-bottom">
-                                        <span class="pd-price-final">INR 3,17,303</span>
-                                        <span class="pd-price-per">/Adult</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pd-amenities">
-                                <span class="pd-amenity">5 nights</span>
-                                <span class="pd-amenity">Luxury</span>
-                                <span class="pd-amenity">Overwater</span>
-                            </div>
-                            <a href="#" class="pd-btn">View packages <span aria-hidden="true">→</span></a>
-                        </div>
-                    </article>
-
-                    {{-- CARD 6: Thailand --}}
-                    <article class="pd-card">
-                        <div class="pd-card-img-wrap">
-                            <img src="{{ asset('images/thailand.jpg') }}" alt="Thailand" class="pd-card-img" loading="lazy">
-                            <div class="pd-card-img-overlay"></div>
-                            <span class="pd-rating">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path
-                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                </svg>
-                                4.5
-                            </span>
-                            <span class="pd-badge pd-badge--seasonal">Seasonal</span>
-                        </div>
-                        <div class="pd-card-body">
-                            <div class="pd-card-top">
-                                <div>
-                                    <h3 class="pd-card-name">Thailand</h3>
-                                    <p class="pd-card-region">
-                                        <svg viewBox="0 0 24 24" fill="none">
-                                            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6" />
-                                            <path
-                                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
-                                                stroke="currentColor" stroke-width="1.6" />
-                                        </svg>
-                                        Southeast Asia
-                                    </p>
-                                </div>
-                                <div class="pd-card-price-wrap">
-                                    <div class="pd-price-top">
-                                        <span class="pd-price-original">INR 4,21,913</span>
-                                        <span class="pd-price-save">SAVE INR 1,04,610</span>
-                                    </div>
-                                    <div class="pd-price-bottom">
-                                        <span class="pd-price-final">INR 3,17,303</span>
-                                        <span class="pd-price-per">/Adult</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pd-amenities">
-                                <span class="pd-amenity">7 nights</span>
-                                <span class="pd-amenity">Islands</span>
-                                <span class="pd-amenity">Street Food</span>
-                            </div>
-                            <a href="#" class="pd-btn">View packages <span aria-hidden="true">→</span></a>
-                        </div>
-                    </article>
-
-                </div>{{-- /pd-track --}}
-            </div>
-
-            {{-- ── Dot Indicators ── --}}
-            <div class="pd-dots" id="pdDots" aria-hidden="true"></div>
-
-            {{-- ── View All ── --}}
-            <div class="pd-footer">
-                <a href="#" class="pd-view-all">View all destinations <span aria-hidden="true">→</span></a>
-            </div>
-
+        {{-- ── Section Header ── --}}
+        <div class="sj-header">
+            <h2 class="sj-title">Seasonal Journeys</h2>
+            <p class="sj-subtitle">Best places to visit this season for unforgettable escapes!</p>
         </div>
-    </section>
+
+        {{-- ── Bento Grid ── --}}
+        @if($seasonalJourneys->isNotEmpty())
+        <div class="sj-grid">
+            @foreach($seasonalJourneys as $journey)
+            <a href="{{ $journey->url }}" class="sj-card {{ $journey->card_size }}">
+                <img
+                    src="{{ asset('storage/' . $journey->image) }}"
+                    alt="{{ $journey->name }}"
+                    class="sj-card__img"
+                    loading="lazy"
+                >
+                <div class="sj-card__overlay"></div>
+                <div class="sj-card__content">
+                    <h3 class="sj-card__name">{{ $journey->name }}</h3>
+                    <p class="sj-card__price">Start From ₹ {{ $journey->price }}</p>
+                </div>
+            </a>
+            @endforeach
+        </div>
+        @endif
+
+    </div>
+</section>
 
     {{-- ── JS ── --}}
     <script>
