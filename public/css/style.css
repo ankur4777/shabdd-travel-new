@@ -650,9 +650,10 @@ div.container.st-nav-inner {
 }
 
 .st-brand img {
-    width: 132px;
+    width: 65px;
     height: auto;
     display: block;
+    margin-left: 10px;
 }
 
 .st-brand-copy {
@@ -1894,7 +1895,7 @@ div.container.st-nav-inner {
     }
 
     .st-brand img {
-        width: 122px;
+        width: 70px;
     }
 
     .st-navlink {
@@ -1914,7 +1915,7 @@ div.container.st-nav-inner {
     }
 
     .st-brand img {
-        width: 116px;
+        width: 65px;
         margin-left: 0;
     }
 
@@ -2045,8 +2046,8 @@ div.container.st-nav-inner {
     }
 
     .st-brand img {
-        width: 154px;
-        margin-left: 0;
+        width: 75px;
+        margin-left: 10px;
     }
 }
 
@@ -2126,8 +2127,8 @@ div.container.st-nav-inner {
     }
 
     .st-brand img {
-        width: 140px;
-        margin-left: 0;
+        width: 65px;
+        margin-left: 10px;
     }
 }
 
@@ -2159,7 +2160,7 @@ div.container.st-nav-inner {
     }
 
     .st-mobile-head .st-brand img {
-        width: 130px;
+        width: 60px;
     }
 
     .st-mobile-links {
@@ -2172,8 +2173,8 @@ div.container.st-nav-inner {
     }
 
     .st-brand img {
-        width: 130px;
-        margin-left: 0;
+        width: 60px;
+        margin-left: 10px;
     }
 
     .st-navbar {
@@ -2482,6 +2483,7 @@ div.container.st-nav-inner {
     letter-spacing: 0.01em;
     line-height: 1.15;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    color: #ffaba6;
 }
 
 .sj-card__price {

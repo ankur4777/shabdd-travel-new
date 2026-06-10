@@ -8,7 +8,7 @@
 
     {{-- RELIGIOUS HERO SECTION --}}
     <section class="religious-hero"
-        style="background-image: linear-gradient(rgba(255,140,0,0.18), rgba(255,140,0,0.06)), url('{{ asset('images/himachal.jpg') }}');">
+        style="background-image: linear-gradient(rgba(255,140,0,0%), rgba(255 140 0 / 20%)), url('{{ asset('images/himachal.jpg') }}');">
         <div class="container">
             <div class="religious-hero-wrapper">
 

@@ -58,13 +58,19 @@
 }
 
 .hero-btn-outline {
-    background: transparent;
+    background: white;
     color: var(--religious-saffron);
     border: 1px solid var(--religious-saffron);
     padding: 0.5rem 0.9rem;
     border-radius: 6px;
     margin-left: 0.75rem;
     display: inline-block;
+    text-decoration: none;
+    margin-top: 10px;
+}
+.hero-btn-outline:hover {
+    background: var(--religious-saffron);
+    color: var(--religious-contrast);
     text-decoration: none;
 }
 
