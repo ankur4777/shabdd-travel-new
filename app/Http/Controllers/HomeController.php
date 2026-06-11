@@ -7,6 +7,7 @@ use App\Models\Package;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\SeasonalJourney;
 
 class HomeController extends Controller
 {
@@ -21,10 +22,12 @@ class HomeController extends Controller
 
         $blogController = new BlogController();
         $blogs = $blogController->buildBlogCollection()->take(6);
+        $seasonalJourneys = SeasonalJourney::active()->get();
 
         return view('home', compact(
             'destinations',
-            'blogs'
+            'blogs',
+            'seasonalJourneys'   // ✅ ADD THIS TOO
         ));
     }
 
