@@ -43,11 +43,29 @@ class HomeController extends Controller
         return $this->packageListing($request, 'religious', 'religious');
     }
 
+    public function budgetFriendly(Request $request): View
+    {
+        return $this->packageCategoryListing($request, 'Budget Friendly', 'budget-friendly');
+    }
+
     private function packageListing(Request $request, string $travelStyle, string $view): View
     {
         $baseQuery = Package::query()
             ->where('travel_style', $travelStyle);
 
+        return $this->buildPackageListing($request, $baseQuery, $view);
+    }
+
+    private function packageCategoryListing(Request $request, string $category, string $view): View
+    {
+        $baseQuery = Package::query()
+            ->where('category', $category);
+
+        return $this->buildPackageListing($request, $baseQuery, $view);
+    }
+
+    private function buildPackageListing(Request $request, Builder $baseQuery, string $view): View
+    {
         $priceStats = (clone $baseQuery)
             ->selectRaw('COALESCE(MIN(price), 0) as min_price, COALESCE(MAX(price), 0) as max_price')
             ->first();

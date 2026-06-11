@@ -114,8 +114,8 @@
         }
 
         .contact-quick-icon {
-            width: 46px;
-            height: 46px;
+            width: 38px;
+            height: 38px;
             flex: 0 0 auto;
             display: inline-flex;
             align-items: center;
@@ -123,13 +123,13 @@
             border-radius: 8px;
             background: rgba(255, 59, 48, 0.1);
             color: #ff3b30;
-            font-size: 1.25rem;
+            font-size: 1.05rem;
         }
 
         .contact-quick-label {
             display: block;
             color: rgba(17, 17, 17, 0.56);
-            font-size: 0.76rem;
+            font-size: 0.56rem;
             font-weight: 800;
             text-transform: uppercase;
         }
@@ -138,7 +138,7 @@
             display: block;
             margin-top: 4px;
             color: #111;
-            font-size: 1rem;
+            font-size: 0.8rem;
             font-weight: 850;
             line-height: 1.35;
         }
@@ -272,7 +272,7 @@
             justify-content: center;
             border-radius: 8px;
             background: rgba(31, 143, 95, 0.1);
-            color: #1f8f5f;
+            color: #ff3b30;
             font-size: 1.1rem;
         }
 

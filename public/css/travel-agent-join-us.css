@@ -1,0 +1,604 @@
+:root {
+    --agent-blue: #0a1f3a;
+    --agent-blue-2: #123761;
+    --agent-gold: #d4af37;
+    --agent-gold-soft: #f2d16f;
+    --agent-ink: #152235;
+    --agent-muted: #64748b;
+    --agent-soft: #f5f8fc;
+    --agent-line: rgba(10, 31, 58, 0.12);
+}
+
+.agent-page {
+    background: #fff;
+    color: var(--agent-ink);
+}
+
+.agent-hero {
+    min-height: 76vh;
+    display: flex;
+    align-items: center;
+    padding: 7rem 0 4.5rem;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+
+.agent-kicker,
+.agent-section-heading span,
+.agent-form-copy span,
+.agent-cta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--agent-gold);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
+
+.agent-kicker::before,
+.agent-section-heading span::before,
+.agent-form-copy span::before {
+    content: "";
+    width: 34px;
+    height: 1px;
+    background: currentColor;
+}
+
+.agent-hero h1 {
+    max-width: 820px;
+    margin: 1rem 0 1rem;
+    font-size: clamp(2.45rem, 5.8vw, 5rem);
+    line-height: 1.02;
+    font-weight: 800;
+    color: #fff;
+}
+
+.agent-hero p {
+    max-width: 680px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.12rem;
+    line-height: 1.75;
+    margin: 0;
+}
+
+.agent-hero-actions {
+    margin-top: 2rem;
+}
+
+.agent-btn {
+    min-height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 6px;
+    padding: 0.78rem 1.22rem;
+    font-weight: 800;
+    text-decoration: none;
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease,
+        color 0.22s ease;
+}
+
+.agent-btn:hover {
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.agent-btn-gold {
+    background: var(--agent-gold);
+    color: var(--agent-blue);
+    box-shadow: 0 14px 28px rgba(212, 175, 55, 0.24);
+}
+
+.agent-btn-gold:hover {
+    background: var(--agent-gold-soft);
+    color: var(--agent-blue);
+}
+
+.agent-btn-light {
+    background: #fff;
+    color: var(--agent-blue);
+}
+
+.agent-btn-light:hover {
+    background: #eef4fb;
+    color: var(--agent-blue);
+}
+
+.agent-hero-panel {
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(10, 31, 58, 0.74);
+    backdrop-filter: blur(14px);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.22);
+}
+
+.agent-hero-panel strong {
+    display: block;
+    color: #fff;
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.agent-hero-panel span {
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.agent-hero-panel ul {
+    display: grid;
+    gap: 0.8rem;
+    padding: 1.2rem 0 0;
+    margin: 1.2rem 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    list-style: none;
+}
+
+.agent-hero-panel li {
+    display: flex;
+    gap: 0.7rem;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.agent-hero-panel i {
+    color: var(--agent-gold);
+}
+
+.agent-section {
+    padding: 5rem 0;
+}
+
+.agent-section-heading {
+    max-width: 760px;
+    margin: 0 auto 2.4rem;
+}
+
+.agent-section-heading-left {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.agent-section-heading h2,
+.agent-form-copy h2,
+.agent-cta h2 {
+    color: var(--agent-ink);
+    font-size: clamp(2rem, 4vw, 3.35rem);
+    line-height: 1.08;
+    font-weight: 800;
+    margin: 0.75rem 0 0;
+}
+
+.agent-why,
+.agent-partner-benefits,
+.agent-faq {
+    background: var(--agent-soft);
+}
+
+.agent-benefit-card {
+    background: #fff;
+    border: 1px solid var(--agent-line);
+    border-radius: 8px;
+    padding: 1.35rem;
+    box-shadow: 0 16px 42px rgba(10, 31, 58, 0.06);
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+}
+
+.agent-benefit-card:hover {
+    border-color: rgba(212, 175, 55, 0.48);
+    box-shadow: 0 24px 60px rgba(10, 31, 58, 0.1);
+    transform: translateY(-4px);
+}
+
+.agent-benefit-card i {
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: var(--agent-blue);
+    color: var(--agent-gold);
+    font-size: 1.3rem;
+    margin-bottom: 1.15rem;
+}
+
+.agent-benefit-card h3 {
+    color: var(--agent-ink);
+    font-size: 1.16rem;
+    font-weight: 800;
+    margin-bottom: 0.65rem;
+}
+
+.agent-benefit-card p,
+.agent-step-card p,
+.agent-image-copy p,
+.agent-form-copy p,
+.agent-accordion .accordion-body {
+    color: var(--agent-muted);
+    line-height: 1.7;
+    margin: 0;
+}
+
+.agent-steps-section {
+    background: #fff;
+}
+
+.agent-timeline {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.agent-timeline::before {
+    content: "";
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: 32px;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        rgba(212, 175, 55, 0.2),
+        rgba(212, 175, 55, 0.9),
+        rgba(212, 175, 55, 0.2)
+    );
+}
+
+.agent-step-card {
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--agent-line);
+    border-radius: 8px;
+    padding: 1.2rem;
+    text-align: center;
+    box-shadow: 0 16px 42px rgba(10, 31, 58, 0.06);
+}
+
+.agent-step-number {
+    width: 64px;
+    height: 64px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--agent-blue);
+    color: var(--agent-gold);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.agent-step-card h3 {
+    color: var(--agent-ink);
+    font-size: 1.08rem;
+    font-weight: 800;
+    margin-bottom: 0.55rem;
+}
+
+.agent-stats {
+    background: var(--agent-blue);
+    color: #fff;
+    padding: 3.25rem 0;
+}
+
+.agent-stat-card {
+    height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 1.35rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.agent-stat-card strong {
+    display: block;
+    color: var(--agent-gold);
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.agent-stat-card span:last-child {
+    color: rgba(255, 255, 255, 0.78);
+    font-weight: 700;
+}
+
+.agent-benefit-stack {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.agent-image-row {
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--agent-line);
+    border-radius: 8px;
+    box-shadow: 0 18px 50px rgba(10, 31, 58, 0.08);
+}
+
+.agent-image-row-reverse {
+    flex-direction: row-reverse;
+}
+
+.agent-image-wrap {
+    height: 100%;
+    min-height: 300px;
+}
+
+.agent-image-wrap img {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    object-fit: cover;
+    display: block;
+}
+
+.agent-image-copy {
+    padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.agent-image-copy span {
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--agent-blue);
+    color: var(--agent-gold);
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.agent-image-copy h3 {
+    color: var(--agent-ink);
+    font-size: clamp(1.55rem, 3vw, 2.25rem);
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+}
+
+.agent-testimonials {
+    background: #fff;
+}
+
+.agent-testimonial-card {
+    min-height: 300px;
+    background: var(--agent-blue);
+    color: #fff;
+    border-radius: 8px;
+    padding: clamp(1.5rem, 4vw, 2.2rem);
+}
+
+.agent-testimonial-card > i {
+    color: var(--agent-gold);
+    font-size: 2rem;
+}
+
+.agent-testimonial-card p {
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 1.1rem;
+    line-height: 1.75;
+    margin: 1rem 0 1.5rem;
+}
+
+.agent-testimonial-card strong,
+.agent-testimonial-card span {
+    display: block;
+}
+
+.agent-testimonial-card span {
+    color: rgba(255, 255, 255, 0.66);
+    margin-top: 0.25rem;
+}
+
+.agent-carousel-controls {
+    display: flex;
+    gap: 0.7rem;
+    margin-top: 1rem;
+}
+
+.agent-carousel-controls button {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--agent-line);
+    border-radius: 50%;
+    background: #fff;
+    color: var(--agent-blue);
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.agent-carousel-controls button:hover {
+    background: var(--agent-gold);
+    color: var(--agent-blue);
+    transform: translateY(-2px);
+}
+
+.agent-form-section {
+    background: linear-gradient(180deg, #fff 0%, var(--agent-soft) 100%);
+}
+
+.agent-form-copy {
+    position: sticky;
+    top: 110px;
+}
+
+.agent-form-copy p {
+    margin-top: 1rem;
+}
+
+.agent-form {
+    background: #fff;
+    border: 1px solid var(--agent-line);
+    border-radius: 8px;
+    padding: clamp(1.2rem, 3vw, 2rem);
+    box-shadow: 0 24px 70px rgba(10, 31, 58, 0.1);
+}
+
+.agent-form .form-label {
+    color: var(--agent-ink);
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+
+.agent-form .form-label span {
+    color: var(--agent-muted);
+    font-weight: 600;
+}
+
+.agent-form .form-control {
+    min-height: 46px;
+    border: 1px solid rgba(10, 31, 58, 0.16);
+    border-radius: 6px;
+}
+
+.agent-form .form-control:focus,
+.agent-form .form-check-input:focus {
+    border-color: var(--agent-gold);
+    box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.18);
+}
+
+.agent-terms {
+    padding-top: 0.25rem;
+}
+
+.agent-terms .form-check-input:checked {
+    background-color: var(--agent-blue);
+    border-color: var(--agent-blue);
+}
+
+.agent-submit {
+    width: 100%;
+}
+
+.agent-form-note {
+    min-height: 24px;
+    color: var(--agent-blue-2);
+    font-weight: 800;
+    margin: 0.8rem 0 0;
+}
+
+.agent-accordion {
+    max-width: 920px;
+    margin: 0 auto;
+    display: grid;
+    gap: 0.8rem;
+}
+
+.agent-accordion .accordion-item {
+    border: 1px solid var(--agent-line);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 12px 34px rgba(10, 31, 58, 0.06);
+}
+
+.agent-accordion .accordion-button {
+    color: var(--agent-ink);
+    font-weight: 800;
+    padding: 1.05rem 1.15rem;
+}
+
+.agent-accordion .accordion-button:not(.collapsed) {
+    background: #fff8df;
+    color: var(--agent-blue);
+    box-shadow: none;
+}
+
+.agent-accordion .accordion-button:focus {
+    border-color: var(--agent-gold);
+    box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.16);
+}
+
+.agent-cta {
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 4rem 0;
+}
+
+.agent-cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.agent-cta h2 {
+    color: #fff;
+    margin-top: 0.5rem;
+}
+
+.agent-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+@media (max-width: 991.98px) {
+    .agent-hero {
+        min-height: auto;
+        padding: 5.5rem 0 3.5rem;
+    }
+
+    .agent-timeline {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .agent-timeline::before {
+        display: none;
+    }
+
+    .agent-image-row-reverse {
+        flex-direction: row;
+    }
+
+    .agent-form-copy {
+        position: static;
+    }
+
+    .agent-cta-inner {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .agent-hero {
+        padding: 4.5rem 0 3rem;
+    }
+
+    .agent-hero h1 {
+        font-size: 2.25rem;
+    }
+
+    .agent-section {
+        padding: 3.25rem 0;
+    }
+
+    .agent-timeline {
+        grid-template-columns: 1fr;
+    }
+
+    .agent-btn,
+    .agent-hero-actions,
+    .agent-cta-actions {
+        width: 100%;
+    }
+
+    .agent-cta-actions .agent-btn {
+        width: 100%;
+    }
+}

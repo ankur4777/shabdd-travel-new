@@ -28,7 +28,7 @@
             </div>
 
             <div class="st-topbar-cluster st-topbar-actions">
-                <a href="#" class="st-utility-link">Travel Agent Join Us</a>
+                <a href="{{ route('travel-agent.join') }}" class="st-utility-link">Travel Agent Join Us</a>
                 <a href="#" class="st-utility-link st-offers-link">
                     <span>Offers</span>
                     <span class="st-badge">3</span>
@@ -136,7 +136,7 @@
                         </li>
                         <li class="nav-item"><a class="nav-link st-navlink"
                                 href="{{ route('religious') }}">Religious</a></li>
-                        <li class="nav-item"><a class="nav-link st-navlink" href="#">Luxury Holidays</a></li>
+                        <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('budget-friendly') }}">Budget Friendly</a></li>
                         <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('blog.index') }}">Blogs</a>
                         </li>
 
@@ -243,7 +243,7 @@
                 Family Trips
             </a>
             <a href="{{ route('religious') }}" class="st-mobile-link">Religious</a>
-            <a href="#" class="st-mobile-link">Luxury Holidays</a>
+            <a href="{{ route('budget-friendly') }}" class="st-mobile-link">Budget Friendly</a>
             <a href="{{ route('blog.index') }}" class="st-mobile-link">Blogs</a>
 
 
