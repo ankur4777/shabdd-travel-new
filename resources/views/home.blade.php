@@ -1113,70 +1113,7 @@
             </div>
 
             {{-- ── Bento Grid ── --}}
-            <div class="sj-grid">
-
-                {{-- ANDAMAN – wide left --}}
-                <a href="#" class="sj-card sj-card--wide-left">
-                    <img src="{{ asset('images/dubai.jpg') }}" alt="Andaman" class="sj-card__img" loading="lazy">
-                    <div class="sj-card__overlay"></div>
-                    <div class="sj-card__content">
-                        <h3 class="sj-card__name">ANDAMAN</h3>
-                        <p class="sj-card__price">Start From ₹ 14,999</p>
-                    </div>
-                </a>
-
-                {{-- EUROPE – tall center (spans both rows) --}}
-                <a href="#" class="sj-card sj-card--tall-center">
-                    <img src="{{ asset('images/himachal.jpg') }}" alt="Europe" class="sj-card__img" loading="lazy">
-                    <div class="sj-card__overlay"></div>
-                    <div class="sj-card__content">
-                        <h3 class="sj-card__name">EUROPE</h3>
-                        <p class="sj-card__price">Start From ₹ 69,089</p>
-                    </div>
-                </a>
-
-                {{-- MAURITIUS – wide right --}}
-                <a href="#" class="sj-card sj-card--wide-right">
-                    <img src="{{ asset('images/himachal.jpg') }}" alt="Mauritius" class="sj-card__img" loading="lazy">
-                    <div class="sj-card__overlay"></div>
-                    <div class="sj-card__content">
-                        <h3 class="sj-card__name">MAURITIUS</h3>
-                        <p class="sj-card__price">Start From ₹ 26,999</p>
-                    </div>
-                </a>
-
-                {{-- HIMACHAL – bottom left --}}
-                <a href="#" class="sj-card sj-card--bottom-sm">
-                    <img src="{{ asset('images/himachal.jpg') }}" alt="Himachal Pradesh" class="sj-card__img"
-                        loading="lazy">
-                    <div class="sj-card__overlay"></div>
-                    <div class="sj-card__content">
-                        <h3 class="sj-card__name">HIMACHAL PRADESH</h3>
-                        <p class="sj-card__price">Start From ₹ 9,999</p>
-                    </div>
-                </a>
-
-                {{-- KERALA – bottom second --}}
-                <a href="#" class="sj-card sj-card--bottom-sm">
-                    <img src="{{ asset('images/kerala.avif') }}" alt="Kerala" class="sj-card__img" loading="lazy">
-                    <div class="sj-card__overlay"></div>
-                    <div class="sj-card__content">
-                        <h3 class="sj-card__name">KERALA</h3>
-                        <p class="sj-card__price">Start From ₹ 9,999</p>
-                    </div>
-                </a>
-
-                {{-- MALAYSIA – bottom right --}}
-                <a href="#" class="sj-card sj-card--bottom-right">
-                    <img src="{{ asset('images/himachal.jpg') }}" alt="Malaysia" class="sj-card__img" loading="lazy">
-                    <div class="sj-card__overlay"></div>
-                    <div class="sj-card__content">
-                        <h3 class="sj-card__name">MALAYSIA</h3>
-                        <p class="sj-card__price">Start From ₹ 21,999</p>
-                    </div>
-                </a>
-
-            </div>{{-- /sj-grid --}}
+            @include('partials.seasonal-journeys')
 
         </div>
     </section>

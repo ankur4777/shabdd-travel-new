@@ -28,3 +28,7 @@ Route::get('/family-trips', [HomeController::class, 'familyTrips'])
     ->name('family-trips');
 Route::get('/religious', [HomeController::class, 'religious'])->name('religious');
 Route::get('/budget-friendly', [HomeController::class, 'budgetFriendly'])->name('budget-friendly');
+
+// Seasonal journeys detail
+use App\Http\Controllers\SeasonalJourneyController;
+Route::get('/seasonal-journeys/{slug}', [SeasonalJourneyController::class, 'show'])->name('seasonal-journeys.show');
