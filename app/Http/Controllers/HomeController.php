@@ -20,12 +20,21 @@ class HomeController extends Controller
             ->take(12)
             ->get();
 
+        $popularDestinations = Destination::query()
+            ->active()
+            ->whereRaw("LOWER(TRIM(COALESCE(category, ''))) = ?", ['popular'])
+            ->orderByDesc('rating')
+            ->latest()
+            ->take(12)
+            ->get();
+
         $blogController = new BlogController();
         $blogs = $blogController->buildBlogCollection()->take(6);
         $seasonalJourneys = SeasonalJourney::active()->get();
 
         return view('home', compact(
             'destinations',
+            'popularDestinations',
             'blogs',
             'seasonalJourneys'   // ✅ ADD THIS TOO
         ));

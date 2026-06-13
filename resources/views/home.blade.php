@@ -1130,127 +1130,122 @@
     ============================================================
     --}}
 
-    {{-- resources/views/sections/seasonal-journeys.blade.php --}}
-
-{{-- resources/views/sections/seasonal-journeys.blade.php --}}
-
-<section class="sj-section">
-    <div class="container-fluid px-0">
-
-        {{-- ── Section Header ── --}}
-        <div class="sj-header">
-            <h2 class="sj-title">Seasonal Journeys</h2>
-            <p class="sj-subtitle">Best places to visit this season for unforgettable escapes!</p>
-        </div>
-
-        {{-- ── Bento Grid ── --}}
-        @if($seasonalJourneys->isNotEmpty())
-        <div class="sj-grid">
-            @foreach($seasonalJourneys as $journey)
-            <a href="{{ $journey->url }}" class="sj-card {{ $journey->card_size }}">
-                <img
-                    src="{{ asset('storage/' . $journey->image) }}"
-                    alt="{{ $journey->name }}"
-                    class="sj-card__img"
-                    loading="lazy"
-                >
-                <div class="sj-card__overlay"></div>
-                <div class="sj-card__content">
-                    <h3 class="sj-card__name">{{ $journey->name }}</h3>
-                    <p class="sj-card__price">Start From ₹ {{ $journey->price }}</p>
+    <section class="rd-section pd-section">
+        <div class="rd-container rd-container--popular">
+            <div class="rd-header pd-header">
+                <div class="rd-header-left">
+                    <p class="rd-eyebrow pd-eyebrow">Most Loved</p>
+                    <h2 class="rd-title">Popular Destinations</h2>
+                    <p class="rd-subtitle">Traveller-favourite places selected from the admin popular category.</p>
                 </div>
-            </a>
-            @endforeach
+                <div class="rd-header-right">
+                    <div class="rd-nav-btns">
+                        <button class="rd-nav-btn pd-nav-btn" id="pdPrev" aria-label="Previous popular destination">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button class="rd-nav-btn pd-nav-btn" id="pdNext" aria-label="Next popular destination">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                    <a href="{{ route('destinations.index', ['category' => 'Popular']) }}" class="rd-view-all-link pd-view-all-link">
+                        View all <span aria-hidden="true">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="rd-slider-outer pd-slider-outer">
+                <div class="rd-track pd-track" id="pdTrack">
+                    @forelse ($popularDestinations as $destination)
+                        <article class="rd-card pd-card"
+                            style="--rd-card-bg: url('{{ $destination->image_url ? asset('storage/' . $destination->image_url) : asset('images/himachal.jpg') }}');">
+                            <div class="rd-card-img"></div>
+                            <div class="rd-card-overlay pd-card-overlay"></div>
+                            <div class="rd-card-badge rd-badge--bestseller pd-card-badge">
+                                {{ $destination->badge_label ?: 'Popular Pick' }}
+                            </div>
+                            <button class="rd-wishlist pd-wishlist" aria-label="Save {{ $destination->name }}" data-saved="false">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                                        stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <div class="rd-card-body pd-card-body">
+                                <div class="pd-topline">
+                                    <div class="rd-card-rating pd-card-rating">
+                                        <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                                            <path
+                                                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                        </svg>
+                                        {{ number_format((float) $destination->rating, 1) }}
+                                    </div>
+                                    @if(!empty($destination->best_season))
+                                        <span class="pd-season">{{ $destination->best_season }}</span>
+                                    @endif
+                                </div>
+                                <div class="rd-card-info">
+                                    <div class="rd-card-location">
+                                        <svg viewBox="0 0 24 24" fill="none" width="13" height="13">
+                                            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6" />
+                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+                                                stroke="currentColor" stroke-width="1.6" />
+                                        </svg>
+                                        <span class="rd-tag">{{ $destination->country }}</span>
+                                        @if(!empty($destination->travel_styles) && is_array($destination->travel_styles))
+                                            <span class="rd-tag">{{ $destination->travel_styles[0] ?? '' }}</span>
+                                        @endif
+                                    </div>
+                                    <h3 class="rd-card-name">{{ $destination->name }}</h3>
+                                    @if (!empty($destination->popular_for))
+                                        <div class="rd-card-tags">
+                                            @foreach (array_slice($destination->popular_for, 0, 3) as $tag)
+                                                <span class="rd-tag">{{ $tag }}</span>
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                    <div class="rd-card-footer">
+                                        <div class="rd-price-block">
+                                            <span class="rd-price-from">From</span>
+                                            <span class="rd-price">{{ $destination->formatted_price ?? ($destination->price_from ? '₹' . number_format($destination->price_from) : '') }}</span>
+                                            <span class="rd-price-per">{{ $destination->price_unit ?? '' }}</span>
+                                        </div>
+                                        <a href="{{ route('destinations.show', $destination) }}" class="rd-card-btn pd-card-btn">
+                                            Explore <span>→</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    @empty
+                        <article class="rd-card pd-card" style="--rd-card-bg: linear-gradient(160deg,#0f766e,#1f2937);">
+                            <div class="rd-card-img"></div>
+                            <div class="rd-card-overlay pd-card-overlay"></div>
+                            <div class="rd-card-body pd-card-body">
+                                <div class="rd-card-info">
+                                    <h3 class="rd-card-name">No popular destinations yet</h3>
+                                    <p class="pd-empty-text">Choose the Popular category in the destination admin panel to show cards here.</p>
+                                    <div class="rd-card-footer">
+                                        <a href="{{ route('destinations.index') }}" class="rd-card-btn pd-card-btn">
+                                            View all <span>→</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    @endforelse
+                </div>
+            </div>
+
+            <div class="rd-dots pd-dots" id="pdDots" aria-hidden="true"></div>
         </div>
-        @endif
-
-    </div>
-</section>
-
-    {{-- ── JS ── --}}
-    <script>
-        (function () {
-            const track = document.getElementById('pdTrack');
-            const prevBtn = document.getElementById('pdPrev');
-            const nextBtn = document.getElementById('pdNext');
-            const countEl = document.getElementById('pdCount');
-            const dotsEl = document.getElementById('pdDots');
-
-            if (!track) return;
-
-            const cards = Array.from(track.children);
-            const total = cards.length;
-            let current = 0;
-
-            /* ── How many cards visible? ── */
-            function visibleCount() {
-                const w = track.parentElement.offsetWidth;
-                if (w >= 1024) return 3;
-                if (w >= 640) return 2;
-                return 1;
-            }
-
-            /* ── Card width including gap ── */
-            function cardStep() {
-                const card = cards[0];
-                if (!card) return 0;
-                const gap = parseInt(getComputedStyle(track).gap) || 24;
-                return card.offsetWidth + gap;
-            }
-
-            function maxIndex() {
-                return Math.max(0, total - visibleCount());
-            }
-
-            function goTo(idx) {
-                current = Math.max(0, Math.min(idx, maxIndex()));
-                track.style.transform = `translateX(-${current * cardStep()}px)`;
-                countEl.textContent = `${current + 1} of ${total}`;
-                prevBtn.disabled = current === 0;
-                nextBtn.disabled = current >= maxIndex();
-                updateDots();
-            }
-
-            /* ── Dots ── */
-            function buildDots() {
-                dotsEl.innerHTML = '';
-                for (let i = 0; i <= maxIndex(); i++) {
-                    const d = document.createElement('button');
-                    d.className = 'pd-dot';
-                    d.setAttribute('aria-label', `Go to slide ${i + 1}`);
-                    d.addEventListener('click', () => goTo(i));
-                    dotsEl.appendChild(d);
-                }
-            }
-
-            function updateDots() {
-                Array.from(dotsEl.children).forEach((d, i) => {
-                    d.classList.toggle('pd-dot--active', i === current);
-                });
-            }
-
-            /* ── Touch / swipe ── */
-            let tx = 0;
-            track.addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; }, { passive: true });
-            track.addEventListener('touchend', e => {
-                const delta = tx - e.changedTouches[0].clientX;
-                if (Math.abs(delta) > 40) delta > 0 ? goTo(current + 1) : goTo(current - 1);
-            }, { passive: true });
-
-            prevBtn.addEventListener('click', () => goTo(current - 1));
-            nextBtn.addEventListener('click', () => goTo(current + 1));
-
-            /* ── Resize ── */
-            let rt;
-            window.addEventListener('resize', () => {
-                clearTimeout(rt);
-                rt = setTimeout(() => { buildDots(); goTo(Math.min(current, maxIndex())); }, 120);
-            });
-
-            buildDots();
-            goTo(0);
-        })();
-    </script>
+    </section>
 
 
 

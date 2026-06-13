@@ -1,18 +1,18 @@
-// Carousel script for the "Recommended Destinations" section.
+// Carousel script for destination card sliders.
 (function () {
     'use strict';
 
-    function initRecommendedSlider() {
-        const track = document.getElementById('rdTrack');
-        const prevBtn = document.getElementById('rdPrev');
-        const nextBtn = document.getElementById('rdNext');
-        const dotsEl = document.getElementById('rdDots');
+    function initDestinationSlider({ trackId, prevId, nextId, dotsId, cardSelector, dotClass, activeDotClass }) {
+        const track = document.getElementById(trackId);
+        const prevBtn = document.getElementById(prevId);
+        const nextBtn = document.getElementById(nextId);
+        const dotsEl = document.getElementById(dotsId);
 
         if (!track || !prevBtn || !nextBtn || !dotsEl) return;
         if (track.dataset.sliderInit === '1') return;
         track.dataset.sliderInit = '1';
 
-        const cards = Array.from(track.querySelectorAll('.rd-card'));
+        const cards = Array.from(track.querySelectorAll(cardSelector));
         if (!cards.length) return;
 
         let current = 0;
@@ -39,7 +39,7 @@
 
         function updateDots() {
             Array.from(dotsEl.children).forEach((dot, index) => {
-                dot.classList.toggle('rd-dot--active', index === current);
+                dot.classList.toggle(activeDotClass, index === current);
             });
         }
 
@@ -59,7 +59,7 @@
             dotsEl.innerHTML = '';
             for (let i = 0; i <= maxIndex(); i++) {
                 const dot = document.createElement('button');
-                dot.className = 'rd-dot';
+                dot.className = dotClass;
                 dot.type = 'button';
                 dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
                 dot.addEventListener('click', () => goTo(i));
@@ -82,14 +82,6 @@
             }
         }, { passive: true });
 
-        document.querySelectorAll('.rd-wishlist').forEach(button => {
-            button.addEventListener('click', () => {
-                const saved = button.dataset.saved === 'true';
-                button.dataset.saved = String(!saved);
-                button.classList.toggle('rd-wishlist--saved', !saved);
-            });
-        });
-
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
@@ -101,6 +93,43 @@
 
         buildDots();
         goTo(0);
+    }
+
+    function initWishlistButtons() {
+        document.querySelectorAll('.rd-wishlist').forEach(button => {
+            if (button.dataset.wishlistInit === '1') return;
+            button.dataset.wishlistInit = '1';
+
+            button.addEventListener('click', () => {
+                const saved = button.dataset.saved === 'true';
+                button.dataset.saved = String(!saved);
+                button.classList.toggle('rd-wishlist--saved', !saved);
+            });
+        });
+    }
+
+    function initRecommendedSlider() {
+        initDestinationSlider({
+            trackId: 'rdTrack',
+            prevId: 'rdPrev',
+            nextId: 'rdNext',
+            dotsId: 'rdDots',
+            cardSelector: '.rd-card',
+            dotClass: 'rd-dot',
+            activeDotClass: 'rd-dot--active',
+        });
+
+        initDestinationSlider({
+            trackId: 'pdTrack',
+            prevId: 'pdPrev',
+            nextId: 'pdNext',
+            dotsId: 'pdDots',
+            cardSelector: '.pd-card',
+            dotClass: 'rd-dot pd-dot',
+            activeDotClass: 'rd-dot--active',
+        });
+
+        initWishlistButtons();
     }
 
     if (document.readyState === 'loading') {

@@ -86,10 +86,14 @@
                                     </div>
                                     <div class="st-mega-col">
                                         <p class="st-mega-title">Quick Plan</p>
-                                        <a class="dropdown-item st-mega-link" href="#">Under 25k Packages</a>
-                                        <a class="dropdown-item st-mega-link" href="#">Family Specials</a>
-                                        <a class="dropdown-item st-mega-link" href="#">Honeymoon Picks</a>
-                                        <a class="dropdown-item st-mega-link" href="#">View All Domestic Tours</a>
+                                        <a class="dropdown-item st-mega-link" href="{{ route('under-25k') }}">Under 25k
+                                            Packages</a>
+                                        <a class="dropdown-item st-mega-link"
+                                            href="{{ route('family-specials') }}">Family Specials</a>
+                                        <a class="dropdown-item st-mega-link"
+                                            href="{{ route('honeymoon-picks') }}">Honeymoon Picks</a>
+                                        <a class="dropdown-item st-mega-link" href="{{ route('all-domestic') }}">View
+                                            All Domestic Tours</a>
                                     </div>
                                 </div>
                             </div>
@@ -136,11 +140,13 @@
                         </li>
                         <li class="nav-item"><a class="nav-link st-navlink"
                                 href="{{ route('religious') }}">Religious</a></li>
-                        <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('budget-friendly') }}">Budget Friendly</a></li>
+                        <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('budget-friendly') }}">Budget
+                                Friendly</a></li>
                         <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('blog.index') }}">Blogs</a>
                         </li>
 
-                        <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('contact', [], false) }}">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link st-navlink"
+                                href="{{ route('contact', [], false) }}">Contact</a></li>
                     </ul>
                 </div>
 

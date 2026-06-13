@@ -50,7 +50,7 @@
                         @endif
                     </section>
 
-                   
+
 
                     <nav class="xpkd-anchor-tabs" aria-label="Package sections">
                         <a href="#xpkd-overview-block">Overview</a>
@@ -146,7 +146,8 @@
                         @if(!empty($pd['pdf_url']))
                             <div class="xpkd-pdf-download-section">
                                 <a href="{{ $pd['pdf_url'] }}" class="xpkd-pdf-btn" download>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                         <polyline points="7 10 12 15 17 10"></polyline>
                                         <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -160,14 +161,16 @@
                             <h4>Package Includes</h4>
                             <div class="xpkd-includes-grid">
                                 <div class="xpkd-include-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                                         <polyline points="9 22 9 12 15 12 15 22"></polyline>
                                     </svg>
                                     <span>Hotel</span>
                                 </div>
                                 <div class="xpkd-include-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
                                         <circle cx="12" cy="12" r="10"></circle>
                                         <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
                                         <line x1="9" y1="9" x2="9.01" y2="9"></line>
@@ -176,14 +179,16 @@
                                     <span>Sightseeing</span>
                                 </div>
                                 <div class="xpkd-include-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
                                         <circle cx="12" cy="12" r="9"></circle>
                                         <path d="M9 10h6v4H9z"></path>
                                     </svg>
                                     <span>Transfer</span>
                                 </div>
                                 <div class="xpkd-include-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
                                         <circle cx="12" cy="12" r="1"></circle>
                                         <path d="M12 5v14M7 12h10M5 8l14 8M5 16l14-8"></path>
                                     </svg>
@@ -204,7 +209,8 @@
                         <p class="xpkd-price-note">Per person on twin sharing</p>
 
                         <a href="#" class="xpkd-cta-btn">Send Enquiry</a>
-                        <a href="https://wa.me/" target="_blank" rel="noopener" class="xpkd-cta-btn xpkd-cta-btn-lite">WhatsApp Expert</a>
+                        <a href="https://wa.me/" target="_blank" rel="noopener"
+                            class="xpkd-cta-btn xpkd-cta-btn-lite">WhatsApp Expert</a>
 
                         <div class="xpkd-side-split"></div>
                         <ul class="xpkd-side-facts">
@@ -223,37 +229,38 @@
             </div>
         </div>
     </section>
-     <!-- Package Section Card -->
-                    <section class="CTA-section-container" style="background-image: url('{{ $mainImage }}'); background-size: cover; background-position: center;">
-                        <div class="CTA-section-overlay"></div>
-                        <div class="CTA-section-content">
+    <!-- Package Section Card -->
+    <section class="CTA-section-container"
+        style="background-image: url('{{ $mainImage }}'); background-size: cover; background-position: center;">
+        <div class="CTA-section-overlay"></div>
+        <div class="CTA-section-content">
 
-                            <div class="CTA-section-main">
-                                <h2 class="CTA-section-title">{{ $pd['package_title'] }}</h2>
-                                <p class="CTA-section-description">{{ strip_tags($pd['overview_text']) }}</p>
+            <div class="CTA-section-main">
+                <h2 class="CTA-section-title">{{ $pd['package_title'] }}</h2>
+                <p class="CTA-section-description">{{ strip_tags($pd['overview_text']) }}</p>
 
-                                <div class="CTA-section-columns">
+                <div class="CTA-section-columns">
 
-                                    <!-- Right Column -->
-                                    <div class="CTA-section-col CTA-section-col-right">
-                                        <div class="CTA-section-info-box">
-                                            <h3 class="CTA-section-subtitle">⛏️ Difficulty</h3>
-                                            <p class="CTA-section-difficulty">{{ $pd['difficulty'] }}</p>
-                                            <h3 class="CTA-section-subtitle">🌤️ Seasons</h3>
-                                                @foreach($pd['seasons'] as $season)
-                                                    <div class="CTA-section-season-item">
-                                                        <strong>{{ $season['name'] }}</strong>
-                                                        <small>{{ $season['note'] }}</small>
-                                        </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
+                    <!-- Right Column -->
+                    <div class="CTA-section-col CTA-section-col-right">
+                        <div class="CTA-section-info-box">
+                            <h3 class="CTA-section-subtitle">⛏️ Difficulty</h3>
+                            <p class="CTA-section-difficulty">{{ $pd['difficulty'] }}</p>
+                            <h3 class="CTA-section-subtitle">🌤️ Seasons</h3>
+                            @foreach($pd['seasons'] as $season)
+                                <div class="CTA-section-season-item">
+                                    <strong>{{ $season['name'] }}</strong>
+                                    <small>{{ $season['note'] }}</small>
                                 </div>
-
-                            </div>
+                            @endforeach
                         </div>
-                    </section>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </section>
     @if(count($galleryImages) > 0)
         <div class="xpkd-gallery-modal" id="xpkdGalleryModal" aria-hidden="true">
             <div class="xpkd-gallery-modal-backdrop" data-xpkd-gallery-close></div>
@@ -262,14 +269,14 @@
                 <button type="button" class="xpkd-gallery-modal-close" data-xpkd-gallery-close aria-label="Close gallery">
                     <span>&times;</span>
                 </button>
-                <button type="button" class="xpkd-gallery-modal-nav xpkd-gallery-modal-prev"
-                    data-xpkd-gallery-prev aria-label="Previous gallery image">
+                <button type="button" class="xpkd-gallery-modal-nav xpkd-gallery-modal-prev" data-xpkd-gallery-prev
+                    aria-label="Previous gallery image">
                     <span>&lsaquo;</span>
                 </button>
-                <img src="{{ $mainImage }}" alt="{{ $pd['package_title'] }} gallery image"
-                    class="xpkd-gallery-modal-image" data-xpkd-gallery-image>
-                <button type="button" class="xpkd-gallery-modal-nav xpkd-gallery-modal-next"
-                    data-xpkd-gallery-next aria-label="Next gallery image">
+                <img src="{{ $mainImage }}" alt="{{ $pd['package_title'] }} gallery image" class="xpkd-gallery-modal-image"
+                    data-xpkd-gallery-image>
+                <button type="button" class="xpkd-gallery-modal-nav xpkd-gallery-modal-next" data-xpkd-gallery-next
+                    aria-label="Next gallery image">
                     <span>&rsaquo;</span>
                 </button>
                 <div class="xpkd-gallery-modal-caption">
