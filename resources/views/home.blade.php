@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="st-hero" data-hero-media="image" style="--hero-image:none;">
+    <section class="st-hero" data-hero-media="video" style="--hero-image:none;">
         <!-- Switch to video background by setting data-hero-media="video" -->
         <!-- Add your image URL in --hero-image and add your video source below -->
         <video class="st-hero-video" autoplay muted loop playsinline>
-            <!-- <source src="{{ asset('videos/your-hero.mp4') }}" type="video/mp4"> -->
+            <source src="{{ asset('images/hero-bg-video.mp4') }}" type="video/mp4">
         </video>
 
         <div class="st-hero-overlay" aria-hidden="true"></div>
@@ -690,8 +690,8 @@
     {{-- ── Styles ── --}}
     <style>
         /* ═══════════════════════════════════════════════
-                                                                                   SECTION WRAPPER
-                                                                                ════════════════════════════════════════════════*/
+                                                                                           SECTION WRAPPER
+                                                                                        ════════════════════════════════════════════════*/
         .st-themes-section {
             width: min(100% - 24px, 1320px);
             margin: 0 auto 48px;
@@ -699,8 +699,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-                                                                                   HEADER ROW
-                                                                                ════════════════════════════════════════════════*/
+                                                                                           HEADER ROW
+                                                                                        ════════════════════════════════════════════════*/
         .st-themes-header {
             display: flex;
             align-items: center;
@@ -752,8 +752,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-                                                                                   SLIDER OUTER  (the visible window + arrows)
-                                                                                ════════════════════════════════════════════════*/
+                                                                                           SLIDER OUTER  (the visible window + arrows)
+                                                                                        ════════════════════════════════════════════════*/
         .st-themes-slider-outer {
             position: relative;
             display: flex;
@@ -762,8 +762,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-                                                                                   ARROW BUTTONS
-                                                                                ════════════════════════════════════════════════*/
+                                                                                           ARROW BUTTONS
+                                                                                        ════════════════════════════════════════════════*/
         .st-themes-arrow {
             position: absolute;
             top: 50%;
@@ -806,8 +806,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-                                                                                   TRACK  (the scrolling row of cards)
-                                                                                ════════════════════════════════════════════════*/
+                                                                                           TRACK  (the scrolling row of cards)
+                                                                                        ════════════════════════════════════════════════*/
         .st-themes-track {
             display: flex;
             gap: 14px;
@@ -826,8 +826,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-                                                                                   INDIVIDUAL THEME CARD
-                                                                                ════════════════════════════════════════════════*/
+                                                                                           INDIVIDUAL THEME CARD
+                                                                                        ════════════════════════════════════════════════*/
         .st-theme-card {
             flex: 0 0 auto;
             width: 176px;
@@ -880,8 +880,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-                                                                                   VIEW ALL CARD
-                                                                                ════════════════════════════════════════════════*/
+                                                                                           VIEW ALL CARD
+                                                                                        ════════════════════════════════════════════════*/
         .st-theme-viewall .st-theme-card-img {
             background: #fff !important;
             border: 1.5px dashed rgba(17, 17, 17, .16);
@@ -945,8 +945,8 @@
         }
 
         /* ═══════════════════════════════════════════════
-                                                                                   RESPONSIVE
-                                                                                ════════════════════════════════════════════════*/
+                                                                                           RESPONSIVE
+                                                                                        ════════════════════════════════════════════════*/
         @media (max-width: 767.98px) {
             .st-themes-header {
                 flex-direction: column;
@@ -1153,7 +1153,8 @@
                             </svg>
                         </button>
                     </div>
-                    <a href="{{ route('destinations.index', ['category' => 'Popular']) }}" class="rd-view-all-link pd-view-all-link">
+                    <a href="{{ route('destinations.index', ['category' => 'Popular']) }}"
+                        class="rd-view-all-link pd-view-all-link">
                         View all <span aria-hidden="true">→</span>
                     </a>
                 </div>
@@ -1169,7 +1170,8 @@
                             <div class="rd-card-badge rd-badge--bestseller pd-card-badge">
                                 {{ $destination->badge_label ?: 'Popular Pick' }}
                             </div>
-                            <button class="rd-wishlist pd-wishlist" aria-label="Save {{ $destination->name }}" data-saved="false">
+                            <button class="rd-wishlist pd-wishlist" aria-label="Save {{ $destination->name }}"
+                                data-saved="false">
                                 <svg viewBox="0 0 24 24" fill="none">
                                     <path
                                         d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
@@ -1213,10 +1215,12 @@
                                     <div class="rd-card-footer">
                                         <div class="rd-price-block">
                                             <span class="rd-price-from">From</span>
-                                            <span class="rd-price">{{ $destination->formatted_price ?? ($destination->price_from ? '₹' . number_format($destination->price_from) : '') }}</span>
+                                            <span
+                                                class="rd-price">{{ $destination->formatted_price ?? ($destination->price_from ? '₹' . number_format($destination->price_from) : '') }}</span>
                                             <span class="rd-price-per">{{ $destination->price_unit ?? '' }}</span>
                                         </div>
-                                        <a href="{{ route('destinations.show', $destination) }}" class="rd-card-btn pd-card-btn">
+                                        <a href="{{ route('destinations.show', $destination) }}"
+                                            class="rd-card-btn pd-card-btn">
                                             Explore <span>→</span>
                                         </a>
                                     </div>
@@ -1230,7 +1234,8 @@
                             <div class="rd-card-body pd-card-body">
                                 <div class="rd-card-info">
                                     <h3 class="rd-card-name">No popular destinations yet</h3>
-                                    <p class="pd-empty-text">Choose the Popular category in the destination admin panel to show cards here.</p>
+                                    <p class="pd-empty-text">Choose the Popular category in the destination admin panel to show
+                                        cards here.</p>
                                     <div class="rd-card-footer">
                                         <a href="{{ route('destinations.index') }}" class="rd-card-btn pd-card-btn">
                                             View all <span>→</span>

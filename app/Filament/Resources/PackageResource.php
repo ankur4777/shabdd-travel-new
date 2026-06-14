@@ -73,8 +73,8 @@ class PackageResource extends Resource
                             ->required(),
                         Select::make('type')
                             ->options([
-                                'Domestic' => 'Domestic',
-                                'International' => 'International',
+                                'domestic' => 'Domestic',
+                                'international' => 'International',
                             ]),
 
                         Select::make('travel_style')

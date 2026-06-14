@@ -42,6 +42,16 @@ class DestinationForm
                                 'Premium' => 'Premium',
                             ]),
 
+                        Select::make('theme')
+                            ->label('Theme')
+                            ->required()
+                            ->options([
+                                'Beach' => 'Beach',
+                                'Hill' => 'Hill',
+                                'Island' => 'Island',
+                                'Dessert' => 'Dessert',
+                            ]),
+
                         CheckboxList::make('travel_styles')
                             ->label('Travel style')
                             ->options([

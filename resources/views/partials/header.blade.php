@@ -72,26 +72,28 @@
                                 <div class="st-mega-grid">
                                     <div class="st-mega-col">
                                         <p class="st-mega-title">Top Destinations</p>
-                                        <a class="dropdown-item st-mega-link" href="#">Himachal Escapes</a>
-                                        <a class="dropdown-item st-mega-link" href="#">Kashmir Retreats</a>
-                                        <a class="dropdown-item st-mega-link" href="#">Rajasthan Royal Trails</a>
-                                        <a class="dropdown-item st-mega-link" href="#">Kerala Backwaters</a>
+                                        @forelse(($topDomesticDestinations ?? collect()) as $destination)
+                                            <a class="dropdown-item st-mega-link"
+                                                href="{{ route('destinations.show', $destination->slug) }}">
+                                                {{ $destination->name }}
+                                            </a>
+                                        @empty
+                                            <a class="dropdown-item st-mega-link" href="{{ route('destinations.index') }}">
+                                                View All Destinations
+                                            </a>
+                                        @endforelse
                                     </div>
                                     <div class="st-mega-col">
-                                        <p class="st-mega-title">Travel Styles</p>
-                                        <a class="dropdown-item st-mega-link" href="#">Weekend Gateways</a>
-                                        <a class="dropdown-item st-mega-link" href="#">Hill Station Tours</a>
-                                        <a class="dropdown-item st-mega-link" href="#">Temple and Heritage</a>
-                                        <a class="dropdown-item st-mega-link" href="#">Wildlife Safaris</a>
+                                        <p class="st-mega-title">Travel Theme</p>
+                                        <a class="dropdown-item st-mega-link" href="{{ route('beach-escapes') }}">Beach Escapes</a>
+                                        <a class="dropdown-item st-mega-link" href="#">Hill Station Retreats</a>
+                                        <a class="dropdown-item st-mega-link" href="#">Island Getaways</a>
+                                        <a class="dropdown-item st-mega-link" href="#">Desert Adventures</a>
                                     </div>
                                     <div class="st-mega-col">
                                         <p class="st-mega-title">Quick Plan</p>
                                         <a class="dropdown-item st-mega-link" href="{{ route('under-25k') }}">Under 25k
                                             Packages</a>
-                                        <a class="dropdown-item st-mega-link"
-                                            href="{{ route('family-specials') }}">Family Specials</a>
-                                        <a class="dropdown-item st-mega-link"
-                                            href="{{ route('honeymoon-picks') }}">Honeymoon Picks</a>
                                         <a class="dropdown-item st-mega-link" href="{{ route('all-domestic') }}">View
                                             All Domestic Tours</a>
                                     </div>
@@ -295,6 +297,18 @@
     </aside>
 </header>
 
+@php
+    $topDomesticDestinationLinks = collect($topDomesticDestinations ?? [])
+        ->map(function ($destination) {
+            return [
+                'text' => $destination->name,
+                'url' => route('destinations.show', $destination->slug),
+            ];
+        })
+        ->values()
+        ->all();
+@endphp
+
 <script>
     (function () {
         const overlay = document.getElementById('stMobileOverlay');
@@ -324,17 +338,16 @@
         }
 
         // Submenu data structure
+        const topDomesticDestinations = @json($topDomesticDestinationLinks);
+
         const submenuData = {
             domestic: {
                 title: 'Domestic Tours',
                 sections: [
                     {
                         title: 'Top Destinations',
-                        items: [
-                            { text: 'Himachal Escapes', url: '#' },
-                            { text: 'Kashmir Retreats', url: '#' },
-                            { text: 'Rajasthan Royal Trails', url: '#' },
-                            { text: 'Kerala Backwaters', url: '#' }
+                        items: topDomesticDestinations.length ? topDomesticDestinations : [
+                            { text: 'View All Destinations', url: @json(route('destinations.index')) }
                         ]
                     },
                     {
@@ -349,10 +362,8 @@
                     {
                         title: 'Quick Plan',
                         items: [
-                            { text: 'Under 25k Packages', url: '#' },
-                            { text: 'Family Specials', url: '#' },
-                            { text: 'Honeymoon Picks', url: '#' },
-                            { text: 'View All Domestic Tours', url: '#' }
+                            { text: 'Under 25k Packages', url: @json(route('under-25k')) },
+                            { text: 'View All Domestic Tours', url: @json(route('all-domestic')) }
                         ]
                     }
                 ]

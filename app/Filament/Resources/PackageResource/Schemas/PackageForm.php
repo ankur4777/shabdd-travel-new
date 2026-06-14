@@ -55,6 +55,12 @@ class PackageForm
                                 'adventure' => 'Adventure',
                             ]),
 
+                        Select::make('type')
+                            ->options([
+                                'domestic' => 'Domestic',
+                                'international' => 'International',
+                            ]),
+
                         TextInput::make('days')
                             ->numeric(),
 

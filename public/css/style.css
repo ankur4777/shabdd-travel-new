@@ -138,12 +138,12 @@ textarea {
     background:
         linear-gradient(
             90deg,
-            rgba(12, 14, 17, 0.78) 0%,
-            rgba(12, 14, 17, 0.68) 38%,
-            rgba(12, 14, 17, 0.5) 60%,
-            rgba(12, 14, 17, 0.56) 100%
+            rgba(12, 14, 17, 0.06) 0%,
+            rgba(12, 14, 17, 0.058) 38%,
+            rgba(12, 14, 17, 0.077) 60%,
+            rgba(12, 14, 17, 0.069) 100%
         ),
-        linear-gradient(0deg, rgba(14, 16, 20, 0.5), rgba(14, 16, 20, 0.5));
+        linear-gradient(0deg, rgba(14, 16, 20, 0.06), rgba(14, 16, 20, 0.06));
 }
 
 .st-hero-inner {
@@ -6523,7 +6523,12 @@ div.container.st-nav-inner {
     position: relative;
     overflow: hidden;
     background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(242, 250, 247, 0.92) 48%, rgba(255, 247, 245, 0.95)),
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.95),
+            rgba(242, 250, 247, 0.92) 48%,
+            rgba(255, 247, 245, 0.95)
+        ),
         #f8faf9;
     border-color: rgba(15, 118, 110, 0.14);
 }
@@ -6564,14 +6569,32 @@ div.container.st-nav-inner {
 
 .pd-card-overlay {
     background:
-        linear-gradient(90deg, rgba(4, 18, 22, 0.86) 0%, rgba(4, 18, 22, 0.56) 45%, rgba(4, 18, 22, 0.1) 100%),
-        linear-gradient(180deg, rgba(4, 18, 22, 0.02) 0%, rgba(4, 18, 22, 0.82) 100%);
+        linear-gradient(
+            90deg,
+            rgba(4, 18, 22, 0.86) 0%,
+            rgba(4, 18, 22, 0.56) 45%,
+            rgba(4, 18, 22, 0.1) 100%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(4, 18, 22, 0.02) 0%,
+            rgba(4, 18, 22, 0.82) 100%
+        );
 }
 
 .pd-card:hover .pd-card-overlay {
     background:
-        linear-gradient(90deg, rgba(4, 18, 22, 0.9) 0%, rgba(4, 18, 22, 0.6) 45%, rgba(4, 18, 22, 0.12) 100%),
-        linear-gradient(180deg, rgba(4, 18, 22, 0.02) 0%, rgba(4, 18, 22, 0.86) 100%);
+        linear-gradient(
+            90deg,
+            rgba(4, 18, 22, 0.9) 0%,
+            rgba(4, 18, 22, 0.6) 45%,
+            rgba(4, 18, 22, 0.12) 100%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(4, 18, 22, 0.02) 0%,
+            rgba(4, 18, 22, 0.86) 100%
+        );
 }
 
 .pd-card-badge {

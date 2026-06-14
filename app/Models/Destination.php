@@ -14,6 +14,7 @@ class Destination extends Model
         'slug',
         'country',
         'category',
+        'theme',
         'travel_styles',
         'image_url',
         'badge_label',

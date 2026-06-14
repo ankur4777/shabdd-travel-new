@@ -9,6 +9,10 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Schema::hasTable('seasonal_journeys')) {
+            return;
+        }
+
         Schema::create('seasonal_journeys', function (Blueprint $table) {
             $table->id();
             $table->string('name');               // e.g. "ANDAMAN"
