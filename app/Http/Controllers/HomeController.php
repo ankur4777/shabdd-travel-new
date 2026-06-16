@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Destination;
 use App\Models\Package;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -63,64 +63,59 @@ class HomeController extends Controller
         return $this->packageCategoryListing($request, 'Budget Friendly', 'budget-friendly');
     }
 
-    public function beachEscapes(Request $request): View
+    public function beachEscapes(Request $request): View|JsonResponse
     {
         $allBeachDestinations = $this->beachThemeDestinations();
+        $destinationOptions = $this->beachDestinationOptions($allBeachDestinations);
+        $budgetOptions = $this->beachBudgetOptions();
         $priceBounds = $this->beachPriceBounds($allBeachDestinations);
-        $selectedMinPrice = $this->sanitizePrice(
-            $request->input('min_price'),
-            $priceBounds['min'],
-            $priceBounds['min'],
-            $priceBounds['max']
-        );
-        $selectedMaxPrice = $this->sanitizePrice(
-            $request->input('max_price'),
-            $priceBounds['max'],
-            $priceBounds['min'],
-            $priceBounds['max']
-        );
-
-        if ($selectedMinPrice > $selectedMaxPrice) {
-            [$selectedMinPrice, $selectedMaxPrice] = [$selectedMaxPrice, $selectedMinPrice];
-        }
-
-        $selectedTravelStyles = collect(Arr::wrap($request->input('travel_styles', [])))
+        $selectedDestination = trim((string) $request->input('destination', ''));
+        $selectedBudget = trim((string) $request->input('budget', ''));
+        $selectedDuration = trim((string) $request->input('duration', ''));
+        $selectedTravelStyles = collect($request->input('travel_styles', []))
             ->map(fn($value) => trim((string) $value))
             ->filter()
             ->unique()
             ->values()
             ->all();
-        $selectedTripType = (string) $request->input('trip_type', 'all');
-        $selectedRating = $this->sanitizeBeachRating($request->input('rating'));
-        $selectedSort = (string) $request->input('sort', 'newest');
+        [$selectedMinPrice, $selectedMaxPrice] = $this->beachBudgetRange($selectedBudget, $priceBounds);
 
         $beachDestinations = $this->filterBeachDestinations(
             $allBeachDestinations,
+            $selectedDestination,
             $selectedMinPrice,
             $selectedMaxPrice,
-            $selectedTravelStyles,
-            $selectedTripType,
-            $selectedRating
+            $selectedDuration,
+            $selectedTravelStyles
         );
 
-        $beachDestinations = $this->sortBeachDestinations($beachDestinations, $selectedSort);
         $beachTravelStyleOptions = $this->beachTravelStyleOptions($allBeachDestinations);
         $beachPackages = $this->popularBeachPackages();
 
-        return view('beach-escapes', [
+        $viewData = [
             'beachDestinations' => $beachDestinations,
+            'destinationOptions' => $destinationOptions,
+            'budgetOptions' => $budgetOptions,
             'beachTravelStyleOptions' => $beachTravelStyleOptions,
             'priceBounds' => $priceBounds,
             'selectedMinPrice' => $selectedMinPrice,
             'selectedMaxPrice' => $selectedMaxPrice,
+            'selectedDestination' => $selectedDestination,
+            'selectedBudget' => $selectedBudget,
+            'selectedDuration' => $selectedDuration,
             'selectedTravelStyles' => $selectedTravelStyles,
-            'selectedTripType' => $selectedTripType,
-            'selectedRating' => $selectedRating,
-            'selectedSort' => $selectedSort,
             'beachPackages' => $beachPackages,
             'beachDestinationCount' => $beachDestinations->count(),
             'beachPackageCount' => $beachPackages->count(),
-        ]);
+        ];
+
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('partials.beach-destination-results', $viewData)->render(),
+            ]);
+        }
+
+        return view('beach-escapes', $viewData);
     }
 
     private function packageListing(Request $request, string $travelStyle, string $view): View
@@ -293,6 +288,38 @@ class HomeController extends Controller
         ];
     }
 
+    private function beachDestinationOptions(Collection $destinations): Collection
+    {
+        return $destinations
+            ->sortBy('name')
+            ->map(fn(array $destination) => [
+                'value' => $destination['slug'],
+                'label' => $destination['name'],
+            ])
+            ->values();
+    }
+
+    private function beachBudgetOptions(): array
+    {
+        return [
+            ['value' => 'under_25k', 'label' => 'Under ₹25K'],
+            ['value' => '25k_50k', 'label' => '₹25K – ₹50K'],
+            ['value' => '50k_1l', 'label' => '₹50K – ₹1L'],
+            ['value' => 'luxury_1l_plus', 'label' => 'Luxury ₹1L+'],
+        ];
+    }
+
+    private function beachBudgetRange(string $budget, array $priceBounds): array
+    {
+        return match ($budget) {
+            'under_25k' => [0, 25000],
+            '25k_50k' => [25000, 50000],
+            '50k_1l' => [50000, 100000],
+            'luxury_1l_plus' => [100000, PHP_INT_MAX],
+            default => [$priceBounds['min'], $priceBounds['max']],
+        };
+    }
+
     private function beachTravelStyleOptions(Collection $destinations): Collection
     {
         return $destinations
@@ -306,40 +333,32 @@ class HomeController extends Controller
 
     private function filterBeachDestinations(
         Collection $destinations,
+        string $selectedDestination,
         int $selectedMinPrice,
         int $selectedMaxPrice,
-        array $selectedTravelStyles,
-        string $selectedTripType,
-        ?float $selectedRating
+        string $selectedDuration,
+        array $selectedTravelStyles
     ): Collection {
         return $destinations
             ->filter(function (array $destination) use (
+                $selectedDestination,
                 $selectedMinPrice,
                 $selectedMaxPrice,
-                $selectedTravelStyles,
-                $selectedTripType,
-                $selectedRating
+                $selectedDuration,
+                $selectedTravelStyles
             ) {
+                if ($selectedDestination !== '' && $destination['slug'] !== $selectedDestination) {
+                    return false;
+                }
+
                 $price = (int) ($destination['price_from'] ?? 0);
 
                 if ($price < $selectedMinPrice || $price > $selectedMaxPrice) {
                     return false;
                 }
 
-                if ($selectedTripType !== 'all' && $selectedTripType !== '') {
-                    $destinationTripType = $this->beachDestinationTripType($destination);
-
-                    if ($destinationTripType !== $selectedTripType) {
-                        return false;
-                    }
-                }
-
-                if ($selectedRating !== null) {
-                    $rating = (float) ($destination['rating'] ?? 0);
-
-                    if ($rating < $selectedRating) {
-                        return false;
-                    }
+                if ($selectedDuration !== '' && !$this->beachDestinationMatchesDuration($destination, $selectedDuration)) {
+                    return false;
                 }
 
                 if (!empty($selectedTravelStyles)) {
@@ -364,37 +383,36 @@ class HomeController extends Controller
             ->values();
     }
 
-    private function sortBeachDestinations(Collection $destinations, string $sort): Collection
+    private function beachDestinationMatchesDuration(array $destination, string $selectedDuration): bool
     {
-        return match ($sort) {
-            'low_to_high' => $destinations->sortBy('price_from')->values(),
-            'high_to_low' => $destinations->sortByDesc('price_from')->values(),
-            'highest_rated' => $destinations->sortByDesc('rating')->values(),
-            'most_popular' => $destinations
-                ->sortByDesc(fn(array $destination) => ((float) ($destination['rating'] ?? 0) * 100000000) + (int) ($destination['price_from'] ?? 0))
-                ->values(),
-            default => $destinations->values(),
+        $dayCount = $this->beachDestinationDayCount($destination);
+
+        return match ($selectedDuration) {
+            'weekend' => $dayCount > 0 && $dayCount <= 3,
+            '3-5' => $dayCount >= 3 && $dayCount <= 5,
+            '5-7' => $dayCount >= 5 && $dayCount <= 7,
+            '7+' => $dayCount >= 7,
+            default => true,
         };
     }
 
-    private function beachDestinationTripType(array $destination): string
+    private function beachDestinationDayCount(array $destination): int
     {
-        $country = Str::lower(trim((string) ($destination['country'] ?? '')));
+        $duration = trim((string) ($destination['duration'] ?? $destination['ideal_duration'] ?? ''));
 
-        return $country !== '' && !Str::contains($country, 'india')
-            ? 'international'
-            : 'domestic';
-    }
-
-    private function sanitizeBeachRating(mixed $value): ?float
-    {
-        if (!is_numeric($value)) {
-            return null;
+        if ($duration === '') {
+            return 0;
         }
 
-        $rating = (float) $value;
+        if (preg_match('/(\d+)\s*(?:-|–|to)\s*(\d+)/i', $duration, $matches)) {
+            return (int) $matches[2];
+        }
 
-        return in_array($rating, [3.0, 4.0, 4.5, 5.0], true) ? $rating : null;
+        if (preg_match('/(\d+)/', $duration, $matches)) {
+            return (int) $matches[1];
+        }
+
+        return 0;
     }
 
     private function popularBeachPackages(): Collection
