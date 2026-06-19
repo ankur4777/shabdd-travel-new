@@ -86,9 +86,9 @@
                                     <div class="st-mega-col">
                                         <p class="st-mega-title">Travel Theme</p>
                                         <a class="dropdown-item st-mega-link" href="{{ route('beach-escapes') }}">Beach Escapes</a>
-                                        <a class="dropdown-item st-mega-link" href="#">Hill Station Retreats</a>
-                                        <a class="dropdown-item st-mega-link" href="#">Island Getaways</a>
-                                        <a class="dropdown-item st-mega-link" href="#">Desert Adventures</a>
+                                        <a class="dropdown-item st-mega-link" href="{{ route('hill-station-retreats') }}">Hill Station Retreats</a>
+                                        <a class="dropdown-item st-mega-link" href="{{ route('island-getaways') }}">Island Getaways</a>
+                                        <a class="dropdown-item st-mega-link" href="{{ route('desert-adventures') }}">Desert Adventures</a>
                                     </div>
                                     <div class="st-mega-col">
                                         <p class="st-mega-title">Quick Plan</p>
@@ -354,9 +354,9 @@
                         title: 'Travel Styles',
                         items: [
                             { text: 'Weekend Gateways', url: '#' },
-                            { text: 'Hill Station Tours', url: '#' },
-                            { text: 'Temple and Heritage', url: '#' },
-                            { text: 'Wildlife Safaris', url: '#' }
+                            { text: 'Hill Station Tours', url: @json(route('hill-station-retreats')) },
+                            { text: 'Island Getaways', url: @json(route('island-getaways')) },
+                            { text: 'Desert Adventures', url: @json(route('desert-adventures')) }
                         ]
                     },
                     {

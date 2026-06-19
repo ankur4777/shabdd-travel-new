@@ -78,8 +78,6 @@
                         <h2>Filter beach destinations</h2>
                         <p>Use destination, budget, duration, and travel style to narrow the beach destination grid.</p>
                     </div>
-
-                    <a href="#beach-packages" class="beach-text-link">Skip to packages</a>
                 </div>
 
                 <div class="beach-destination-layout">

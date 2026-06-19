@@ -84,8 +84,9 @@ class PackageForm
                         Select::make('theme')
                             ->options([
                                 'Beach' => 'Beach',
-                                'Mountain' => 'Mountain',
+                                'Hill' => 'Hill',
                                 'Island' => 'Island',
+                                'Desert' => 'Desert',
                             ]),
 
                         Textarea::make('feature_1'),

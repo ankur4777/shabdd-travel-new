@@ -7,7 +7,6 @@
     'use strict';
 
     function initCarousel() {
-        const carouselOuter = document.getElementById('dfCarouselOuter');
         const cardsGrid = document.getElementById('dfCardsGrid');
         const arrowLeft = document.getElementById('dfCarouselArrowLeft');
         const arrowRight = document.getElementById('dfCarouselArrowRight');
@@ -20,16 +19,16 @@
         if (cardsGrid.dataset.carouselInit === '1') {
             return;
         }
+        cardsGrid.dataset.carouselInit = '1';
 
         // Get responsive card width
         function getCardWidth() {
             const firstCard = cardsGrid.querySelector('.df-card');
             if (!firstCard) return 280; // Fallback
-            
-            const style = window.getComputedStyle(firstCard);
-            const width = parseFloat(style.width) || 280;
-            const marginRight = parseFloat(style.marginRight) || 0;
-            return width + marginRight;
+
+            const gridStyle = window.getComputedStyle(cardsGrid);
+            const gap = parseFloat(gridStyle.columnGap || gridStyle.gap) || 0;
+            return firstCard.getBoundingClientRect().width + gap;
         }
 
         // Update arrow visibility based on scroll position
@@ -88,28 +87,38 @@
         // Update arrows on scroll
         cardsGrid.addEventListener('scroll', updateArrows);
 
-        // Mobile drag support for smoother horizontal swipe
+        // Touch devices use native momentum scrolling. Add mouse drag support only.
         let isDragging = false;
         let startX = 0;
         let startScrollLeft = 0;
         let dragMoved = false;
 
         cardsGrid.addEventListener('pointerdown', (event) => {
+            if (event.pointerType !== 'mouse' || event.button !== 0) {
+                return;
+            }
+
+            if (event.target.closest('a, button, input, select, label, textarea')) {
+                return;
+            }
+
             isDragging = true;
             dragMoved = false;
             startX = event.clientX;
             startScrollLeft = cardsGrid.scrollLeft;
+            cardsGrid.classList.add('df-is-dragging');
             cardsGrid.setPointerCapture(event.pointerId);
         });
 
         cardsGrid.addEventListener('pointermove', (event) => {
-            if (!isDragging) {
+            if (!isDragging || event.pointerType !== 'mouse') {
                 return;
             }
 
             const deltaX = event.clientX - startX;
             if (Math.abs(deltaX) > 3) {
                 dragMoved = true;
+                event.preventDefault();
             }
 
             cardsGrid.scrollLeft = startScrollLeft - deltaX;
@@ -121,7 +130,10 @@
             }
 
             isDragging = false;
-            cardsGrid.releasePointerCapture(event.pointerId);
+            cardsGrid.classList.remove('df-is-dragging');
+            if (cardsGrid.hasPointerCapture(event.pointerId)) {
+                cardsGrid.releasePointerCapture(event.pointerId);
+            }
             if (dragMoved) {
                 setTimeout(updateArrows, 80);
             }

@@ -117,8 +117,9 @@ class PackageResource extends Resource
                         Select::make('theme')
                             ->options([
                                 'Beach' => 'Beach',
-                                'Mountain' => 'Mountain',
+                                'Hill' => 'Hill',
                                 'Island' => 'Island',
+                                'Desert' => 'Desert',
                             ]),
 
                         Textarea::make('feature_1'),

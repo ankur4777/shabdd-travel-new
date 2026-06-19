@@ -6,18 +6,55 @@ use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
 
 class DomesticTourController extends Controller
 {
-    public function under25k()
+    public function under25k(Request $request): View
     {
-        // Fetch packages under 25k
-        $packages = Package::where('type', 'domestic')
-            ->where('price', '<=', 25000)
+        $baseQuery = Package::query()
+            ->where('price', '>', 0)
+            ->where('price', '<=', 25000);
+
+        $this->applyDomesticScope($baseQuery);
+
+        $allPackages = (clone $baseQuery)
+            ->orderByDesc('featured')
+            ->orderByDesc('rating')
+            ->orderBy('price')
             ->get();
 
-        return view('domestic-tours.under-25k', compact('packages'));
+        $filteredQuery = clone $baseQuery;
+        $selectedDestination = trim((string) $request->input('destination', ''));
+        $selectedDuration = trim((string) $request->input('duration', ''));
+        $selectedMonth = trim((string) $request->input('month', ''));
+        $selectedSort = trim((string) $request->input('sort', 'popularity'));
+
+        $this->applyUnder25kFilters($filteredQuery, $selectedDestination, $selectedDuration, $selectedMonth);
+        $this->applyUnder25kSort($filteredQuery, $selectedSort);
+
+        $packages = $filteredQuery->get();
+        $destinationOptions = $this->buildUnder25kDestinationOptions($allPackages);
+        $popularDestinations = $this->buildUnder25kPopularDestinations($allPackages);
+        $budgetCategories = $this->buildUnder25kBudgetCategories($allPackages);
+
+        return view('domestic-tours.under-25k', [
+            'packages' => $packages,
+            'allPackages' => $allPackages,
+            'destinationOptions' => $destinationOptions,
+            'popularDestinations' => $popularDestinations,
+            'budgetCategories' => $budgetCategories,
+            'monthOptions' => $this->under25kMonthOptions(),
+            'selectedDestination' => $selectedDestination,
+            'selectedDuration' => $selectedDuration,
+            'selectedMonth' => $selectedMonth,
+            'selectedSort' => $selectedSort,
+            'packageCount' => $packages->count(),
+            'startingPrice' => (int) ($allPackages->min('price') ?? 0),
+            'maxPrice' => (int) ($allPackages->max('price') ?? 25000),
+        ]);
     }
 
     public function summerVacationSpecials(Request $request): View
@@ -288,5 +325,245 @@ class DomesticTourController extends Controller
         ];
 
         return $configs[$seasonKey] ?? $configs['summer'];
+    }
+
+    private function applyUnder25kFilters(
+        Builder $query,
+        string $selectedDestination,
+        string $selectedDuration,
+        string $selectedMonth
+    ): void {
+        if ($selectedDestination !== '') {
+            $search = '%' . strtolower($selectedDestination) . '%';
+
+            $query->where(function (Builder $locationQuery) use ($search) {
+                $locationQuery
+                    ->whereRaw('LOWER(COALESCE(title, \'\')) LIKE ?', [$search])
+                    ->orWhereRaw('LOWER(COALESCE(city, \'\')) LIKE ?', [$search])
+                    ->orWhereRaw('LOWER(COALESCE(state, \'\')) LIKE ?', [$search])
+                    ->orWhereRaw('LOWER(COALESCE(country, \'\')) LIKE ?', [$search]);
+            });
+        }
+
+        if ($selectedDuration !== '') {
+            match ($selectedDuration) {
+                '2-4' => $query->whereBetween('days', [2, 4]),
+                '4-6' => $query->whereBetween('days', [4, 6]),
+                '6-8' => $query->whereBetween('days', [6, 8]),
+                '8+' => $query->where('days', '>=', 8),
+                default => null,
+            };
+        }
+
+        $seasonColumn = $this->under25kMonthSeasonColumn($selectedMonth);
+
+        if ($seasonColumn !== null && $this->packageHasColumn($seasonColumn)) {
+            $query->where(function (Builder $seasonQuery) use ($seasonColumn) {
+                $seasonQuery
+                    ->where($seasonColumn, true)
+                    ->orWhere(function (Builder $fallbackQuery) {
+                        $fallbackQuery
+                            ->where(function (Builder $innerQuery) {
+                                $innerQuery
+                                    ->whereNull('summer_vacation_special')
+                                    ->orWhere('summer_vacation_special', false);
+                            })
+                            ->where(function (Builder $innerQuery) {
+                                $innerQuery
+                                    ->whereNull('winter_vacation_special')
+                                    ->orWhere('winter_vacation_special', false);
+                            })
+                            ->where(function (Builder $innerQuery) {
+                                $innerQuery
+                                    ->whereNull('monsoon_special')
+                                    ->orWhere('monsoon_special', false);
+                            });
+                    });
+            });
+        }
+    }
+
+    private function applyUnder25kSort(Builder $query, string $selectedSort): void
+    {
+        match ($selectedSort) {
+            'price_low' => $query->orderBy('price')->orderByDesc('rating')->orderByDesc('id'),
+            'duration' => $query->orderBy('days')->orderBy('price')->orderByDesc('id'),
+            default => $query->orderByDesc('featured')->orderByDesc('rating')->orderBy('price')->orderByDesc('id'),
+        };
+    }
+
+    private function buildUnder25kDestinationOptions(Collection $packages): array
+    {
+        return $packages
+            ->map(function (Package $package): ?string {
+                return collect([
+                    trim((string) $package->city),
+                    trim((string) $package->state),
+                    trim((string) $package->country),
+                ])->filter()->first();
+            })
+            ->filter()
+            ->unique(fn (string $value) => strtolower($value))
+            ->sort()
+            ->values()
+            ->all();
+    }
+
+    private function buildUnder25kPopularDestinations(Collection $packages): Collection
+    {
+        $priorityNames = [
+            'Manali',
+            'Shimla',
+            'Kashmir',
+            'Goa',
+            'Jaipur',
+            'Udaipur',
+            'Kerala',
+            'Rishikesh',
+            'Varanasi',
+            'Darjeeling',
+        ];
+
+        return collect($priorityNames)
+            ->map(function (string $name) use ($packages): ?array {
+                $matching = $packages->filter(function (Package $package) use ($name): bool {
+                    $haystack = strtolower(implode(' ', array_filter([
+                        $package->title,
+                        $package->city,
+                        $package->state,
+                        $package->country,
+                    ])));
+
+                    return str_contains($haystack, strtolower($name));
+                })->values();
+
+                if ($matching->isEmpty()) {
+                    return null;
+                }
+
+                /** @var Package $primaryPackage */
+                $primaryPackage = $matching->sort(function (Package $left, Package $right): int {
+                    $leftRank = [
+                        (int) $left->featured,
+                        (float) ($left->rating ?? 0),
+                        -1 * (int) ($left->price ?? PHP_INT_MAX),
+                    ];
+                    $rightRank = [
+                        (int) $right->featured,
+                        (float) ($right->rating ?? 0),
+                        -1 * (int) ($right->price ?? PHP_INT_MAX),
+                    ];
+
+                    return $rightRank <=> $leftRank;
+                })->first();
+
+                return [
+                    'name' => $name,
+                    'count' => $matching->count(),
+                    'starting_price' => (int) ($matching->min('price') ?? 0),
+                    'image' => $this->packageImageUrl($primaryPackage),
+                    'url' => route('packages.show', $primaryPackage->slug),
+                ];
+            })
+            ->filter()
+            ->values();
+    }
+
+    private function buildUnder25kBudgetCategories(Collection $packages): array
+    {
+        $bands = [
+            ['label' => 'Under ₹10,000', 'min' => 0, 'max' => 10000],
+            ['label' => '₹10,000 - ₹15,000', 'min' => 10001, 'max' => 15000],
+            ['label' => '₹15,000 - ₹20,000', 'min' => 15001, 'max' => 20000],
+            ['label' => '₹20,000 - ₹25,000', 'min' => 20001, 'max' => 25000],
+        ];
+
+        return collect($bands)
+            ->map(function (array $band) use ($packages): array {
+                $matching = $packages->whereBetween('price', [$band['min'], $band['max']])->values();
+
+                return [
+                    'label' => $band['label'],
+                    'count' => $matching->count(),
+                    'starting_price' => (int) ($matching->min('price') ?? 0),
+                    'destinations' => $matching
+                        ->map(fn (Package $package) => trim((string) ($package->city ?: $package->state ?: $package->country)))
+                        ->filter()
+                        ->unique(fn (string $value) => strtolower($value))
+                        ->take(3)
+                        ->values()
+                        ->all(),
+                ];
+            })
+            ->all();
+    }
+
+    private function under25kMonthOptions(): array
+    {
+        return [
+            ['value' => '', 'label' => 'Any month'],
+            ['value' => 'january', 'label' => 'January'],
+            ['value' => 'february', 'label' => 'February'],
+            ['value' => 'march', 'label' => 'March'],
+            ['value' => 'april', 'label' => 'April'],
+            ['value' => 'may', 'label' => 'May'],
+            ['value' => 'june', 'label' => 'June'],
+            ['value' => 'july', 'label' => 'July'],
+            ['value' => 'august', 'label' => 'August'],
+            ['value' => 'september', 'label' => 'September'],
+            ['value' => 'october', 'label' => 'October'],
+            ['value' => 'november', 'label' => 'November'],
+            ['value' => 'december', 'label' => 'December'],
+        ];
+    }
+
+    private function under25kMonthSeasonColumn(string $selectedMonth): ?string
+    {
+        return match ($selectedMonth) {
+            'march', 'april', 'may', 'june' => 'summer_vacation_special',
+            'july', 'august', 'september' => 'monsoon_special',
+            'october', 'november', 'december', 'january', 'february' => 'winter_vacation_special',
+            default => null,
+        };
+    }
+
+    private function packageImageUrl(Package $package): string
+    {
+        if (blank($package->image)) {
+            return asset('images/couple-bg.jpg');
+        }
+
+        if (Str::startsWith($package->image, ['http://', 'https://'])) {
+            return $package->image;
+        }
+
+        return asset('storage/' . ltrim((string) $package->image, '/'));
+    }
+
+    private function applyDomesticScope(Builder $query): void
+    {
+        if ($this->packageHasColumn('type')) {
+            $query->whereRaw('LOWER(COALESCE(type, \'\')) = ?', ['domestic']);
+
+            return;
+        }
+
+        if ($this->packageHasColumn('country')) {
+            $query->where(function (Builder $countryQuery) {
+                $countryQuery
+                    ->whereNull('country')
+                    ->orWhereRaw('TRIM(COALESCE(country, \'\')) = ?', [''])
+                    ->orWhereRaw('LOWER(TRIM(COALESCE(country, \'\'))) = ?', ['india']);
+            });
+        }
+    }
+
+    private function packageHasColumn(string $column): bool
+    {
+        static $columns;
+
+        $columns ??= array_flip(Schema::getColumnListing('packages'));
+
+        return isset($columns[$column]);
     }
 }

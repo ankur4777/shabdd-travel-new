@@ -12,54 +12,12 @@
        BUDGET DATA  —  per destination (dynamic)
        Each entry: { label, value, min, max (null = no limit) }
        ========================================================= */
-    const BUDGET_MAP = {
-        '': [
-            { label: 'Under ₹25K',       value: 'u25',  min: 0,      max: 25000  },
-            { label: '₹25K – ₹50K',      value: '25-50',min: 25000,  max: 50000  },
-            { label: '₹50K – ₹1L',       value: '50-1l',min: 50000,  max: 100000 },
-            { label: 'Luxury ₹1L+',       value: 'lux',  min: 100000, max: null   },
-        ],
-        bali: [
-            { label: '₹25K – ₹50K',      value: '25-50',min: 25000,  max: 50000  },
-            { label: '₹50K – ₹1L',       value: '50-1l',min: 50000,  max: 100000 },
-            { label: 'Luxury ₹1L+',       value: 'lux',  min: 100000, max: null   },
-        ],
-        goa: [
-            { label: 'Under ₹10K',        value: 'u10',  min: 0,      max: 10000  },
-            { label: '₹10K – ₹25K',       value: '10-25',min: 10000,  max: 25000  },
-            { label: '₹25K+',             value: '25p',  min: 25000,  max: null   },
-        ],
-        dubai: [
-            { label: '₹75K – ₹1.5L',      value: '75-15',min: 75000,  max: 150000 },
-            { label: '₹1.5L – ₹3L',       value: '15-3l',min: 150000, max: 300000 },
-            { label: 'Ultra Luxury ₹3L+',  value: 'ultra',min: 300000, max: null   },
-        ],
-        thailand: [
-            { label: '₹30K – ₹60K',       value: '30-60',min: 30000,  max: 60000  },
-            { label: '₹60K – ₹1L',        value: '60-1l',min: 60000,  max: 100000 },
-            { label: 'Luxury ₹1L+',        value: 'lux',  min: 100000, max: null   },
-        ],
-        maldives: [
-            { label: '₹1L – ₹2L',         value: '1l-2l',min: 100000, max: 200000 },
-            { label: '₹2L – ₹4L',         value: '2l-4l',min: 200000, max: 400000 },
-            { label: 'Ultra Luxury ₹4L+',  value: 'ultra',min: 400000, max: null   },
-        ],
-        kashmir: [
-            { label: 'Under ₹20K',         value: 'u20',  min: 0,      max: 20000  },
-            { label: '₹20K – ₹40K',        value: '20-40',min: 20000,  max: 40000  },
-            { label: '₹40K+',              value: '40p',  min: 40000,  max: null   },
-        ],
-        kerala: [
-            { label: 'Under ₹15K',         value: 'u15',  min: 0,      max: 15000  },
-            { label: '₹15K – ₹30K',        value: '15-30',min: 15000,  max: 30000  },
-            { label: '₹30K+',              value: '30p',  min: 30000,  max: null   },
-        ],
-        switzerland: [
-            { label: '₹1.5L – ₹2.5L',     value: '15-25',min: 150000, max: 250000 },
-            { label: '₹2.5L – ₹4L',        value: '25-4l',min: 250000, max: 400000 },
-            { label: 'Ultra Luxury ₹4L+',   value: 'ultra',min: 400000, max: null   },
-        ],
-    };
+    const DEFAULT_BUDGET_OPTIONS = [
+        { label: 'Under ₹25K',  value: 'u25',   min: 0,      max: 25000  },
+        { label: '₹25K – ₹50K', value: '25-50', min: 25000,  max: 50000  },
+        { label: '₹50K – ₹1L',  value: '50-1l', min: 50000,  max: 100000 },
+        { label: 'Luxury ₹1L+', value: 'lux',   min: 100000, max: null   },
+    ];
 
     /* =========================================================
        STATE
@@ -103,11 +61,29 @@
     // Cards NodeList (live)
     const allCards = () => Array.from(cardsGrid.querySelectorAll('.df-card'));
 
+    function getDestinationOptions() {
+        if (!destSelect) return [];
+
+        return Array.from(destSelect.options)
+            .filter(option => option.value !== '')
+            .map(option => ({
+                value: option.value,
+                label: option.textContent.trim(),
+            }));
+    }
+
+    function getDestinationLabel(value) {
+        if (!destSelect) return value;
+
+        const option = Array.from(destSelect.options).find(item => item.value === value);
+        return option ? option.textContent.trim() : value;
+    }
+
     /* =========================================================
        BUDGET RENDER
        ========================================================= */
     function renderBudgetOptions(dest) {
-        const options = BUDGET_MAP[dest] || BUDGET_MAP[''];
+        const options = DEFAULT_BUDGET_OPTIONS;
         budgetOptions.innerHTML = '';
 
         options.forEach((opt, i) => {
@@ -344,8 +320,8 @@
             const total = cards.length;
             if (resultsCount) {
                 resultsCount.textContent = visibleCount === total
-                    ? `${total} packages found`
-                    : `${visibleCount} of ${total} packages`;
+                    ? `${total} destinations found`
+                    : `${visibleCount} of ${total} destinations`;
             }
 
             // No results
@@ -395,12 +371,10 @@
         const pills = [];
 
         if (state.destination) {
-            const labels = { bali:'Bali', goa:'Goa', dubai:'Dubai', thailand:'Thailand', maldives:'Maldives', kashmir:'Kashmir', kerala:'Kerala', switzerland:'Switzerland' };
-            pills.push({ label: labels[state.destination] || state.destination, key: 'destination' });
+            pills.push({ label: getDestinationLabel(state.destination), key: 'destination' });
         }
         if (state.budget) {
-            // Find label
-            const opts = BUDGET_MAP[state.destination] || BUDGET_MAP[''];
+            const opts = DEFAULT_BUDGET_OPTIONS;
             const opt = opts.find(o => o.min === state.budget.min && (o.max === state.budget.max || (o.max === null && state.budget.max === null)));
             if (opt) pills.push({ label: opt.label, key: 'budget' });
         }
@@ -702,21 +676,17 @@
         const container = $('dfOffcanvasContent');
         if (!container) return;
 
+        const destinationOptionsHtml = destSelect
+            ? destSelect.innerHTML
+            : '<option value="">All Destinations</option>';
+
         container.innerHTML = `
             <!-- Destination -->
             <div class="df-filter-group">
                 <label class="df-filter-label"><i class="bi bi-geo-alt"></i> Destination</label>
                 <div class="df-select-wrap">
                     <select class="df-select" id="dfOCDestination">
-                        <option value="">All Destinations</option>
-                        <option value="bali">Bali</option>
-                        <option value="goa">Goa</option>
-                        <option value="dubai">Dubai</option>
-                        <option value="thailand">Thailand</option>
-                        <option value="maldives">Maldives</option>
-                        <option value="kashmir">Kashmir</option>
-                        <option value="kerala">Kerala</option>
-                        <option value="switzerland">Switzerland</option>
+                        ${destinationOptionsHtml}
                     </select>
                     <i class="bi bi-chevron-down df-select-chevron"></i>
                 </div>
@@ -867,7 +837,7 @@
         if (ocClear) ocClear.addEventListener('click', clearAllFilters);
 
         // Render initial budget options
-        renderOffcanvasBudget(BUDGET_MAP['']);
+        renderOffcanvasBudget(DEFAULT_BUDGET_OPTIONS);
     }
 
     /* =========================================================

@@ -108,10 +108,10 @@
                         style="background-image:url('{{ asset('images/dubai.jpg') }}');">
                         <div class="st-offers-slide-overlay" aria-hidden="true"></div>
                         <div class="st-offers-slide-content">
-                            <span class="st-offers-pill">International Escape</span>
-                            <h3 class="st-offers-slide-title">Dubai Luxe Weekend</h3>
-                            <p class="st-offers-slide-text">2 nights • Desert safari • Premium hotels</p>
-                            <a class="st-offers-slide-cta" href="#">Book Now</a>
+                            <span class="st-offers-pill">Destination Spotlight</span>
+                            <h3 class="st-offers-slide-title">Discover Handpicked Destinations</h3>
+                            <p class="st-offers-slide-text">Browse curated destinations uploaded from admin with stays, highlights, and pricing inspiration.</p>
+                            <a class="st-offers-slide-cta" href="{{ route('destinations.index') }}">Explore Now</a>
                         </div>
                     </div>
 
@@ -1333,14 +1333,9 @@
                         <div class="df-select-wrap">
                             <select class="df-select" id="dfDestination" aria-label="Select destination">
                                 <option value="">All Destinations</option>
-                                <option value="bali">Bali</option>
-                                <option value="goa">Goa</option>
-                                <option value="dubai">Dubai</option>
-                                <option value="thailand">Thailand</option>
-                                <option value="maldives">Maldives</option>
-                                <option value="kashmir">Kashmir</option>
-                                <option value="kerala">Kerala</option>
-                                <option value="switzerland">Switzerland</option>
+                                @foreach($discoverDestinationOptions as $destinationOption)
+                                    <option value="{{ $destinationOption['slug'] }}">{{ $destinationOption['name'] }}</option>
+                                @endforeach
                             </select>
                             <i class="bi bi-chevron-down df-select-chevron"></i>
                         </div>
@@ -1463,7 +1458,7 @@
                         <p class="df-results-subtitle">Handpicked journeys curated based on your travel preferences.</p>
                     </div>
                     <div class="df-results-controls">
-                        <span class="df-results-count" id="dfResultsCount">8 packages found</span>
+                        <span class="df-results-count" id="dfResultsCount">{{ $discoverDestinationCards->count() }} destinations found</span>
                         <div class="df-active-filters" id="dfActiveFilters" aria-live="polite"></div>
                         <div class="df-view-toggle d-none d-md-flex" role="group" aria-label="View mode">
                             <button class="df-view-btn df-view-btn--active" id="dfViewGrid" aria-label="Grid view"
@@ -1492,358 +1487,68 @@
 
                         {{-- Cards Track --}}
                         <div class="df-cards-grid" id="dfCardsGrid" aria-live="polite" aria-label="Destination results">
-
-                            {{-- CARD: Bali --}}
-                            <article class="df-card" data-destination="bali" data-type="international"
-                                data-style="honeymoon,adventure,friends" data-season="summer,monsoon" data-duration="5-7"
-                                data-rating="4.7" data-price="50000" data-tag="trending">
-                                <div class="df-card-img-wrap">
-                                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80"
-                                        alt="Bali, Indonesia" class="df-card-img" loading="lazy">
-                                    <div class="df-card-overlay"></div>
-                                    <div class="df-card-badges">
-                                        <span class="df-badge df-badge--trending">Trending</span>
-                                    </div>
-                                    <button class="df-wishlist-btn" aria-label="Add Bali to wishlist"
-                                        data-wishlisted="false">
-                                        <i class="bi bi-heart"></i>
-                                    </button>
-                                    <div class="df-card-rating">
-                                        <i class="bi bi-star-fill"></i> 4.7
-                                    </div>
-                                </div>
-                                <div class="df-card-body">
-                                    <div class="df-card-header">
-                                        <div>
-                                            <h3 class="df-card-name">Bali</h3>
-                                            <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> Indonesia</p>
+                            @forelse($discoverDestinationCards as $destination)
+                                <article class="df-card"
+                                    data-destination="{{ $destination['slug'] }}"
+                                    data-type="{{ $destination['destination_type'] }}"
+                                    data-style="{{ collect($destination['travel_tags'])->map(fn ($tag) => \Illuminate\Support\Str::slug($tag))->implode(',') }}"
+                                    data-season="{{ $destination['season_keys'] }}"
+                                    data-duration="{{ $destination['duration_key'] }}"
+                                    data-rating="{{ $destination['rating'] }}"
+                                    data-price="{{ $destination['price'] }}"
+                                    data-tag="{{ $destination['badge']['sort_tag'] }}">
+                                    <div class="df-card-img-wrap">
+                                        <img src="{{ $destination['image'] }}"
+                                            alt="{{ $destination['name'] }}, {{ $destination['location'] }}"
+                                            class="df-card-img" loading="lazy">
+                                        <div class="df-card-overlay"></div>
+                                        <div class="df-card-badges">
+                                            <span class="df-badge {{ $destination['badge']['class'] }}">{{ $destination['badge']['label'] }}</span>
                                         </div>
-                                        <div class="df-card-price-block">
-                                            <span class="df-price-from">From</span>
-                                            <span class="df-price">₹50,000</span>
+                                        <button class="df-wishlist-btn" aria-label="Add {{ $destination['name'] }} to wishlist"
+                                            data-wishlisted="false">
+                                            <i class="bi bi-heart"></i>
+                                        </button>
+                                        <div class="df-card-rating">
+                                            <i class="bi bi-star-fill"></i> {{ $destination['rating'] }}
                                         </div>
                                     </div>
-                                    <div class="df-card-highlights">
-                                        <span><i class="bi bi-clock"></i> 5–7 Days</span>
-                                        <span><i class="bi bi-water"></i> Beach & Temples</span>
-                                        <span><i class="bi bi-camera"></i> Rice Terraces</span>
-                                    </div>
-                                    <div class="df-card-tags">
-                                        <span class="df-tag">Honeymoon</span>
-                                        <span class="df-tag">Adventure</span>
-                                        <span class="df-tag">Friends</span>
-                                    </div>
-                                    <a href="#" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-
-                            {{-- CARD: Goa --}}
-                            <article class="df-card" data-destination="goa" data-type="domestic"
-                                data-style="friends,adventure,solo" data-season="winter,december" data-duration="weekend"
-                                data-rating="4.3" data-price="10000" data-tag="bestseller">
-                                <div class="df-card-img-wrap">
-                                    <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&q=80"
-                                        alt="Goa, India" class="df-card-img" loading="lazy">
-                                    <div class="df-card-overlay"></div>
-                                    <div class="df-card-badges">
-                                        <span class="df-badge df-badge--bestseller">Bestseller</span>
-                                    </div>
-                                    <button class="df-wishlist-btn" aria-label="Add Goa to wishlist"
-                                        data-wishlisted="false">
-                                        <i class="bi bi-heart"></i>
-                                    </button>
-                                    <div class="df-card-rating">
-                                        <i class="bi bi-star-fill"></i> 4.3
-                                    </div>
-                                </div>
-                                <div class="df-card-body">
-                                    <div class="df-card-header">
-                                        <div>
-                                            <h3 class="df-card-name">Goa</h3>
-                                            <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> India</p>
+                                    <div class="df-card-body">
+                                        <div class="df-card-header">
+                                            <div>
+                                                <h3 class="df-card-name">{{ $destination['name'] }}</h3>
+                                                <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> {{ $destination['location'] }}</p>
+                                            </div>
+                                            <div class="df-card-price-block">
+                                                <span class="df-price-from">From</span>
+                                                <span class="df-price">{{ $destination['price_label'] }}</span>
+                                            </div>
                                         </div>
-                                        <div class="df-card-price-block">
-                                            <span class="df-price-from">From</span>
-                                            <span class="df-price">₹10,000</span>
+                                        <div class="df-card-highlights">
+                                            @foreach($destination['highlights'] as $highlight)
+                                                <span>
+                                                    @if($loop->first)
+                                                        <i class="bi bi-clock"></i>
+                                                    @elseif($loop->iteration === 2)
+                                                        <i class="bi bi-stars"></i>
+                                                    @else
+                                                        <i class="bi bi-geo"></i>
+                                                    @endif
+                                                    {{ $highlight }}
+                                                </span>
+                                            @endforeach
                                         </div>
-                                    </div>
-                                    <div class="df-card-highlights">
-                                        <span><i class="bi bi-clock"></i> Weekend Trip</span>
-                                        <span><i class="bi bi-water"></i> Beaches</span>
-                                        <span><i class="bi bi-music-note"></i> Nightlife</span>
-                                    </div>
-                                    <div class="df-card-tags">
-                                        <span class="df-tag">Friends</span>
-                                        <span class="df-tag">Adventure</span>
-                                        <span class="df-tag">Solo</span>
-                                    </div>
-                                    <a href="#" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-
-                            {{-- CARD: Dubai --}}
-                            <article class="df-card" data-destination="dubai" data-type="international"
-                                data-style="luxury,family,honeymoon" data-season="winter,december" data-duration="3-5"
-                                data-rating="4.8" data-price="120000" data-tag="luxury">
-                                <div class="df-card-img-wrap">
-                                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80"
-                                        alt="Dubai, UAE" class="df-card-img" loading="lazy">
-                                    <div class="df-card-overlay"></div>
-                                    <div class="df-card-badges">
-                                        <span class="df-badge df-badge--luxury">Luxury</span>
-                                    </div>
-                                    <button class="df-wishlist-btn" aria-label="Add Dubai to wishlist"
-                                        data-wishlisted="false">
-                                        <i class="bi bi-heart"></i>
-                                    </button>
-                                    <div class="df-card-rating">
-                                        <i class="bi bi-star-fill"></i> 4.8
-                                    </div>
-                                </div>
-                                <div class="df-card-body">
-                                    <div class="df-card-header">
-                                        <div>
-                                            <h3 class="df-card-name">Dubai</h3>
-                                            <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> UAE</p>
+                                        <div class="df-card-tags">
+                                            @foreach($destination['travel_tags'] as $tag)
+                                                <span class="df-tag">{{ $tag }}</span>
+                                            @endforeach
                                         </div>
-                                        <div class="df-card-price-block">
-                                            <span class="df-price-from">From</span>
-                                            <span class="df-price">₹1,20,000</span>
-                                        </div>
+                                        <a href="{{ $destination['url'] }}" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
                                     </div>
-                                    <div class="df-card-highlights">
-                                        <span><i class="bi bi-clock"></i> 3–5 Days</span>
-                                        <span><i class="bi bi-buildings"></i> Skyline</span>
-                                        <span><i class="bi bi-sun"></i> Desert Safari</span>
-                                    </div>
-                                    <div class="df-card-tags">
-                                        <span class="df-tag">Luxury</span>
-                                        <span class="df-tag">Family</span>
-                                        <span class="df-tag">Honeymoon</span>
-                                    </div>
-                                    <a href="#" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-
-                            {{-- CARD: Maldives --}}
-                            <article class="df-card" data-destination="maldives" data-type="international"
-                                data-style="honeymoon,luxury" data-season="summer,winter" data-duration="5-7"
-                                data-rating="4.9" data-price="150000" data-tag="luxury">
-                                <div class="df-card-img-wrap">
-                                    <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80"
-                                        alt="Maldives" class="df-card-img" loading="lazy">
-                                    <div class="df-card-overlay"></div>
-                                    <div class="df-card-badges">
-                                        <span class="df-badge df-badge--luxury">Luxury</span>
-                                    </div>
-                                    <button class="df-wishlist-btn" aria-label="Add Maldives to wishlist"
-                                        data-wishlisted="false">
-                                        <i class="bi bi-heart"></i>
-                                    </button>
-                                    <div class="df-card-rating">
-                                        <i class="bi bi-star-fill"></i> 4.9
-                                    </div>
-                                </div>
-                                <div class="df-card-body">
-                                    <div class="df-card-header">
-                                        <div>
-                                            <h3 class="df-card-name">Maldives</h3>
-                                            <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> South Asia</p>
-                                        </div>
-                                        <div class="df-card-price-block">
-                                            <span class="df-price-from">From</span>
-                                            <span class="df-price">₹1,50,000</span>
-                                        </div>
-                                    </div>
-                                    <div class="df-card-highlights">
-                                        <span><i class="bi bi-clock"></i> 5–7 Days</span>
-                                        <span><i class="bi bi-houses"></i> Overwater Villa</span>
-                                        <span><i class="bi bi-water"></i> Coral Reefs</span>
-                                    </div>
-                                    <div class="df-card-tags">
-                                        <span class="df-tag">Honeymoon</span>
-                                        <span class="df-tag">Luxury</span>
-                                    </div>
-                                    <a href="#" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-
-                            {{-- CARD: Kashmir --}}
-                            <article class="df-card" data-destination="kashmir" data-type="domestic"
-                                data-style="honeymoon,family,adventure" data-season="summer,winter" data-duration="5-7"
-                                data-rating="4.6" data-price="35000" data-tag="trending">
-                                <div class="df-card-img-wrap">
-                                    <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80"
-                                        alt="Kashmir, India" class="df-card-img" loading="lazy">
-                                    <div class="df-card-overlay"></div>
-                                    <div class="df-card-badges">
-                                        <span class="df-badge df-badge--trending">Trending</span>
-                                    </div>
-                                    <button class="df-wishlist-btn" aria-label="Add Kashmir to wishlist"
-                                        data-wishlisted="false">
-                                        <i class="bi bi-heart"></i>
-                                    </button>
-                                    <div class="df-card-rating">
-                                        <i class="bi bi-star-fill"></i> 4.6
-                                    </div>
-                                </div>
-                                <div class="df-card-body">
-                                    <div class="df-card-header">
-                                        <div>
-                                            <h3 class="df-card-name">Kashmir</h3>
-                                            <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> India</p>
-                                        </div>
-                                        <div class="df-card-price-block">
-                                            <span class="df-price-from">From</span>
-                                            <span class="df-price">₹35,000</span>
-                                        </div>
-                                    </div>
-                                    <div class="df-card-highlights">
-                                        <span><i class="bi bi-clock"></i> 5–7 Days</span>
-                                        <span><i class="bi bi-snow"></i> Snow Peaks</span>
-                                        <span><i class="bi bi-water"></i> Dal Lake</span>
-                                    </div>
-                                    <div class="df-card-tags">
-                                        <span class="df-tag">Honeymoon</span>
-                                        <span class="df-tag">Family</span>
-                                        <span class="df-tag">Adventure</span>
-                                    </div>
-                                    <a href="#" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-
-                            {{-- CARD: Thailand --}}
-                            <article class="df-card" data-destination="thailand" data-type="international"
-                                data-style="friends,adventure,solo" data-season="summer,winter" data-duration="7+"
-                                data-rating="4.5" data-price="60000" data-tag="bestseller">
-                                <div class="df-card-img-wrap">
-                                    <img src="https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?w=800&q=80"
-                                        alt="Thailand" class="df-card-img" loading="lazy">
-                                    <div class="df-card-overlay"></div>
-                                    <div class="df-card-badges">
-                                        <span class="df-badge df-badge--bestseller">Bestseller</span>
-                                    </div>
-                                    <button class="df-wishlist-btn" aria-label="Add Thailand to wishlist"
-                                        data-wishlisted="false">
-                                        <i class="bi bi-heart"></i>
-                                    </button>
-                                    <div class="df-card-rating">
-                                        <i class="bi bi-star-fill"></i> 4.5
-                                    </div>
-                                </div>
-                                <div class="df-card-body">
-                                    <div class="df-card-header">
-                                        <div>
-                                            <h3 class="df-card-name">Thailand</h3>
-                                            <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> Southeast Asia
-                                            </p>
-                                        </div>
-                                        <div class="df-card-price-block">
-                                            <span class="df-price-from">From</span>
-                                            <span class="df-price">₹60,000</span>
-                                        </div>
-                                    </div>
-                                    <div class="df-card-highlights">
-                                        <span><i class="bi bi-clock"></i> 7+ Days</span>
-                                        <span><i class="bi bi-tropical-storm"></i> Islands</span>
-                                        <span><i class="bi bi-cup-hot"></i> Street Food</span>
-                                    </div>
-                                    <div class="df-card-tags">
-                                        <span class="df-tag">Friends</span>
-                                        <span class="df-tag">Adventure</span>
-                                        <span class="df-tag">Solo</span>
-                                    </div>
-                                    <a href="#" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-
-                            {{-- CARD: Switzerland --}}
-                            <article class="df-card" data-destination="switzerland" data-type="international"
-                                data-style="honeymoon,family,luxury" data-season="winter,summer" data-duration="7+"
-                                data-rating="4.9" data-price="200000" data-tag="luxury">
-                                <div class="df-card-img-wrap">
-                                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
-                                        alt="Switzerland" class="df-card-img" loading="lazy">
-                                    <div class="df-card-overlay"></div>
-                                    <div class="df-card-badges">
-                                        <span class="df-badge df-badge--luxury">Luxury</span>
-                                    </div>
-                                    <button class="df-wishlist-btn" aria-label="Add Switzerland to wishlist"
-                                        data-wishlisted="false">
-                                        <i class="bi bi-heart"></i>
-                                    </button>
-                                    <div class="df-card-rating">
-                                        <i class="bi bi-star-fill"></i> 4.9
-                                    </div>
-                                </div>
-                                <div class="df-card-body">
-                                    <div class="df-card-header">
-                                        <div>
-                                            <h3 class="df-card-name">Switzerland</h3>
-                                            <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> Europe</p>
-                                        </div>
-                                        <div class="df-card-price-block">
-                                            <span class="df-price-from">From</span>
-                                            <span class="df-price">₹2,00,000</span>
-                                        </div>
-                                    </div>
-                                    <div class="df-card-highlights">
-                                        <span><i class="bi bi-clock"></i> 7+ Days</span>
-                                        <span><i class="bi bi-snow2"></i> Alps</span>
-                                        <span><i class="bi bi-train-front"></i> Scenic Rail</span>
-                                    </div>
-                                    <div class="df-card-tags">
-                                        <span class="df-tag">Honeymoon</span>
-                                        <span class="df-tag">Luxury</span>
-                                        <span class="df-tag">Family</span>
-                                    </div>
-                                    <a href="#" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-
-                            {{-- CARD: Kerala --}}
-                            <article class="df-card" data-destination="kerala" data-type="domestic"
-                                data-style="honeymoon,family,solo" data-season="monsoon,winter" data-duration="5-7"
-                                data-rating="4.6" data-price="25000" data-tag="bestseller">
-                                <div class="df-card-img-wrap">
-                                    <img src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?w=800&q=80"
-                                        alt="Kerala, India" class="df-card-img" loading="lazy">
-                                    <div class="df-card-overlay"></div>
-                                    <div class="df-card-badges">
-                                        <span class="df-badge df-badge--bestseller">Bestseller</span>
-                                    </div>
-                                    <button class="df-wishlist-btn" aria-label="Add Kerala to wishlist"
-                                        data-wishlisted="false">
-                                        <i class="bi bi-heart"></i>
-                                    </button>
-                                    <div class="df-card-rating">
-                                        <i class="bi bi-star-fill"></i> 4.6
-                                    </div>
-                                </div>
-                                <div class="df-card-body">
-                                    <div class="df-card-header">
-                                        <div>
-                                            <h3 class="df-card-name">Kerala</h3>
-                                            <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> India</p>
-                                        </div>
-                                        <div class="df-card-price-block">
-                                            <span class="df-price-from">From</span>
-                                            <span class="df-price">₹25,000</span>
-                                        </div>
-                                    </div>
-                                    <div class="df-card-highlights">
-                                        <span><i class="bi bi-clock"></i> 5–7 Days</span>
-                                        <span><i class="bi bi-water"></i> Backwaters</span>
-                                        <span><i class="bi bi-tree"></i> Spice Gardens</span>
-                                    </div>
-                                    <div class="df-card-tags">
-                                        <span class="df-tag">Honeymoon</span>
-                                        <span class="df-tag">Family</span>
-                                        <span class="df-tag">Solo</span>
-                                    </div>
-                                    <a href="#" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
+                                </article>
+                            @empty
+                                <div class="alert alert-secondary mb-0 w-100">No destinations uploaded from admin yet.</div>
+                            @endforelse
 
                         </div>{{-- /df-cards-grid --}}
 
@@ -1864,7 +1569,7 @@
                 <div class="df-no-results" id="dfNoResults" style="display:none;" aria-live="assertive">
                     <div class="df-no-results-inner">
                         <div class="df-no-results-icon"><i class="bi bi-search-heart"></i></div>
-                        <h3>No packages found</h3>
+                        <h3>No destinations found</h3>
                         <p>Try adjusting your filters or clearing them to discover more destinations.</p>
                         <button class="df-btn-search" id="dfClearFiltersAlt" type="button">
                             <i class="bi bi-arrow-counterclockwise"></i> Reset Filters
@@ -1876,7 +1581,7 @@
             </div>{{-- /df-results --}}
         </div>{{-- /df-wrapper --}}
         <div class="df-footer">
-            <a href="#" class="df-view-all">View all destinations <span aria-hidden="true">→</span></a>
+            <a href="{{ route('destinations.index') }}" class="df-view-all">View all destinations <span aria-hidden="true">→</span></a>
         </div>
     </section>
 

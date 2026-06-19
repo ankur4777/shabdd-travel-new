@@ -31,6 +31,9 @@ Route::get('/family-trips', [HomeController::class, 'familyTrips'])
 Route::get('/religious', [HomeController::class, 'religious'])->name('religious');
 Route::get('/budget-friendly', [HomeController::class, 'budgetFriendly'])->name('budget-friendly');
 Route::get('/beach-escapes', [HomeController::class, 'beachEscapes'])->name('beach-escapes');
+Route::get('/hill-station-retreats', [HomeController::class, 'hillStationRetreats'])->name('hill-station-retreats');
+Route::get('/island-getaways', [HomeController::class, 'islandGetaways'])->name('island-getaways');
+Route::get('/desert-adventures', [HomeController::class, 'desertAdventures'])->name('desert-adventures');
 
 Route::get('/under-25k', [DomesticTourController::class, 'under25k'])
     ->name('under-25k');

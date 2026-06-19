@@ -34,13 +34,238 @@ class HomeController extends Controller
         $blogController = new BlogController();
         $blogs = $blogController->buildBlogCollection()->take(6);
         $seasonalJourneys = SeasonalJourney::active()->get();
+        $discoverDestinations = $this->homeDiscoverDestinations();
+        $discoverDestinationOptions = $discoverDestinations
+            ->map(fn(Destination $destination) => [
+                'slug' => $destination->slug,
+                'name' => $destination->name,
+            ])
+            ->values();
+        $discoverDestinationCards = $discoverDestinations
+            ->map(fn(Destination $destination) => $this->homeDiscoverDestinationCard($destination))
+            ->values();
 
         return view('home', compact(
             'destinations',
             'popularDestinations',
             'blogs',
-            'seasonalJourneys'   // ✅ ADD THIS TOO
+            'seasonalJourneys',
+            'discoverDestinationOptions',
+            'discoverDestinationCards'
         ));
+    }
+
+    private function homeDiscoverDestinations(): Collection
+    {
+        return Destination::query()
+            ->active()
+            ->orderByDesc('is_trending')
+            ->orderByDesc('rating')
+            ->latest('id')
+            ->take(12)
+            ->get();
+    }
+
+    private function homeDiscoverDestinationCard(Destination $destination): array
+    {
+        $durationLabel = (string) ($destination->ideal_duration ?: $destination->ideal_days ?: 'Flexible Duration');
+        $durationKey = $this->homeDiscoverDurationKey($durationLabel);
+        $travelTags = $this->homeDiscoverTravelTags($destination);
+        $highlights = $this->homeDiscoverHighlights($destination, $durationLabel);
+        $badge = $this->homeDiscoverBadge($destination);
+
+        return [
+            'slug' => $destination->slug,
+            'name' => $destination->name,
+            'location' => $destination->location ?: $destination->country ?: 'India',
+            'image' => $this->homeDiscoverImage($destination),
+            'rating' => $destination->rating ? number_format((float) $destination->rating, 1) : '4.5',
+            'price' => (int) ($destination->price_from ?? 0),
+            'price_label' => $destination->formatted_price ?: ((int) ($destination->price_from ?? 0) > 0 ? '₹' . number_format((int) $destination->price_from) : 'On Request'),
+            'duration_label' => $durationLabel,
+            'duration_key' => $durationKey,
+            'travel_tags' => $travelTags,
+            'highlights' => $highlights,
+            'destination_type' => $this->homeDiscoverDestinationType($destination),
+            'season_keys' => $this->homeDiscoverSeasonKeys($destination),
+            'badge' => $badge,
+            'url' => route('destinations.show', $destination),
+        ];
+    }
+
+    private function homeDiscoverImage(Destination $destination): string
+    {
+        $path = trim((string) ($destination->image_url ?: $destination->hero_image));
+
+        if ($path === '') {
+            return asset('images/couple-bg.jpg');
+        }
+
+        if (Str::startsWith($path, ['http://', 'https://'])) {
+            return $path;
+        }
+
+        if (Str::startsWith($path, ['/storage/', 'storage/', '/images/', 'images/'])) {
+            return asset(ltrim($path, '/'));
+        }
+
+        return asset('storage/' . ltrim($path, '/'));
+    }
+
+    private function homeDiscoverDurationKey(string $durationLabel): string
+    {
+        $days = (int) (Str::of($durationLabel)->match('/\d+/')->value() ?? 0);
+
+        return match (true) {
+            $days > 0 && $days <= 2 => 'weekend',
+            $days >= 3 && $days <= 5 => '3-5',
+            $days >= 6 && $days <= 7 => '5-7',
+            $days >= 8 => '7+',
+            default => '5-7',
+        };
+    }
+
+    private function homeDiscoverTravelTags(Destination $destination): Collection
+    {
+        return $this->homeDiscoverTextCollection(
+            $destination->travel_styles ?? [],
+            $destination->popular_for ?? [],
+            $destination->tags ?? []
+        )
+            ->map(fn($value) => Str::headline($value))
+            ->unique()
+            ->take(3)
+            ->values();
+    }
+
+    private function homeDiscoverHighlights(Destination $destination, string $durationLabel): Collection
+    {
+        $items = collect([$durationLabel])
+            ->merge($this->homeDiscoverTextCollection($destination->highlights ?? [])->take(2))
+            ->merge($this->homeDiscoverTextCollection($destination->places ?? [])->take(2))
+            ->merge($this->homeDiscoverTextCollection($destination->features ?? [])->take(2))
+            ->merge($this->homeDiscoverTravelTags($destination))
+            ->filter()
+            ->map(fn($value) => trim(strip_tags((string) $value)))
+            ->filter()
+            ->unique()
+            ->take(3)
+            ->values();
+
+        return $items->isNotEmpty()
+            ? $items
+            : collect([$durationLabel, 'Curated Stay', 'Local Highlights'])->take(3)->values();
+    }
+
+    private function homeDiscoverDestinationType(Destination $destination): string
+    {
+        $country = strtolower(trim((string) $destination->country));
+
+        return in_array($country, ['', 'india'], true) ? 'domestic' : 'international';
+    }
+
+    private function homeDiscoverSeasonKeys(Destination $destination): string
+    {
+        $terms = $this->homeDiscoverTextCollection(
+            $destination->seasons ?? [],
+            $destination->recommended_months ?? [],
+            [$destination->best_season]
+        )
+            ->map(fn($value) => strtolower($value))
+            ->implode(' ');
+
+        $keys = collect();
+
+        if (Str::contains($terms, ['summer', 'april', 'may', 'june'])) {
+            $keys->push('summer');
+        }
+
+        if (Str::contains($terms, ['winter', 'november', 'december', 'january', 'february'])) {
+            $keys->push('winter');
+        }
+
+        if (Str::contains($terms, ['monsoon', 'rain', 'july', 'august', 'september'])) {
+            $keys->push('monsoon');
+        }
+
+        if (Str::contains($terms, ['december'])) {
+            $keys->push('december');
+        }
+
+        return $keys->filter()->unique()->values()->implode(',');
+    }
+
+    private function homeDiscoverTextCollection(mixed ...$sources): Collection
+    {
+        return collect($sources)
+            ->flatMap(fn($source) => $this->homeDiscoverNormalizeTextValues($source))
+            ->filter()
+            ->values();
+    }
+
+    private function homeDiscoverNormalizeTextValues(mixed $value): Collection
+    {
+        if ($value instanceof Collection) {
+            return $value->flatMap(fn($item) => $this->homeDiscoverNormalizeTextValues($item));
+        }
+
+        if (is_array($value)) {
+            if ($this->homeDiscoverIsAssoc($value)) {
+                foreach (['name', 'title', 'label', 'value', 'season', 'month'] as $key) {
+                    if (!empty($value[$key])) {
+                        return $this->homeDiscoverNormalizeTextValues($value[$key]);
+                    }
+                }
+            }
+
+            return collect($value)->flatMap(fn($item) => $this->homeDiscoverNormalizeTextValues($item));
+        }
+
+        $text = trim(strip_tags((string) $value));
+
+        return $text === '' ? collect() : collect([$text]);
+    }
+
+    private function homeDiscoverIsAssoc(array $value): bool
+    {
+        return array_keys($value) !== range(0, count($value) - 1);
+    }
+
+    private function homeDiscoverBadge(Destination $destination): array
+    {
+        $label = trim((string) ($destination->badge_label ?: ''));
+        $type = strtolower(trim((string) ($destination->badge_type ?: '')));
+        $category = strtolower(trim((string) ($destination->category ?: '')));
+
+        if ($label !== '' && in_array($type, ['trending', 'bestseller', 'luxury'], true)) {
+            return [
+                'label' => $label,
+                'class' => 'df-badge--' . $type,
+                'sort_tag' => $type,
+            ];
+        }
+
+        if ($destination->is_trending || $category === 'trending') {
+            return [
+                'label' => $label !== '' ? $label : 'Trending',
+                'class' => 'df-badge--trending',
+                'sort_tag' => 'trending',
+            ];
+        }
+
+        if ($type === 'luxury' || $category === 'premium') {
+            return [
+                'label' => $label !== '' ? $label : 'Luxury',
+                'class' => 'df-badge--luxury',
+                'sort_tag' => 'luxury',
+            ];
+        }
+
+        return [
+            'label' => $label !== '' ? $label : 'Bestseller',
+            'class' => 'df-badge--bestseller',
+            'sort_tag' => 'bestseller',
+        ];
     }
 
     public function familyTrips(Request $request): View
@@ -116,6 +341,86 @@ class HomeController extends Controller
         }
 
         return view('beach-escapes', $viewData);
+    }
+
+    public function hillStationRetreats(Request $request): View|JsonResponse
+    {
+        return $this->travelThemePage($request, 'hill');
+    }
+
+    public function islandGetaways(Request $request): View|JsonResponse
+    {
+        return $this->travelThemePage($request, 'island');
+    }
+
+    public function desertAdventures(Request $request): View|JsonResponse
+    {
+        return $this->travelThemePage($request, 'desert');
+    }
+
+    private function travelThemePage(Request $request, string $themeKey): View|JsonResponse
+    {
+        $themeConfig = $this->travelThemeConfig($themeKey);
+
+        if (empty($themeConfig)) {
+            abort(404);
+        }
+
+        $allThemeDestinations = $this->buildTravelThemeDestinations($themeKey);
+        $destinationOptions = $this->beachDestinationOptions($allThemeDestinations);
+        $budgetOptions = $this->beachBudgetOptions();
+        $priceBounds = $this->beachPriceBounds($allThemeDestinations);
+        $selectedDestination = trim((string) $request->input('destination', ''));
+        $selectedBudget = trim((string) $request->input('budget', ''));
+        $selectedDuration = trim((string) $request->input('duration', ''));
+        $selectedTravelStyles = collect($request->input('travel_styles', []))
+            ->map(fn($value) => trim((string) $value))
+            ->filter()
+            ->unique()
+            ->values()
+            ->all();
+        [$selectedMinPrice, $selectedMaxPrice] = $this->beachBudgetRange($selectedBudget, $priceBounds);
+
+        $filteredDestinations = $this->filterBeachDestinations(
+            $allThemeDestinations,
+            $selectedDestination,
+            $selectedMinPrice,
+            $selectedMaxPrice,
+            $selectedDuration,
+            $selectedTravelStyles
+        );
+
+        $travelStyleOptions = $this->beachTravelStyleOptions($allThemeDestinations);
+        $themePackages = $this->buildTravelThemePackages($themeKey);
+        $listingRoute = route($this->travelThemeRouteName($themeKey));
+
+        $viewData = array_merge($themeConfig, [
+            'themeKey' => $themeKey,
+            'themeName' => $themeConfig['hero']['title'] ?? Str::headline($themeKey),
+            'listingRoute' => $listingRoute,
+            'beachDestinations' => $filteredDestinations,
+            'destinationOptions' => $destinationOptions,
+            'budgetOptions' => $budgetOptions,
+            'beachTravelStyleOptions' => $travelStyleOptions,
+            'priceBounds' => $priceBounds,
+            'selectedMinPrice' => $selectedMinPrice,
+            'selectedMaxPrice' => $selectedMaxPrice,
+            'selectedDestination' => $selectedDestination,
+            'selectedBudget' => $selectedBudget,
+            'selectedDuration' => $selectedDuration,
+            'selectedTravelStyles' => $selectedTravelStyles,
+            'beachPackages' => $themePackages,
+            'beachDestinationCount' => $filteredDestinations->count(),
+            'beachPackageCount' => $themePackages->count(),
+        ]);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('partials.travel-theme-destination-results', $viewData)->render(),
+            ]);
+        }
+
+        return view('travel-theme', $viewData);
     }
 
     private function packageListing(Request $request, string $travelStyle, string $view): View
@@ -437,7 +742,115 @@ class HomeController extends Controller
             return $path;
         }
 
-        return asset('storage/' . ltrim($path, '/'));
+        $normalizedPath = ltrim($path, '/');
+
+        if (Str::startsWith($normalizedPath, ['images/', 'storage/', 'css/', 'js/', 'fonts/'])) {
+            return asset($normalizedPath);
+        }
+
+        return asset('storage/' . $normalizedPath);
+    }
+
+    private function travelThemeConfig(string $themeKey): array
+    {
+        return config("travel_themes.{$themeKey}", []);
+    }
+
+    private function travelThemeRouteName(string $themeKey): string
+    {
+        return match ($themeKey) {
+            'hill' => 'hill-station-retreats',
+            'island' => 'island-getaways',
+            'desert' => 'desert-adventures',
+            default => 'beach-escapes',
+        };
+    }
+
+    private function buildTravelThemeDestinations(string $themeKey): Collection
+    {
+        $themeValues = $this->travelThemeQueryValues($themeKey);
+
+        return Destination::query()
+            ->active()
+            ->whereRaw('LOWER(TRIM(COALESCE(theme, \'\'))) IN (' . implode(',', array_fill(0, count($themeValues), '?')) . ')', $themeValues)
+            ->orderByDesc('rating')
+            ->orderByDesc('is_trending')
+            ->orderBy('name')
+            ->get()
+            ->map(fn(Destination $destination) => $this->normalizeThemeDestinationFromModel($destination, []))
+            ->values();
+    }
+
+    private function buildTravelThemePackages(string $themeKey): Collection
+    {
+        $themeValues = $this->travelThemeQueryValues($themeKey);
+
+        return Package::query()
+            ->whereRaw('LOWER(TRIM(COALESCE(theme, \'\'))) IN (' . implode(',', array_fill(0, count($themeValues), '?')) . ')', $themeValues)
+            ->whereRaw('LOWER(TRIM(COALESCE(category, \'\'))) = ?', ['popular'])
+            ->orderByDesc('featured')
+            ->orderByDesc('rating')
+            ->orderByDesc('id')
+            ->get()
+            ->map(fn(Package $package) => $this->normalizeThemePackageFromModel($package, [], $themeKey))
+            ->values();
+    }
+
+    private function normalizeThemeDestinationFromModel(Destination $destination, array $definition): array
+    {
+        return [
+            'name' => $destination->name,
+            'slug' => $destination->slug,
+            'country' => $destination->country ?: ($definition['country'] ?? 'India'),
+            'duration' => $destination->ideal_duration ?: ($definition['duration'] ?? '3-5 Days'),
+            'price_from' => (int) ($destination->price_from ?? ($definition['price_from'] ?? 0)),
+            'rating' => $destination->rating ? (float) $destination->rating : ($definition['rating'] ?? null),
+            'travel_styles' => collect($destination->travel_styles ?? ($definition['travel_styles'] ?? []))
+                ->filter()
+                ->values()
+                ->all(),
+            'description' => $destination->short_description ?: ($definition['description'] ?? 'A curated destination for this travel theme.'),
+            'image' => $this->resolveMediaUrl($destination->image_url ?: $destination->hero_image ?: ($definition['image'] ?? null)),
+            'url' => route('destinations.show', $destination->slug),
+        ];
+    }
+
+    private function normalizeThemePackageFromModel(Package $package, array $definition, string $themeKey): array
+    {
+        return [
+            'title' => $package->title,
+            'country' => $package->country ?: ($definition['country'] ?? 'India'),
+            'location' => $package->city ?: $package->state ?: $package->country ?: ($definition['location'] ?? 'India'),
+            'duration' => $package->duration_text ?: (($package->days ?? null) ? $package->days . ' Days' : ($definition['duration'] ?? 'Flexible duration')),
+            'price' => (int) ($package->price ?? ($definition['price'] ?? 0)),
+            'rating' => $package->rating ? (float) $package->rating : ($definition['rating'] ?? null),
+            'theme' => $this->normalizeThemeLabel($package->theme ?: ($definition['theme'] ?? null), $themeKey),
+            'description' => $package->feature_1 ?: ($definition['description'] ?? 'Premium travel experience with curated stays and smooth transfers.'),
+            'image' => $this->resolveMediaUrl($package->image ?: ($definition['image'] ?? null)),
+            'url' => route('packages.show', $package->slug),
+        ];
+    }
+
+    private function travelThemeQueryValues(string $themeKey): array
+    {
+        return match ($themeKey) {
+            'hill' => ['hill', 'mountain'],
+            'desert' => ['desert', 'dessert'],
+            default => [Str::lower($themeKey)],
+        };
+    }
+
+    private function normalizeThemeLabel(?string $value, string $themeKey): string
+    {
+        $normalizedValue = strtolower(trim((string) $value));
+
+        return match ($normalizedValue) {
+            'beach' => 'Beach',
+            'hill', 'mountain' => 'Hill',
+            'island' => 'Island',
+            'desert', 'dessert' => 'Desert',
+            default => Str::headline($value ?: $themeKey),
+        };
     }
 
     private function sanitizePrice(mixed $value, int $fallback, int $min, int $max): int
@@ -448,6 +861,7 @@ class HomeController extends Controller
 
         return max($min, min((int) $value, $max));
     }
+
     public function packageDetails($slug): View
     {
         $package = Package::where('slug', $slug)->firstOrFail();

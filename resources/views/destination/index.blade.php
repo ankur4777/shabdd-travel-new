@@ -3,6 +3,12 @@
 @php
     $selectedDestination = $destinationOptions->firstWhere('slug', request('destination'));
     $selectedCategory = request('category');
+    $heroDestination = $destinationCards->first();
+    $heroImage = $heroDestination['image'] ?? asset('images/couple-bg.jpg');
+    $heroDestinationNames = $destinationCards->pluck('name')->filter()->unique()->take(4)->values();
+    $heroStartingPrice = $destinationCards->min('min_price');
+    $heroTravelStyleCount = $destinationCards->pluck('travel_styles')->flatten()->filter()->unique()->count();
+    $heroPackageCount = $destinationCards->sum('package_count');
     $ratingLabels = [
         '5' => '5 Star',
         '4' => '4+ Rating',
@@ -54,6 +60,8 @@
     if (request('sort') && request('sort') !== 'newest' && isset($sortLabels[request('sort')])) {
         $activeFilters[] = ['label' => 'Sort', 'value' => $sortLabels[request('sort')]];
     }
+
+    $hasActiveFilters = count($activeFilters) > 0;
 @endphp
 
 @push('styles')
@@ -67,10 +75,91 @@
 @section('content')
     <section class="pkg-listing-section dst-page-section">
         <div class="container">
+            <section class="dst-hero-section" style="--dst-hero-image: url('{{ $heroImage }}');">
+                <div class="dst-hero-shell">
+                    <div class="dst-hero-copy">
+                        <nav class="dst-hero-breadcrumb" aria-label="Breadcrumb">
+                            <a href="{{ url('/') }}">Home</a>
+                            <span aria-hidden="true">/</span>
+                            <span>Destinations</span>
+                        </nav>
+
+                        <span class="dst-hero-kicker">All Destination Pages</span>
+                        <h1>Explore destinations that match your next travel mood</h1>
+                        <p>
+                            Browse admin-managed destination pages with real package counts, starting prices,
+                            travel styles, and quick filters to narrow down the right escape faster.
+                        </p>
+
+                        <div class="dst-hero-actions">
+                            <a href="#destinationResults" class="dst-hero-btn dst-hero-btn-primary">
+                                Explore Destinations
+                                <i class="bi bi-arrow-down-right"></i>
+                            </a>
+                            <a
+                                href="{{ $hasActiveFilters ? route('destinations.index') : route('contact') }}"
+                                class="dst-hero-btn dst-hero-btn-secondary"
+                            >
+                                {{ $hasActiveFilters ? 'Clear Filters' : 'Plan With Us' }}
+                            </a>
+                        </div>
+
+                        @if($heroDestinationNames->isNotEmpty())
+                            <div class="dst-hero-tags" aria-label="Featured destinations">
+                                @foreach($heroDestinationNames as $heroName)
+                                    <span>{{ $heroName }}</span>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="dst-hero-panel">
+                        <div class="dst-hero-stat-grid">
+                            <article class="dst-hero-stat">
+                                <strong>{{ $destinationCount }}</strong>
+                                <span>{{ \Illuminate\Support\Str::plural('destination', $destinationCount) }} live</span>
+                            </article>
+                            <article class="dst-hero-stat">
+                                <strong>{{ $heroStartingPrice ? '₹' . number_format($heroStartingPrice) : 'Custom' }}</strong>
+                                <span>starting budget</span>
+                            </article>
+                            <article class="dst-hero-stat">
+                                <strong>{{ $heroTravelStyleCount ?: 1 }}</strong>
+                                <span>{{ \Illuminate\Support\Str::plural('travel style', max($heroTravelStyleCount, 1)) }}</span>
+                            </article>
+                        </div>
+
+                        <article class="dst-hero-spotlight">
+                            <span class="dst-hero-spotlight-label">Quick Snapshot</span>
+                            <h2>{{ $heroDestination['name'] ?? 'Curated India & beyond' }}</h2>
+                            <p>
+                                {{ $heroPackageCount ?: 0 }} {{ \Illuminate\Support\Str::plural('package', $heroPackageCount ?: 0) }}
+                                across destination pages curated from your admin panel.
+                            </p>
+                            <div class="dst-hero-spotlight-meta">
+                                <span>
+                                    <i class="bi bi-geo-alt-fill"></i>
+                                    {{ $heroDestination['country'] ?? 'Travel-ready collection' }}
+                                </span>
+                                <span>
+                                    <i class="bi bi-star-fill"></i>
+                                    {{ $heroDestination['rating'] ?: 'Freshly added' }}
+                                </span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
             <div class="pkg-listing-top">
                 <div class="section-heading text-start pkg-section-heading">
-                    <span>All Destinations</span>
-                    <h2>Explore Destination Pages</h2>
+                    <span>{{ $hasActiveFilters ? 'Filtered Results' : 'Destination Collection' }}</span>
+                    <h2 id="destinationResults">{{ $hasActiveFilters ? 'Destinations Matching Your Filters' : 'Explore Destination Pages' }}</h2>
+                    <p class="pkg-section-description">
+                        {{ $hasActiveFilters
+                            ? 'Fine-tune your filters or clear them to widen your destination choices.'
+                            : 'Compare destinations by category, style, duration, rating, and starting budget.' }}
+                    </p>
                 </div>
 
                 <div class="pkg-count-card">

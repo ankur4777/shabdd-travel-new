@@ -4223,6 +4223,9 @@ div.container.st-nav-inner {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
 }
 
 /* Carousel Wrapper - holds carousel and view all button */
@@ -4230,6 +4233,9 @@ div.container.st-nav-inner {
     display: flex;
     align-items: center;
     gap: 20px;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
 }
 
 /* Top Bar */
@@ -4424,7 +4430,7 @@ div.container.st-nav-inner {
     max-width: 100%;
     scroll-padding-left: 0;
     scroll-snap-type: x proximity;
-    touch-action: pan-y;
+    touch-action: pan-x pan-y;
     overscroll-behavior-x: contain;
     /* Hide scrollbar */
     scrollbar-width: none;
@@ -5034,6 +5040,7 @@ div.container.st-nav-inner {
 .df-offcanvas {
     width: min(340px, 92vw) !important;
     border-right: 1px solid var(--df-border) !important;
+    z-index: 1100 !important;
 }
 
 .df-offcanvas-header {
@@ -5094,7 +5101,7 @@ div.container.st-nav-inner {
 /* Below lg: hide desktop sidebar, show mobile bar */
 @media (max-width: 991.98px) {
     .df-wrapper {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .df-section {
@@ -5112,7 +5119,8 @@ div.container.st-nav-inner {
 
     .df-carousel-arrow {
         position: absolute;
-        top: -66px;
+        top: 50%;
+        transform: translateY(-50%);
         display: flex !important;
         width: 38px;
         height: 38px;
@@ -5121,11 +5129,12 @@ div.container.st-nav-inner {
     }
 
     .df-carousel-arrow-left {
-        right: 48px;
+        left: 8px;
+        right: auto;
     }
 
     .df-carousel-arrow-right {
-        right: 0;
+        right: 8px;
     }
 
     .df-carousel-wrapper {
@@ -5137,11 +5146,17 @@ div.container.st-nav-inner {
 
     .df-carousel-outer {
         width: 100%;
+        min-width: 0;
+        max-width: 100%;
     }
 
     .df-cards-grid {
+        flex: 0 0 100%;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
         gap: 14px;
-        padding-right: 18px;
+        padding: 0 18px 0 0;
     }
 
     .df-view-all-section {

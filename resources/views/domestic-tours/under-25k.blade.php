@@ -1,251 +1,495 @@
 @extends('layouts.app')
 
+@section('meta')
+    <title>Domestic Tours Under ₹25,000 | SHABDD Travel</title>
+    <meta name="description"
+        content="Explore India under ₹25,000 with dynamic domestic tour packages, destination filters, FAQs, testimonials, and budget-friendly getaways across top Indian destinations.">
+@endsection
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/under-25k.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/beach-escapes.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+@endpush
+
+@php
+    use Illuminate\Support\Str;
+
+    $testimonials = [
+        [
+            'name' => 'Aarti Sharma',
+            'destination' => 'Kerala',
+            'rating' => 5,
+            'image' => asset('images/user1.jpg'),
+            'review' => 'The package felt far more premium than the price. Transfers were smooth, the hotel was comfortable, and the itinerary was perfect for our family.',
+        ],
+        [
+            'name' => 'Rohan Mehta',
+            'destination' => 'Manali',
+            'rating' => 5,
+            'image' => asset('images/user2.jpg'),
+            'review' => 'Exactly what we wanted for a quick mountain escape. Great value, clear inclusions, and no stress during the trip.',
+        ],
+        [
+            'name' => 'Sneha Verma',
+            'destination' => 'Goa',
+            'rating' => 5,
+            'image' => asset('images/user1.jpg'),
+            'review' => 'Budget-friendly without feeling basic. The team helped us pick the right package and the stay exceeded our expectations.',
+        ],
+    ];
+
+    $faqs = [
+        [
+            'question' => "What's included in the package?",
+            'answer' => 'Most packages include hotel stays, sightseeing, and route-based transfers. Exact inclusions are listed on each package detail page before booking.',
+        ],
+        [
+            'question' => 'Are flights included?',
+            'answer' => 'Flights are not automatically included in every under ₹25,000 package. Check the package detail page or talk to our team for flight-inclusive custom quotes.',
+        ],
+        [
+            'question' => 'Can I customize the itinerary?',
+            'answer' => 'Yes. You can shortlist a package and then request hotel upgrades, extra nights, or sightseeing changes based on your travel plan.',
+        ],
+        [
+            'question' => 'What is the cancellation policy?',
+            'answer' => 'Cancellation terms depend on the package, hotel, and travel dates. Our team shares the applicable policy before confirmation.',
+        ],
+        [
+            'question' => 'Are these packages suitable for families?',
+            'answer' => 'Yes. Many options are ideal for couples, families, and small groups, especially packages with balanced travel time and comfortable stays.',
+        ],
+    ];
+
+    $activeFilters = collect([
+        $selectedDestination ? 'Destination: ' . $selectedDestination : null,
+        $selectedDuration
+        ? 'Duration: ' . match ($selectedDuration) {
+            '2-4' => '2 to 4 days',
+            '4-6' => '4 to 6 days',
+            '6-8' => '6 to 8 days',
+            '8+' => '8+ days',
+            default => $selectedDuration,
+        }
+        : null,
+        $selectedMonth ? 'Month: ' . Str::headline($selectedMonth) : null,
+        $selectedSort && $selectedSort !== 'popularity'
+        ? 'Sort: ' . match ($selectedSort) {
+            'price_low' => 'Price Low to High',
+            'duration' => 'Duration',
+            default => 'Popularity',
+        }
+        : null,
+    ])->filter()->values();
+@endphp
+
 @section('content')
+    <main class="budget25-page">
 
-    {{-- 1. Hero Section --}}
-    <section class="destination-st-hero" data-hero-media="image"
-        style="--hero-image: url('{{ asset('images/himachal.jpg') }}'); min-height: 55vh; padding-bottom: 0; margin-top: 0;">
-        <div class="destination-st-hero-overlay"></div>
-        <div class="destination-st-hero-inner container" style="min-height: 55vh; padding-top: 100px;">
-            <div class="destination-st-hero-copy" style="text-align: center; margin: 0 auto;">
-                <div class="destination-st-hero-eyebrow justify-content-center">
-                    <span class="st-eyebrow-dot"></span> Budget Escapes
-                </div>
-                <h1 class="destination-st-hero-title">Domestic Tours Under <em>₹25K</em></h1>
-                <p class="destination-st-hero-text">
-                    Incredible journeys across India that fit perfectly within your budget. Handpicked experiences,
-                    comfortable stays, and unforgettable memories — all without breaking the bank.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    {{-- 2. Relevant Content & Slider --}}
-    {{-- Quick Filter Section --}}
-    <section class="container mt-5">
-        <div class="rd-container">
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <h4 class="mb-3" style="font-weight: 800; font-size: 1.1rem; color: #0f1115;">Budget Range</h4>
-                    <div class="d-flex flex-wrap gap-2">
-                        <a href="#" class="df-chip text-decoration-none">₹10k–15k</a>
-                        <a href="#" class="df-chip text-decoration-none">₹15k–20k</a>
-                        <a href="#" class="df-chip text-decoration-none">₹20k–25k</a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <h4 class="mb-3" style="font-weight: 800; font-size: 1.1rem; color: #0f1115;">Trip Type</h4>
-                    <div class="d-flex flex-wrap gap-2">
-                        <a href="#" class="df-chip text-decoration-none">Family Tours</a>
-                        <a href="#" class="df-chip text-decoration-none">Honeymoon Tours</a>
-                        <a href="#" class="df-chip text-decoration-none">Adventure Trips</a>
-                        <a href="#" class="df-chip text-decoration-none">Religious Tours</a>
-                        <a href="#" class="df-chip text-decoration-none">Weekend Getaways</a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <h4 class="mb-3" style="font-weight: 800; font-size: 1.1rem; color: #0f1115;">Duration</h4>
-                    <div class="d-flex flex-wrap gap-2">
-                        <a href="#" class="df-chip text-decoration-none">2–3 Days</a>
-                        <a href="#" class="df-chip text-decoration-none">4–5 Days</a>
-                        <a href="#" class="df-chip text-decoration-none">6–7 Days</a>
-                    </div>
+        <section class="budget25-hero">
+            <div class="budget25-hero__media" aria-hidden="true"></div>
+            <div class="budget25-hero__veil" aria-hidden="true"></div>
+            <div class="container budget25-hero__container">
+                <div class="budget25-hero__content">
+                    <span class="budget25-kicker">Budget domestic getaways</span>
+                    <h1>Explore India Under ₹25,000</h1>
+                    <p>Handpicked budget-friendly tours for unforgettable experiences.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    {{-- Popular Destinations Under ₹25,000 --}}
-    <section class="pd-section mt-5">
-        <div class="pd-container">
-            <div class="pd-header">
-                <div>
-                    <p class="pd-eyebrow">Top Spots</p>
-                    <h2 class="pd-title">Popular Destinations Under ₹25,000</h2>
+        <section class="budget25-section budget25-section--packages" id="packages">
+            <div class="container">
+                <div class="budget25-section__head budget25-section__head--split">
+                    <div>
+                        <span class="budget25-eyebrow">Featured packages</span>
+                        <h2>Affordable domestic tours from the admin panel</h2>
+                        <p>{{ $packageCount }} package{{ $packageCount === 1 ? '' : 's' }} matched your current filters.</p>
+                    </div>
+
+                    <form method="GET" action="{{ route('under-25k') }}" class="budget25-sort">
+                        <input type="hidden" name="destination" value="{{ $selectedDestination }}">
+                        <input type="hidden" name="duration" value="{{ $selectedDuration }}">
+                        <input type="hidden" name="month" value="{{ $selectedMonth }}">
+                        <label for="budget25Sort">Sort by</label>
+                        <select id="budget25Sort" name="sort" onchange="this.form.submit()">
+                            <option value="popularity" {{ $selectedSort === 'popularity' ? 'selected' : '' }}>Popularity
+                            </option>
+                            <option value="price_low" {{ $selectedSort === 'price_low' ? 'selected' : '' }}>Price Low to High
+                            </option>
+                            <option value="duration" {{ $selectedSort === 'duration' ? 'selected' : '' }}>Duration</option>
+                        </select>
+                    </form>
                 </div>
-            </div>
-            <div class="row g-4">
-                @php
-                    $destinations = [
-                        ['name' => 'Goa', 'price' => '12,000', 'count' => '45', 'img' => 'goa.jpg'],
-                        ['name' => 'Jaipur', 'price' => '10,500', 'count' => '32', 'img' => 'jaipur.jpg'],
-                        ['name' => 'Udaipur', 'price' => '14,000', 'count' => '28', 'img' => 'udaipur.jpg'],
-                        ['name' => 'Manali', 'price' => '11,500', 'count' => '50', 'img' => 'manali.jpg'],
-                        ['name' => 'Shimla', 'price' => '13,000', 'count' => '40', 'img' => 'shimla.jpg'],
-                        ['name' => 'Rishikesh', 'price' => '8,500', 'count' => '25', 'img' => 'rishikesh.jpg'],
-                        ['name' => 'Varanasi', 'price' => '9,000', 'count' => '18', 'img' => 'varanasi.jpg'],
-                        ['name' => 'Kerala', 'price' => '16,000', 'count' => '60', 'img' => 'kerala.avif'],
-                    ];
-                @endphp
-                @foreach($destinations as $dest)
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <a href="#" class="pd-card text-decoration-none h-100">
-                            <div class="pd-card-img-wrap">
-                                <img src="{{ asset('images/' . $dest['img']) }}" alt="{{ $dest['name'] }}" class="pd-card-img"
-                                    onerror="this.src='{{ asset('images/couple-bg.jpg') }}'">
-                                <div class="pd-card-img-overlay"></div>
-                                <div class="pd-badge pd-badge--hot">{{ $dest['count'] }} Packages</div>
-                            </div>
-                            <div class="pd-card-body">
-                                <h3 class="pd-card-name">{{ $dest['name'] }}</h3>
-                                <div class="pd-card-price-wrap align-items-start mt-auto">
-                                    <span class="pd-price-per text-muted">Starting from</span>
-                                    <div class="pd-price-bottom">
-                                        <span class="pd-price-final">₹{{ $dest['price'] }}</span>
+
+                @if($activeFilters->isNotEmpty())
+                    <div class="budget25-active-filters" aria-label="Active filters">
+                        @foreach($activeFilters as $filter)
+                            <span>{{ $filter }}</span>
+                        @endforeach
+                        <a href="{{ route('under-25k') }}">Clear all</a>
+                    </div>
+                @endif
+
+                @if($packages->isEmpty())
+                    <div class="budget25-empty">
+                        <h3>No packages found for this combination</h3>
+                        <p>Try changing the destination, duration, or month filter to reveal more budget-friendly domestic
+                            tours.</p>
+                    </div>
+                @else
+                    <div class="budget25-grid">
+                        @foreach($packages as $package)
+                            @php
+                                $packageImage = blank($package->image)
+                                    ? asset('images/couple-bg.jpg')
+                                    : (Str::startsWith($package->image, ['http://', 'https://'])
+                                        ? $package->image
+                                        : asset('storage/' . ltrim($package->image, '/')));
+                                $packageDuration = $package->duration_text ?: ($package->days ? $package->days . 'D' : 'Flexible');
+                                $packageLocation = collect([$package->city, $package->state, $package->country])->filter()->implode(', ');
+                                $packageHighlights = collect([$package->feature_1, $package->feature_2, $package->feature_3])->filter()->take(3);
+                                $packageDescription = $package->description
+                                    ? Str::limit(strip_tags($package->description), 120)
+                                    : 'Curated stays, seamless transfers, and practical sightseeing for value-first domestic travel.';
+                            @endphp
+
+                            <article class="budget25-card">
+                                <a href="{{ route('packages.show', $package->slug) }}" class="budget25-card__media">
+                                    <img src="{{ $packageImage }}" alt="{{ $package->title }}" loading="lazy">
+                                    <span class="budget25-card__price">From ₹{{ number_format((int) $package->price) }}</span>
+                                </a>
+
+                                <div class="budget25-card__body">
+                                    <div class="budget25-card__meta">
+                                        <span><i class="bi bi-geo-alt"></i> {{ $packageLocation ?: 'India' }}</span>
+                                        <span><i class="bi bi-calendar3"></i> {{ $packageDuration }}</span>
                                     </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
 
-    {{-- Dynamic Packages Slider --}}
-    <section class="rd-section" style="margin-top: 60px;">
-        <div class="rd-container">
-            <div class="rd-header">
-                <div>
-                    <p class="rd-eyebrow">Top Picks</p>
-                    <h2 class="rd-title">Affordable Packages</h2>
-                    <p class="rd-subtitle">Explore our best value domestic tour packages</p>
-                </div>
-                <div class="rd-header-right">
-                    {{-- Slider Navigation Controls --}}
-                    <div class="rd-nav-btns">
-                        <button class="rd-nav-btn" id="rdPrev" aria-label="Previous">
-                            <i class="bi bi-chevron-left"></i>
-                        </button>
-                        <button class="rd-nav-btn" id="rdNext" aria-label="Next">
-                            <i class="bi bi-chevron-right"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="rd-slider-outer">
-                <div class="rd-track" id="rdTrack">
-                    @forelse($packages as $package)
-                        <a href="{{ route('packages.show', $package->slug) }}" class="rd-card">
-                            <div class="rd-card-img"
-                                style="background-image: url('{{ $package->image ? asset('storage/' . $package->image) : asset('images/couple-bg.jpg') }}');">
-                            </div>
-                            <div class="rd-card-overlay"></div>
-
-                            <div class="rd-card-badge rd-badge--hot">
-                                Best Value
-                            </div>
-
-                            <div class="rd-card-body">
-                                <div class="rd-card-rating">
-                                    <i class="bi bi-star-fill"></i> {{ $package->rating ?? '4.5' }}
-                                </div>
-                                <div class="rd-card-info">
-                                    <span class="rd-card-location">
-                                        <i class="bi bi-geo-alt-fill"></i> {{ $package->state ?? 'India' }}
-                                    </span>
-                                    <h3 class="rd-card-name">{{ $package->title }}</h3>
-
-                                    <div class="rd-card-footer">
-                                        <div class="rd-price-block">
-                                            <span class="rd-price-from">From</span>
-                                            <span class="rd-price">₹{{ number_format($package->price) }}</span>
-                                            <span class="rd-price-per">/Adult</span>
+                                    <div class="budget25-card__heading">
+                                        <h3>{{ $package->title }}</h3>
+                                        <div class="budget25-rating">
+                                            <i class="bi bi-star-fill"></i>
+                                            <span>{{ $package->rating ? number_format((float) $package->rating, 1) : '4.5' }}</span>
                                         </div>
-                                        <span class="rd-card-btn">View <i class="bi bi-arrow-right"></i></span>
                                     </div>
+
+                                    <p>{{ $packageDescription }}</p>
+
+                                    @if($packageHighlights->isNotEmpty())
+                                        <ul class="budget25-highlights">
+                                            @foreach($packageHighlights as $highlight)
+                                                <li>{{ $highlight }}</li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+
+                                    <a href="{{ route('packages.show', $package->slug) }}" class="budget25-btn budget25-btn--ghost">
+                                        View Details
+                                    </a>
                                 </div>
+                            </article>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+        </section>
+        <section class="beach-banner-slider" aria-label="Featured beach banner">
+            <div class="container">
+                <div class="beach-banner-frame">
+                    <div class="swiper beach-banner-swiper" data-beach-banner-swiper>
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <article class="beach-banner-slide"
+                                    style="--beach-banner-image: url('{{ asset('images/kerala.avif') }}');">
+                                    <div class="beach-banner-slide__overlay"></div>
+                                    <div class="beach-banner-slide__content">
+                                        <span class="beach-banner-slide__eyebrow">
+                                            <i class="bi bi-sunrise-fill" aria-hidden="true"></i> Coastal spotlight
+                                        </span>
+                                        <h2>Beach breaks with a premium holiday feel</h2>
+                                        <p>Use this space to highlight your strongest beach offer before visitors move into
+                                            the package slider.</p>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="swiper-slide">
+                                <article class="beach-banner-slide"
+                                    style="--beach-banner-image: url('{{ asset('images/contact-us-bg.jpg') }}');">
+                                    <div class="beach-banner-slide__overlay"></div>
+                                    <div class="beach-banner-slide__content">
+                                        <span class="beach-banner-slide__eyebrow">
+                                            <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Island favorite
+                                        </span>
+                                        <h2>Go from planning to sea breeze in one click</h2>
+                                        <p>Feature Andaman, Lakshadweep, or Goa in a large visual banner that breaks up the
+                                            page and keeps momentum high.</p>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="swiper-slide">
+                                <article class="beach-banner-slide"
+                                    style="--beach-banner-image: url('{{ asset('images/world-map.avif') }}');">
+                                    <div class="beach-banner-slide__overlay"></div>
+                                    <div class="beach-banner-slide__content">
+                                        <span class="beach-banner-slide__eyebrow">
+                                            <i class="bi bi-stars" aria-hidden="true"></i> Curated highlights
+                                        </span>
+                                        <h2>Use a bold transition section to keep the page moving</h2>
+                                        <p>This banner works as a visual bridge between your filter results and the package
+                                            cards below.</p>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="beach-banner-swiper__btn beach-banner-swiper__btn--prev"
+                        aria-label="Previous beach banner">
+                        <i class="bi bi-arrow-left"></i>
+                    </button>
+                    <button type="button" class="beach-banner-swiper__btn beach-banner-swiper__btn--next"
+                        aria-label="Next beach banner">
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="beach-banner-swiper__pagination"></div>
+            </div>
+        </section>
+        <section class="budget25-section">
+            <div class="container">
+                <div class="budget25-section__head">
+                    <span class="budget25-eyebrow">Popular destinations under ₹25K</span>
+                    <h2>Budget-friendly places travelers love</h2>
+                    <p>These destination tiles are built from the live domestic package inventory currently available under
+                        ₹25,000.</p>
+                </div>
+
+                <div class="budget25-destination-grid">
+                    @forelse($popularDestinations as $destination)
+                        <a href="{{ $destination['url'] }}" class="budget25-destination-card">
+                            <img src="{{ $destination['image'] }}" alt="{{ $destination['name'] }}" loading="lazy">
+                            <div class="budget25-destination-card__overlay"></div>
+                            <div class="budget25-destination-card__content">
+                                <span>{{ $destination['count'] }} package{{ $destination['count'] === 1 ? '' : 's' }}</span>
+                                <h3>{{ $destination['name'] }}</h3>
+                                <strong>Starts from ₹{{ number_format($destination['starting_price']) }}</strong>
                             </div>
                         </a>
                     @empty
-                        <div class="col-12 text-center py-5" style="width: 100%;">
-                            <h4 class="text-muted">No packages found under ₹25,000 at the moment.</h4>
-                            <p>Please check back later or explore our other destinations.</p>
+                        <div class="budget25-empty budget25-empty--soft">
+                            <h3>Popular destinations will appear here automatically</h3>
+                            <p>Add or update domestic packages in the admin panel and this section will fill from live package
+                                data.</p>
                         </div>
                     @endforelse
                 </div>
             </div>
+        </section>
 
-            <div class="rd-dots" id="rdDots"></div>
-        </div>
-    </section>
+        <section class="budget25-section budget25-section--tint">
+            <div class="container">
+                <div class="budget25-section__head">
+                    <span class="budget25-eyebrow">Budget travel categories</span>
+                    <h2>Choose your comfort zone</h2>
+                    <p>Compare how many domestic tour options are currently available in each price band.</p>
+                </div>
 
-    {{-- 3. CTA Section --}}
-    {{-- Traveler Testimonials --}}
-    <section class="container mt-5 mb-5" style="max-width: min(100% - 24px, 1320px);">
-        <div class="rd-header mb-4">
-            <div>
-                <p class="rd-eyebrow">Reviews</p>
-                <h2 class="rd-title">Traveler Testimonials</h2>
-            </div>
-        </div>
-        <div class="seo-dd-testimonial-grid">
-            <div class="seo-dd-testimonial-card">
-                <span class="seo-dd-quote-mark">"</span>
-                <div class="seo-dd-stars" style="width: max-content;">
-                    <span><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                            class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
-                </div>
-                <p class="seo-dd-review">"An absolutely amazing experience! The budget package to Kerala was well-organized
-                    and we didn't have to worry about a thing. Highly recommend for family trips!"</p>
-                <div class="seo-dd-user">
-                    <img src="{{ asset('images/user1.jpg') }}"
-                        onerror="this.src='https://ui-avatars.com/api/?name=Aarti+S&background=random'" alt="Aarti S.">
-                    <div class="seo-dd-user-meta">
-                        <h3>Aarti S.</h3>
-                        <p class="mb-0 text-success fw-bold mt-1" style="font-size: 0.85rem;"><i
-                                class="bi bi-patch-check-fill"></i> Verified Traveler</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="seo-dd-testimonial-card">
-                <span class="seo-dd-quote-mark">"</span>
-                <div class="seo-dd-stars" style="width: max-content;">
-                    <span><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                            class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
-                </div>
-                <p class="seo-dd-review">"The Manali trip under 25K was an absolute steal. Beautiful hotel stays, seamless
-                    transfers, and unforgettable snow activities. Will definitely book again!"</p>
-                <div class="seo-dd-user">
-                    <img src="{{ asset('images/user2.jpg') }}"
-                        onerror="this.src='https://ui-avatars.com/api/?name=Rohan+M&background=random'" alt="Rohan M.">
-                    <div class="seo-dd-user-meta">
-                        <h3>Rohan M.</h3>
-                        <p class="mb-0 text-success fw-bold mt-1" style="font-size: 0.85rem;"><i
-                                class="bi bi-patch-check-fill"></i> Verified Traveler</p>
-                    </div>
+                <div class="budget25-category-grid">
+                    @foreach($budgetCategories as $category)
+                        <article class="budget25-category-card">
+                            <h3>{{ $category['label'] }}</h3>
+                            <strong>{{ $category['count'] }} package{{ $category['count'] === 1 ? '' : 's' }}</strong>
+                            <p>
+                                @if($category['starting_price'] > 0)
+                                    Starts from ₹{{ number_format($category['starting_price']) }}
+                                @else
+                                    New options will appear here as packages are added.
+                                @endif
+                            </p>
+                            @if(!empty($category['destinations']))
+                                <div class="budget25-pills">
+                                    @foreach($category['destinations'] as $destinationName)
+                                        <span>{{ $destinationName }}</span>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </article>
+                    @endforeach
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    {{-- CTA Section --}}
-    <section class="CTA-section-container"
-        style="background-image: url('{{ asset('images/kerala.avif') }}'); margin-bottom: 60px;">
-        <div class="CTA-section-overlay"></div>
-        <div class="container position-relative z-2">
-            <div class="row align-items-center">
-                <div class="col-lg-7 CTA-section-content">
-                    <div class="CTA-section-header">
-                        <h2 class="CTA-section-title">Can't find what you're looking for?</h2>
-                        <p class="CTA-section-description">
-                            Let our travel experts craft a personalized itinerary just for you. Tell us your budget,
-                            preferences, and travel dates, and we'll design the perfect trip across India.
-                        </p>
-                    </div>
-                    <div class="d-flex gap-3 flex-wrap">
-                        <a href="{{ route('contact') }}" class="hb-btn hb-btn--primary">
-                            Plan My Trip <i class="bi bi-arrow-right"></i>
-                        </a>
-                        <a href="tel:+919828065555" class="hb-btn hb-btn--ghost">
-                            <i class="bi bi-telephone-fill"></i> Call Us Now
-                        </a>
-                    </div>
+        <section class="budget25-section">
+            <div class="container">
+                <div class="budget25-section__head">
+                    <span class="budget25-eyebrow">Traveller testimonials</span>
+                    <h2>Stories from value-first explorers</h2>
+                    <p>Shortlisted for travelers who want dependable planning, attractive pricing, and memorable domestic
+                        escapes.</p>
+                </div>
+
+                <div class="budget25-testimonial-grid">
+                    @foreach($testimonials as $testimonial)
+                        <article class="budget25-testimonial-card">
+                            <div class="budget25-testimonial-card__top">
+                                <img src="{{ $testimonial['image'] }}" alt="{{ $testimonial['name'] }}" loading="lazy"
+                                    onerror="this.src='https://ui-avatars.com/api/?name={{ urlencode($testimonial['name']) }}&background=0f766e&color=ffffff'">
+                                <div>
+                                    <h3>{{ $testimonial['name'] }}</h3>
+                                    <p>{{ $testimonial['destination'] }}</p>
+                                </div>
+                            </div>
+                            <div class="budget25-testimonial-card__stars" aria-label="{{ $testimonial['rating'] }} star rating">
+                                @for($i = 0; $i < $testimonial['rating']; $i++)
+                                    <i class="bi bi-star-fill"></i>
+                                @endfor
+                            </div>
+                            <blockquote>{{ $testimonial['review'] }}</blockquote>
+                        </article>
+                    @endforeach
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section class="budget25-section" id="faq" itemscope itemtype="https://schema.org/FAQPage">
+            <div class="container">
+                <div class="budget25-section__head">
+                    <span class="budget25-eyebrow">FAQ</span>
+                    <h2>Quick answers before you book</h2>
+                    <p>Everything a budget-conscious traveler usually wants to know before choosing a domestic package.</p>
+                </div>
+
+                <div class="budget25-faq">
+                    @foreach($faqs as $faq)
+                        <details class="budget25-faq__item" itemscope itemprop="mainEntity"
+                            itemtype="https://schema.org/Question" {{ $loop->first ? 'open' : '' }}>
+                            <summary itemprop="name">{{ $faq['question'] }}</summary>
+                            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                                <p itemprop="text">{{ $faq['answer'] }}</p>
+                            </div>
+                        </details>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+        <section class="budget25-cta">
+            <div class="container">
+                <div class="budget25-cta__panel">
+                    <div class="budget25-cta__copy">
+                        <span class="budget25-eyebrow budget25-eyebrow--light">Final call</span>
+                        <h2>Ready for Your Next Adventure?</h2>
+                        <p>Tell us your destination idea, travel month, and budget target. We’ll help you shortlist the
+                            right under ₹25,000 package faster.</p>
+                        <div class="budget25-cta__actions">
+                            <a href="tel:+919999999999" class="budget25-btn budget25-btn--light">
+                                <i class="bi bi-telephone-fill"></i> Call Now
+                            </a>
+                            <a href="https://wa.me/919999999999?text={{ urlencode('Hi, I want help planning a domestic trip under ₹25,000.') }}"
+                                target="_blank" rel="noopener" class="budget25-btn budget25-btn--whatsapp">
+                                <i class="bi bi-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                    <form method="GET" action="{{ route('contact') }}" class="budget25-cta__form">
+                        <div class="budget25-form__field">
+                            <label for="budget25Name">Full name</label>
+                            <input id="budget25Name" type="text" name="name" placeholder="Your name">
+                        </div>
+                        <div class="budget25-form__field">
+                            <label for="budget25Phone">Phone number</label>
+                            <input id="budget25Phone" type="tel" name="phone" placeholder="+91">
+                        </div>
+                        <div class="budget25-form__field">
+                            <label for="budget25DestinationIdea">Destination</label>
+                            <input id="budget25DestinationIdea" type="text" name="destination"
+                                placeholder="Goa, Manali, Kerala...">
+                        </div>
+                        <div class="budget25-form__field">
+                            <label for="budget25Budget">Budget range</label>
+                            <select id="budget25Budget" name="budget">
+                                <option>Under ₹10,000</option>
+                                <option>₹10,000 - ₹15,000</option>
+                                <option>₹15,000 - ₹20,000</option>
+                                <option selected>₹20,000 - ₹25,000</option>
+                            </select>
+                        </div>
+                        <div class="budget25-form__field budget25-form__field--full">
+                            <label for="budget25TravelMonth">Travel month</label>
+                            <select id="budget25TravelMonth" name="month">
+                                @foreach($monthOptions as $monthOption)
+                                    <option value="{{ $monthOption['value'] }}">{{ $monthOption['label'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="budget25-btn budget25-btn--primary budget25-btn--full">Send
+                            Enquiry</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
 
 @endsection
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const bannerSwiperElement = document.querySelector('[data-beach-banner-swiper]');
+
+            if (typeof Swiper !== 'undefined') {
+                if (bannerSwiperElement) {
+                    const bannerFrame = bannerSwiperElement.closest('.beach-banner-frame');
+
+                    new Swiper(bannerSwiperElement, {
+                        slidesPerView: 1,
+                        spaceBetween: 18,
+                        speed: 700,
+                        loop: true,
+                        autoplay: {
+                            delay: 5500,
+                            disableOnInteraction: false,
+                        },
+                        navigation: {
+                            nextEl: bannerFrame?.querySelector('.beach-banner-swiper__btn--next'),
+                            prevEl: bannerFrame?.querySelector('.beach-banner-swiper__btn--prev'),
+                        },
+                        pagination: {
+                            el: bannerFrame?.parentElement?.querySelector('.beach-banner-swiper__pagination'),
+                            clickable: true,
+                        },
+                    });
+                }
+            }
+        });
+    </script>
+    <script type="application/ld+json">
+                            {!! json_encode([
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => route('home'),
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Domestic Tours',
+                'item' => route('all-domestic'),
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 3,
+                'name' => 'Domestic Tours Under ₹25,000',
+                'item' => route('under-25k'),
+            ],
+        ],
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+                        </script>
+@endpush

@@ -49,7 +49,7 @@ class DestinationForm
                                 'Beach' => 'Beach',
                                 'Hill' => 'Hill',
                                 'Island' => 'Island',
-                                'Dessert' => 'Dessert',
+                                'Desert' => 'Desert',
                             ]),
 
                         CheckboxList::make('travel_styles')
