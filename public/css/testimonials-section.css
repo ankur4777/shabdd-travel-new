@@ -1,0 +1,503 @@
+/* =========================================================
+   TESTIMONIALS SECTION  –  testimonials-section.css
+   ========================================================= */
+
+.tm-section {
+    width: min(100% - 24px, 1320px);
+    margin: 0 auto 72px;
+    font-family: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+.tm-container {
+    background: var(--brand-bg, #f7f7f7);
+    border-radius: 32px;
+    padding: 64px 56px 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* ── Header ── */
+.tm-header {
+    text-align: center;
+    margin-bottom: 52px;
+}
+
+.tm-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brand-primary, #ff3b30);
+    margin-bottom: 18px;
+}
+
+.tm-eyebrow-line {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--brand-primary, #ff3b30);
+    border-radius: 2px;
+}
+
+.tm-title {
+    margin: 0 0 8px;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--brand-black, #111);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+}
+
+.tm-subtitle {
+    margin: 0 0 14px;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 700;
+    font-style: italic;
+    color: var(--brand-primary, #ff3b30);
+    letter-spacing: -0.01em;
+}
+
+.tm-desc {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(17, 17, 17, 0.5);
+    line-height: 1.6;
+}
+
+/* ── Bento Grid ── */
+.tm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 0;
+    min-width: 0;
+}
+
+/* ── Base Card ── */
+.tm-card {
+    border-radius: 22px;
+    border: 1px solid var(--brand-border, rgba(17, 17, 17, 0.08));
+    padding: 32px 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    box-sizing: border-box;
+    min-width: 0;
+    background-image: url('../images/kerala.avif');
+    width: 100%;
+}
+
+.tm-card:hover {
+    transform: translateY(-4px);
+}
+
+/* ── Large Card ── */
+.tm-card--large {
+    padding: 36px 36px 32px;
+    background-image: linear-gradient(115deg, rgba(255, 255, 255, 1) 0%, rgba(255, 248, 241, 0.9) 38%, rgba(255, 255, 255, 0.18) 100%), url('../images/kerala.avif');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* ── Top Right Card ── */
+.tm-card--top-right {
+    padding: 28px 28px 24px;
+    background-image: linear-gradient(115deg, rgba(255, 255, 255, 1) 0%, rgba(255, 248, 241, 0.9) 38%, rgba(255, 255, 255, 0.18) 100%), url('../images/couple.png');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* ── Small Bottom Cards ── */
+.tm-card--bottom-sm {
+    padding: 24px 24px 22px;
+    background-image: linear-gradient(115deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 248, 241, 0.86) 38%, rgba(255, 255, 255, 0.18) 100%), url('../images/dubai.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* ── Dark Card ── */
+.tm-card--dark {
+    background-image:
+        linear-gradient(rgba(17, 17, 17, 0.8), rgba(17, 17, 17, 0.7)),
+        url("../images/kerala.avif");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-color: transparent;
+}
+
+.tm-card--dark .tm-quote-text {
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.tm-card--dark .tm-author-name {
+    color: #fff;
+}
+
+.tm-card--dark .tm-author-role {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* ── Right Column ── */
+.tm-right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ── Bottom Row ── */
+.tm-bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    flex: 1;
+}
+
+/* ── Stat Numbers ── */
+.tm-stat {
+    margin-bottom: 4px;
+}
+
+.tm-stat-number {
+    display: block;
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 900;
+    color: var(--brand-black, #111);
+    letter-spacing: -0.04em;
+    line-height: 1;
+}
+
+.tm-stat-label {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: rgba(17, 17, 17, 0.55);
+    margin-top: 4px;
+}
+
+.tm-stat-inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+}
+
+.tm-stat-number--sm {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 900;
+    color: var(--brand-black, #111);
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+.tm-stat-label-inline {
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(17, 17, 17, 0.55);
+}
+
+/* ── Quote Icon ── */
+.tm-quote-icon {
+    display: flex;
+    align-items: center;
+}
+
+/* ── Quote Text ── */
+.tm-quote-text {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(17, 17, 17, 0.78);
+    line-height: 1.7;
+    flex: 1;
+    width: 75%;
+}
+
+.tm-quote-text--sm {
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.tm-quote-text--xs {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* ── Author ── */
+.tm-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 4px;
+}
+
+.tm-author-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid var(--brand-border-strong, rgba(17, 17, 17, 0.14));
+}
+
+.tm-author-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.tm-author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
+
+.tm-author-name {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--brand-black, #111);
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tm-author-role {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.45);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── Brand Icons ── */
+.tm-brand-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+.tm-brand-icon--spotify {
+    background: #1DB954;
+    color: #fff;
+}
+
+.tm-brand-icon--google {
+    background: #fff;
+    border: 1px solid rgba(17, 17, 17, 0.1);
+}
+
+/* ── Footer Bar ── */
+.tm-footer-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px 0 28px;
+    border-top: 1px solid var(--brand-border, rgba(17, 17, 17, 0.08));
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.tm-footer-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.tm-footer-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(255, 59, 48, 0.08);
+    color: var(--brand-primary, #ff3b30);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.tm-footer-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.65);
+}
+
+.tm-footer-text strong {
+    color: var(--brand-black, #111);
+    font-weight: 800;
+}
+
+.tm-footer-center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    justify-content: center;
+}
+
+.tm-stars {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.tm-rating-val {
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--brand-black, #111);
+    margin-left: 4px;
+}
+
+.tm-rating-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.45);
+}
+
+.tm-footer-right {
+    flex-shrink: 0;
+}
+
+.tm-view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: 12px;
+    border: 1.5px solid var(--brand-border-strong, rgba(17, 17, 17, 0.14));
+    background: var(--brand-white, #fff);
+    color: var(--brand-black, #111);
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tm-view-all-btn:hover {
+    background: var(--brand-primary, #ff3b30);
+    border-color: var(--brand-primary, #ff3b30);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(255, 59, 48, 0.22);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+    .tm-container {
+        padding: 48px 32px 0;
+    }
+
+    .tm-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tm-right-col {
+        gap: 14px;
+    }
+
+    .tm-bottom-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .tm-footer-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .tm-footer-center {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .tm-section {
+        width: 100%;
+        margin-bottom: 48px;
+        padding: 0 12px;
+    }
+
+    .tm-container {
+        padding: 36px 16px 0;
+        border-radius: 24px;
+    }
+
+    .tm-header {
+        margin-bottom: 36px;
+    }
+
+    .tm-grid {
+        gap: 12px;
+        width: 100%;
+    }
+
+    .tm-card--large {
+        padding: 26px 22px 22px;
+    }
+
+    .tm-stat-number {
+        font-size: 3.2rem;
+    }
+
+    .tm-right-col {
+        gap: 12px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .tm-section {
+        padding: 0 10px;
+    }
+
+    .tm-container {
+        padding: 32px 14px 0;
+    }
+
+    .tm-card {
+        border-radius: 20px;
+    }
+
+    .tm-card--large,
+    .tm-card--top-right,
+    .tm-card--bottom-sm {
+        padding: 24px 18px 22px;
+    }
+
+    .tm-bottom-row {
+        grid-template-columns: 1fr;
+    }
+
+    .tm-footer-bar {
+        padding: 20px 0 22px;
+    }
+
+    .tm-view-all-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
