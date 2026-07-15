@@ -75,7 +75,7 @@
                 <div class="beach-section-head beach-section-head--split">
                     <div>
                         <span class="beach-eyebrow beach-eyebrow--dark">Beach theme destinations</span>
-                        <h2>Filter beach destinations</h2>
+                        <h2 class="beach-destinations-title">Filter beach destinations</h2>
                         <p>Use destination, budget, duration, and travel style to narrow the beach destination grid.</p>
                     </div>
                 </div>

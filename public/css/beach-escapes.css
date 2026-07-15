@@ -1012,20 +1012,25 @@
 }
 
 .beach-page[class*="beach-page--"] .beach-section-head {
-    margin-bottom: 42px;
+    margin-bottom: 23px;
 }
 
 .beach-page[class*="beach-page--"] .beach-section-head h2 {
     max-width: 760px;
     color: var(--beach-ink);
-    font-size: clamp(2.45rem, 4.5vw, 4.75rem);
-    font-weight: 400;
+    font-size: 42px;
+    font-weight: 800;
     line-height: 1;
     letter-spacing: -.045em;
+    font-family: Merriweather;
+}
+
+.beach-page.beach-page--beach .beach-destinations-title {
+    font-family: "Merriweather", Georgia, "Times New Roman", serif;
 }
 
 .beach-page[class*="beach-page--"] .beach-section-head p {
-    max-width: 650px;
+    max-width: 660px;
     color: var(--beach-muted);
     line-height: 1.8;
 }
