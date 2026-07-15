@@ -59,7 +59,7 @@
 
                         <div class="beach-hero__actions">
                             <a href="#beach-destinations" class="beach-btn beach-btn--primary">
-                                Explore Destinations <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                                Explore Packages
                             </a>
                             <a href="#beach-packages" class="beach-btn beach-btn--ghost">
                                 View Popular Packages

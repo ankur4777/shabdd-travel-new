@@ -973,8 +973,16 @@
 
 .beach-page[class*="beach-page--"] .beach-btn--ghost {
     background: transparent;
-    border-color: rgba(255, 255, 255, .42);
     backdrop-filter: none;
+    font-size: 16px;
+    border-radius: 7px;
+    border: 2px solid color-mix(in srgb, #ff3b30 82%, #111111);
+    color: color-mix(in srgb, #ff3b30 82%, #111111);
+}
+
+.beach-page[class*="beach-page--"] .beach-btn--ghost:hover {
+    background: color-mix(in srgb, #ff3b30 82%, #111111);
+    color: white;
 }
 
 .beach-page.beach-page--beach .beach-hero h1 {
@@ -983,6 +991,24 @@
     font-size: 45px;
     font-weight: 800;
     line-height: 49.5px;
+}
+
+.beach-page.beach-page--beach .beach-hero__actions .beach-btn--primary {
+    background: var(--brand-primary-tint);
+    border-radius: 7px;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    line-height: 24px;
+    min-height: 66px;
+    padding: 14px 28px;
+    font-size: 16px;
+    min-width: 243px;
+}
+
+.beach-page.beach-page--beach .beach-hero__actions .beach-btn--primary:hover {
+    background: var(--brand-primary-hover);
+    color: #fff;
 }
 
 .beach-page[class*="beach-page--"] .beach-section-head {
