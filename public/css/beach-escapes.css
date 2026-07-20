@@ -1090,13 +1090,16 @@
     font-size: 1.35rem;
 }
 
-.beach-page[class*="beach-page--"] .beach-destination-card__meta span,
-
 .beach-page[class*="beach-page--"] .beach-package-card__meta span {
+ font-size: 11.84px;
+
+}
+.beach-page[class*="beach-page--"] .beach-destination-card__meta span{
 
     background: rgba(var(--theme-accent-rgb), .09);
     border-radius: 15px;
     padding: 4px 7px;
+
 
 }
 
@@ -1127,6 +1130,7 @@
 .beach-page[class*="beach-page--"] .beach-banner-slide {
     border-radius: 0;
     box-shadow: none;
+    border-radius: 20px;
 }
 
 .beach-page[class*="beach-page--"] .beach-banner-slide__eyebrow {
@@ -1390,8 +1394,13 @@
     font-weight: 900;
 }
 
+.beach-package-card__meta{
+margin-top:0px !important
+}
+
+
 .beach-package-card h3 {
-    margin: 12px 0 0;
+   
     font-size: 1.1rem;
     font-weight: 950;
     line-height: 1.35;
@@ -1399,18 +1408,18 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
-    min-height: calc(1.35em * 2);
+  
 }
 
 .beach-package-card p {
-    margin: 10px 0 0;
+  
     color: var(--beach-muted);
     line-height: 1.7;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
-    min-height: calc(1.7em * 2);
+  
 }
 
 .beach-package-card__meta {
@@ -1430,6 +1439,7 @@
     padding: 8px 12px;
     border-radius: 999px;
     background: rgba(8, 47, 73, 0.04);
+    min-height: 0px !important ;
 }
 
 .beach-package-card__footer {
