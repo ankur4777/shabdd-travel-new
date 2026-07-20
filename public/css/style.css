@@ -36,6 +36,7 @@
     --df-red-lt: var(--brand-primary-soft);
     --df-red-glow: var(--brand-primary-glow);
     --df-black: var(--brand-black);
+    --df-label-strong: #071b32;
     --df-dark: #1a1a1a;
     --df-mid: #555555;
     --df-muted: rgba(8, 8, 8, 0.796);
@@ -4359,11 +4360,12 @@ div.container.st-nav-inner {
     display: flex;
     align-items: center;
     gap: 7px;
-    font-size: 11.5px;
-    font-weight: 800;
-    letter-spacing: 0.06em;
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
-    color: var(--df-mid);
+    color: var(--df-label-strong);
+    line-height: 1.2;
 }
 
 .df-filter-label i {
@@ -4383,11 +4385,14 @@ div.container.st-nav-inner {
     background: var(--df-bg);
     border: 1.5px solid var(--df-border-md);
     border-radius: var(--df-radius-sm);
-    padding: 11px 38px 11px 14px;
+    padding: 13px 38px 13px 16px;
     font-family: var(--df-font);
-    font-size: 13.5px;
-    font-weight: 700;
-    color: var(--df-black);
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--df-label-strong);
     cursor: pointer;
     transition:
         border-color var(--df-transition),
@@ -4429,10 +4434,13 @@ div.container.st-nav-inner {
     border-radius: 999px;
     border: 1.5px solid var(--df-border-md);
     background: var(--df-bg);
-    color: var(--df-mid);
+    color: var(--df-label-strong);
     font-family: var(--df-font);
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
     cursor: pointer;
     white-space: nowrap;
     transition:
@@ -4501,9 +4509,12 @@ div.container.st-nav-inner {
 }
 
 .df-budget-radio-label {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--df-black);
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--df-label-strong);
     cursor: pointer;
     flex: 1;
 }
