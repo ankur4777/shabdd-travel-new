@@ -8,6 +8,8 @@
     --beach-border: rgba(8, 47, 73, 0.12);
 }
 
+
+
 .beach-page {
     font-family: "Manrope", sans-serif;
     color: var(--beach-ink);
@@ -95,6 +97,7 @@
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 26px;
+    justify-content:left;
 }
 
 .beach-btn {
@@ -958,13 +961,13 @@
 }
 
 .beach-page[class*="beach-page--"] .beach-hero h1 {
-    max-width: 820px;
-    margin: 0 0 25px;
-    color: #fff;
-    font-size: clamp(3.6rem, 7vw, 7rem);
-    font-weight: 400;
-    line-height: .92;
-    letter-spacing: -.055em;
+  
+
+    color: white;
+    font-family: "Merriweather", Georgia, "Times New Roman", serif;
+    font-size: 45px;
+    font-weight: 800;
+    line-height: 49.5px;
 }
 
 .beach-page[class*="beach-page--"] .beach-hero__description {
@@ -1142,6 +1145,7 @@
     font-family: Georgia, "Times New Roman", serif;
     font-weight: 400;
     letter-spacing: -.045em;
+    color:white
 }
 
 .beach-page[class*="beach-page--"] .beach-banner-swiper__btn,
@@ -1205,6 +1209,18 @@
 
 .beach-page[class*="beach-page--"] .beach-cta__overlay {
     background: transparent;
+    
+    
+}
+
+.beach-page--beach .beach-cta {
+    background: #082f49;
+}
+
+.beach-page--beach .beach-cta__overlay {
+    background:
+        linear-gradient(135deg, rgba(8, 47, 73, 0.72), rgba(8, 47, 73, 0.38)),
+        url("/images/plan-your-perfect-backgroung-image.png") center / cover no-repeat;
 }
 
 .beach-page[class*="beach-page--"] .beach-cta__copy span {

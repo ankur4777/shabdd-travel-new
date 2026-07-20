@@ -357,7 +357,8 @@
         </section>
 
     <section class="beach-cta" aria-label="Final call to action">
-            <div class="beach-cta__overlay"></div>
+            <div class="beach-cta__overlay"
+                style="background: linear-gradient(135deg, rgba(8, 47, 73, 0.72), rgba(8, 47, 73, 0.38)), url('{{ asset('images/plan-your-perfect-backgroung-image.png') }}') center / cover no-repeat;"></div>
             <div class="container beach-cta__inner">
                 <div class="beach-cta__copy">
                     <span>Coastal planning made easy</span>
