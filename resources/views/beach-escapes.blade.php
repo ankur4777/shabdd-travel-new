@@ -275,7 +275,7 @@
                                         <article class="beach-package-card">
                                             <a href="{{ route('packages.show', $package->slug) }}" class="beach-package-card__media">
                                                 <img src="{{ $packageImage }}" alt="{{ $package->title }}" loading="lazy">
-                                                <span class="beach-package-card__tag">{{ $package->theme ?: 'Beach' }}</span>
+                                              
                                             </a>
                                             <div class="beach-package-card__body">
                                                 <div class="beach-package-card__rating">
@@ -289,7 +289,7 @@
                                                     <span><i class="bi bi-geo-alt-fill"></i> {{ $package->city ?: $package->state ?: $package->country ?: 'India' }}</span>
                                                 </div>
                                                 <div class="beach-package-card__footer">
-                                                    <strong >₹<span style="color: ">{{ number_format((int) $package->price) }}</span></strong>
+                                                    <strong >₹<span style="color: #43c165">{{ number_format((int) $package->price) }}</span></strong>
                                                     <a href="{{ route('packages.show', $package->slug) }}">View details</a>
                                                 </div>
                                             </div>
@@ -531,7 +531,7 @@
                                 slidesPerView: 2,
                             },
                             1200: {
-                                slidesPerView: 3,
+                                slidesPerView: 4,
                             },
                         },
                     });
