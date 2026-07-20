@@ -5,6 +5,7 @@
 @endpush
 
 @section('content')
+    <div class="travel-style-page">
 
     {{-- RELIGIOUS HERO SECTION --}}
     <section class="religious-hero"
@@ -50,4 +51,5 @@
         'defaultTag' => 'Religious',
     ])
 
+    </div>
 @endsection

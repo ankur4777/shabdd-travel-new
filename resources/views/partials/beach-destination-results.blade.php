@@ -36,7 +36,10 @@
                             @endforeach
                         </div>
                         <div class="price">
-                            <strong>{{ $destination['price_from'] ? 'Starts From ₹' . number_format((int) $destination['price_from']) : '' }}</strong>
+                             <strong>
+        Starts From ₹
+        <span>{{ number_format((int) $destination['price_from']) }}</span>
+    </strong>
                         </div>
                     @endif
 

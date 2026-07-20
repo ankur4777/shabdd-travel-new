@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="travel-style-page">
 
     {{-- HERO SECTION --}}
     <section class="honeymoon-hero">
@@ -49,4 +50,5 @@
         'defaultTag' => 'Honeymoon',
     ])
 
+    </div>
 @endsection
