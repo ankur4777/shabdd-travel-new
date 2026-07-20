@@ -491,28 +491,29 @@
     font-size: 0.95rem;
     white-space: nowrap;
 }
-
+.price {
+    margin-top:10px
+}
 .price span{
     margin-top: 12px;
     color:#43c165
 }
 
 .beach-destination-card__body>p {
-    
+    margin: 0;
     color: var(--beach-muted);
     line-height: 1.7;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
-    min-height: calc(1.7em * 3);
 }
 
 .beach-destination-card__meta {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 14px;
+    margin-top: 10px;
     color: var(--beach-muted);
     font-weight: 600;
   
