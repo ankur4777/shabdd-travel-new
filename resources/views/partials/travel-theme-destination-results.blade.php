@@ -30,9 +30,13 @@
                                 <span>{{ $style }}</span>
                             @endforeach
                         </div>
-                        <div class="price">
-                            <strong>{{ $destination['price_from'] ? 'Starts From ₹' . number_format((int) $destination['price_from']) : '' }}</strong>
-                        </div>
+                        @if($destination['price_from'])
+                            <div class="price">
+                                <strong>
+                                    Starts From<span> &#8377;{{ number_format((int) $destination['price_from']) }}</span>
+                                </strong>
+                            </div>
+                        @endif
                     @endif
 
                     <a href="{{ $destination['url'] }}" class="beach-destination-card__cta">

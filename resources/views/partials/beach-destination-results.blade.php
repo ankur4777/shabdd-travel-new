@@ -37,8 +37,8 @@
                         </div>
                         <div class="price">
                              <strong>
-        Starts From ₹
-        <span>{{ number_format((int) $destination['price_from']) }}</span>
+        Starts From  <span> ₹
+       {{ number_format((int) $destination['price_from']) }}</span>
     </strong>
                         </div>
                     @endif

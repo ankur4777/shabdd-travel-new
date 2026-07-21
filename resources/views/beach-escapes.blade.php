@@ -289,7 +289,8 @@
                                                     <span><i class="bi bi-geo-alt-fill"></i> {{ $package->city ?: $package->state ?: $package->country ?: 'India' }}</span>
                                                 </div>
                                                 <div class="beach-package-card__footer">
-                                                    <strong >₹<span style="color: #43c165">{{ number_format((int) $package->price) }}</span></strong>
+
+                                                    <strong  class="price"><span>₹{{ number_format((int) $package->price) }}</span></strong>
                                                     <a href="{{ route('packages.show', $package->slug) }}">View details</a>
                                                 </div>
                                             </div>
