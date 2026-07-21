@@ -93,7 +93,7 @@
 }
 
 .beach-hero__actions,
-.beach-cta__actions {
+ {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
@@ -101,6 +101,13 @@
     justify-content:left;
 }
 
+.beach-cta__actions{
+       display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 26px;
+    justify-content: center;
+}
 .beach-btn {
     display: inline-flex;
     align-items: center;
@@ -1474,8 +1481,8 @@ margin-top:0px !important
 }
 
 .beach-package-card__footer strong {
-    font-size: 1.35rem;
-    font-weight: 1000;
+    font-size: 1rem;
+    font-weight: 700;
 }
 
 .beach-package-card__footer a {
