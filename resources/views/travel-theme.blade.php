@@ -238,7 +238,7 @@
                                         <article class="beach-package-card">
                                             <a href="{{ $packageUrl }}" class="beach-package-card__media">
                                                 <img src="{{ $packageImage }}" alt="{{ $package['title'] }}" loading="lazy">
-                                                <span class="beach-package-card__tag">{{ $package['theme'] ?? $themeName }}</span>
+                                              
                                             </a>
                                             <div class="beach-package-card__body">
                                                 <div class="beach-package-card__rating">
