@@ -498,7 +498,8 @@
 .price {
     margin-top:10px
 }
-.price span{
+
+:root .price span{
     margin-top: 12px;
     color:#43c165
 }
@@ -1020,10 +1021,10 @@
     font-family: "Inter", sans-serif;
     font-weight: 700;
     line-height: 24px;
-    min-height: 66px;
+    
     padding: 14px 28px;
     font-size: 16px;
-    min-width: 243px;
+  
 }
 
 .beach-page.beach-page--beach .beach-hero__actions .beach-btn--primary:hover {
