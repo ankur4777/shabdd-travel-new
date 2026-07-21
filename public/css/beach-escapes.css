@@ -664,6 +664,7 @@
     line-height: 0.98;
     letter-spacing: -0.05em;
     font-weight: 1000;
+    color:white
 }
 
 .beach-banner-slide p {
@@ -915,6 +916,7 @@
 .beach-page[class*="beach-page--"] h1,
 .beach-page[class*="beach-page--"] h2,
 .beach-page[class*="beach-page--"] h3,
+.budget25-card__heading h3 ,
 
 .beach-page[class*="beach-page--"] .beach-faq-item summary {
     font-family: Georgia, "Times New Roman", serif;
@@ -1091,13 +1093,15 @@
 .beach-page[class*="beach-page--"] .beach-destination-card__top h3,
 .beach-page[class*="beach-page--"] .beach-package-card h3,
 .beach-page[class*="beach-page--"] .beach-benefit-card h3,
-.beach-page[class*="beach-page--"] .beach-tip-card h3 {
+.beach-page[class*="beach-page--"] .beach-tip-card h3,
+.budget25-card__heading h3  {
     color: var(--beach-ink);
     font-weight: 400;
 }
 
 .beach-page[class*="beach-page--"] .beach-destination-card__top h3,
-.beach-page[class*="beach-page--"] .beach-package-card h3 {
+.beach-page[class*="beach-page--"] .beach-package-card h3,
+.budget25-card__heading h3  {
     font-size: 1.35rem;
 }
 
@@ -1373,6 +1377,7 @@
     flex-direction: column;
     height: 100%;
     width: 307px;
+    
 }
 
 .beach-package-card__media {
