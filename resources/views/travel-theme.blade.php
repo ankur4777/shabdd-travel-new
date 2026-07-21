@@ -252,7 +252,7 @@
                                                     <span><i class="bi bi-geo-alt-fill"></i> {{ $package['location'] ?? $package['country'] ?? 'India' }}</span>
                                                 </div>
                                                 <div class="beach-package-card__footer">
-                                                    <strong>₹{{ number_format((int) ($package['price'] ?? 0)) }}</strong>
+                                                    <strong class="price"><span>₹{{ number_format((int) ($package['price'] ?? 0)) }}</span></strong>
                                                     <a href="{{ $packageUrl }}">View details</a>
                                                 </div>
                                             </div>
@@ -444,6 +444,8 @@
             }
 
             if (typeof Swiper !== 'undefined') {
+                const isHillThemePage = document.querySelector('.beach-page--hill') !== null;
+
                 if (bannerSwiperElement) {
                     new Swiper(bannerSwiperElement, {
                         slidesPerView: 1,
@@ -467,7 +469,7 @@
 
                 if (packageSwiperElement) {
                     new Swiper(packageSwiperElement, {
-                        slidesPerView: 1.08,
+                        slidesPerView: isHillThemePage ? 'auto' : 1.08,
                         spaceBetween: 18,
                         speed: 600,
                         loop: true,
@@ -486,13 +488,13 @@
                         },
                         breakpoints: {
                             576: {
-                                slidesPerView: 1.5,
+                                slidesPerView: isHillThemePage ? 'auto' : 1.5,
                             },
                             768: {
-                                slidesPerView: 2,
+                                slidesPerView: isHillThemePage ? 'auto' : 2,
                             },
                             1200: {
-                                slidesPerView: 3,
+                                slidesPerView: isHillThemePage ? 'auto' : 3,
                             },
                         },
                     });
