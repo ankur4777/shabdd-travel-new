@@ -60,7 +60,7 @@ return [
             [
                 'eyebrow' => 'Snowline spotlight',
                 'icon' => 'bi bi-snow',
-                'title' => 'Slow mornings, mountain views, and stays that warm up the trip.',
+                'title' => 'Slow mornings, mountain views, and stays that warm up.',
                 'description' => 'Showcase a cozy hill holiday with warm hospitality, pine-lined roads, and moments that feel made for unwinding.',
                 'image' => 'images/himachal.jpg',
             ],
