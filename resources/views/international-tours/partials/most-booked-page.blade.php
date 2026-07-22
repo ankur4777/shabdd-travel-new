@@ -15,7 +15,7 @@
                     <div class="mb-hero__actions">
                         <a href="#journeyPackages" class="mb-button mb-button--gold">See holiday plans <i class="bi bi-arrow-down"></i></a>
                         <a href="{{ route('contact') }}" class="mb-button mb-button--ghost">Build it around my dates</a>
-                    </div>
+                    </div>    <div><a class="mb-hero__scroll" href="#journeyOverview" aria-label="Continue to overview"><span></span>Scroll to wander</a></div>
                 </div>
 
                 <aside class="mb-facts" data-mb-reveal>
@@ -26,9 +26,11 @@
                         <div><dt>Good months</dt><dd>{{ $journey['best_months'] }}</dd></div>
                         <div><dt>From India</dt><dd>{{ $journey['flight_time'] }}</dd></div>
                     </dl>
+
                 </aside>
+                    
             </div>
-            <a class="mb-hero__scroll" href="#journeyOverview" aria-label="Continue to overview"><span></span>Scroll to wander</a>
+        
         </section>
 
         <section class="mb-overview" id="journeyOverview">

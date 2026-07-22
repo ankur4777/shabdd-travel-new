@@ -17,8 +17,9 @@
     box-sizing: border-box;
 }
 
+
 .mb-shell {
-    width: min(1180px, calc(100% - 40px));
+    width: min(1320px, calc(100% - 40px));
     margin-inline: auto;
 }
 
@@ -37,40 +38,36 @@
     font-weight: 800;
     letter-spacing: .16em;
     text-transform: uppercase;
+    color: white;
 }
 
 .mb-hero {
     position: relative;
-    min-height: 720px;
+ 
     background:
         linear-gradient(90deg, rgba(10, 15, 18, .93), rgba(10, 15, 18, .68) 52%, rgba(10, 15, 18, .18)),
         var(--mb-hero) center / cover no-repeat;
     color: #fff;
 }
 
-.mb-hero::before {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, transparent 55%, rgba(10, 15, 18, .54));
-    content: "";
-}
+
 
 .mb-hero__inner {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 315px;
+    grid-template-columns: minmax(0, 1fr) 500px;
     gap: 90px;
     align-items: end;
-    min-height: 720px;
-    padding-block: 90px 100px;
+    min-height: 500px;
+    padding-block: 50px 75px;
 }
 
 .mb-breadcrumb {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 78px;
+    margin-bottom: 30px;
     color: rgba(255, 255, 255, .58);
     font-size: .72rem;
 }
@@ -81,12 +78,13 @@
 }
 
 .mb-hero h1 {
-    max-width: 790px;
-    margin: 0;
-    color: #fff;
-    font-size: clamp(3.7rem, 6.8vw, 6.8rem);
-    line-height: .94;
-    letter-spacing: -.055em;
+
+    color: white;
+    font-family: "Merriweather", Georgia, "Times New Roman", serif;
+    font-size: 45px;
+    font-weight: 800;
+    line-height: 49.5px;
+
 }
 
 .mb-hero__intro {
@@ -236,6 +234,7 @@
     font-size: clamp(2.5rem, 4.2vw, 4.45rem);
     line-height: 1.02;
     letter-spacing: -.045em;
+    color:white
 }
 
 .mb-overview__text {
@@ -362,6 +361,15 @@
     top: 120px;
 }
 
+.mb-section-label{
+    color:black
+}
+
+.mb-section-label h2{
+    color:black !important
+}
+
+
 .mb-itinerary__intro > p:not(.mb-section-label) {
     margin: 23px 0;
     color: var(--mb-muted);
@@ -419,7 +427,7 @@
 
 .mb-package-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 18px;
     align-items: stretch;
 }
@@ -686,6 +694,7 @@
 .mb-stay-grid h3 {
     margin: 0;
     font-size: 2rem;
+    color:white
 }
 
 .mb-stay-grid article > div {
@@ -842,6 +851,7 @@
 [data-mb-reveal].is-visible {
     opacity: 1;
     transform: none;
+    color:black 
 }
 
 @keyframes mbScrollLine {
