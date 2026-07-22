@@ -152,7 +152,7 @@
         <section class="mb-stays">
             <div class="mb-shell">
                 <header class="mb-heading mb-heading--light" data-mb-reveal>
-                    <div><p class="mb-section-label">Where you stay changes the trip</p><h2>Pick a neighbourhood, not just a hotel.</h2></div>
+                    <div><p class="mb-section-label" style="color:white">Where you stay changes the trip</p><h2 style="color:white">Pick a neighbourhood, not just a hotel.</h2></div>
                 </header>
                 <div class="mb-stay-grid">
                     @foreach($journey['stay_areas'] as $area)
@@ -169,7 +169,7 @@
 
         <section class="mb-notes">
             <div class="mb-shell mb-notes__grid">
-                <div data-mb-reveal><p class="mb-section-label">Small things that improve the holiday</p><h2>Before you book.</h2></div>
+                <div data-mb-reveal><p class="mb-section-label">Small things that improve the holiday</p><h2 class="mb-notes__title">Before you book.</h2></div>
                 <div>
                     @foreach($journey['notes'] as $note)
                         <article data-mb-reveal>
@@ -183,7 +183,10 @@
 
         <section class="mb-faq">
             <div class="mb-shell mb-faq__grid">
-                <div data-mb-reveal><p class="mb-section-label">Useful answers</p><h2>Questions travellers usually ask us.</h2></div>
+                <div data-mb-reveal><p class="mb-section-label">Useful answers</p>
+                
+                <h2 style="color:black">Questions travellers usually ask us.</h2>
+            </div>
                 <div class="mb-faq__list">
                     @foreach($journey['faqs'] as $faq)
                         <details data-mb-reveal>

@@ -224,9 +224,30 @@
     gap: 105px;
 }
 
-.mb-overview h2,
-.mb-heading h2,
-.mb-itinerary h2,
+.mb-overview h2{
+        margin: 0;
+    font-size: clamp(2.5rem, 4.2vw, 4.45rem);
+    line-height: 1.02;
+    letter-spacing: -.045em;
+    color:black;
+
+}
+.mb-heading h2{
+        margin: 0;
+    font-size: clamp(2.5rem, 4.2vw, 4.45rem);
+    line-height: 1.02;
+    letter-spacing: -.045em;
+    
+}
+
+.mb-itinerary h2{
+    
+    margin: 0;
+    font-size: clamp(2.5rem, 4.2vw, 4.45rem);
+    line-height: 1.02;
+    letter-spacing: -.045em;
+    
+}
 .mb-notes h2,
 .mb-faq h2,
 .mb-cta h2 {
@@ -235,6 +256,10 @@
     line-height: 1.02;
     letter-spacing: -.045em;
     color:white
+}
+
+.mb-notes .mb-notes__title {
+    color: #000;
 }
 
 .mb-overview__text {
@@ -362,12 +387,9 @@
 }
 
 .mb-section-label{
-    color:black
+    color:black;
 }
 
-.mb-section-label h2{
-    color:black !important
-}
 
 
 .mb-itinerary__intro > p:not(.mb-section-label) {
