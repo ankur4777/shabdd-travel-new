@@ -205,15 +205,18 @@ color: white;
 .budget25-btn--light {
     background: #fff;
     color: var(--budget25-brand-deep);
+    gap:10px
 }
 
 .budget25-btn--whatsapp {
     background: #25d366;
     color: #062d17;
+    gap:10px
 }
 
 .budget25-btn--full {
-    width: 100%;
+    width: 63%;
+    height: 40px;
 }
 
 .budget25-section {
@@ -385,7 +388,7 @@ color: white;
     margin-top: 4px;
     color: var(--budget25-ink);
     font-size: 1rem;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.25;
 }
 
@@ -581,6 +584,7 @@ color: white;
 
 .budget25-destination-card__content h3 {
     font-size: 1.5rem;
+    color:white;
 }
 
 .budget25-destination-card__content strong {
@@ -846,6 +850,7 @@ color: white;
     line-height: 0.98;
     letter-spacing: -0.04em;
     font-weight: 800;
+    color:white;
 }
 
 .budget25-cta__copy p {
@@ -858,6 +863,7 @@ color: white;
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 26px;
+    height:40px
 }
 
 .budget25-cta__form {
