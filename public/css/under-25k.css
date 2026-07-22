@@ -388,8 +388,8 @@ color: white;
 .budget25-card__body {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding: 22px;
+    gap: 10px;
+    padding: 18px;
 }
 
 .budget25-card__meta,
@@ -397,7 +397,7 @@ color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 14px;
+    gap: 5px;
 }
 
 .budget25-card__meta {
@@ -449,7 +449,8 @@ color: white;
    
     list-style: none;
       background: var(--theme-accent-rgb);
-    margin-top: 14px;  
+  
+    margin-left:-35px;
     /* align-items: center;
     justify-content: left; */
 }
