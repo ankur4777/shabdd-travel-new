@@ -18,7 +18,7 @@
 }
 
 .pj-shell {
-    width: min(1200px, calc(100% - 40px));
+    width: min(1320px, calc(100% - 40px));
     margin-inline: auto;
 }
 
@@ -32,17 +32,18 @@
 
 .pj-label,
 .pj-kicker {
-    margin: 0 0 15px;
+    margin: 0px 0 16px;
     color: var(--pj-accent);
     font-size: .68rem;
     font-weight: 900;
     letter-spacing: .17em;
     text-transform: uppercase;
+    color: white;
 }
 
 .pj-hero {
     position: relative;
-    min-height: 760px;
+    min-height: auto;
     background: var(--pj-hero) center / cover no-repeat;
     color: #fff;
 }
@@ -59,18 +60,17 @@
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 300px;
+    grid-template-columns: minmax(0, 1fr) 500px;
     gap: 90px;
     align-items: end;
-    min-height: 760px;
-    padding-block: 92px 80px;
+    padding-block: 50px 75px;
 }
 
 .pj-breadcrumb {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 88px;
+    margin-bottom: 30px;
     color: rgba(255, 255, 255, .6);
     font-size: .68rem;
 }
@@ -81,17 +81,17 @@
 }
 
 .pj-hero h1 {
-    max-width: 840px;
-    margin: 0;
-    color: #fff;
-    font-size: clamp(3.8rem, 6.8vw, 7rem);
-    line-height: .93;
-    letter-spacing: -.055em;
+ color: white;
+    font-family: "Merriweather", Georgia, "Times New Roman", serif;
+    font-size: 45px;
+    font-weight: 800;
+    line-height: 49.5px;
+
 }
 
 .pj-hero__dek {
     max-width: 660px;
-    margin: 26px 0 0;
+    margin: 25px 0 0;
     color: rgba(255, 255, 255, .78);
     line-height: 1.8;
 }
@@ -945,7 +945,7 @@
     }
 
     .pj-hero h1 {
-        font-size: clamp(3rem, 14vw, 4.25rem);
+        font-size: clamp(1rem, 14vw, 2.5rem);
     }
 
     .pj-hero__actions,
