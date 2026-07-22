@@ -18,7 +18,7 @@
 }
 
 .domestic-container {
-    width: min(1180px, calc(100% - 40px));
+    width: min(1320px, calc(100% - 40px));
     margin-inline: auto;
 }
 
@@ -47,7 +47,6 @@
 
 .domestic-hero {
     position: relative;
-    min-height: 680px;
     overflow: hidden;
     background:
         linear-gradient(90deg, rgba(11, 29, 23, .93) 0%, rgba(11, 29, 23, .78) 48%, rgba(11, 29, 23, .25) 100%),
@@ -71,18 +70,17 @@
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 350px;
+    grid-template-columns: minmax(0, 1fr)500px;
     gap: 90px;
     align-items: end;
-    min-height: 680px;
-    padding-block: 90px 75px;
+    padding-block: 50px 75px;
 }
 
 .domestic-breadcrumb {
     display: flex;
     gap: 8px;
     align-items: center;
-    margin-bottom: 62px;
+    margin-bottom: 30px;
     color: rgba(255, 255, 255, .66);
     font-size: .78rem;
 }
@@ -97,13 +95,11 @@
 }
 
 .domestic-hero h1 {
-    max-width: 720px;
-    margin: 0;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(3.5rem, 6.6vw, 6.5rem);
-    font-weight: 400;
-    line-height: .94;
-    letter-spacing: -.05em;
+    color: white;
+    font-family: "Merriweather", Georgia, "Times New Roman", serif;
+    font-size: 45px;
+    font-weight: 800;
+    line-height: 49.5px;
 }
 
 .domestic-hero__lead {
@@ -480,7 +476,7 @@
 
 .domestic-package-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 25px;
 }
 
@@ -651,6 +647,11 @@
     line-height: 1.75;
 }
 
+.domestic-seasons__copy h2{
+    color:white
+}
+ 
+
 .domestic-seasons__cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -682,6 +683,7 @@
     font-family: Georgia, "Times New Roman", serif;
     font-size: 1.35rem;
     font-weight: 400;
+    color:white
 }
 
 .domestic-seasons__cards p {
@@ -841,6 +843,7 @@
         font-size: clamp(2.85rem, 12.5vw, 3.35rem);
         letter-spacing: -.045em;
         overflow-wrap: anywhere;
+
     }
 
     .domestic-hero__lead {
