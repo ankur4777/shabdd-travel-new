@@ -403,6 +403,7 @@
                                         $packageDuration = $package->duration_text ?: ($package->days ? $package->days . 'D' : 'Flexible');
                                         $packageLocation = collect([$package->city, $package->state, $package->country])->filter()->implode(', ');
                                         $packageHighlights = collect([$package->feature_1, $package->feature_2, $package->feature_3])->filter()->take(3);
+                                        $packageCountry = $package->country ?: 'India';
                                         $packageDescription = $package->description
                                             ? Str::limit(strip_tags($package->description), 120)
                                             : 'Curated stays, seamless transfers, and practical sightseeing for value-first domestic travel.';
@@ -415,20 +416,19 @@
                                         </a>
 
                                         <div class="budget25-card__body">
-                                            <div class="budget25-card__meta">
-                                                <span><i class="bi bi-geo-alt"></i> {{ $packageLocation ?: 'India' }}</span>
-                                              
-                                            </div>
-                                                  <span><i class="bi bi-calendar3"></i> {{ $packageDuration }}</span>
                                             <div class="budget25-card__heading">
-                                                <h3>{{ $package->title }}</h3>
-                                                <div class="budget25-rating">
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <span>{{ $package->rating ? number_format((float) $package->rating, 1) : '4.5' }}</span>
+                                                <div>
+                                                    <p>{{ $packageCountry }}</p>
+                                                    <h3>{{ $package->title }}</h3>
                                                 </div>
                                             </div>
 
                                             <p>{{ $packageDescription }}</p>
+
+                                            <div class="budget25-card__meta">
+                                                <span><i class="bi bi-calendar3" aria-hidden="true"></i> {{ $packageDuration }}</span>
+                                                <span><i class="bi bi-star-fill" aria-hidden="true"></i> {{ $package->rating ? number_format((float) $package->rating, 1) : '4.5' }}</span>
+                                            </div>
 
                                             @if($packageHighlights->isNotEmpty())
                                                 <ul class="budget25-highlights">
@@ -438,8 +438,12 @@
                                                 </ul>
                                             @endif
 
-                                            <a href="{{ route('packages.show', $package->slug) }}" class="budget25-btn budget25-btn--ghost">
-                                                View Details
+                                            <strong class="budget25-card__price">
+                                                Starts From <span>&#8377;{{ number_format((int) $package->price) }}</span>
+                                            </strong>
+
+                                            <a href="{{ route('packages.show', $package->slug) }}" class="budget25-card__cta">
+                                                View details <i class="bi bi-arrow-right" aria-hidden="true"></i>
                                             </a>
                                         </div>
                                     </article>

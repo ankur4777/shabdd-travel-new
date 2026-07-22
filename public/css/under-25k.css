@@ -346,6 +346,11 @@ color: white;
     overflow: hidden;
     transition: transform 0.28s ease, box-shadow 0.28s ease;
     max-width: 308px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .budget25-card:hover,
@@ -358,7 +363,7 @@ color: white;
 .budget25-card__media {
     position: relative;
     display: block;
-    aspect-ratio: 16 / 11;
+    min-height: 210px;
     overflow: hidden;
 }
 
@@ -376,42 +381,80 @@ color: white;
 }
 
 .budget25-card__price {
+    display: block;
+    margin-top: 4px;
+    color: var(--budget25-ink);
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.budget25-card:not(.budget25-card--modal) .budget25-card__media .budget25-card__price {
+    display: none;
+}
+
+.budget25-card--modal .budget25-card__media .budget25-card__price {
     position: absolute;
     left: 16px;
     bottom: 16px;
+    display: inline-flex;
+    width: auto;
+    margin-top: 0;
     padding: 10px 14px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.92);
     color: var(--budget25-brand-deep);
     font-size: 0.9rem;
-    font-weight: 800;
+}
+
+.budget25-card__price span {
+    color: #43c165;
 }
 
 .budget25-card__body {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    flex: 1;
+    gap: 14px;
     padding: 18px;
 }
 
-.budget25-card__meta,
 .budget25-card__heading {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 5px;
+    gap: 12px;
 }
 
 .budget25-card__meta {
+    display: flex;
     flex-wrap: wrap;
+    gap: 10px;
     color: var(--budget25-muted);
-    font-size: 0.92rem;
+    font-size: 0.64rem;
+    font-weight: 600;
 }
 
 .budget25-card__meta span {
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    padding: 4px 7px;
+    border-radius: 15px;
+    background: rgba(185, 123, 63, 0.09);
+}
+
+.budget25-card__meta i {
+    color: var(--budget25-brand-deep);
+}
+
+.budget25-card__heading p {
+    margin: 0 0 8px;
+    color: var(--budget25-brand);
+    font-size: 0.64rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 .budget25-card__heading h3,
@@ -425,6 +468,12 @@ color: white;
 
 .budget25-card__heading h3 {
     font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--budget25-ink);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
 }
 
 .budget25-card__body p,
@@ -434,6 +483,14 @@ color: white;
 .budget25-cta__copy p {
     margin: 0;
     color: var(--budget25-muted);
+}
+
+.budget25-card__body > p {
+    line-height: 1.7;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 }
 
 .budget25-rating {
@@ -447,25 +504,38 @@ color: white;
 
 .budget25-highlights {
     display: flex;
-    gap:8px;
-   
+    flex-wrap: wrap;
+    gap: 8px;
     list-style: none;
-      background: var(--theme-accent-rgb);
-  
-    margin-left:-35px;
-   
-    /* align-items: center;
-    justify-content: left; */
+    margin: 0;
+    padding: 0;
 }
 
 .budget25-highlights li {
-     padding: 5px 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
     border-radius: 15px;
     background: #b97b3f17;
     color: var(--budget25-ink);
-     font-size: 0.74rem;
+    font-size: 0.74rem;
     font-weight: 600;
-    
+}
+
+.budget25-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    color: var(--budget25-brand);
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.budget25-card__cta:hover {
+    color: var(--budget25-brand-deep);
 }
 
 .budget25-destination-grid {
