@@ -417,9 +417,9 @@
                                         <div class="budget25-card__body">
                                             <div class="budget25-card__meta">
                                                 <span><i class="bi bi-geo-alt"></i> {{ $packageLocation ?: 'India' }}</span>
-                                                <span><i class="bi bi-calendar3"></i> {{ $packageDuration }}</span>
+                                              
                                             </div>
-
+                                                  <span><i class="bi bi-calendar3"></i> {{ $packageDuration }}</span>
                                             <div class="budget25-card__heading">
                                                 <h3>{{ $package->title }}</h3>
                                                 <div class="budget25-rating">
@@ -682,9 +682,11 @@
                                             <div class="budget25-card__body">
                                                 <div class="budget25-card__meta">
                                                     <span><i class="bi bi-geo-alt"></i> {{ $packageLocation ?: 'India' }}</span>
-                                                    <span><i class="bi bi-calendar3"></i> {{ $packageDuration }}</span>
-                                                </div>
 
+                                                      <span><i class="bi bi-calendar3"></i> {{ $packageDuration }}</span>
+                                                      
+                                                </div>
+                                                   
                                                 <div class="budget25-card__heading">
                                                     <h3>{{ $package->title }}</h3>
                                                     <div class="budget25-rating">

@@ -174,13 +174,14 @@ color: white;
 .budget25-btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    min-height: 56px;
+    justify-content: left;
+   
+        min-height: 20px;
+    width:150px;
     padding: 0 22px;
     border: 0;
     border-radius: 18px;
-    font-weight: 700;
+    font-weight: 500;
     text-decoration: none;
     transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
 }
@@ -198,6 +199,7 @@ color: white;
 .budget25-btn--ghost {
     background: rgba(15, 118, 110, 0.08);
     color: var(--budget25-brand-deep);
+    border-radius: 9px;
 }
 
 .budget25-btn--light {
@@ -451,6 +453,7 @@ color: white;
       background: var(--theme-accent-rgb);
   
     margin-left:-35px;
+   
     /* align-items: center;
     justify-content: left; */
 }
