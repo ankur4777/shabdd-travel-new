@@ -373,7 +373,7 @@
                     {
                         title: 'Travel Styles',
                         items: [
-                            { text: 'Weekend Gateways', url: '#' },
+                            { text: 'Beach Escapes', url: 'beach-escapes' },
                             { text: 'Hill Station Tours', url: @json(route('hill-station-retreats')) },
                             { text: 'Island Getaways', url: @json(route('island-getaways')) },
                             { text: 'Desert Adventures', url: @json(route('desert-adventures')) }
