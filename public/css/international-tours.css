@@ -17,7 +17,7 @@
 }
 
 .intl-container {
-    width: min(1180px, calc(100% - 40px));
+    width: min(1320px, calc(100% - 40px));
     margin-inline: auto;
 }
 
@@ -46,7 +46,7 @@
 
 .intl-hero {
     position: relative;
-    min-height: 690px;
+    min-height: auto;
     overflow: hidden;
     background:
         linear-gradient(90deg, rgba(5, 16, 31, .95) 0%, rgba(5, 16, 31, .78) 48%, rgba(5, 16, 31, .28) 100%),
@@ -61,8 +61,8 @@
     grid-template-columns: minmax(0, 1fr) 360px;
     gap: 78px;
     align-items: end;
-    min-height: 690px;
-    padding-block: 92px 78px;
+    /* min-height: auto; */
+    padding-block: 50px 75px;
 }
 
 .intl-breadcrumb {
@@ -70,7 +70,7 @@
     flex-wrap: wrap;
     gap: 8px;
     align-items: center;
-    margin-bottom: 58px;
+    margin-bottom: 30px;
     color: rgba(255, 255, 255, .68);
     font-size: .78rem;
 }
@@ -87,16 +87,17 @@
 .intl-hero h1 {
     max-width: 820px;
     margin: 0;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(3.2rem, 6.1vw, 6.2rem);
-    font-weight: 400;
-    line-height: .94;
+    font-family: "Merriweather", Georgia, "Times New Roman", serif;
+    font-weight: 800;
+    line-height: 52.5px;
     letter-spacing: 0;
+    color: white;
+    font-size: 45px;
 }
 
 .intl-hero__lead {
     max-width: 650px;
-    margin: 28px 0 0;
+    margin: 25px 0 0;
     color: rgba(255, 255, 255, .8);
     font-size: 1.04rem;
     line-height: 1.8;
@@ -225,7 +226,8 @@
 .intl-packages,
 .intl-support-steps,
 .intl-faq {
-    padding: 96px 0;
+    padding-bottom: 59px;
+    padding-top: 30px;
 }
 
 .intl-split {
@@ -235,9 +237,20 @@
     align-items: start;
 }
 
+
+.intl-process h2{
+    color:white;
+        margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2.3rem, 4vw, 4.35rem);
+    font-weight: 400;
+    line-height: 1;
+}
+
+
 .intl-intro h2,
 .intl-heading h2,
-.intl-process h2,
+
 .intl-faq h2 {
     margin: 0;
     font-family: Georgia, "Times New Roman", serif;
@@ -581,7 +594,7 @@
 }
 
 .intl-package-grid--compact {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .intl-faq__grid {
