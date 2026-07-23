@@ -15,10 +15,10 @@
 }
 
 .agent-hero {
-    min-height: 76vh;
+   
     display: flex;
     align-items: center;
-    padding: 7rem 0 4.5rem;
+    padding: 50px 75px;
     background-size: cover;
     background-position: center;
     color: #fff;
@@ -50,7 +50,7 @@
 .agent-hero h1 {
     max-width: 820px;
     margin: 1rem 0 1rem;
-    font-size: clamp(2.45rem, 5.8vw, 5rem);
+    font-size: 45px;
     line-height: 1.02;
     font-weight: 800;
     color: #fff;

@@ -28,31 +28,31 @@ CSS FILE: footer.css  (link in your layout head)
             {{-- India Packages --}}
             <div class="st-footer-tab-panel active" id="tab-india" role="tabpanel">
                 <div class="st-footer-link-grid">
-                    <div class="footer-sub-text" ><a href="#">Ladakh Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Spiti Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Kashmir Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Rajasthan Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Kerala Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Andaman Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Sikkim Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Darjeeling Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Meghalaya Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">North East Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Arunachal Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Assam Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Himachal Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Uttarakhand Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Manali Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Jaisalmer Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Golden Triangle Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Udaipur Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Wayanad Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Munnar Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Shimla Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Mussoorie Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Jim Corbett Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Srinagar Tour Packages</a></div>
-                    <div class="footer-sub-text"><a href="#">Alleppey Tour Packages</a></div>
+                <a href="#">Ladakh Tour Packages</a>
+                <a href="#">Spiti Tour Packages</a>
+                <a href="#">Kashmir Tour Packages</a>
+                <a href="#">Rajasthan Tour Packages</a>
+                <a href="#">Kerala Tour Packages</a>
+                <a href="#">Andaman Tour Packages</a>
+                <a href="#">Sikkim Tour Packages</a>
+                <a href="#">Darjeeling Tour Packages</a>
+                <a href="#">Meghalaya Tour Packages</a>
+                <a href="#">North East Tour Packages</a>
+                <a href="#">Arunachal Tour Packages</a>
+                <a href="#">Assam Tour Packages</a>
+                <a href="#">Himachal Tour Packages</a>
+                <a href="#">Uttarakhand Tour Packages</a>
+                <a href="#">Manali Tour Packages</a>
+                <a href="#">Jaisalmer Tour Packages</a>
+                <a href="#">Golden Triangle Tour Packages</a>
+                <a href="#">Udaipur Tour Packages</a>
+                <a href="#">Wayanad Tour Packages</a>
+                <a href="#">Munnar Tour Packages</a>
+                <a href="#">Shimla Tour Packages</a>
+                <a href="#">Mussoorie Tour Packages</a>
+                <a href="#">Jim Corbett Tour Packages</a>
+                <a href="#">Srinagar Tour Packages</a>
+                <a href="#">Alleppey Tour Packages</a>
                 </div>
             </div>
 

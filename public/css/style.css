@@ -3093,9 +3093,6 @@ div.container.st-nav-inner {
     margin-bottom: 0;
     flex-wrap: wrap;
     gap: 6px;
-    width: 100%;
-    max-width: 1320px;
-    margin: 0 auto;
 }
 
 .st-footer-tab {
@@ -3137,21 +3134,17 @@ div.container.st-nav-inner {
 
 .st-footer-tab-panel.active {
     display: block;
-    width: 100%;
-    max-width: 1320px;
-    margin: auto;
 }
 
 /* ── Link Grid (wrapping inline links) ── */
 .st-footer-link-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    column-gap: 56px;
-    row-gap: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 0;
+    /* Use separator dots between inline links */
 }
 
 .st-footer-link-grid a {
-    display: inline-block;
     color: rgba(255, 255, 255, 0.65);
     text-decoration: none;
     font-size: 14px;
@@ -3165,8 +3158,8 @@ div.container.st-nav-inner {
 }
 
 .footer-sub-text{
-    min-width: 0;
-    padding: 0;
+    min-width: 300px;
+    padding:2px
 }
 
 .st-footer-link-grid a::after {
@@ -3341,20 +3334,7 @@ div.container.st-nav-inner {
    RESPONSIVE
    ========================================================== */
 
-/* Tablet */
-@media (max-width: 1199.98px) {
-    .st-footer-link-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        column-gap: 36px;
-    }
-}
-
 @media (max-width: 991.98px) {
-    .st-footer-link-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        column-gap: 32px;
-    }
-
     .st-footer-cols {
         grid-template-columns: 1fr 1fr;
         gap: 32px 40px;
@@ -3378,11 +3358,6 @@ div.container.st-nav-inner {
 
     .st-footer-link-grid a {
         font-size: 13px;
-    }
-
-    .st-footer-link-grid {
-        grid-template-columns: 1fr;
-        row-gap: 10px;
     }
 
     .st-footer-cols {
