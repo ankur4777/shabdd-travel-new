@@ -238,18 +238,7 @@
 
 <section class="seo-dd" style="--dd-primary: {{ $primaryColor }};">
     <div class="container seo-dd-container">
-        <div class="seo-dd-mobile-filter-bar" aria-label="Mobile quick actions">
-            <button class="seo-dd-mobile-filter-btn" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#seoTripOffcanvas" aria-controls="seoTripOffcanvas">
-                <i class="bi bi-funnel-fill"></i>
-                <span>Filter</span>
-            </button>
-            <button class="seo-dd-mobile-filter-btn" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#seoPageNavOffcanvas" aria-controls="seoPageNavOffcanvas">
-                <i class="bi bi-sort-down"></i>
-                <span>Sort</span>
-            </button>
-        </div>
+
 
         <div class="offcanvas offcanvas-start seo-dd-offcanvas" tabindex="-1" id="seoTripOffcanvas"
             aria-labelledby="seoTripOffcanvasLabel">
@@ -413,7 +402,18 @@
                     <div class="seo-dd-title-wrap">
                         <p class="seo-dd-kicker seo-dd-section-eyebrow"><span>Explore {{ $destination->name }} Packages</span></p>
                     </div>
-
+                            <div class="seo-dd-mobile-filter-bar" aria-label="Mobile quick actions">
+            <button class="seo-dd-mobile-filter-btn" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#seoTripOffcanvas" aria-controls="seoTripOffcanvas">
+                <i class="bi bi-funnel-fill"></i>
+                <span>Filter</span>
+            </button>
+            <button class="seo-dd-mobile-filter-btn" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#seoPageNavOffcanvas" aria-controls="seoPageNavOffcanvas">
+                <i class="bi bi-sort-down"></i>
+                <span>Sort</span>
+            </button>
+        </div>
                     @if(empty($packages))
                         <article class="seo-dd-card seo-dd-empty-card">
                             <h3>No packages uploaded yet</h3>
