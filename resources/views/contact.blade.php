@@ -17,7 +17,7 @@
             position: relative;
             overflow: hidden;
             align-items: center;
-            min-height: min(560px, 74vh);
+            min-height: min(560px, 55vh);
             display: flex;
             margin: 0 auto;
             isolation: isolate;
@@ -36,10 +36,10 @@
         }
 
         .contact-hero-inner {
-            width: min(100% - 32px, 1180px);
-            margin-left: 20px;
-            margin-right: 240px;
-            padding: 26px 0 26px;
+            width: min(100% - 32px, 1320px);
+            margin:auto;
+          
+          
         }
 
         .contact-kicker {
@@ -65,7 +65,7 @@
             max-width: 760px;
             margin: 0;
             font-family: var(--font-display, inherit);
-            font-size: clamp(2.25rem, 5vw, 4.75rem);
+            font-size: clamp(2.25rem, 2vw, 5.75rem);
             font-weight: 900;
             line-height: 0.98;
             letter-spacing: 0;
@@ -339,7 +339,7 @@
 
             .contact-hero-inner {
                 padding-bottom: 44px;
-                margin-right: 40px;
+             
             }
 
             .contact-form {

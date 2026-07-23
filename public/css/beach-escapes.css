@@ -44,13 +44,13 @@
 .beach-hero__grid {
     display: grid;
     grid-template-columns: 0.65fr 0.75fr;
-    gap: 24px;
+    /* gap: 24px; */
     align-items: center;
 }
 
 .beach-hero__copy {
     padding: 18px 4px;
-    margin:35px;
+    /* margin:35px; */
 }
 
 .beach-eyebrow {
@@ -940,7 +940,7 @@
 }
 
 .beach-page[class*="beach-page--"] .beach-hero__grid {
-    grid-template-columns: minmax(0, 580px) 1fr;
+    grid-template-columns: minmax(0, 653px) 1fr;
 }
 
 .beach-page[class*="beach-page--"] .beach-hero__copy {

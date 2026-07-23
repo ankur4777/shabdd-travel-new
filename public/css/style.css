@@ -3157,6 +3157,11 @@ div.container.st-nav-inner {
     position: relative;
 }
 
+.footer-sub-text{
+    min-width: 300px;
+    padding:2px
+}
+
 .st-footer-link-grid a::after {
     content: "·";
     position: absolute;
