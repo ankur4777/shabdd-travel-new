@@ -409,6 +409,7 @@ input[type="submit"],
 /* === 03. HEADER & NAVIGATION === */
 .st-header a {
     text-decoration: none;
+    \: clamp(10px, 1vw, 9rem);
 }
 
 .st-header svg {
@@ -1564,7 +1565,7 @@ div.container.st-nav-inner {
     border-radius: 999px;
     background: var(--brand-primary);
     color: #fff;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.03em;
     text-transform: uppercase;
@@ -4391,8 +4392,8 @@ div.container.st-nav-inner {
     border-radius: var(--df-radius-sm);
     padding: 13px 38px 13px 16px;
     font-family: var(--df-font);
-    font-size: 16px;
-    font-weight: 900;
+    font-size: 14px;
+    font-weight: 800;
     line-height: 1.2;
     letter-spacing: 0.02em;
     text-transform: uppercase;
@@ -4402,6 +4403,7 @@ div.container.st-nav-inner {
         border-color var(--df-transition),
         box-shadow var(--df-transition);
     outline: none;
+    margin-bottom: 10px;
 }
 
 .df-select:focus {
@@ -4428,6 +4430,9 @@ div.container.st-nav-inner {
 
 .df-chip-group--wrap {
     flex-wrap: wrap;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 700;
 }
 
 .df-chip {
@@ -4440,7 +4445,7 @@ div.container.st-nav-inner {
     background: var(--df-bg);
     color: var(--df-label-strong);
     font-family: var(--df-font);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 900;
     line-height: 1.2;
     letter-spacing: 0.02em;
@@ -4477,6 +4482,7 @@ div.container.st-nav-inner {
     display: flex;
     flex-direction: column;
     gap: 7px;
+    margin-bottom: 10px;
 }
 
 .df-budget-radio {
@@ -4513,8 +4519,8 @@ div.container.st-nav-inner {
 }
 
 .df-budget-radio-label {
-    font-size: 16px;
-    font-weight: 900;
+    font-size: 14px;
+    font-weight: 700;
     line-height: 1.2;
     letter-spacing: 0.02em;
     text-transform: uppercase;
@@ -4531,6 +4537,7 @@ div.container.st-nav-inner {
     border-radius: 999px;
     padding: 3px;
     gap: 0;
+    margin-bottom: 10px;
 }
 
 .df-toggle-btn {
