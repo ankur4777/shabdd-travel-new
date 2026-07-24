@@ -332,7 +332,7 @@
 
 .mb-highlight-grid article:hover {
     background: var(--mb-night);
-    color: #fff;
+    color:white
 }
 
 .mb-highlight__top {
@@ -357,6 +357,11 @@
     margin: 42px 0 10px;
     font-size: 1.35rem;
     line-height: 1.15;
+    /* color: white; */
+}
+
+.mb-highlight-grid h3 :hover{
+    color:white
 }
 
 .mb-highlight-grid p {
@@ -366,9 +371,10 @@
     line-height: 1.7;
 }
 
-.mb-highlight-grid article:hover p {
-    color: rgba(255, 255, 255, .66);
+.mb-highlight-grid article:hover h3 {
+    color:white
 }
+
 
 .mb-itinerary {
     background: var(--mb-cream);
