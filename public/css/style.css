@@ -4365,7 +4365,7 @@ div.container.st-nav-inner {
     display: flex;
     align-items: center;
     gap: 7px;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 900;
     letter-spacing: 0.02em;
     text-transform: uppercase;
@@ -4392,8 +4392,8 @@ div.container.st-nav-inner {
     border-radius: var(--df-radius-sm);
     padding: 13px 38px 13px 16px;
     font-family: var(--df-font);
-    font-size: 14px;
-    font-weight: 800;
+    font-size: 11px;
+    font-weight: 600;
     line-height: 1.2;
     letter-spacing: 0.02em;
     text-transform: uppercase;
@@ -4445,11 +4445,11 @@ div.container.st-nav-inner {
     background: var(--df-bg);
     color: var(--df-label-strong);
     font-family: var(--df-font);
-    font-size: 14px;
-    font-weight: 900;
+    font-size: 11px;
+    font-weight: 600;
     line-height: 1.2;
     letter-spacing: 0.02em;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     cursor: pointer;
     white-space: nowrap;
     transition:
@@ -4483,6 +4483,8 @@ div.container.st-nav-inner {
     flex-direction: column;
     gap: 7px;
     margin-bottom: 10px;
+    /* font-size: 13px; */
+    /* font-weight: 600; */
 }
 
 .df-budget-radio {
@@ -4519,8 +4521,8 @@ div.container.st-nav-inner {
 }
 
 .df-budget-radio-label {
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 11px;
+    font-weight: 600;
     line-height: 1.2;
     letter-spacing: 0.02em;
     text-transform: uppercase;
@@ -4568,7 +4570,7 @@ div.container.st-nav-inner {
 /* Sidebar Actions */
 .df-sidebar-actions {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
     padding-top: 4px;
     border-top: 1px solid var(--df-border);
@@ -4579,13 +4581,13 @@ div.container.st-nav-inner {
     align-items: center;
     justify-content: center;
     gap: 7px;
-    padding: 11px 18px;
+    /* padding: 11px 18px; */
     border-radius: var(--df-radius-sm);
     border: 1.5px solid var(--df-border-md);
     background: transparent;
     color: var(--df-mid);
     font-family: var(--df-font);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
     cursor: pointer;
     transition:
@@ -4613,8 +4615,8 @@ div.container.st-nav-inner {
             var(--df-red) 100%);
     color: #fff;
     font-family: var(--df-font);
-    font-size: 14px;
-    font-weight: 900;
+    font-size: 12px;
+    font-weight: 800;
     letter-spacing: 0.02em;
     cursor: pointer;
     box-shadow: 0 14px 32px var(--df-red-glow);

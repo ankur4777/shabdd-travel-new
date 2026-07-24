@@ -260,7 +260,7 @@
     align-items: center;
     justify-content: center;
     gap: 7px;
-    padding: 11px 18px;
+    /* padding: 11px 18px; */
     border-radius: var(--df-radius-sm);
     border: 1.5px solid var(--df-border-md);
     background: transparent;
