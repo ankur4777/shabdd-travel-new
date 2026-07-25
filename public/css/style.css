@@ -4644,7 +4644,7 @@ div.container.st-nav-inner {
     transform: translateY(-2px);
     box-shadow: 0 20px 42px rgba(255, 59, 48, 0.3);
     filter: saturate(1.06);
-    color: #fff;
+    color:white
 }
 
 /* =========================================================
