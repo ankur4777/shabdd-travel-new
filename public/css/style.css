@@ -4338,11 +4338,12 @@ div.container.st-nav-inner {
 
 .df-sidebar-title {
     margin: 0 0 4px;
-    font-size: 1rem;
-    font-weight: 800;
+    font-size: 1.16rem;
+    font-weight: 600;
     color: var(--df-black);
     letter-spacing: -0.01em;
     line-height: 1.25;
+    font-family: Poppins, sans-serif;
 }
 
 .df-sidebar-subtitle {
@@ -4580,7 +4581,7 @@ div.container.st-nav-inner {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 7px;
+    /* gap: 7px; */
     /* padding: 11px 18px; */
     border-radius: var(--df-radius-sm);
     border: 1.5px solid var(--df-border-md);
@@ -4588,7 +4589,7 @@ div.container.st-nav-inner {
     color: var(--df-mid);
     font-family: var(--df-font);
     font-size: 12px;
-    font-weight: 800;
+    font-weight: 700;
     cursor: pointer;
     transition:
         border-color var(--df-transition),
@@ -4606,8 +4607,8 @@ div.container.st-nav-inner {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 9px;
-    padding: 14px 20px;
+    /* gap: 9px; */
+    /* padding: 14px 20px; */
     border-radius: var(--df-radius-sm);
     border: none;
     background: linear-gradient(135deg,
@@ -4616,7 +4617,7 @@ div.container.st-nav-inner {
     color: #fff;
     font-family: var(--df-font);
     font-size: 12px;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 0.02em;
     cursor: pointer;
     box-shadow: 0 14px 32px var(--df-red-glow);
