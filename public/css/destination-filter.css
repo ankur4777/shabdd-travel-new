@@ -249,25 +249,33 @@
 
 .df-sidebar-actions {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
     padding-top: 4px;
     border-top: 1px solid var(--df-border);
+    width: 100%;
+    min-width: 0;
 }
 
 .df-btn-clear {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px;
-    /* padding: 11px 18px; */
+    flex: 0 0 auto;
+    gap: 5px;
+    min-width: 0;
+    height: 44px;
+    padding: 0 9px;
     border-radius: var(--df-radius-sm);
     border: 1.5px solid var(--df-border-md);
     background: transparent;
     color: var(--df-mid);
     font-family: var(--df-font);
-    font-size: 13px;
-    font-weight: 800;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
     cursor: pointer;
     transition: all var(--df-transition);
 }
@@ -282,15 +290,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex: 1 1 auto;
     gap: 5px;
-    padding: 15px 11px;
+    min-width: 0;
+    height: 44px;
+    padding: 0 10px;
     border-radius: var(--df-radius-sm);
     border: none;
     background: linear-gradient(135deg, #ff574d 0%, var(--df-red) 100%);
     color: #fff;
     font-family: var(--df-font);
-    font-size: 14px;
-    font-weight: 900;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
     cursor: pointer;
     box-shadow: 0 14px 32px rgba(255, 59, 48, 0.22);
     transition: all var(--df-transition);

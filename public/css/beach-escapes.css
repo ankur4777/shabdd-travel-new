@@ -1184,11 +1184,11 @@
 .beach-page[class*="beach-page--"] .df-btn-search {
     border-radius: 0;
     box-shadow: none;
-     color: #1f2937;
+    color: #1f2937;
     font-size: 0.82rem;
     font-weight: 900;
     letter-spacing: 0.04em;
-    text-transform: uppercase;
+    border-radius: 50px;
 }
 
 .beach-page[class*="beach-page--"] .df-budget-radio input:checked+.df-budget-radio-label,
