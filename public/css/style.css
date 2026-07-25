@@ -10662,10 +10662,10 @@ body.travel-gallery-lightbox-open {
 }
 
 .seo-dd-card p {
-    margin: 0px 0 0;
+    margin: 3px 0 0;
     color: var(--dd-muted);
-    font-size: 0.9rem;
-    line-height: 1.62;
+    line-height: 19px;
+    font-size: 17px;
 }
 
 .seo-dd-duration {
@@ -10727,7 +10727,7 @@ body.travel-gallery-lightbox-open {
 .seo-dd-btn-primary {
     background: white;
     color: #0d6efd;
-    margin-top: 5px;
+    margin-top: 0px;
 }
 
 .seo-dd-btn-enquiry {
@@ -11724,9 +11724,12 @@ body.travel-gallery-lightbox-open {
 .seo-dd-booking-card,
 .seo-dd-quick-facts,
 .seo-dd-sticky-nav,
-.seo-dd-cta-card,
-.seo-dd-card {
+.seo-dd-cta-card {
     padding: 18px;
+}
+
+.seo-dd-card{
+padding-top:0px
 }
 
 .seo-dd-booking-card h3,
@@ -11734,8 +11737,8 @@ body.travel-gallery-lightbox-open {
 .seo-dd-sticky-nav h4,
 .seo-dd-cta-card h4 {
     margin: 0;
-    font-size: 1.08rem;
-    font-weight: 800;
+    font-size: 15px;
+    font-weight: 700;
 }
 
 .seo-dd-sidebar-price {
@@ -11750,7 +11753,23 @@ body.travel-gallery-lightbox-open {
     font-weight: 600;
     color: var(--dd-muted);
 }
+.filter-send-query-button{
+    display: flex;
+    font-size: 16px;
+    gap:10px
+}
 
+.filter-send-query-button button{
+    font-size: 10px;
+    height:40px;
+   
+}
+
+.filter-send-query-button a{
+    font-size: 10px;
+     height:40px;
+     
+}
 .seo-dd-form {
     display: grid;
     gap: 10px;
@@ -11775,8 +11794,12 @@ body.travel-gallery-lightbox-open {
     padding: 0 10px;
     outline: 0;
     background: var(--select-bg);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    appearance: none;
     color: var(--select-color);
-    padding-right: 20px;
+    padding-right: 34px;
 }
 
 .seo-dd-form select.--accent {
@@ -11923,10 +11946,11 @@ body.travel-gallery-lightbox-open {
 .seo-dd-offcanvas-header {
     border-bottom: 1px solid color-mix(in srgb, var(--dd-primary) 14%, #dce7f4);
     padding: 10px 16px 0px;
+    justify-content: space-between;
 }
 
 .seo-dd-offcanvas-header .offcanvas-title {
-    font-size: 1rem;
+    font-size: 12px;
     font-weight: 800;
     color: #123252;
 }

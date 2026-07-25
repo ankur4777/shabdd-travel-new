@@ -275,12 +275,14 @@
                                 @endfor
                             </select>
                         </label>
-
+                        <div class="filter-send-query-button">
                         <button type="submit"
                             class="seo-dd-btn seo-dd-btn-primary seo-dd-btn-enquiry  seo-dd-btn-block">Send
                             Enquiry</button>
                         <a href="https://wa.me/" target="_blank" rel="noopener"
                             class="seo-dd-btn seo-dd-btn-whatsapp seo-dd-btn-block">WhatsApp Expert</a>
+
+                            </div>
                     </form>
                 </article>
 

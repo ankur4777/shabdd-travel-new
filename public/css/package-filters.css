@@ -378,9 +378,11 @@
     background: linear-gradient(180deg, #fffaf7, #ffffff 38%, #f7fbfc);
 }
 
+
 .pkg-filter-offcanvas .offcanvas-header {
     align-items: start;
     border-bottom: 1px solid rgba(31, 41, 55, 0.08);
+
 }
 
 .pkg-tour-card {
