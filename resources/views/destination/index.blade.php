@@ -75,7 +75,7 @@
 @section('content')
     <section class="pkg-listing-section dst-page-section">
         <div class="container">
-            <section class="dst-hero-section" style="--dst-hero-image: url('{{ $heroImage }}');">
+            <section class="dst-hero-section">
                 <div class="dst-hero-shell">
                     <div class="dst-hero-copy">
                         <nav class="dst-hero-breadcrumb" aria-label="Breadcrumb">
@@ -96,21 +96,9 @@
                                 Explore Destinations
                                 <i class="bi bi-arrow-down-right"></i>
                             </a>
-                            <a
-                                href="{{ $hasActiveFilters ? route('destinations.index') : route('contact') }}"
-                                class="dst-hero-btn dst-hero-btn-secondary"
-                            >
-                                {{ $hasActiveFilters ? 'Clear Filters' : 'Plan With Us' }}
-                            </a>
+                        
                         </div>
 
-                        @if($heroDestinationNames->isNotEmpty())
-                            <div class="dst-hero-tags" aria-label="Featured destinations">
-                                @foreach($heroDestinationNames as $heroName)
-                                    <span>{{ $heroName }}</span>
-                                @endforeach
-                            </div>
-                        @endif
                     </div>
 
                     <div class="dst-hero-panel">
@@ -123,30 +111,9 @@
                                 <strong>{{ $heroStartingPrice ? '₹' . number_format($heroStartingPrice) : 'Custom' }}</strong>
                                 <span>starting budget</span>
                             </article>
-                            <article class="dst-hero-stat">
-                                <strong>{{ $heroTravelStyleCount ?: 1 }}</strong>
-                                <span>{{ \Illuminate\Support\Str::plural('travel style', max($heroTravelStyleCount, 1)) }}</span>
-                            </article>
+                    
                         </div>
 
-                        <article class="dst-hero-spotlight">
-                            <span class="dst-hero-spotlight-label">Quick Snapshot</span>
-                            <h2>{{ $heroDestination['name'] ?? 'Curated India & beyond' }}</h2>
-                            <p>
-                                {{ $heroPackageCount ?: 0 }} {{ \Illuminate\Support\Str::plural('package', $heroPackageCount ?: 0) }}
-                                across destination pages curated from your admin panel.
-                            </p>
-                            <div class="dst-hero-spotlight-meta">
-                                <span>
-                                    <i class="bi bi-geo-alt-fill"></i>
-                                    {{ $heroDestination['country'] ?? 'Travel-ready collection' }}
-                                </span>
-                                <span>
-                                    <i class="bi bi-star-fill"></i>
-                                    {{ ($heroDestination['rating'] ?? null) ?: 'Freshly added' }}
-                                </span>
-                            </div>
-                        </article>
                     </div>
                 </div>
             </section>
