@@ -616,6 +616,7 @@
 
                         <form action="#" method="POST" class="seo-dd-form">
                             @csrf
+                            
                             <label>
                                 Travel Month
                                 <select name="month">

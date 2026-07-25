@@ -824,6 +824,7 @@
 .df-offcanvas-header {
     padding: 22px 20px 16px;
     border-bottom: 1px solid var(--df-border);
+    justify-content: space-between;
 }
 
 .df-offcanvas-close {
