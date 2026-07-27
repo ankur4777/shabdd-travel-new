@@ -3792,7 +3792,7 @@ div.container.st-nav-inner {
     position: relative;
     z-index: 1;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(16px, 1.8vw, 22px);
+    gap: clamp(16px, 6.8vw, 62px);
     align-items: stretch;
     padding: 0;
 }
@@ -3920,7 +3920,7 @@ div.container.st-nav-inner {
 @media (max-width: 1199px) and (min-width: 992px) {
     #why .seo-dd-why-grid {
         grid-template-columns: repeat(4, minmax(0, 1fr)2);
-        gap: 14px;
+        gap: 68px;
     }
 
     #why .seo-dd-why-card {
@@ -4291,6 +4291,7 @@ div.container.st-nav-inner {
     /* overflow-y: auto; */
     /* scrollbar-width: thin; */
     scrollbar-color: var(--df-border-md) transparent;
+    border-bottom: 2px solid #11111117;
 }
 
 .df-sidebar::-webkit-scrollbar {
@@ -6588,6 +6589,7 @@ div.container.st-nav-inner {
     gap: 20px;
     transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
+    height: clamp(18rem,5vw,25rem);
 }
 
 /* =========================================================
