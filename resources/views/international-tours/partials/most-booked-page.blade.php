@@ -18,16 +18,7 @@
                     </div>    <div><a class="mb-hero__scroll" href="#journeyOverview" aria-label="Continue to overview"><span></span>Scroll to wander</a></div>
                 </div>
 
-                <aside class="mb-facts" data-mb-reveal>
-                    <p>At a glance</p>
-                    <dl>
-                        <div><dt>From</dt><dd>₹{{ number_format($journey['starting_price']) }}</dd></div>
-                        <div><dt>Best length</dt><dd>{{ $journey['ideal_days'] }}</dd></div>
-                        <div><dt>Good months</dt><dd>{{ $journey['best_months'] }}</dd></div>
-                        <div><dt>From India</dt><dd>{{ $journey['flight_time'] }}</dd></div>
-                    </dl>
-
-                </aside>
+          
                     
             </div>
         
