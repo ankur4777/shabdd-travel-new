@@ -409,7 +409,7 @@ input[type="submit"],
 /* === 03. HEADER & NAVIGATION === */
 .st-header a {
     text-decoration: none;
-    \: clamp(10px, 1vw, 9rem);
+    font-size: clamp(15px, 1vw, 9rem);
 }
 
 .st-header svg {
@@ -7669,6 +7669,7 @@ div.container.st-nav-inner {
     color: var(--tb-mid);
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -7852,6 +7853,7 @@ div.container.st-nav-inner {
     letter-spacing: -0.01em;
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -8207,6 +8209,7 @@ div.container.st-nav-inner {
     .tb-featured-excerpt {
         font-size: 13.5px;
         -webkit-line-clamp: 2;
+        line-clamp: 2;
     }
 
     .tb-featured-footer {
@@ -8368,6 +8371,7 @@ div.container.st-nav-inner {
 
     .tb-featured-excerpt {
         -webkit-line-clamp: 2;
+        line-clamp: 2;
         font-size: 12.5px;
         line-height: 1.5;
     }

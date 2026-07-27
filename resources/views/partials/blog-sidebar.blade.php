@@ -381,6 +381,7 @@
     font-size: 0.9rem;
     opacity: 0.95;
     margin-bottom: 16px;
+    color:white
 }
 
 .newsletter-form {

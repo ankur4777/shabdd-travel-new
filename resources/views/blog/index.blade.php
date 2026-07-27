@@ -29,12 +29,14 @@
     font-weight: 900;
     margin-bottom: 1rem;
     text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+    color:white
 }
 .blog-hero p {
     font-size: 1.3rem;
     opacity: 0.95;
     max-width: 600px;
     margin: 0 auto;
+    color:white
 }
 .blog-stats {
     display: flex;

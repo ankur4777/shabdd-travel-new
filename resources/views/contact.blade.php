@@ -22,7 +22,7 @@
             margin: 0 auto;
             isolation: isolate;
             color: #fff;
-            background: linear-gradient(90deg, rgb(17 17 17 / 61%), rgb(17 17 17 / 0%)), url(https://amplify-wrought-tamer.ngrok-free.dev/images/contact-us-bg.jpg) center / cover no-repeat
+            background: linear-gradient(90deg, rgb(17 17 17 / 61%), rgb(17 17 17 / 0%)), url("/images/contact-banner .jpeg") center / cover no-repeat;
         }
 
         .contact-hero::after {
