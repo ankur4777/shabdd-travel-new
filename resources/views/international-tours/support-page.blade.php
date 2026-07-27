@@ -43,11 +43,7 @@
                     </div>
                 </div>
 
-                <aside class="intl-hero__panel">
-                    <span>Travel desk</span>
-                    <strong>Talk to a specialist before you decide.</strong>
-                    <p>Share destination, dates and group size. We will guide the next practical step.</p>
-                </aside>
+           
             </div>
         </section>
 

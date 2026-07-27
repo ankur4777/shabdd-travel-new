@@ -48,10 +48,18 @@
 .domestic-hero {
     position: relative;
     overflow: hidden;
-    background:
-        linear-gradient(90deg, rgba(11, 29, 23, .93) 0%, rgba(11, 29, 23, .78) 48%, rgba(11, 29, 23, .25) 100%),
-        var(--domestic-hero-image) center 42% / cover no-repeat;
+  
     color: #fff;
+
+background:
+  linear-gradient(
+    to right,
+    black 0%,
+   
+    rgba(255,255,255,0) 100%
+  ),
+  url("/images/domestic-all-place.png");
+
 }
 
 .domestic-hero::after {

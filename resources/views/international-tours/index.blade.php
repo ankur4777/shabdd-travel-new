@@ -59,15 +59,7 @@
                     @endif
                 </div>
 
-                <aside class="intl-hero__panel">
-                    <span>Live from admin</span>
-                    <strong>{{ $destinations->count() }} international destinations</strong>
-                    <p>Only destinations marked as International in the admin panel appear on this page.</p>
-                    <div class="intl-hero__stats">
-                        <div><b>{{ $popularPackages->count() }}</b><small>popular packages</small></div>
-                        <div><b>{{ $startingPrice ? 'Rs ' . number_format($startingPrice) : 'Ask us' }}</b><small>starting from</small></div>
-                    </div>
-                </aside>
+         
             </div>
         </section>
 

@@ -48,10 +48,18 @@
     position: relative;
     min-height: auto;
     overflow: hidden;
-    background:
-        linear-gradient(90deg, rgba(5, 16, 31, .95) 0%, rgba(5, 16, 31, .78) 48%, rgba(5, 16, 31, .28) 100%),
-        var(--intl-hero-image) center / cover no-repeat;
-    color: #fff;
+background:
+  linear-gradient(
+    to right,
+    rgba(0,0,0,0.8) 0%,
+    rgba(0,0,0,0.4) 40%,
+    rgba(0,0,0,0) 100%
+  ),
+  url("/images/international-image.png");
+
+    background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
 }
 
 .intl-hero__inner {
