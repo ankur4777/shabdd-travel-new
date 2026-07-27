@@ -66,16 +66,6 @@
                     @endif
                 </div>
 
-                <aside class="domestic-hero__note">
-                    <span class="domestic-hero__note-kicker">A quick starting point</span>
-                    <strong>{{ $packages->count() }} trips, each open to a little tinkering.</strong>
-                    <p>Change the pace, hotel category or number of nights with our travel team.</p>
-                    <div class="domestic-hero__note-stats">
-                        <div><b>{{ $destinations->count() }}</b><span>destinations</span></div>
-                        <div><b>{{ $travelStyles ?: 1 }}</b><span>travel styles</span></div>
-                        <div><b>{{ $startingPrice ? '₹' . number_format($startingPrice) : 'Ask us' }}</b><span>starting from</span></div>
-                    </div>
-                </aside>
             </div>
         </section>
 
