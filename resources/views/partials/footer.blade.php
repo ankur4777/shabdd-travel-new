@@ -16,92 +16,50 @@ CSS FILE: footer.css  (link in your layout head)
             {{-- Tab Nav --}}
             <div class="st-footer-tabs" role="tablist">
                 <button class="st-footer-tab active" role="tab" aria-selected="true"
-                    data-target="tab-india">India Packages</button>
+                    data-target="tab-domestic">Domestic Destinations</button>
                 <button class="st-footer-tab" role="tab" aria-selected="false"
-                    data-target="tab-international">International Packages</button>
-                <button class="st-footer-tab" role="tab" aria-selected="false"
-                    data-target="tab-honeymoon">Honeymoon Packages</button>
+                    data-target="tab-international">International Destinations</button>
+                @foreach(($footerTravelStyleTabs ?? []) as $styleTab)
+                    <button class="st-footer-tab" role="tab" aria-selected="false"
+                        data-target="tab-style-{{ $styleTab['id'] }}">{{ $styleTab['label'] }}</button>
+                @endforeach
             </div>
 
             <div class="st-footer-tab-divider"></div>
 
-            {{-- India Packages --}}
-            <div class="st-footer-tab-panel active" id="tab-india" role="tabpanel">
+            {{-- Domestic Destinations --}}
+            <div class="st-footer-tab-panel active" id="tab-domestic" role="tabpanel">
                 <div class="st-footer-link-grid">
-                <a href="#">Ladakh Tour Packages</a>
-                <a href="#">Spiti Tour Packages</a>
-                <a href="#">Kashmir Tour Packages</a>
-                <a href="#">Rajasthan Tour Packages</a>
-                <a href="#">Kerala Tour Packages</a>
-                <a href="#">Andaman Tour Packages</a>
-                <a href="#">Sikkim Tour Packages</a>
-                <a href="#">Darjeeling Tour Packages</a>
-                <a href="#">Meghalaya Tour Packages</a>
-                <a href="#">North East Tour Packages</a>
-                <a href="#">Arunachal Tour Packages</a>
-                <a href="#">Assam Tour Packages</a>
-                <a href="#">Himachal Tour Packages</a>
-                <a href="#">Uttarakhand Tour Packages</a>
-                <a href="#">Manali Tour Packages</a>
-                <a href="#">Jaisalmer Tour Packages</a>
-                <a href="#">Golden Triangle Tour Packages</a>
-                <a href="#">Udaipur Tour Packages</a>
-                <a href="#">Wayanad Tour Packages</a>
-                <a href="#">Munnar Tour Packages</a>
-                <a href="#">Shimla Tour Packages</a>
-                <a href="#">Mussoorie Tour Packages</a>
-                <a href="#">Jim Corbett Tour Packages</a>
-                <a href="#">Srinagar Tour Packages</a>
-                <a href="#">Alleppey Tour Packages</a>
+                    @forelse(($footerDomesticDestinations ?? collect()) as $destination)
+                        <a href="{{ route('destinations.show', $destination) }}">{{ $destination->name }} Tour Packages</a>
+                    @empty
+                        <span class="footer-sub-text">No domestic destinations published yet.</span>
+                    @endforelse
                 </div>
             </div>
 
-            {{-- International Packages --}}
+            {{-- International Destinations --}}
             <div class="st-footer-tab-panel" id="tab-international" role="tabpanel">
                 <div class="st-footer-link-grid">
-                    <a href="#">Bali Tour Packages</a>
-                    <a href="#">Dubai Tour Packages</a>
-                    <a href="#">Thailand Tour Packages</a>
-                    <a href="#">Maldives Tour Packages</a>
-                    <a href="#">Singapore Tour Packages</a>
-                    <a href="#">Europe Tour Packages</a>
-                    <a href="#">Malaysia Tour Packages</a>
-                    <a href="#">Sri Lanka Tour Packages</a>
-                    <a href="#">Nepal Tour Packages</a>
-                    <a href="#">Bhutan Tour Packages</a>
-                    <a href="#">Vietnam Tour Packages</a>
-                    <a href="#">Japan Tour Packages</a>
-                    <a href="#">Mauritius Tour Packages</a>
-                    <a href="#">Australia Tour Packages</a>
-                    <a href="#">New Zealand Tour Packages</a>
-                    <a href="#">Canada Tour Packages</a>
-                    <a href="#">USA Tour Packages</a>
-                    <a href="#">Turkey Tour Packages</a>
-                    <a href="#">Egypt Tour Packages</a>
-                    <a href="#">South Africa Tour Packages</a>
+                    @forelse(($footerInternationalDestinations ?? collect()) as $destination)
+                        <a href="{{ route('destinations.show', $destination) }}">{{ $destination->name }} Tour Packages</a>
+                    @empty
+                        <span class="footer-sub-text">No international destinations published yet.</span>
+                    @endforelse
                 </div>
             </div>
 
-            {{-- Honeymoon Packages --}}
-            <div class="st-footer-tab-panel" id="tab-honeymoon" role="tabpanel">
-                <div class="st-footer-link-grid">
-                    <a href="#">Maldives Honeymoon Packages</a>
-                    <a href="#">Bali Honeymoon Packages</a>
-                    <a href="#">Kashmir Honeymoon Packages</a>
-                    <a href="#">Kerala Honeymoon Packages</a>
-                    <a href="#">Shimla Honeymoon Packages</a>
-                    <a href="#">Manali Honeymoon Packages</a>
-                    <a href="#">Goa Honeymoon Packages</a>
-                    <a href="#">Andaman Honeymoon Packages</a>
-                    <a href="#">Mauritius Honeymoon Packages</a>
-                    <a href="#">Thailand Honeymoon Packages</a>
-                    <a href="#">Singapore Honeymoon Packages</a>
-                    <a href="#">Dubai Honeymoon Packages</a>
-                    <a href="#">Europe Honeymoon Packages</a>
-                    <a href="#">Switzerland Honeymoon Packages</a>
-                    <a href="#">Paris Honeymoon Packages</a>
+            @foreach(($footerTravelStyleTabs ?? []) as $styleTab)
+                <div class="st-footer-tab-panel" id="tab-style-{{ $styleTab['id'] }}" role="tabpanel">
+                    <div class="st-footer-link-grid">
+                        @forelse(($styleTab['destinations'] ?? collect()) as $destination)
+                            <a href="{{ route('destinations.show', $destination) }}">{{ $destination->name }} {{ $styleTab['label'] }} Packages</a>
+                        @empty
+                            <span class="footer-sub-text">No {{ strtolower($styleTab['label']) }} destinations published yet.</span>
+                        @endforelse
+                    </div>
                 </div>
-            </div>
+            @endforeach
 
         </div>
     </div>
