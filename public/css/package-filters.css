@@ -1,7 +1,7 @@
 .pkg-listing-section {
     position: relative;
     padding: 72px 0 86px;
-    background: linear-gradient(180deg, #fffaf7 0%, #ffffff 34%, #f6f9fb 100%);
+    background: linear-gradient(180deg, #fffaf7 0%, #ffffff 0%, #F6F9EC 1%);
 }
 
 .pkg-listing-section.pkg-is-loading .pkg-package-grid,
