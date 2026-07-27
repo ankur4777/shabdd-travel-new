@@ -195,6 +195,7 @@
                             data-duration="{{ $package['duration_code'] ?? '5-7' }}"
                             data-rating="{{ $package['rating'] ?? 4.5 }}"
                             data-price="{{ $package['price_numeric'] ?? (is_numeric($package['discounted_price'] ?? null) ? (float) $package['discounted_price'] : ($package['price_numeric'] ?? 25000)) }}"
+                            data-category="{{ $package['category_key'] ?? \Illuminate\Support\Str::slug($package['category'] ?? $package['tag'] ?? '') }}"
                             data-tag="{{ $package['tag'] ?? '' }}">
                             <div class="df-card-img-wrap">
                                 <img src="{{ $package['image'] }}" alt="{{ $package['name'] }}" class="df-card-img"

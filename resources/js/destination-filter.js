@@ -30,6 +30,7 @@
         season:      [],
         tripType:    'all',
         rating:      null,
+        category:    [],
         sort:        'popular',
     };
 
@@ -61,6 +62,14 @@
     // Cards NodeList (live)
     const allCards = () => cardsGrid ? Array.from(cardsGrid.querySelectorAll('.df-card')) : [];
 
+    function initializeCardSortIndexes() {
+        allCards().forEach((card, index) => {
+            if (!card.dataset.originalIndex) {
+                card.dataset.originalIndex = String(index);
+            }
+        });
+    }
+
     function getDestinationOptions() {
         if (!destSelect) return [];
 
@@ -77,6 +86,14 @@
 
         const option = Array.from(destSelect.options).find(item => item.value === value);
         return option ? option.textContent.trim() : value;
+    }
+
+    function getSortLabel(value) {
+        const select = sortSelect || mobileSortSelect;
+        if (!select) return capitalize(value);
+
+        const option = Array.from(select.options).find(item => item.value === value);
+        return option ? option.textContent.trim() : capitalize(value);
     }
 
     /* =========================================================
@@ -236,18 +253,36 @@
     function initSort() {
         if (sortSelect) {
             sortSelect.addEventListener('change', function () {
-                state.sort = this.value;
+                applySortSelection(this.value);
                 if (mobileSortSelect) mobileSortSelect.value = this.value;
                 applyFilters();
+                updateActiveFilterPills();
             });
         }
         if (mobileSortSelect) {
             mobileSortSelect.addEventListener('change', function () {
-                state.sort = this.value;
+                applySortSelection(this.value);
                 if (sortSelect) sortSelect.value = this.value;
                 applyFilters();
+                updateActiveFilterPills();
             });
         }
+    }
+
+    function applySortSelection(value) {
+        state.sort = value;
+        state.category = categoryKeysForSort(value);
+    }
+
+    function categoryKeysForSort(value) {
+        const categories = {
+            popular: ['popular'],
+            budget: ['budget-friendly', 'budget'],
+            luxury: ['premium', 'luxury'],
+            trending: ['trending'],
+        };
+
+        return categories[value] || [];
     }
 
     /* =========================================================
@@ -263,6 +298,10 @@
             let show = true;
 
             if (state.destination && card.dataset.destination !== state.destination) show = false;
+
+            if (show && state.category.length > 0) {
+                if (!state.category.includes(card.dataset.category)) show = false;
+            }
 
             if (show && state.budget) {
                 const price = parseFloat(card.dataset.price);
@@ -320,12 +359,18 @@
         const visible = cards.filter(c => !c.classList.contains('df-card--hidden'));
         const hidden  = cards.filter(c => c.classList.contains('df-card--hidden'));
 
+        const originalOrder = card => numberValue(card.dataset.originalIndex, 0);
+        const compareOriginal = (a, b) => originalOrder(a) - originalOrder(b);
+        const comparePriceAsc = (a, b) => compareNumber(a, b, 'price', 'asc') || compareOriginal(a, b);
+        const comparePriceDesc = (a, b) => compareNumber(a, b, 'price', 'desc') || compareOriginal(a, b);
+        const compareRatingDesc = (a, b) => compareNumber(a, b, 'rating', 'desc') || compareOriginal(a, b);
+
         const sortFn = {
-            popular:  (a, b) => parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating),
-            budget:   (a, b) => parseFloat(a.dataset.price)  - parseFloat(b.dataset.price),
-            luxury:   (a, b) => parseFloat(b.dataset.price)  - parseFloat(a.dataset.price),
-            trending: (a, b) => (b.dataset.tag === 'trending' ? 1 : 0) - (a.dataset.tag === 'trending' ? 1 : 0),
-            duration: (a, b) => durationOrder(a.dataset.duration) - durationOrder(b.dataset.duration),
+            popular:  compareRatingDesc,
+            budget:   comparePriceAsc,
+            luxury:   (a, b) => sortRank(b, 'luxury') - sortRank(a, 'luxury') || comparePriceDesc(a, b),
+            trending: (a, b) => sortRank(b, 'trending') - sortRank(a, 'trending') || compareRatingDesc(a, b),
+            duration: (a, b) => durationOrder(a.dataset.duration) - durationOrder(b.dataset.duration) || compareOriginal(a, b),
         };
 
         const sorted = (sortFn[state.sort] ? visible.sort(sortFn[state.sort]) : visible);
@@ -339,6 +384,28 @@
         return order[d] !== undefined ? order[d] : 99;
     }
 
+    function numberValue(value, fallback = Number.POSITIVE_INFINITY) {
+        const normalized = String(value ?? '').replace(/[^0-9.-]/g, '');
+        const number = Number.parseFloat(normalized);
+
+        return Number.isFinite(number) ? number : fallback;
+    }
+
+    function compareNumber(a, b, key, direction = 'asc') {
+        const fallback = direction === 'asc' ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY;
+        const aValue = numberValue(a.dataset[key], fallback);
+        const bValue = numberValue(b.dataset[key], fallback);
+
+        return direction === 'asc' ? aValue - bValue : bValue - aValue;
+    }
+
+    function sortRank(card, value) {
+        const tag = String(card.dataset.tag || '').toLowerCase();
+        const styles = String(card.dataset.style || '').toLowerCase().split(',').map(item => item.trim());
+
+        return Number(tag === value || styles.includes(value));
+    }
+
     /* =========================================================
        ACTIVE FILTER PILLS
        ========================================================= */
@@ -350,6 +417,9 @@
 
         if (state.destination) {
             pills.push({ label: getDestinationLabel(state.destination), key: 'destination' });
+        }
+        if (state.category.length > 0) {
+            pills.push({ label: getSortLabel(state.sort), key: 'category' });
         }
         if (state.budget) {
             const opts = DEFAULT_BUDGET_OPTIONS;
@@ -377,6 +447,12 @@
                 state.destination = '';
                 if (destSelect) destSelect.value = '';
                 renderBudgetOptions('');
+                break;
+            case 'category':
+                state.category = [];
+                state.sort = 'popular';
+                if (sortSelect) sortSelect.value = 'popular';
+                if (mobileSortSelect) mobileSortSelect.value = 'popular';
                 break;
             case 'budget':
                 state.budget = null;
@@ -431,6 +507,7 @@
         state.season      = [];
         state.tripType    = 'all';
         state.rating      = null;
+        state.category    = [];
         state.sort        = 'popular';
 
         if (destSelect) destSelect.value = '';
@@ -464,6 +541,7 @@
         let count = 0;
         if (state.destination) count++;
         if (state.budget)      count++;
+        if (state.category.length > 0) count++;
         count += state.duration.length + state.style.length + state.season.length;
         if (state.tripType !== 'all') count++;
         if (state.rating !== null) count++;
@@ -874,6 +952,7 @@
         if (!cardsGrid && !budgetOptions && !destSelect) return;
 
         renderBudgetOptions('');
+        initializeCardSortIndexes();
         initDestinationSelect();
         initChipGroup(durationGroup, 'duration');
         initChipGroup(styleGroup, 'style');

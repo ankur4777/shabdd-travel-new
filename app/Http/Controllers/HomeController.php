@@ -85,6 +85,7 @@ class HomeController extends Controller
             'price_label' => $destination->formatted_price ?: ((int) ($destination->price_from ?? 0) > 0 ? '₹' . number_format((int) $destination->price_from) : 'On Request'),
             'duration_label' => $durationLabel,
             'duration_key' => $durationKey,
+            'category_key' => Str::slug((string) ($destination->category ?: $badge['sort_tag'])),
             'travel_tags' => $travelTags,
             'highlights' => $highlights,
             'destination_type' => $this->homeDiscoverDestinationType($destination),
@@ -228,36 +229,38 @@ class HomeController extends Controller
     {
         $label = trim((string) ($destination->badge_label ?: ''));
         $type = strtolower(trim((string) ($destination->badge_type ?: '')));
-        $category = strtolower(trim((string) ($destination->category ?: '')));
+        $categoryLabel = trim((string) ($destination->category ?: ''));
+        $category = strtolower($categoryLabel);
+        $displayLabel = $categoryLabel !== '' ? $categoryLabel : $label;
 
-        if ($label !== '' && in_array($type, ['trending', 'bestseller', 'luxury'], true)) {
+        if ($category === 'trending' || ($categoryLabel === '' && $destination->is_trending)) {
             return [
-                'label' => $label,
-                'class' => 'df-badge--' . $type,
-                'sort_tag' => $type,
-            ];
-        }
-
-        if ($destination->is_trending || $category === 'trending') {
-            return [
-                'label' => $label !== '' ? $label : 'Trending',
+                'label' => $displayLabel !== '' ? $displayLabel : 'Trending',
                 'class' => 'df-badge--trending',
                 'sort_tag' => 'trending',
             ];
         }
 
-        if ($type === 'luxury' || $category === 'premium') {
+        if (in_array($category, ['premium', 'luxury'], true) || ($categoryLabel === '' && $type === 'luxury')) {
             return [
-                'label' => $label !== '' ? $label : 'Luxury',
+                'label' => $displayLabel !== '' ? $displayLabel : 'Luxury',
                 'class' => 'df-badge--luxury',
                 'sort_tag' => 'luxury',
             ];
         }
 
+        if ($displayLabel !== '' && in_array($type, ['trending', 'bestseller', 'luxury'], true)) {
+            return [
+                'label' => $displayLabel,
+                'class' => 'df-badge--' . $type,
+                'sort_tag' => $type,
+            ];
+        }
+
         return [
-            'label' => $label !== '' ? $label : 'Bestseller',
+            'label' => $displayLabel !== '' ? $displayLabel : 'Bestseller',
             'class' => 'df-badge--bestseller',
-            'sort_tag' => 'bestseller',
+            'sort_tag' => Str::slug($categoryLabel !== '' ? $categoryLabel : 'bestseller'),
         ];
     }
 

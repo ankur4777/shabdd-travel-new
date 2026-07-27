@@ -1629,6 +1629,7 @@
                                     data-duration="{{ $destination['duration_key'] }}"
                                     data-rating="{{ $destination['rating'] }}"
                                     data-price="{{ $destination['price'] }}"
+                                    data-category="{{ $destination['category_key'] }}"
                                     data-tag="{{ $destination['badge']['sort_tag'] }}">
                                     <div class="df-card-img-wrap">
                                         <img src="{{ $destination['image'] }}"

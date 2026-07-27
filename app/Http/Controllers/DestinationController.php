@@ -721,9 +721,12 @@ class DestinationController extends Controller
         return [
             'name' => $package->title,
             'duration' => $duration !== '' ? $duration : '4D/3N',
+            'duration_code' => $this->durationCodeFromText($duration !== '' ? $duration : '4D/3N'),
             'rating' => $package->rating ?: $destination->rating ?: 4.5,
             'price' => $package->old_price ? '₹' . number_format((int) $package->old_price) : '',
             'discounted_price' => '₹' . number_format((int) $package->price),
+            'price_numeric' => (int) $package->price,
+            'category_key' => Str::slug((string) ($package->category ?: $destination->category ?: '')),
             'image' => $this->mediaUrl($package->image ?: $destination->image_url),
             'style' => $travelStyle !== '' ? Str::slug($travelStyle) : 'family',
             'style_labels' => $travelStyle !== '' ? Str::headline($travelStyle) : 'Family',
@@ -755,6 +758,19 @@ class DestinationController extends Controller
                 'packageSlug' => $package->slug,
             ]),
         ];
+    }
+
+    private function durationCodeFromText(string $duration): string
+    {
+        $days = (int) (Str::of($duration)->match('/\d+/')->value() ?? 0);
+
+        return match (true) {
+            $days > 0 && $days <= 2 => 'weekend',
+            $days >= 3 && $days <= 5 => '3-5',
+            $days >= 6 && $days <= 7 => '5-7',
+            $days >= 8 => '7+',
+            default => '5-7',
+        };
     }
 
     private function resolveRelatedPackageCollection(Destination $destination, array $destinationPackages): array
