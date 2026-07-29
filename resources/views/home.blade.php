@@ -1663,6 +1663,7 @@
                                                 <span class="df-price">{{ $destination['price_label'] }}</span>
                                             </div>
                                         </div>
+                                        
                                         <div class="df-card-highlights">
                                             @foreach($destination['highlights'] as $highlight)
                                                 <span>
@@ -1677,6 +1678,7 @@
                                                 </span>
                                             @endforeach
                                         </div>
+
                                         <div class="df-card-tags">
                                             @foreach($destination['travel_tags'] as $tag)
                                                 <span class="df-tag">{{ $tag }}</span>
