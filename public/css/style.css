@@ -4906,8 +4906,8 @@ div.container.st-nav-inner {
         border-color 0.3s ease,
         opacity 0.3s ease;
     /* Fixed width for carousel */
-    min-width: 280px;
-    max-width: 280px;
+    min-width: 260px;
+    max-width: 260px;
     flex-shrink: 0;
     scroll-snap-align: start;
 }
@@ -4943,7 +4943,7 @@ div.container.st-nav-inner {
 /* Image Wrap */
 .df-card-img-wrap {
     position: relative;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1.45 / 1;
     overflow: hidden;
     flex-shrink: 0;
 }
@@ -5083,8 +5083,8 @@ div.container.st-nav-inner {
 .df-card-body {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 16px 18px 18px;
+    gap: 10px;
+    padding: 14px 16px 14px;
     flex: 1;
     position: relative;
     z-index: 2;
@@ -5099,7 +5099,7 @@ div.container.st-nav-inner {
 
 .df-card-name {
     margin: 0 0 4px;
-    font-size: 1.1rem;
+    font-size: 1.04rem;
     font-weight: 800;
     color: var(--df-black);
     letter-spacing: -0.01em;
@@ -5202,7 +5202,7 @@ div.container.st-nav-inner {
     justify-content: center;
     gap: 8px;
     margin-top: auto;
-    padding: 12px 18px;
+    padding: 11px 16px;
     border-radius: var(--df-radius-sm);
     border: 1.5px solid var(--df-red);
     background: transparent;
@@ -5550,20 +5550,30 @@ div.container.st-nav-inner {
 /* Mobile: Smaller cards and arrows */
 @media (max-width: 639.98px) {
     .df-card {
-        flex-basis: min(74vw, 280px) !important;
-        min-width: min(74vw, 280px) !important;
-        max-width: min(74vw, 280px) !important;
+        flex-basis: min(68vw, 250px) !important;
+        min-width: min(68vw, 250px) !important;
+        max-width: min(68vw, 250px) !important;
+    }
+
+    .df-card-img-wrap {
+        aspect-ratio: 1.45 / 1;
+    }
+
+    .df-card-body {
+        gap: 10px;
+        padding: 14px 16px 12px;
+    }
+
+    .df-card-highlights {
+        padding: 8px 0;
+    }
+
+    .df-card-btn {
+        padding: 11px 16px;
     }
 
     .df-carousel-arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        display: flex !important;
-        width: 38px;
-        height: 38px;
-        z-index: 20;
-        box-shadow: 0 8px 22px rgba(17, 17, 17, 0.12);
+        display: none !important;
     }
 
     .df-carousel-arrow-left {
