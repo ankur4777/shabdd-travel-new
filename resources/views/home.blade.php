@@ -1663,27 +1663,23 @@
                                                 <span class="df-price">{{ $destination['price_label'] }}</span>
                                             </div>
                                         </div>
-                                        
-                                        <div class="df-card-highlights">
-                                            @foreach($destination['highlights'] as $highlight)
+                                        @if(!empty($destination['highlights'][0]))
+                                            <div class="df-card-highlights">
                                                 <span>
-                                                    @if($loop->first)
-                                                        <i class="bi bi-clock"></i>
-                                                    @elseif($loop->iteration === 2)
-                                                        <i class="bi bi-stars"></i>
-                                                    @else
-                                                        <i class="bi bi-geo"></i>
-                                                    @endif
-                                                    {{ $highlight }}
+                                                    <i class="bi bi-clock"></i>
+                                                    {{ $destination['highlights'][0] }}
                                                 </span>
-                                            @endforeach
-                                        </div>
+                                            </div>
+                                        @endif
+
 
                                         <div class="df-card-tags">
                                             @foreach($destination['travel_tags'] as $tag)
                                                 <span class="df-tag">{{ $tag }}</span>
                                             @endforeach
                                         </div>
+
+                                        
                                         <a href="{{ $destination['url'] }}" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
                                     </div>
                                 </article>
