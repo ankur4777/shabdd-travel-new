@@ -4891,6 +4891,7 @@ div.container.st-nav-inner {
 
 /* ── CARD ── */
 .df-card {
+    position: relative;
     background: var(--df-white);
     border-radius: var(--df-radius);
     overflow: hidden;
@@ -4898,6 +4899,7 @@ div.container.st-nav-inner {
     box-shadow: var(--df-shadow);
     display: flex;
     flex-direction: column;
+    cursor: pointer;
     transition:
         transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1),
         box-shadow 0.3s ease,
@@ -4918,6 +4920,19 @@ div.container.st-nav-inner {
 
 .df-card.df-card--hidden {
     display: none;
+}
+
+.df-card-full-link {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    border-radius: inherit;
+    text-decoration: none;
+}
+
+.df-card-full-link:focus-visible {
+    outline: 3px solid rgba(255, 59, 48, 0.45);
+    outline-offset: -5px;
 }
 
 .df-card.df-card--fade-out {
@@ -5028,7 +5043,7 @@ div.container.st-nav-inner {
     position: absolute;
     top: 12px;
     right: 12px;
-    z-index: 2;
+    z-index: 4;
     width: 36px;
     height: 36px;
     display: flex;
@@ -5180,6 +5195,8 @@ div.container.st-nav-inner {
 
 /* View Details Button */
 .df-card-btn {
+    position: relative;
+    z-index: 4;
     display: flex;
     align-items: center;
     justify-content: center;

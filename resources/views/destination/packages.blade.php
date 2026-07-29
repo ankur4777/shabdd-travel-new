@@ -196,7 +196,12 @@
                             data-rating="{{ $package['rating'] ?? 4.5 }}"
                             data-price="{{ $package['price_numeric'] ?? (is_numeric($package['discounted_price'] ?? null) ? (float) $package['discounted_price'] : ($package['price_numeric'] ?? 25000)) }}"
                             data-category="{{ $package['category_key'] ?? \Illuminate\Support\Str::slug($package['category'] ?? $package['tag'] ?? '') }}"
-                            data-tag="{{ $package['tag'] ?? '' }}">
+                            data-detail-url="{{ $package['detail_url'] }}"
+                            data-tag="{{ $package['tag'] ?? '' }}"
+                            style="position: relative;">
+                            <a href="{{ $package['detail_url'] }}" class="df-card-full-link"
+                                style="position: absolute; inset: 0; z-index: 3; border-radius: inherit; text-decoration: none;"
+                                aria-label="View details for {{ $package['name'] }}"></a>
                             <div class="df-card-img-wrap">
                                 <img src="{{ $package['image'] }}" alt="{{ $package['name'] }}" class="df-card-img"
                                     loading="lazy">

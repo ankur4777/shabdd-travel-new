@@ -70,6 +70,19 @@
         });
     }
 
+    function initCardLinks() {
+        if (!cardsGrid) return;
+
+        cardsGrid.addEventListener('click', function (event) {
+            const card = event.target.closest('.df-card[data-detail-url]');
+
+            if (!card || !cardsGrid.contains(card)) return;
+            if (event.target.closest('a, button, input, select, textarea, label')) return;
+
+            window.location.href = card.dataset.detailUrl;
+        });
+    }
+
     function getDestinationOptions() {
         if (!destSelect) return [];
 
@@ -962,6 +975,7 @@
         initSort();
         initViewToggle();
         initWishlistButtons();
+        initCardLinks();
         // initCardsCarousel(); // Disabled - using grid layout instead
         buildOffcanvasContent();
         applyInitialQueryFilters();

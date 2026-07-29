@@ -1635,7 +1635,12 @@
                                     data-rating="{{ $destination['rating'] }}"
                                     data-price="{{ $destination['price'] }}"
                                     data-category="{{ $destination['category_key'] }}"
-                                    data-tag="{{ $destination['badge']['sort_tag'] }}">
+                                    data-detail-url="{{ $destination['url'] }}"
+                                    data-tag="{{ $destination['badge']['sort_tag'] }}"
+                                    style="position: relative;">
+                                    <a href="{{ $destination['url'] }}" class="df-card-full-link"
+                                        style="position: absolute; inset: 0; z-index: 3; border-radius: inherit; text-decoration: none;"
+                                        aria-label="View details for {{ $destination['name'] }}"></a>
                                     <div class="df-card-img-wrap">
                                         <img src="{{ $destination['image'] }}"
                                             alt="{{ $destination['name'] }}, {{ $destination['location'] }}"
