@@ -245,12 +245,13 @@ class DestinationController extends Controller
 
     private function destinationTravelStyles(Destination $destination): Collection
     {
+        $travelStyleOptions = $this->travelStyleOptions();
+
         return collect($destination->travel_styles ?? [])
-            ->merge($destination->popular_for ?? [])
-            ->merge($destination->tags ?? [])
-            ->filter()
+            ->map(fn($style) => trim((string) $style))
+            ->filter(fn(string $style) => array_key_exists($style, $travelStyleOptions))
+            ->map(fn(string $style) => $travelStyleOptions[$style])
             ->unique()
-            ->take(2)
             ->values();
     }
 

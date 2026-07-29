@@ -115,15 +115,31 @@ class HomeController extends Controller
 
     private function homeDiscoverTravelTags(Destination $destination): Collection
     {
-        return $this->homeDiscoverTextCollection(
-            $destination->travel_styles ?? [],
-            $destination->popular_for ?? [],
-            $destination->tags ?? []
-        )
-            ->map(fn($value) => Str::headline($value))
+        $travelStyleOptions = $this->homeTravelStyleOptions();
+
+        return $this->homeDiscoverTextCollection($destination->travel_styles ?? [])
+            ->map(fn($value) => trim((string) $value))
+            ->filter(fn(string $value) => array_key_exists($value, $travelStyleOptions))
+            ->map(fn(string $value) => $travelStyleOptions[$value])
             ->unique()
-            ->take(3)
             ->values();
+    }
+
+    private function homeTravelStyleOptions(): array
+    {
+        return [
+            'honeymoon' => 'Honeymoon',
+            'religiuos' => 'Religious',
+            'religious' => 'Religious',
+            'family' => 'Family',
+            'adventure' => 'Adventure',
+            'friends' => 'Friends',
+            'corporate tour' => 'Corporate Tour',
+            'solo' => 'Solo',
+            'nature' => 'Nature',
+            'wildlife' => 'Wildlife',
+            'water activities' => 'Water Activities',
+        ];
     }
 
     private function homeDiscoverHighlights(Destination $destination, string $durationLabel): Collection

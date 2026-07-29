@@ -6618,6 +6618,19 @@ div.container.st-nav-inner {
     transform: translateY(-2px) scale(1.001);
 }
 
+.rd-card-full-link {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    border-radius: inherit;
+    text-decoration: none;
+}
+
+.rd-card-full-link:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.82);
+    outline-offset: -5px;
+}
+
 /* Background image layer */
 .rd-card-img {
     position: absolute;
@@ -6693,7 +6706,7 @@ div.container.st-nav-inner {
     position: absolute;
     top: 14px;
     right: 14px;
-    z-index: 3;
+    z-index: 5;
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -6860,6 +6873,8 @@ div.container.st-nav-inner {
 
 /* Explore button */
 .rd-card-btn {
+    position: relative;
+    z-index: 5;
     display: inline-flex;
     align-items: center;
     gap: 5px;
@@ -10850,6 +10865,7 @@ body.travel-gallery-lightbox-open {
     border: 1px solid rgba(255, 255, 255, 0.12);
     background: linear-gradient(145deg, #2f3135 0%, #232529 100%);
     color: #f5f5f5;
+    overflow: hidden;
 }
 
 #blogs {

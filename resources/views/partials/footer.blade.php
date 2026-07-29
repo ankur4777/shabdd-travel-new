@@ -209,7 +209,7 @@ CSS FILE: footer.css  (link in your layout head)
 
                 {{-- Logo --}}
                 <a href="{{ url('/') }}" class="st-footer-brand">
-                    <img src="{{ asset('images/logo.png') }}" alt="SHABDD" class="st-footer-logo">
+                    <img src="{{ asset('images/logo-bottom.png') }}" alt="SHABDD" class="st-footer-logo">
                 </a>
 
                 {{-- Copyright --}}

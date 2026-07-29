@@ -101,20 +101,7 @@
 
                     </div>
 
-                    <div class="dst-hero-panel">
-                        <div class="dst-hero-stat-grid">
-                            <article class="dst-hero-stat">
-                                <strong>{{ $destinationCount }}</strong>
-                                <span>{{ \Illuminate\Support\Str::plural('destination', $destinationCount) }} live</span>
-                            </article>
-                            <article class="dst-hero-stat">
-                                <strong>{{ $heroStartingPrice ? '₹' . number_format($heroStartingPrice) : 'Custom' }}</strong>
-                                <span>starting budget</span>
-                            </article>
-                    
-                        </div>
-
-                    </div>
+          
                 </div>
             </section>
 

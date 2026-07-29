@@ -651,6 +651,9 @@
                     @forelse ($destinations as $destination)
                         <article class="rd-card"
                             style="--rd-card-bg: url('{{ $destination->image_url ? asset('storage/' . $destination->image_url) : asset('images/himachal.jpg') }}');">
+                            <a href="{{ route('destinations.show', $destination) }}" class="rd-card-full-link"
+                                aria-label="Explore {{ $destination->name }}"></a>
+                            
                             <div class="rd-card-img"></div>
                             <div class="rd-card-overlay"></div>
                             <div class="rd-card-badge {{ $destination->badge_class }}">
@@ -1297,6 +1300,8 @@
                     @forelse ($popularDestinations as $destination)
                         <article class="rd-card pd-card"
                             style="--rd-card-bg: url('{{ $destination->image_url ? asset('storage/' . $destination->image_url) : asset('images/himachal.jpg') }}');">
+                            <a href="{{ route('destinations.show', $destination) }}" class="rd-card-full-link"
+                                aria-label="Explore {{ $destination->name }}"></a>
                             <div class="rd-card-img"></div>
                             <div class="rd-card-overlay pd-card-overlay"></div>
                             <div class="rd-card-badge rd-badge--bestseller pd-card-badge">
