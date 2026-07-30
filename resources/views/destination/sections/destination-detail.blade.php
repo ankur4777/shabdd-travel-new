@@ -443,7 +443,7 @@
                                     <img src="{{ $mediaUrl($package['image'] ?? $destinationImage) }}"
                                         alt="{{ $package['name'] }}" loading="lazy">
                                     <div class="seo-dd-package-media-bar">
-                                        <span class="seo-dd-package-chip">{{ $packageType }}</span>
+                                        
                                         <span
                                             class="seo-dd-package-chip seo-dd-package-chip-muted">{{ $packageDuration }}</span>
                                     </div>

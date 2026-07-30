@@ -11181,9 +11181,9 @@ body.travel-gallery-lightbox-open {
 
 .seo-dd-package-media-bar {
     position: absolute;
-    top: 12px;
-    left: 12px;
-    right: 12px;
+    top: 21px;
+    left: 20px;
+    right: 20px;
     display: flex;
     justify-content: space-between;
     gap: 8px;
