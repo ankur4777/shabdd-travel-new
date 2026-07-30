@@ -1325,9 +1325,7 @@
                                         </svg>
                                         {{ number_format((float) $destination->rating, 1) }}
                                     </div>
-                                    @if(!empty($destination->best_season))
-                                        <span class="pd-season">{{ $destination->best_season }}</span>
-                                    @endif
+                                
                                 </div>
                                 <div class="rd-card-info">
                                     <div class="rd-card-location">
@@ -1351,10 +1349,10 @@
                                     @endif
                                     <div class="rd-card-footer">
                                         <div class="rd-price-block">
-                                            <span class="rd-price-from">From</span>
+                                            
                                             <span
                                                 class="rd-price">{{ $destination->formatted_price ?? ($destination->price_from ? '₹' . number_format($destination->price_from) : '') }}</span>
-                                            <span class="rd-price-per">{{ $destination->price_unit ?? '' }}</span>
+                                           
                                         </div>
                                         <a href="{{ route('destinations.show', $destination) }}"
                                             class="rd-card-btn pd-card-btn">
