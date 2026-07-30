@@ -32,6 +32,14 @@ class HomeController extends Controller
             ->take(12)
             ->get();
 
+        $packagesForPriceDisplay = Package::query()
+            ->whereNotNull('price')
+            ->where('price', '>', 0)
+            ->get(['title', 'country', 'state', 'city', 'price']);
+
+        $this->attachLowestPackagePrices($destinations, $packagesForPriceDisplay);
+        $this->attachLowestPackagePrices($popularDestinations, $packagesForPriceDisplay);
+
         $blogController = new BlogController();
         $blogs = $blogController->buildBlogCollection()->take(6);
         $seasonalJourneys = SeasonalJourney::active()->get();
@@ -54,6 +62,53 @@ class HomeController extends Controller
             'discoverDestinationOptions',
             'discoverDestinationCards'
         ));
+    }
+
+    private function attachLowestPackagePrices(Collection $destinations, Collection $packages): void
+    {
+        $destinations->each(function (Destination $destination) use ($packages): void {
+            $lowestPackagePrice = $this->lowestPackagePriceForDestination($destination, $packages);
+            $displayPrice = $lowestPackagePrice ?: (int) ($destination->price_from ?? 0);
+
+            $destination->setAttribute('home_price_from', $displayPrice);
+            $destination->setAttribute(
+                'home_price_label',
+                $displayPrice > 0 ? '₹' . number_format($displayPrice) : 'On Request'
+            );
+        });
+    }
+
+    private function lowestPackagePriceForDestination(Destination $destination, Collection $packages): ?int
+    {
+        $terms = collect([
+            $destination->name,
+            Str::of((string) $destination->slug)->replace('-', ' ')->value(),
+            $destination->country && strtolower(trim((string) $destination->country)) !== 'india'
+                ? $destination->country
+                : null,
+        ])
+            ->map(fn($term) => strtolower(trim((string) $term)))
+            ->filter(fn(string $term) => $term !== '')
+            ->unique()
+            ->values();
+
+        if ($terms->isEmpty()) {
+            return null;
+        }
+
+        return $packages
+            ->filter(function (Package $package) use ($terms): bool {
+                $haystack = strtolower(trim(collect([
+                    $package->title,
+                    $package->country,
+                    $package->state,
+                    $package->city,
+                ])->filter()->implode(' ')));
+
+                return $haystack !== ''
+                    && $terms->contains(fn(string $term) => Str::contains($haystack, $term));
+            })
+            ->min('price');
     }
 
     private function homeDiscoverDestinations(): Collection

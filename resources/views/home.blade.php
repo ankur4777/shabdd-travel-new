@@ -702,7 +702,7 @@
                                         <div class="rd-price-block">
                                             <span class="rd-price-from">From</span>
                                             <span
-                                                class="rd-price-from">{{ $destination->formatted_price ?? ($destination->price_from ? '₹' . number_format($destination->price_from) : '') }}</span>
+                                                class="rd-price-from">{{ $destination->home_price_label ?? ($destination->price_from ? '₹' . number_format($destination->price_from) : '') }}</span>
                                             <span class="rd-price">&nbsp;</span>
                                             <span class="rd-price-per">{{ $destination->price_unit ?? '' }}</span>
                                         </div>
@@ -1351,7 +1351,7 @@
                                         <div class="rd-price-block">
                                             
                                             <span
-                                                class="rd-price">{{ $destination->formatted_price ?? ($destination->price_from ? '₹' . number_format($destination->price_from) : '') }}</span>
+                                                class="rd-price">{{ $destination->home_price_label ?? ($destination->price_from ? '₹' . number_format($destination->price_from) : '') }}</span>
                                            
                                         </div>
                                         <a href="{{ route('destinations.show', $destination) }}"

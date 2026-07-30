@@ -544,9 +544,9 @@
 
                     <div class="author-box">
                         <div class="author-avatar">{{ substr($post['author'], 0, 1) }}</div>
-                        <div class="author-info">
-                            <h4>{{ $post['author'] }}</h4>
-                            <p>{{ $post['role'] }}</p>
+                        <div class="author-info" >
+                            <h4 style="color:white">{{ $post['author'] }}</h4> 
+                            <p style="color:white">{{ $post['role'] }}</p>
                         </div>
                     </div>
 
