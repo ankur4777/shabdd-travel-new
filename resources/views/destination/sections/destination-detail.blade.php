@@ -349,8 +349,8 @@
                 <strong>{{ $displayIdealDays }}</strong>
             </article>
             <article class="seo-dd-quick-card">
-                <p>{{ $destination->language ? 'Language' : 'Popular For' }}</p>
-                <strong>{{ $destination->language ?: implode(', ', $popularFor) }}</strong>
+                <p>Popular For</p>
+                <strong>{{ implode(', ', array_slice($popularFor, 0, 3)) }}</strong>
             </article>
         </section>
 
