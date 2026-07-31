@@ -1594,7 +1594,8 @@
                         <p class="df-results-subtitle">Handpicked journeys curated based on your travel preferences.</p>
                     </div>
                     <div class="df-results-controls">
-                        <span class="df-results-count" id="dfResultsCount">{{ $discoverDestinationCards->count() }} destinations found</span>
+                        <span class="df-results-count" id="dfResultsCount">{{ $discoverDestinationCards->count() }} packages found</span>
+                        
                         <div class="df-active-filters" id="dfActiveFilters" aria-live="polite"></div>
                         <div class="df-view-toggle d-none d-md-flex" role="group" aria-label="View mode">
                             <button class="df-view-btn df-view-btn--active" id="dfViewGrid" aria-label="Grid view"

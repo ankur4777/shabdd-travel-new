@@ -389,9 +389,10 @@
 
         const total = cards.length;
         if (resultsCount) {
+            const resultLabel = resultsCount.dataset.resultLabel || 'destinations';
             resultsCount.textContent = visibleCount === total
-                ? `${total} destinations found`
-                : `${visibleCount} of ${total} destinations`;
+                ? `${total} ${resultLabel} found`
+                : `${visibleCount} of ${total} ${resultLabel}`;
         }
 
         if (noResults) noResults.style.display = visibleCount === 0 ? 'block' : 'none';

@@ -5026,11 +5026,11 @@ div.container.st-nav-inner {
     font-weight: 900;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    background-color: white;
 }
 
 .df-badge--trending {
-    background: var(--brand-primary);
-    color: #fff;
+    color: black;
     box-shadow: 0 6px 16px rgba(255, 59, 48, 0.35);
 }
 

@@ -367,25 +367,11 @@ class DestinationController extends Controller
 
     public function packages(): View
     {
-        $destinations = Destination::query()
-            ->active()
+        $allPackages = Package::query()
             ->latest()
-            ->get();
-
-        $allPackages = [];
-
-        foreach ($destinations as $destination) {
-            $destinationProfile = $this->buildDestinationProfile($destination);
-            $packages = $this->resolvePackageCollection($destination, $destinationProfile);
-
-            foreach ($packages as $package) {
-                $allPackages[] = array_merge($package, [
-                    'destination' => $destination,
-                    'destination_name' => $destination->name,
-                    'destination_country' => $destination->country,
-                ]);
-            }
-        }
+            ->get()
+            ->map(fn(Package $package) => $this->normalizeAdminPackageForIndex($package))
+            ->all();
 
         return view('destination.packages', compact('allPackages'));
     }
@@ -758,6 +744,39 @@ class DestinationController extends Controller
                 'destination' => $destination,
                 'packageSlug' => $package->slug,
             ]),
+        ];
+    }
+
+    private function normalizeAdminPackageForIndex(Package $package): array
+    {
+        $destination = $this->resolveDestinationForPackage($package);
+        $destinationName = $this->packageDestinationName($package);
+        $duration = trim((string) $package->duration_text);
+        $travelStyle = trim((string) $package->travel_style);
+
+        if ($duration === '' && $package->days) {
+            $duration = (int) $package->days . 'D/' . max(0, ((int) $package->days) - 1) . 'N';
+        }
+
+        return [
+            'name' => $package->title,
+            'duration' => $duration !== '' ? $duration : '4D/3N',
+            'duration_code' => $this->durationCodeFromText($duration !== '' ? $duration : '4D/3N'),
+            'rating' => $package->rating ?: $destination?->rating ?: 4.5,
+            'price' => $package->old_price ? '₹' . number_format((int) $package->old_price) : '',
+            'discounted_price' => '₹' . number_format((int) $package->price),
+            'price_numeric' => (int) $package->price,
+            'category_key' => Str::slug((string) ($package->category ?: $destination?->category ?: '')),
+            'image' => $this->mediaUrl($package->image ?: $destination?->image_url),
+            'style' => $travelStyle !== '' ? Str::slug($travelStyle) : 'family',
+            'style_labels' => $travelStyle !== '' ? Str::headline($travelStyle) : 'Family',
+            'package_slug' => $package->slug,
+            'tag' => Str::slug((string) ($package->category ?: 'package')),
+            'type' => Str::lower((string) ($package->type ?: 'domestic')),
+            'detail_url' => route('packages.show', $package->slug),
+            'destination' => $destination,
+            'destination_name' => $destinationName,
+            'destination_country' => $package->country ?: $destination?->country ?: $destinationName,
         ];
     }
 

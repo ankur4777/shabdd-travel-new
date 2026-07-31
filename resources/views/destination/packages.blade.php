@@ -179,7 +179,7 @@
                         <p class="df-results-subtitle">Handpicked journeys curated based on your travel preferences.</p>
                     </div>
                     <div class="df-results-controls">
-                        <span class="df-results-count" id="dfResultsCount">{{ count($allPackages) }} packages found</span>
+                        <span class="df-results-count" id="dfResultsCount" data-result-label="packages">{{ count($allPackages) }} packages found</span>
                         <div class="df-active-filters" id="dfActiveFilters" aria-live="polite"></div>
                         <a href="{{ route('home') }}" class="btn btn-outline-dark btn-sm">Back to Home</a>
                     </div>
