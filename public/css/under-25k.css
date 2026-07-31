@@ -200,6 +200,11 @@ color: white;
     background: rgba(15, 118, 110, 0.08);
     color: var(--budget25-brand-deep);
     border-radius: 9px;
+    font-weight: 800;
+    font-size: 11.5px;
+    padding: 6px 8px;
+    width: fit-content;
+    align-self: end;
 }
 
 .budget25-btn--light {
@@ -765,7 +770,7 @@ color: white;
 }
 
 .budget25-card--modal .budget25-btn {
-    min-height: 48px;
+    /* min-height: 48px; */
 }
 
 .budget25-testimonial-grid {
