@@ -4872,7 +4872,18 @@ div.container.st-nav-inner {
 }
 
 .df-cards2 {
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    align-items: stretch;
+    overflow-x: visible;
+    padding-right: 0;
+}
+
+.df-cards2 .df-card {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    flex-shrink: 1;
 }
 
 .df-cards-grid::-webkit-scrollbar {
@@ -5531,6 +5542,15 @@ div.container.st-nav-inner {
         max-width: 260px !important;
     }
 
+    .df-cards2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .df-cards2 .df-card {
+        min-width: 0 !important;
+        max-width: none !important;
+    }
+
     .df-view-all-button {
         padding: 10px 18px;
         font-size: 13px;
@@ -5606,6 +5626,18 @@ div.container.st-nav-inner {
         max-width: 100%;
         gap: 14px;
         padding: 0 18px 0 0;
+    }
+
+    .df-cards2 {
+        grid-template-columns: 1fr;
+        padding: 0;
+    }
+
+    .df-cards2 .df-card {
+        flex-basis: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        width: 100%;
     }
 
     .df-view-all-section {
