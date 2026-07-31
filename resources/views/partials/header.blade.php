@@ -252,30 +252,50 @@
 
         <div class="st-mobile-links" id="stMobileLinksMain">
             <div class="st-mobile-menu-item st-has-submenu">
-                <button class="st-mobile-link st-mobile-menu-toggle" type="button" data-submenu="domestic"
+                <button class="st-mobile-link st-mobile-link--tour st-mobile-link--domestic st-mobile-menu-toggle" type="button" data-submenu="domestic"
                     aria-expanded="false">
+                    <span class="st-mobile-link-icon" aria-hidden="true">
+                        <img class="st-mobile-link-india-icon" src="https://www.svgrepo.com/show/308279/india-map-country.svg" alt="">
+                    </span>
                     Domestic Tours <span aria-hidden="true">›</span>
                 </button>
             </div>
 
             <div class="st-mobile-menu-item st-has-submenu">
-                <button class="st-mobile-link st-mobile-menu-toggle" type="button" data-submenu="international"
+                <button class="st-mobile-link st-mobile-link--tour st-mobile-link--international st-mobile-menu-toggle" type="button" data-submenu="international"
                     aria-expanded="false">
+                    <span class="st-mobile-link-icon" aria-hidden="true"><i class="bi bi-airplane"></i></span>
                     International Tours <span aria-hidden="true">›</span>
                 </button>
             </div>
 
-            <a href="{{ route('honeymoon') }}" class="st-mobile-link">Honeymoon</a>
-
-            <a href="{{ route('family-trips') }}" class="st-mobile-link">
-                Family Trips
+            <a href="{{ route('honeymoon') }}" class="st-mobile-link st-mobile-link--context st-mobile-link--honeymoon">
+                <span class="st-mobile-link-icon" aria-hidden="true"><i class="bi bi-heart"></i></span>
+                <span>Honeymoon</span>
             </a>
-            <a href="{{ route('religious') }}" class="st-mobile-link">Religious</a>
-            <a href="{{ route('budget-friendly') }}" class="st-mobile-link">Budget Friendly</a>
-            <a href="{{ route('blog.index') }}" class="st-mobile-link">Blogs</a>
+
+            <a href="{{ route('family-trips') }}" class="st-mobile-link st-mobile-link--context st-mobile-link--family">
+                <span class="st-mobile-link-icon" aria-hidden="true"><i class="bi bi-people"></i></span>
+                <span>Family Trips</span>
+            </a>
+            <a href="{{ route('religious') }}" class="st-mobile-link st-mobile-link--context st-mobile-link--religious">
+                <span class="st-mobile-link-icon" aria-hidden="true"><i class="bi bi-bank"></i></span>
+                <span>Religious</span>
+            </a>
+            <a href="{{ route('budget-friendly') }}" class="st-mobile-link st-mobile-link--context st-mobile-link--budget">
+                <span class="st-mobile-link-icon" aria-hidden="true"><i class="bi bi-wallet2"></i></span>
+                <span>Budget Friendly</span>
+            </a>
+            <a href="{{ route('blog.index') }}" class="st-mobile-link st-mobile-link--context st-mobile-link--blogs">
+                <span class="st-mobile-link-icon" aria-hidden="true"><i class="bi bi-journal-text"></i></span>
+                <span>Blogs</span>
+            </a>
 
 
-            <a href="{{ route('contact', [], false) }}" class="st-mobile-link">Contact</a>
+            <a href="{{ route('contact', [], false) }}" class="st-mobile-link st-mobile-link--context st-mobile-link--contact">
+                <span class="st-mobile-link-icon" aria-hidden="true"><i class="bi bi-headset"></i></span>
+                <span>Contact</span>
+            </a>
         </div>
 
         <div class="st-mobile-submenu" id="stMobileSubmenu">
