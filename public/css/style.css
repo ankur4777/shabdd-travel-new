@@ -409,7 +409,7 @@ input[type="submit"],
 /* === 03. HEADER & NAVIGATION === */
 .st-header a {
     text-decoration: none;
-    font-size: clamp(15px, 1vw, 9rem);
+    font-size: clamp(14px, 1vw, 9rem);
 }
 
 .st-header svg {
@@ -1535,7 +1535,7 @@ div.container.st-nav-inner {
 }
 
 .st-mobile-head .st-brand img {
-    width: 150px;
+    width: 71px;
 }
 
 .st-mobile-close {
@@ -1565,10 +1565,11 @@ div.container.st-nav-inner {
     border-radius: 999px;
     background: var(--brand-primary);
     color: #fff;
-    font-size: 12px;
+    /* font-size: 12px; */
     font-weight: 800;
     letter-spacing: 0.03em;
     text-transform: uppercase;
+    font-size: clamp(12px, 1vw, 9rem) !important;
 }
 
 .st-mobile-pill-alt {
@@ -1892,7 +1893,7 @@ div.container.st-nav-inner {
     }
 
     .st-brand img {
-        width: 70px;
+        width: 760px;
     }
 
     .st-navlink {

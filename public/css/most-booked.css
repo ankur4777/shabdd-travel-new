@@ -913,12 +913,20 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .mb-package-grid--admin {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .mb-highlight-grid article:last-child {
         grid-column: span 2;
     }
 
     .mb-package-grid article:last-child {
         grid-column: span 2;
+    }
+
+    .mb-package-grid--admin article:last-child {
+        grid-column: auto;
     }
 
     .mb-itinerary__intro {
@@ -983,6 +991,10 @@
         grid-template-columns: 1fr;
     }
 
+    .mb-package-grid--admin {
+        gap: 18px;
+    }
+
     .mb-highlight-grid article:last-child,
     .mb-package-grid article:last-child {
         grid-column: auto;
@@ -994,6 +1006,61 @@
 
     .mb-package-grid article {
         min-height: 450px;
+    }
+
+    .mb-package-grid--admin article {
+        min-height: auto;
+    }
+
+    .mb-package-grid--admin article > a.mb-admin-package-card__image {
+        height: clamp(190px, 58vw, 245px);
+    }
+
+    .mb-admin-package-card__image span {
+        top: 12px;
+        left: 12px;
+        max-width: calc(100% - 24px);
+        font-size: .58rem;
+        line-height: 1.2;
+    }
+
+    .mb-admin-package-card__body {
+        min-height: auto;
+        padding: 18px;
+    }
+
+    .mb-admin-package-card__body > p {
+        margin-bottom: 8px;
+        font-size: .62rem;
+        line-height: 1.35;
+    }
+
+    .mb-admin-package-card__body h3 {
+        font-size: 1.18rem;
+        line-height: 1.18;
+    }
+
+    .mb-admin-package-card__body ul {
+        margin-top: 14px;
+        padding-top: 13px;
+        font-size: .72rem;
+        line-height: 1.55;
+    }
+
+    .mb-admin-package-card__body .mb-package__price {
+        flex-wrap: wrap;
+        row-gap: 3px;
+        padding-top: 20px;
+    }
+
+    .mb-admin-package-card__body .mb-package__price strong {
+        font-size: 1.1rem;
+    }
+
+    .mb-admin-package-card__body > a {
+        margin-top: 15px;
+        padding-top: 14px;
+        font-size: .7rem;
     }
 
     .mb-stay-grid article {
