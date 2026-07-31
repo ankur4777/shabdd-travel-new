@@ -8,6 +8,7 @@ use App\Support\MediaUrl;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
 
@@ -474,11 +475,7 @@ class DomesticTourController extends Controller
     {
         return $packages
             ->groupBy(function (Package $package): ?string {
-                return collect([
-                    trim((string) $package->city),
-                    trim((string) $package->state),
-                    trim((string) $package->country),
-                ])->filter()->first();
+                return trim((string) $package->city) ?: null;
             })
             ->map(function (Collection $matching, ?string $name): ?array {
                 if ($name === null || $name === '' || $matching->isEmpty()) {
@@ -495,11 +492,21 @@ class DomesticTourController extends Controller
                     ->first();
 
                 return [
+                    'modal_id' => 'budget25DestinationModal' . Str::studly(Str::slug($name) ?: 'destination') . substr(md5(strtolower($name)), 0, 8),
                     'name' => $name,
                     'count' => $matching->count(),
                     'starting_price' => (int) ($matching->min('price') ?? 0),
                     'image' => $this->packageImageUrl($primaryPackage),
                     'url' => route('packages.show', $primaryPackage->slug),
+                    'packages' => $matching
+                        ->sortBy([
+                            ['featured', 'desc'],
+                            ['rating', 'desc'],
+                            ['price', 'asc'],
+                            ['id', 'desc'],
+                        ])
+                        ->values()
+                        ->all(),
                 ];
             })
             ->filter()

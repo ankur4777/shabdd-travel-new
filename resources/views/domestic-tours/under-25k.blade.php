@@ -124,7 +124,8 @@
 
                 <div class="budget25-destination-grid">
                     @forelse($popularDestinations as $destination)
-                        <a href="{{ $destination['url'] }}" class="budget25-destination-card">
+                        <button type="button" class="budget25-destination-card budget25-destination-card--trigger"
+                            data-bs-toggle="modal" data-bs-target="#{{ $destination['modal_id'] }}">
                             <img src="{{ $destination['image'] }}" alt="{{ $destination['name'] }}" loading="lazy">
                             <div class="budget25-destination-card__overlay"></div>
                             <div class="budget25-destination-card__content">
@@ -132,7 +133,7 @@
                                 <h3>{{ $destination['name'] }}</h3>
                                 <strong>Starts from ₹{{ number_format($destination['starting_price']) }}</strong>
                             </div>
-                        </a>
+                        </button>
                     @empty
                         <div class="budget25-empty budget25-empty--soft">
                             <h3>Popular destinations will appear here automatically</h3>
@@ -143,6 +144,80 @@
                 </div>
             </div>
         </section>
+
+        @foreach($popularDestinations as $destination)
+            <div class="modal fade budget25-category-modal budget25-destination-modal" id="{{ $destination['modal_id'] }}"
+                tabindex="-1" aria-labelledby="{{ $destination['modal_id'] }}Label" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="budget25-category-modal__head">
+                            <div>
+                                <span class="budget25-eyebrow">Destination packages</span>
+                                <h3 id="{{ $destination['modal_id'] }}Label">{{ $destination['name'] }}</h3>
+                                <p>{{ $destination['count'] }} package{{ $destination['count'] === 1 ? '' : 's' }} available in {{ $destination['name'] }}.</p>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="budget25-category-modal__body">
+                            <div class="budget25-category-scroller" aria-label="{{ $destination['name'] }} packages">
+                                @foreach($destination['packages'] as $package)
+                                    @php
+                                        $packageImage = blank($package->image)
+                                            ? asset('images/couple-bg.jpg')
+                                            : (Str::startsWith($package->image, ['http://', 'https://'])
+                                                ? $package->image
+                                                : asset('storage/' . ltrim($package->image, '/')));
+                                        $packageDuration = $package->duration_text ?: ($package->days ? $package->days . 'D' : 'Flexible');
+                                        $packageLocation = collect([$package->city, $package->state, $package->country])->filter()->implode(', ');
+                                        $packageHighlights = collect([$package->feature_1, $package->feature_2, $package->feature_3])->filter()->take(3);
+                                        $packageDescription = $package->description
+                                            ? Str::limit(strip_tags($package->description), 110)
+                                            : 'Curated stays, seamless transfers, and practical sightseeing for value-first domestic travel.';
+                                    @endphp
+
+                                    <article class="budget25-card budget25-card--modal budget25-category-scroller__item">
+                                        <a href="{{ route('packages.show', $package->slug) }}" class="budget25-card__media">
+                                            <img src="{{ $packageImage }}" alt="{{ $package->title }}" loading="lazy">
+                                            <span class="budget25-card__price">From ₹{{ number_format((int) $package->price) }}</span>
+                                        </a>
+
+                                        <div class="budget25-card__body">
+                                            <div class="budget25-card__meta">
+                                                <span><i class="bi bi-geo-alt"></i> {{ $packageLocation ?: 'India' }}</span>
+                                                <span><i class="bi bi-calendar3"></i> {{ $packageDuration }}</span>
+                                            </div>
+
+                                            <div class="budget25-card__heading">
+                                                <h3>{{ $package->title }}</h3>
+                                                <div class="budget25-rating">
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <span>{{ $package->rating ? number_format((float) $package->rating, 1) : '4.5' }}</span>
+                                                </div>
+                                            </div>
+
+                                            <p>{{ $packageDescription }}</p>
+
+                                            @if($packageHighlights->isNotEmpty())
+                                                <ul class="budget25-highlights">
+                                                    @foreach($packageHighlights as $highlight)
+                                                        <li>{{ $highlight }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+
+                                            <a href="{{ route('packages.show', $package->slug) }}" class="budget25-btn budget25-btn--ghost">
+                                                View Details
+                                            </a>
+                                        </div>
+                                    </article>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
 
 
 

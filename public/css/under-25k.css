@@ -552,13 +552,24 @@ color: white;
 .budget25-destination-card {
     position: relative;
     display: block;
+    width: 100%;
     min-height: 320px;
     overflow: hidden;
     border-radius: 0px;
+    border: 0;
     color: #fff;
     text-decoration: none;
+    text-align: left;
     box-shadow: 0 22px 55px rgba(11, 33, 27, 0.16);
     transition: transform 0.28s ease, box-shadow 0.28s ease;
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+}
+
+.budget25-destination-card--trigger:focus-visible {
+    outline: 3px solid rgba(15, 118, 110, 0.45);
+    outline-offset: 4px;
 }
 
 .budget25-destination-card__overlay {
@@ -651,6 +662,14 @@ color: white;
         linear-gradient(180deg, #fbf8f2, #f4efe5);
     box-shadow: 0 24px 80px rgba(11, 33, 27, 0.18);
     overflow: hidden;
+}
+
+.budget25-destination-modal .modal-dialog {
+    max-width: min(1420px, calc(100vw - 48px));
+}
+
+.budget25-destination-modal .budget25-category-scroller {
+    grid-auto-columns: minmax(300px, 31%);
 }
 
 .budget25-category-modal__head {
@@ -952,5 +971,11 @@ color: white;
 
     .budget25-category-scroller {
         grid-auto-columns: minmax(280px, 86%);
+    }
+
+    .budget25-destination-modal .modal-dialog {
+        max-width: calc(100vw - 20px);
+        margin-left: auto;
+        margin-right: auto;
     }
 }
