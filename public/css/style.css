@@ -575,6 +575,9 @@ input[type="submit"],
 
 div.container.st-nav-inner {
     width: 100%;
+    max-width: none;
+    padding-left: 22px;
+    padding-right: 22px;
 }
 
 @media (max-width: 1200px) {
@@ -2193,6 +2196,21 @@ div.container.st-nav-inner {
 @media (min-width: 992px) {
     .st-mobile-only {
         display: none !important;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .st-desktop-only {
+        display: none !important;
+    }
+
+    .st-mobile-only {
+        display: flex !important;
+    }
+
+    .st-nav-inner {
+        grid-template-columns: auto auto !important;
+        justify-content: space-between !important;
     }
 }
 
