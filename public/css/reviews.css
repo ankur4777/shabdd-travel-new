@@ -99,8 +99,8 @@
 .review-heading h2 { margin: 0 0 3px; font-size: 13px; font-weight: 800; }
 .review-card-stars { font-size: 9px; }
 .review-quote { color: #ff5963; font-size: 25px; }
-.review-trip { align-self: flex-start; margin: 11px 0; padding: 5px 9px; border-radius: 20px; color: var(--reviews-red); background: #fff0f1; font-size: 9px; font-weight: 700; }
-.review-content > p { margin: 0 0 16px; color: #363d48; font-size: 11px; line-height: 1.65; }
+.review-trip {align-self: flex-start;margin: 11px 0;padding: 5px 9px;border-radius: 20px;color: var(--reviews-red);background: #fff0f1;font-size: 11px;font-weight: 700;}
+.review-content > p {margin: 0 0 16px;color: #363d48;font-size: 12px;line-height: 1.65;}
 .review-gallery {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -152,22 +152,33 @@
 .reviews-pagination nav > div:last-child {
     width: 100%;
     display: flex;
-    \: 57px;
+    justify-content: space-between;
+}
+
+@media(max-width:482px){
+    .reviews-pagination nav > div:last-child {
+    width: 100%;
+    display: flex;
+    flex-direction:column;
+    gap:20px
+}
+
 }
 
 .reviews-pagination nav > div:last-child > div {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 39px;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
 }
 
 .reviews-pagination p {
-    margin-right: 42px;
+    margin: 0;
     color: #6b7280;
     font-size: 14px;
     font-weight: 700;
-    margin: auto 20px;
+    text-align: center;
 }
 
 .reviews-pagination span[aria-current="page"] span,
@@ -278,6 +289,29 @@
     .reviews-trust-bar { grid-template-columns: 1fr; }
     .reviews-trust-bar > div { justify-content: flex-start; border-left: 0; border-top: 1px solid #ffd9dc; padding-top: 12px; }
     .reviews-trust-bar > div:first-child { border-top: 0; padding-top: 0; }
+}
+
+@media (max-width: 468px) {
+    .reviews-pagination nav > div:last-child > div {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .reviews-pagination p {
+        width: 100%;
+        order: 1;
+    }
+
+    .reviews-pagination nav > div:last-child > div > div:last-child {
+        order: 2;
+    }
+
+    .reviews-pagination .inline-flex {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 }
 
 @media (max-width: 420px) {

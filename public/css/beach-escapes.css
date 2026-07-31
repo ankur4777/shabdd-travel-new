@@ -994,12 +994,16 @@
     min-height: 50px;
     padding: 0 22px;
     border-radius: 0;
-    font-size: .76rem;
+    font-size: 16px;
     box-shadow: none;
+    border-radius: 7px;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
 }
 
 .beach-page[class*="beach-page--"] .beach-btn--primary {
     background: var(--theme-accent);
+    background: oklab(0.687458 0.17987 0.0914685);
 }
 
 .beach-page[class*="beach-page--"] .beach-btn--ghost {
