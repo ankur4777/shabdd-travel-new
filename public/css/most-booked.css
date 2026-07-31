@@ -298,7 +298,6 @@
 }
 
 .mb-heading {
-    display: flex;
     gap: 70px;
     align-items: end;
     justify-content: space-between;
