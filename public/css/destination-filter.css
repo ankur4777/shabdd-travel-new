@@ -305,7 +305,7 @@
     line-height: 1;
     white-space: nowrap;
     cursor: pointer;
-    box-shadow: 0 14px 32px rgba(255, 59, 48, 0.22);
+    /* box-shadow: 0 14px 32px rgba(255, 59, 48, 0.22); */
     transition: all var(--df-transition);
 }
 

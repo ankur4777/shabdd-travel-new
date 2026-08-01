@@ -426,7 +426,7 @@ input[type="submit"],
     background: rgb(255 149 149 / 94%);
     border-bottom: 1px solid rgba(17, 17, 17, 0.06);
     backdrop-filter: blur(10px);
-  
+    padding-top: 10px;
 }
 
 .st-topbar-inner {

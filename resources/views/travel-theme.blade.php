@@ -208,7 +208,7 @@
                         </form>
                     </aside>
 
-                    <div class="beach-destination-results" data-theme-destination-results>
+                    <div class="beach-destination-results" data-theme-destination-re Is upside UV hub four US.sults>
                         @include('partials.travel-theme-destination-results')
                     </div>
                 </div>
