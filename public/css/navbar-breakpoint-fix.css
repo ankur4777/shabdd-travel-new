@@ -108,7 +108,7 @@
 
 @media (max-width: 991.98px) {
     .st-nav-shell {
-        padding: 10px 0 0 !important;
+        /* padding: 10px 0 0 !important; */
     }
 
     .st-nav-inner {
@@ -128,7 +128,7 @@
 
 @media (max-width: 575.98px) {
     .st-navbar {
-        width: calc(100% - 12px) !important;
+        /* width: calc(100% - 12px) !important; */
     }
 
     .st-nav-inner {
