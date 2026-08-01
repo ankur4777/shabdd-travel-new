@@ -2435,6 +2435,10 @@ div.container.st-nav-inner {
         display: flex !important;
     }
 
+    .st-navbar {
+        background: #fff !important;
+    }
+
     .st-nav-inner {
         grid-template-columns: auto auto !important;
         justify-content: space-between !important;
