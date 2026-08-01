@@ -65,6 +65,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link st-navlink st-dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-house-door"></i></span>
                                 <span>Domestic Tours</span>
                                 <span class="st-dropdown-indicator" aria-hidden="true"></span>
                             </a>
@@ -107,6 +108,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link st-navlink st-dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-globe2"></i></span>
                                 <span>International Tours</span>
                                 <span class="st-dropdown-indicator" aria-hidden="true"></span>
                             </a>
@@ -153,22 +155,22 @@
                             </div>
                         </li>
                         <li class="nav-item"><a class="nav-link st-navlink"
-                                href="{{ route('honeymoon') }}">Honeymoon</a></li>
+                                href="{{ route('honeymoon') }}"><span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-heart"></i></span><span>Honeymoon</span></a></li>
 
                         <li class="nav-item">
                             <a class="nav-link st-navlink" href="{{ route('family-trips') }}">
-                                Family Trips
+                                <span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-people"></i></span>
+                                <span>Family Trips</span>
                             </a>
                         </li>
                         <li class="nav-item"><a class="nav-link st-navlink"
-                                href="{{ route('religious') }}">Religious</a></li>
-                        <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('budget-friendly') }}">Budget
-                                Friendly</a></li>
-                        <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('blog.index') }}">Blogs</a>
+                                href="{{ route('religious') }}"><span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-bank"></i></span><span>Religious</span></a></li>
+                        <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('budget-friendly') }}"><span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-tags"></i></span><span>Budget Friendly</span></a></li>
+                        <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('blog.index') }}"><span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-journal-text"></i></span><span>Blogs</span></a>
                         </li>
 
                         <li class="nav-item"><a class="nav-link st-navlink"
-                                href="{{ route('contact', [], false) }}">Contact</a></li>
+                                href="{{ route('contact', [], false) }}"><span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-telephone"></i></span><span>Contact</span></a></li>
                     </ul>
                 </div>
 
@@ -189,7 +191,7 @@
                     </a>
                     <a href="#" class="st-cta btn" role="button">
                         <span>Plan My Trip</span>
-                        <span class="st-cta-arrow" aria-hidden="true">→</span>
+                       
                     </a>
                 </div>
 

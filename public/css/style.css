@@ -554,7 +554,7 @@ input[type="submit"],
 
 .st-navbar {
     margin: 0 auto;
-    width: min(100% - 24px, 1320px);
+    width: min(100% - 24px, 1455px);
     background: rgb(255 202 202 / 62%);
     border: 1px solid rgba(255, 255, 255, 0.58);
     border-bottom-color: rgba(17, 17, 17, 0.06);
@@ -711,6 +711,22 @@ div.container.st-nav-inner {
     letter-spacing: 0;
     white-space: nowrap;
     transition: color 0.25s ease;
+}
+
+.st-navlink-icon {
+    width: clamp(16px, 1.2vw, 24px);
+    height: clamp(16px, 1.2vw, 24px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 clamp(16px, 1.2vw, 24px);
+    color: var(--brand-primary);
+    font-size: clamp(16px, 1.15vw, 23px);
+    line-height: 1;
+}
+
+.st-navlink-icon i {
+    line-height: 1;
 }
 
 .st-navlink:hover,
@@ -1028,8 +1044,8 @@ div.container.st-nav-inner {
 }
 
 .st-cta {
-    min-height: 44px;
-    padding: 10px 14px;
+    min-height: 40px;
+    padding: 0px 11px;
     border: 1px solid rgba(255, 59, 48, 0.12) !important;
     border-radius: 16px;
     background: linear-gradient(135deg,
@@ -1037,7 +1053,7 @@ div.container.st-nav-inner {
             var(--brand-primary) 100%) !important;
     color: var(--brand-white) !important;
     font-size: 12px;
-    font-weight: 800;
+    font-weight: 600;
     letter-spacing: 0.03em;
     text-transform: uppercase;
     display: inline-flex;
