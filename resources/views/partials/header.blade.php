@@ -28,13 +28,23 @@
             </div>
 
             <div class="st-topbar-cluster st-topbar-actions">
-                <a href="{{ route('travel-agent.join') }}" class="st-utility-link">Travel Agent Join Us</a>
+                <a href="{{ route('travel-agent.join') }}" class="st-utility-link">
+                    <span class="st-topbar-icon" aria-hidden="true"><i class="bi bi-person-plus"></i></span>
+                    <span>Travel Agent Join Us</span>
+                </a>
                 <a href="#" class="st-utility-link st-offers-link">
+                    <span class="st-topbar-icon" aria-hidden="true"><i class="bi bi-tags"></i></span>
                     <span>Offers</span>
                     <span class="st-badge">3</span>
                 </a>
-                <a href="#" class="st-utility-link">Blog</a>
-                <a href="#" class="st-utility-link">Download App</a>
+                <a href="#" class="st-utility-link">
+                    <span class="st-topbar-icon" aria-hidden="true"><i class="bi bi-journal-text"></i></span>
+                    <span>Blog</span>
+                </a>
+                <a href="#" class="st-utility-link">
+                    <span class="st-topbar-icon" aria-hidden="true"><i class="bi bi-phone"></i></span>
+                    <span>Download App</span>
+                </a>
                 {{-- <a href="#" class="st-login-chip">
                     <span class="st-chip-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none">

@@ -430,17 +430,17 @@ input[type="submit"],
 }
 
 .st-topbar-inner {
-    min-height: 42px;
+    min-height: clamp(34px, 2.4vw, 42px);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
+    gap: clamp(12px, 1.6vw, 24px);
 }
 
 .st-topbar-cluster {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: clamp(8px, 1vw, 16px);
 }
 
 .st-topbar-link,
@@ -454,19 +454,34 @@ input[type="submit"],
 .st-topbar-link {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 13px;
+    gap: clamp(5px, 0.55vw, 8px);
+    font-size: clamp(11px, 0.72vw, 13px);
     font-weight: 700;
     letter-spacing: 0.01em;
 }
 
 .st-topbar-icon {
-    width: 18px;
-    height: 18px;
+    width: clamp(16px, 1.12vw, 21px);
+    height: clamp(16px, 1.12vw, 21px);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: var(--brand-primary);
+    flex: 0 0 clamp(16px, 1.12vw, 21px);
+    color: #fff;
+    font-size: clamp(14px, 1vw, 19px);
+    line-height: 1;
+}
+
+.st-topbar-icon i,
+.st-topbar-icon svg {
+    color: #fff;
+    line-height: 1;
+}
+
+.st-topbar .st-topbar-icon,
+.st-topbar .st-topbar-icon i,
+.st-topbar .st-topbar-icon svg {
+    color: #fff !important;
 }
 
 .st-sep {
@@ -476,15 +491,19 @@ input[type="submit"],
 }
 
 .st-topbar-actions {
-    gap: 18px;
+    gap: clamp(10px, 1.15vw, 18px);
 }
 
 .st-utility-link {
     position: relative;
-    font-size: 12.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: clamp(5px, 0.55vw, 8px);
+    font-size: clamp(10.5px, 0.68vw, 12.5px);
     font-weight: 700;
     letter-spacing: 0.03em;
     text-transform: uppercase;
+    white-space: nowrap;
 }
 
 .st-utility-link:hover,
