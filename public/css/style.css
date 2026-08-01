@@ -2420,13 +2420,13 @@ div.container.st-nav-inner {
     }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1297px) {
     .st-mobile-only {
         display: none !important;
     }
 }
 
-@media (min-width: 992px) and (max-width: 1199.98px) {
+@media (min-width: 992px) and (max-width: 1296px) {
     .st-desktop-only {
         display: none !important;
     }

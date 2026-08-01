@@ -360,7 +360,7 @@
         const navbar = document.getElementById('stNavbar');
         const navShell = navbar ? navbar.closest('.st-nav-shell') : null;
         const headerEl = navbar ? navbar.closest('.st-header') : null;
-        const desktopMq = window.matchMedia('(min-width: 1200px)');
+        const desktopMq = window.matchMedia('(min-width: 1297px)');
         const searchEndpoint = @json(route('search.live', [], false));
         const searchOverlay = document.getElementById('stSearchOverlay');
         const searchPanel = document.getElementById('stSearchPanel');
