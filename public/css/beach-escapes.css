@@ -337,6 +337,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 6px;
     min-height: 38px;
     padding: 0 14px;
     border-radius: 999px;
@@ -350,6 +351,95 @@
     transition: all var(--df-transition);
 }
 
+.beach-destination-filter-panel .df-chip-option-icon {
+    flex: 0 0 auto;
+    color: var(--df-chip-icon-color, var(--df-red));
+    font-size: 1.05em;
+    line-height: 1;
+}
+
+.beach-destination-filter-panel .df-chip-option-icon--duration-weekend {
+    --df-chip-icon-color: #f97316;
+}
+
+.beach-destination-filter-panel .df-chip-option-icon--duration-3-5 {
+    --df-chip-icon-color: #2563eb;
+}
+
+.beach-destination-filter-panel .df-chip-option-icon--duration-5-7 {
+    --df-chip-icon-color: #7c3aed;
+}
+
+.beach-destination-filter-panel .df-chip-option-icon--duration-7-plus {
+    --df-chip-icon-color: #16a34a;
+}
+
+.beach-destination-filter-panel .df-chip-option-icon--style-honeymoon {
+    --df-chip-icon-color: #e11d48;
+}
+
+.beach-destination-filter-panel .df-chip-option-icon--style-adventure {
+    --df-chip-icon-color: #ea580c;
+}
+
+.beach-destination-filter-panel .df-chip-option-icon--style-family,
+.beach-destination-filter-panel .df-chip-option-icon--style-friends {
+    --df-chip-icon-color: #0891b2;
+}
+
+.beach-destination-filter-panel .df-chip-option-icon--style-solo {
+    --df-chip-icon-color: #4f46e5;
+}
+
+.beach-destination-filter-panel .df-chip-option-icon--style-luxury {
+    --df-chip-icon-color: #b45309;
+}
+
+.beach-destination-filter-panel .df-chip-option-icon--style-corporate-tour {
+    --df-chip-icon-color: #475569;
+}
+
+.beach-destination-filter-panel .df-chip-option-icon--style-nature,
+.beach-destination-filter-panel .df-chip-option-icon--style-wildlife {
+    --df-chip-icon-color: #15803d;
+}
+
+.beach-destination-filter-panel .df-chip-option-icon--style-water-activities {
+    --df-chip-icon-color: #0284c7;
+}
+
+.beach-destination-filter-panel .df-chip-option-icon--style-religious {
+    --df-chip-icon-color: #dc2626;
+}
+
+.beach-destination-filter-panel .df-chip-option-icon--season-summer {
+    --df-chip-icon-color: #f59e0b;
+}
+
+.beach-destination-filter-panel .df-chip-option-icon--season-winter {
+    --df-chip-icon-color: #38bdf8;
+}
+
+.beach-destination-filter-panel .df-chip-option-icon--season-monsoon {
+    --df-chip-icon-color: #0ea5e9;
+}
+
+.beach-destination-filter-panel .df-chip-option-icon--season-december {
+    --df-chip-icon-color: #db2777;
+}
+
+.beach-page--beach .beach-destination-filter-panel .df-filter-label i {
+    color: #ea580c;
+}
+
+.beach-page--beach .beach-destination-filter-panel .df-chip-option-icon--style-corporate-tour {
+    --df-chip-icon-color: #64748b;
+}
+
+.beach-page--beach .beach-destination-filter-panel .df-chip-option-icon--style-religious {
+    --df-chip-icon-color: #d97706;
+}
+
 .beach-destination-filter-panel .df-chip:hover span {
     border-color: var(--df-red);
     color: var(--df-red);
@@ -361,6 +451,10 @@
     background: var(--df-red);
     color: #fff;
     box-shadow: 0 6px 18px rgba(255, 59, 48, 0.22);
+}
+
+.beach-destination-filter-panel .df-chip input:checked+span .df-chip-option-icon {
+    color: #fff;
 }
 
 .beach-destination-filter-panel .df-filter-label {

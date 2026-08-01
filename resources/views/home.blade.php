@@ -1492,10 +1492,10 @@
                             <i class="bi bi-clock"></i> Duration
                         </label>
                         <div class="df-chip-group" id="dfDurationGroup" role="group" aria-label="Duration">
-                            <button class="df-chip" data-filter="duration" data-value="weekend">Weekend</button>
-                            <button class="df-chip" data-filter="duration" data-value="3-5">3–5 Days</button>
-                            <button class="df-chip" data-filter="duration" data-value="5-7">5–7 Days</button>
-                            <button class="df-chip" data-filter="duration" data-value="7+">7+ Days</button>
+                            <button class="df-chip" data-filter="duration" data-value="weekend"><i class="bi bi-calendar-week df-chip-option-icon df-chip-option-icon--duration-weekend" aria-hidden="true"></i> Weekend</button>
+                            <button class="df-chip" data-filter="duration" data-value="3-5"><i class="bi bi-calendar3 df-chip-option-icon df-chip-option-icon--duration-3-5" aria-hidden="true"></i> 3-5 Days</button>
+                            <button class="df-chip" data-filter="duration" data-value="5-7"><i class="bi bi-calendar-range df-chip-option-icon df-chip-option-icon--duration-5-7" aria-hidden="true"></i> 5-7 Days</button>
+                            <button class="df-chip" data-filter="duration" data-value="7+"><i class="bi bi-calendar2-plus df-chip-option-icon df-chip-option-icon--duration-7-plus" aria-hidden="true"></i> 7+ Days</button>
                         </div>
                     </div>
 
@@ -1506,13 +1506,13 @@
                         </label>
                         <div class="df-chip-group df-chip-group--wrap" id="dfStyleGroup" role="group"
                             aria-label="Travel style">
-                            <button class="df-chip" data-filter="style" data-value="honeymoon">💑 Honeymoon</button>
-                            <button class="df-chip" data-filter="style" data-value="adventure">🧗 Adventure</button>
-                            <button class="df-chip" data-filter="style" data-value="family">👨‍👩‍👧 Family</button>
-                            <button class="df-chip" data-filter="style" data-value="solo">🎒 Solo</button>
-                            <button class="df-chip" data-filter="style" data-value="friends">🎉 Friends</button>
-                            <button class="df-chip" data-filter="style" data-value="luxury">✨ Luxury</button>
-                            <button class="df-chip" data-filter="style" data-value="corporate-tour">🏢 Corporate Tour</button>
+                            <button class="df-chip" data-filter="style" data-value="honeymoon"><i class="bi bi-heart df-chip-option-icon df-chip-option-icon--style-honeymoon" aria-hidden="true"></i> Honeymoon</button>
+                            <button class="df-chip" data-filter="style" data-value="adventure"><i class="bi bi-compass df-chip-option-icon df-chip-option-icon--style-adventure" aria-hidden="true"></i> Adventure</button>
+                            <button class="df-chip" data-filter="style" data-value="family"><i class="bi bi-people df-chip-option-icon df-chip-option-icon--style-family" aria-hidden="true"></i> Family</button>
+                            <button class="df-chip" data-filter="style" data-value="solo"><i class="bi bi-backpack df-chip-option-icon df-chip-option-icon--style-solo" aria-hidden="true"></i> Solo</button>
+                            <button class="df-chip" data-filter="style" data-value="friends"><i class="bi bi-stars df-chip-option-icon df-chip-option-icon--style-friends" aria-hidden="true"></i> Friends</button>
+                            <button class="df-chip" data-filter="style" data-value="luxury"><i class="bi bi-gem df-chip-option-icon df-chip-option-icon--style-luxury" aria-hidden="true"></i> Luxury</button>
+                            <button class="df-chip" data-filter="style" data-value="corporate-tour"><i class="bi bi-buildings df-chip-option-icon df-chip-option-icon--style-corporate-tour" aria-hidden="true"></i> Corporate Tour</button>
                         </div>
                     </div>
 
@@ -1536,10 +1536,10 @@
                             <i class="bi bi-sun"></i> Season
                         </label>
                         <div class="df-chip-group df-chip-group--wrap" id="dfSeasonGroup" role="group" aria-label="Season">
-                            <button class="df-chip" data-filter="season" data-value="summer">☀️ Summer</button>
-                            <button class="df-chip" data-filter="season" data-value="winter">❄️ Winter</button>
-                            <button class="df-chip" data-filter="season" data-value="monsoon">🌧️ Monsoon</button>
-                            <button class="df-chip" data-filter="season" data-value="december">🎄 December</button>
+                            <button class="df-chip" data-filter="season" data-value="summer"><i class="bi bi-sun df-chip-option-icon df-chip-option-icon--season-summer" aria-hidden="true"></i> Summer</button>
+                            <button class="df-chip" data-filter="season" data-value="winter"><i class="bi bi-snow2 df-chip-option-icon df-chip-option-icon--season-winter" aria-hidden="true"></i> Winter</button>
+                            <button class="df-chip" data-filter="season" data-value="monsoon"><i class="bi bi-cloud-rain df-chip-option-icon df-chip-option-icon--season-monsoon" aria-hidden="true"></i> Monsoon</button>
+                            <button class="df-chip" data-filter="season" data-value="december"><i class="bi bi-calendar-heart df-chip-option-icon df-chip-option-icon--season-december" aria-hidden="true"></i> December</button>
                         </div>
                     </div>
 

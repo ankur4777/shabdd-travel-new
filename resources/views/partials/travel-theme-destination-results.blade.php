@@ -1,7 +1,7 @@
 @if($beachDestinations->isEmpty())
     <div class="beach-empty">
         <h3>{{ $destination_section['empty_title'] ?? 'No destinations match your filters' }}</h3>
-        <p>{{ $destination_section['empty_description'] ?? 'Try a different destination, budget, duration, or travel style to see more options.' }}</p>
+        <p>{{ $destination_section['empty_description'] ?? 'Try a different destination, budget, duration, travel style, or season to see more options.' }}</p>
     </div>
 @else
     <div class="beach-destination-grid">

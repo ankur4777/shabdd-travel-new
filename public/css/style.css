@@ -4735,6 +4735,70 @@ div.container.st-nav-inner {
     user-select: none;
 }
 
+.df-chip-option-icon {
+    flex: 0 0 auto;
+    color: var(--df-chip-icon-color, var(--df-red));
+    font-size: 1.05em;
+    line-height: 1;
+}
+
+.df-chip-option-icon--duration-weekend {
+    --df-chip-icon-color: #f97316;
+}
+
+.df-chip-option-icon--duration-3-5 {
+    --df-chip-icon-color: #2563eb;
+}
+
+.df-chip-option-icon--duration-5-7 {
+    --df-chip-icon-color: #7c3aed;
+}
+
+.df-chip-option-icon--duration-7-plus {
+    --df-chip-icon-color: #16a34a;
+}
+
+.df-chip-option-icon--style-honeymoon {
+    --df-chip-icon-color: #e11d48;
+}
+
+.df-chip-option-icon--style-adventure {
+    --df-chip-icon-color: #ea580c;
+}
+
+.df-chip-option-icon--style-family,
+.df-chip-option-icon--style-friends {
+    --df-chip-icon-color: #0891b2;
+}
+
+.df-chip-option-icon--style-solo {
+    --df-chip-icon-color: #4f46e5;
+}
+
+.df-chip-option-icon--style-luxury {
+    --df-chip-icon-color: #b45309;
+}
+
+.df-chip-option-icon--style-corporate-tour {
+    --df-chip-icon-color: #64748b;
+}
+
+.df-chip-option-icon--season-summer {
+    --df-chip-icon-color: #f59e0b;
+}
+
+.df-chip-option-icon--season-winter {
+    --df-chip-icon-color: #38bdf8;
+}
+
+.df-chip-option-icon--season-monsoon {
+    --df-chip-icon-color: #0ea5e9;
+}
+
+.df-chip-option-icon--season-december {
+    --df-chip-icon-color: #db2777;
+}
+
 .df-chip:hover {
     border-color: var(--df-red);
     color: var(--df-red);
@@ -4749,6 +4813,11 @@ div.container.st-nav-inner {
     color: #fff;
     box-shadow: 0 6px 18px var(--df-red-glow);
     transform: translateY(-1px);
+}
+
+.df-chip.df-chip--active .df-chip-option-icon,
+.df-chip[aria-pressed="true"] .df-chip-option-icon {
+    color: #fff;
 }
 
 /* Budget radio buttons */

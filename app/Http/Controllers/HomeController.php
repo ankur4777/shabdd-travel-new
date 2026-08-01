@@ -370,6 +370,12 @@ class HomeController extends Controller
             ->unique()
             ->values()
             ->all();
+        $selectedSeasons = collect($request->input('seasons', []))
+            ->map(fn($value) => trim((string) $value))
+            ->filter()
+            ->unique()
+            ->values()
+            ->all();
         [$selectedMinPrice, $selectedMaxPrice] = $this->beachBudgetRange($selectedBudget, $priceBounds);
 
         $beachDestinations = $this->filterBeachDestinations(
@@ -378,10 +384,12 @@ class HomeController extends Controller
             $selectedMinPrice,
             $selectedMaxPrice,
             $selectedDuration,
-            $selectedTravelStyles
+            $selectedTravelStyles,
+            $selectedSeasons
         );
 
         $beachTravelStyleOptions = $this->beachTravelStyleOptions($allBeachDestinations);
+        $seasonOptions = $this->themeSeasonOptions();
         $beachPackages = $this->popularBeachPackages();
 
         $viewData = [
@@ -396,6 +404,8 @@ class HomeController extends Controller
             'selectedBudget' => $selectedBudget,
             'selectedDuration' => $selectedDuration,
             'selectedTravelStyles' => $selectedTravelStyles,
+            'selectedSeasons' => $selectedSeasons,
+            'seasonOptions' => $seasonOptions,
             'beachPackages' => $beachPackages,
             'beachDestinationCount' => $beachDestinations->count(),
             'beachPackageCount' => $beachPackages->count(),
@@ -446,6 +456,12 @@ class HomeController extends Controller
             ->unique()
             ->values()
             ->all();
+        $selectedSeasons = collect($request->input('seasons', []))
+            ->map(fn($value) => trim((string) $value))
+            ->filter()
+            ->unique()
+            ->values()
+            ->all();
         [$selectedMinPrice, $selectedMaxPrice] = $this->beachBudgetRange($selectedBudget, $priceBounds);
 
         $filteredDestinations = $this->filterBeachDestinations(
@@ -454,10 +470,12 @@ class HomeController extends Controller
             $selectedMinPrice,
             $selectedMaxPrice,
             $selectedDuration,
-            $selectedTravelStyles
+            $selectedTravelStyles,
+            $selectedSeasons
         );
 
         $travelStyleOptions = $this->beachTravelStyleOptions($allThemeDestinations);
+        $seasonOptions = $this->themeSeasonOptions();
         $themePackages = $this->buildTravelThemePackages($themeKey);
         $listingRoute = route($this->travelThemeRouteName($themeKey));
 
@@ -476,6 +494,8 @@ class HomeController extends Controller
             'selectedBudget' => $selectedBudget,
             'selectedDuration' => $selectedDuration,
             'selectedTravelStyles' => $selectedTravelStyles,
+            'selectedSeasons' => $selectedSeasons,
+            'seasonOptions' => $seasonOptions,
             'beachPackages' => $themePackages,
             'beachDestinationCount' => $filteredDestinations->count(),
             'beachPackageCount' => $themePackages->count(),
@@ -638,6 +658,7 @@ class HomeController extends Controller
                         ->filter()
                         ->values()
                         ->all(),
+                    'season_keys' => $this->themeDestinationSeasonKeys($destination),
                     'description' => $destination->short_description ?: 'A beach destination curated from the admin panel.',
                     'image' => $this->resolveMediaUrl($destination->image_url ?: $destination->hero_image),
                     'url' => route('destinations.show', $destination->slug),
@@ -709,7 +730,8 @@ class HomeController extends Controller
         int $selectedMinPrice,
         int $selectedMaxPrice,
         string $selectedDuration,
-        array $selectedTravelStyles
+        array $selectedTravelStyles,
+        array $selectedSeasons = []
     ): Collection {
         return $destinations
             ->filter(function (array $destination) use (
@@ -717,7 +739,8 @@ class HomeController extends Controller
                 $selectedMinPrice,
                 $selectedMaxPrice,
                 $selectedDuration,
-                $selectedTravelStyles
+                $selectedTravelStyles,
+                $selectedSeasons
             ) {
                 if ($selectedDestination !== '' && $destination['slug'] !== $selectedDestination) {
                     return false;
@@ -746,6 +769,23 @@ class HomeController extends Controller
                         ->contains(fn(string $style) => in_array($style, $destinationStyles, true));
 
                     if (!$matchesStyle) {
+                        return false;
+                    }
+                }
+
+                if (!empty($selectedSeasons)) {
+                    $destinationSeasons = collect($destination['season_keys'] ?? [])
+                        ->map(fn($season) => Str::slug((string) $season))
+                        ->filter()
+                        ->values()
+                        ->all();
+
+                    $matchesSeason = collect($selectedSeasons)
+                        ->map(fn($season) => Str::slug((string) $season))
+                        ->filter()
+                        ->contains(fn(string $season) => in_array($season, $destinationSeasons, true));
+
+                    if (!$matchesSeason) {
                         return false;
                     }
                 }
@@ -862,10 +902,52 @@ class HomeController extends Controller
                 ->filter()
                 ->values()
                 ->all(),
+            'season_keys' => $this->themeDestinationSeasonKeys($destination),
             'description' => $destination->short_description ?: ($definition['description'] ?? 'A curated destination for this travel theme.'),
             'image' => $this->resolveMediaUrl($destination->image_url ?: $destination->hero_image ?: ($definition['image'] ?? null)),
             'url' => route('destinations.show', $destination->slug),
         ];
+    }
+
+    private function themeSeasonOptions(): array
+    {
+        return [
+            ['value' => 'summer', 'label' => 'Summer', 'icon' => 'bi bi-sun'],
+            ['value' => 'winter', 'label' => 'Winter', 'icon' => 'bi bi-snow2'],
+            ['value' => 'monsoon', 'label' => 'Monsoon', 'icon' => 'bi bi-cloud-rain'],
+            ['value' => 'december', 'label' => 'December', 'icon' => 'bi bi-calendar-heart'],
+        ];
+    }
+
+    private function themeDestinationSeasonKeys(Destination $destination): array
+    {
+        $terms = $this->homeDiscoverTextCollection(
+            $destination->seasons ?? [],
+            $destination->recommended_months ?? [],
+            [$destination->best_season]
+        )
+            ->map(fn($value) => strtolower($value))
+            ->implode(' ');
+
+        $keys = collect();
+
+        if (Str::contains($terms, ['summer', 'april', 'may', 'june'])) {
+            $keys->push('summer');
+        }
+
+        if (Str::contains($terms, ['winter', 'november', 'december', 'january', 'february'])) {
+            $keys->push('winter');
+        }
+
+        if (Str::contains($terms, ['monsoon', 'rain', 'july', 'august', 'september'])) {
+            $keys->push('monsoon');
+        }
+
+        if (Str::contains($terms, ['december'])) {
+            $keys->push('december');
+        }
+
+        return $keys->filter()->unique()->values()->all();
     }
 
     private function normalizeThemePackageFromModel(Package $package, array $definition, string $themeKey): array

@@ -14,6 +14,25 @@
     $heroImage = asset($hero['image'] ?? 'images/himachal.jpg');
     $ctaImage = asset($hero['image'] ?? 'images/himachal.jpg');
     $palette = $palette ?? [];
+    $durationFilterIcons = [
+        'weekend' => 'bi bi-calendar-week',
+        '3-5' => 'bi bi-calendar3',
+        '5-7' => 'bi bi-calendar-range',
+        '7+' => 'bi bi-calendar2-plus',
+    ];
+    $travelStyleFilterIcons = [
+        'honeymoon' => 'bi bi-heart',
+        'adventure' => 'bi bi-compass',
+        'family' => 'bi bi-people',
+        'solo' => 'bi bi-backpack',
+        'friends' => 'bi bi-stars',
+        'luxury' => 'bi bi-gem',
+        'corporate-tour' => 'bi bi-buildings',
+        'nature' => 'bi bi-tree',
+        'wildlife' => 'bi bi-binoculars',
+        'water-activities' => 'bi bi-water',
+        'religious' => 'bi bi-bank',
+    ];
 @endphp
 
 @section('content')
@@ -121,19 +140,19 @@
                                 <div class="df-chip-group" id="themeDurationGroup" role="group" aria-label="Duration">
                                     <label class="df-chip">
                                         <input type="radio" name="duration" value="weekend" {{ $selectedDuration === 'weekend' ? 'checked' : '' }} data-theme-auto-submit>
-                                        <span>Weekend</span>
+                                        <span><i class="{{ $durationFilterIcons['weekend'] }} df-chip-option-icon df-chip-option-icon--duration-weekend" aria-hidden="true"></i> Weekend</span>
                                     </label>
                                     <label class="df-chip">
                                         <input type="radio" name="duration" value="3-5" {{ $selectedDuration === '3-5' ? 'checked' : '' }} data-theme-auto-submit>
-                                        <span>3-5 Days</span>
+                                        <span><i class="{{ $durationFilterIcons['3-5'] }} df-chip-option-icon df-chip-option-icon--duration-3-5" aria-hidden="true"></i> 3-5 Days</span>
                                     </label>
                                     <label class="df-chip">
                                         <input type="radio" name="duration" value="5-7" {{ $selectedDuration === '5-7' ? 'checked' : '' }} data-theme-auto-submit>
-                                        <span>5-7 Days</span>
+                                        <span><i class="{{ $durationFilterIcons['5-7'] }} df-chip-option-icon df-chip-option-icon--duration-5-7" aria-hidden="true"></i> 5-7 Days</span>
                                     </label>
                                     <label class="df-chip">
                                         <input type="radio" name="duration" value="7+" {{ $selectedDuration === '7+' ? 'checked' : '' }} data-theme-auto-submit>
-                                        <span>7+ Days</span>
+                                        <span><i class="{{ $durationFilterIcons['7+'] }} df-chip-option-icon df-chip-option-icon--duration-7-plus" aria-hidden="true"></i> 7+ Days</span>
                                     </label>
                                 </div>
                             </div>
@@ -149,11 +168,32 @@
                                             <input type="checkbox" name="travel_styles[]" value="{{ $travelStyle }}"
                                                 {{ in_array($travelStyle, $selectedTravelStyles, true) ? 'checked' : '' }}
                                                 data-theme-auto-submit>
-                                            <span>{{ $travelStyle }}</span>
+                                            @php
+                                                $travelStyleSlug = \Illuminate\Support\Str::slug($travelStyle);
+                                                $travelStyleIcon = $travelStyleFilterIcons[$travelStyleSlug] ?? 'bi bi-stars';
+                                            @endphp
+                                            <span><i class="{{ $travelStyleIcon }} df-chip-option-icon df-chip-option-icon--style-{{ $travelStyleSlug }}" aria-hidden="true"></i> {{ $travelStyle }}</span>
                                         </label>
                                     @empty
                                         <div class="beach-filter-note">No travel styles found yet.</div>
                                     @endforelse
+                                </div>
+                            </div>
+
+                            <div class="df-filter-group">
+                                <label class="df-filter-label">
+                                    <i class="bi bi-sun"></i> Season
+                                </label>
+                                <div class="df-chip-group df-chip-group--wrap" id="themeSeasonGroup" role="group"
+                                    aria-label="Season">
+                                    @foreach(($seasonOptions ?? []) as $seasonOption)
+                                        <label class="df-chip">
+                                            <input type="checkbox" name="seasons[]" value="{{ $seasonOption['value'] }}"
+                                                {{ in_array($seasonOption['value'], $selectedSeasons ?? [], true) ? 'checked' : '' }}
+                                                data-theme-auto-submit>
+                                            <span><i class="{{ $seasonOption['icon'] }} df-chip-option-icon df-chip-option-icon--season-{{ $seasonOption['value'] }}" aria-hidden="true"></i> {{ $seasonOption['label'] }}</span>
+                                        </label>
+                                    @endforeach
                                 </div>
                             </div>
 
