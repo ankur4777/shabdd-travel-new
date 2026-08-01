@@ -593,7 +593,7 @@ div.container.st-nav-inner {
 }
 
 .st-header.st-header-nav-fixed {
-    padding-top: var(--st-nav-fixed-offset, 0px);
+    /* padding-top: var(--st-nav-fixed-offset, 0px); */
 }
 
 .st-nav-shell.st-shell-fixed {
