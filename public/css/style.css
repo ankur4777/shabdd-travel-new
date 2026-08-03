@@ -612,9 +612,7 @@ div.container.st-nav-inner {
     box-shadow: var(--brand-shadow-strong);
 }
 
-.st-header.st-header-nav-fixed {
-    /* padding-top: var(--st-nav-fixed-offset, 0px); */
-}
+
 
 .st-nav-shell.st-shell-fixed {
     position: fixed;
@@ -3551,14 +3549,17 @@ div.container.st-nav-inner {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    opacity: 0.75;
-    transition: opacity 0.2s ease;
+  
 }
 
 .st-footer-social-link:hover .st-social-icon {
     opacity: 1;
 }
 
+.st-social-icon-img{
+    width:25px;
+  
+}
 .st-social-icon svg {
     width: 100%;
     height: 100%;

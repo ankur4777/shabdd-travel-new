@@ -116,9 +116,9 @@ CSS FILE: footer.css  (link in your layout head)
                             </a>
                         </li>
                         <li><a href="#">Support</a></li>
-                        <li><a href="#">Blog</a></li>
+                        <li><a href="/blogs">Blog</a></li>
                         <li><a href="#">Sitemap</a></li>
-                        <li><a href="#">Partner With SHABDD</a></li>
+                        <li><a href="/travel-agent-join-us">Partner With SHABDD</a></li>
                         <li><a href="#">Destination Marketing</a></li>
                     </ul>
                 </div>
@@ -130,12 +130,9 @@ CSS FILE: footer.css  (link in your layout head)
 
                         <li>
                             <a href="#" class="st-footer-social-link">
-                                {{-- Facebook --}}
+                                    {{-- Facebook --}}
                                 <span class="st-social-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
-                                        <path d="M15 8h-1.5A1.5 1.5 0 0012 9.5V11h3l-.5 3H12v7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
+                                    <img src="/footericon/facebook.png" alt="Facebook" class="st-social-icon-img">
                                 </span>
                                 Facebook
                             </a>
@@ -145,11 +142,7 @@ CSS FILE: footer.css  (link in your layout head)
                             <a href="#" class="st-footer-social-link">
                                 {{-- Instagram --}}
                                 <span class="st-social-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                        <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.6"/>
-                                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/>
-                                        <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
-                                    </svg>
+                                  <img src="/footericon/instagram.png" alt="Instagram" class="st-social-icon-img">
                                 </span>
                                 Instagram
                             </a>
@@ -159,9 +152,7 @@ CSS FILE: footer.css  (link in your layout head)
                             <a href="#" class="st-footer-social-link">
                                 {{-- X / Twitter --}}
                                 <span class="st-social-icon">
-                                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                                    </svg>
+                                   <img src="/footericon/x.com.png" alt="X.com" class="st-social-icon-img">
                                 </span>
                                 X.com
                             </a>
@@ -171,10 +162,7 @@ CSS FILE: footer.css  (link in your layout head)
                             <a href="#" class="st-footer-social-link">
                                 {{-- LinkedIn --}}
                                 <span class="st-social-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                        <rect x="2" y="2" width="20" height="20" rx="4" stroke="currentColor" stroke-width="1.6"/>
-                                        <path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 014 0v4M11 10v7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                                    </svg>
+                                   <img src="/footericon/linkedin.png" alt="LinkedIn" class="st-social-icon-img">
                                 </span>
                                 Linkedin
                             </a>
@@ -184,10 +172,7 @@ CSS FILE: footer.css  (link in your layout head)
                             <a href="#" class="st-footer-social-link">
                                 {{-- YouTube --}}
                                 <span class="st-social-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                        <rect x="2" y="5" width="20" height="14" rx="4" stroke="currentColor" stroke-width="1.6"/>
-                                        <path d="M10 9l5 3-5 3V9z" fill="currentColor"/>
-                                    </svg>
+                                    <img src="/footericon/youtub.png" alt="YouTube" class="st-social-icon-img">
                                 </span>
                                 Youtube
                             </a>
