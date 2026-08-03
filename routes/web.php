@@ -94,3 +94,7 @@ Route::get('/chatbot/themes', [ChatController::class, 'themes']);
 Route::get('/chatbot/travel-styles', [ChatController::class, 'travelStyles']);
 Route::post('/chatbot/save-lead', [ChatController::class, 'saveLead']);
 Route::get('/chatbot/search-destinations', [ChatController::class, 'searchDestinations']);
+
+Route::get("/about-page",function(){
+    return view("about");
+});
