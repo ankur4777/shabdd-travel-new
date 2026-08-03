@@ -118,7 +118,7 @@
                     ['name' => 'Vikas Sharma', 'role' => 'Founder & CEO', 'img' => '01KWE8R3NGPVKEY218XFH0XB9B.png'],
                     ['name' => 'Anjali Mehta', 'role' => 'Travel Expert', 'img' => '01KWEEYA0GJ6NQ4CKCB47Y4XH5.png'],
                     ['name' => 'Rohit Verma', 'role' => 'Operations Head', 'img' => '01KWE6QEMJQPE08WN3W5GZ9JM8.jpeg'],
-                    ['name' => 'Priya Nair', 'role' => 'Customer Relations', 'img' => '01KWEGQWKBQCQ49VPKTCHDEMAM.png'],
+                    ['name' => 'verma', 'role' => 'Customer Relations', 'img' => '01KWEGQWKBQCQ49VPKTCHDEMAM.png'],
                 ] as $member)
                     <article class="about-team-card">
                         <img src="{{ asset('storage_backup_20260730121753/review-profiles/' . $member['img']) }}"
