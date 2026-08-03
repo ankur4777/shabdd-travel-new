@@ -53,7 +53,7 @@
                     <li><i class="bi bi-check-circle"></i> 24/7 customer support</li>
                     <li><i class="bi bi-check-circle"></i> Safe & comfortable travel</li>
                 </ul>
-                <a class="about-btn" href="/contact">Learn More About Us <i class="bi bi-arrow-right"></i></a>
+               
             </div>
 
             <div class="about-gallery" aria-label="Travel memories">
@@ -68,10 +68,10 @@
         </section>
 
         <section class="about-stats" aria-label="Company highlights">
-            <div class="about-stat"><i class="bi bi-people"></i><strong>5,000+</strong><span>Happy Travelers</span></div>
-            <div class="about-stat"><i class="bi bi-globe2"></i><strong>150+</strong><span>Destinations</span></div>
-            <div class="about-stat"><i class="bi bi-suitcase"></i><strong>500+</strong><span>Curated Packages</span></div>
-            <div class="about-stat"><i class="bi bi-headset"></i><strong>24/7</strong><span>Customer Support</span></div>
+            <div class="about-stat"><i class="bi bi-people"></i><strong data-count="5000" data-suffix="+">0+</strong><span>Happy Travelers</span></div>
+            <div class="about-stat"><i class="bi bi-globe2"></i><strong data-count="150" data-suffix="+">0+</strong><span>Destinations</span></div>
+            <div class="about-stat"><i class="bi bi-suitcase"></i><strong data-count="500" data-suffix="+">0+</strong><span>Curated Packages</span></div>
+            <div class="about-stat"><i class="bi bi-headset"></i><strong data-count="24" data-suffix="/7">0/7</strong><span>Customer Support</span></div>
         </section>
 
         <section class="about-section about-why">
@@ -108,7 +108,7 @@
             <div class="about-section-head">
                 <div class="about-copy">
                     <p class="about-kicker">Our Team</p>
-                    <h2>The passionate people<br>behind your journeys.</h2>
+                    <h2>The passionate people behind your journeys.</h2>
                 </div>
                 <a href="/contact">View All Team <i class="bi bi-arrow-right"></i></a>
             </div>
@@ -168,3 +168,39 @@
 
     </main>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const counters = document.querySelectorAll('.about-stats strong[data-count]');
+            const duration = 1800;
+
+            const formatNumber = function (value) {
+                return Math.floor(value).toLocaleString('en-IN');
+            };
+
+            const runCounters = function () {
+                const startTime = performance.now();
+
+                const tick = function (now) {
+                    const progress = Math.min((now - startTime) / duration, 1);
+                    const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+                    counters.forEach(function (counter) {
+                        const target = Number(counter.dataset.count);
+                        const suffix = counter.dataset.suffix || '';
+                        counter.textContent = formatNumber(target * easedProgress) + suffix;
+                    });
+
+                    if (progress < 1) {
+                        requestAnimationFrame(tick);
+                    }
+                };
+
+                requestAnimationFrame(tick);
+            };
+
+            runCounters();
+        });
+    </script>
+@endpush
