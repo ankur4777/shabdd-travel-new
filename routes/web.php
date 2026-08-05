@@ -17,6 +17,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
 Route::get('/search/live', [SearchController::class, 'live'])->name('search.live');
 Route::view('/contact', 'contact')->name('contact');
+Route::view('/terms-and-conditions', 'terms-and-conditions')->name('terms.conditions');
 Route::view('/travel-agent-join-us', 'travel-agent-join-us')->name('travel-agent.join');
 Route::get('/blogs', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blogs/{destination}/{blog}', [BlogController::class, 'show'])->name('blog.show');
