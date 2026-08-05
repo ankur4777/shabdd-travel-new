@@ -671,7 +671,7 @@ div.container.st-nav-inner {
 }
 
 .st-brand img {
-    width: 108px;
+    width: 150px;
     height: auto;
     display: block;
     margin-left: 10px;
@@ -2141,7 +2141,7 @@ div.container.st-nav-inner {
     }
 
     .st-brand img {
-        width: 108px;
+        width: 150px;
     }
 
     .st-navlink {
@@ -2161,7 +2161,7 @@ div.container.st-nav-inner {
     }
 
     .st-brand img {
-        width: 96px;
+        width: 136px;
         margin-left: 0;
     }
 
@@ -2301,7 +2301,7 @@ div.container.st-nav-inner {
     }
 
     .st-brand img {
-        width: 100px;
+        width: 136px;
         margin-left: 10px;
     }
 }
@@ -2383,7 +2383,7 @@ div.container.st-nav-inner {
     }
 
     .st-brand img {
-        width: 90px;
+        width: 124px;
         margin-left: 10px;
     }
 }
@@ -2416,7 +2416,7 @@ div.container.st-nav-inner {
     }
 
     .st-mobile-head .st-brand img {
-        width: 82px;
+        width: 112px;
     }
 
     .st-mobile-links {
@@ -2429,7 +2429,7 @@ div.container.st-nav-inner {
     }
 
     .st-brand img {
-        width: 82px;
+        width: 112px;
         margin-left: 10px;
     }
 
@@ -3591,8 +3591,8 @@ div.container.st-nav-inner {
 }
 
 .st-footer-logo {
-    height:36px;
-    width: auto;
+    width: 150px;
+    height: auto;
     display: block;
 }
 
@@ -3643,6 +3643,10 @@ div.container.st-nav-inner {
         flex-direction: column;
         align-items: flex-start;
         gap: 14px;
+    }
+
+    .st-footer-logo {
+        width: 112px;
     }
 
     .st-footer-copy {
