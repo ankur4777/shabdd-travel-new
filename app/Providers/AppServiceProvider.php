@@ -13,15 +13,12 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      */
-    // public function register(): void
-    // {
+    public function register(): void
+    {
         
-    // }
-
-    /**
-     * Bootstrap any application services.
-     */
-    // public function boot(): void {}
+    }
+//  Bootstrap any application services.
+    //  public function boot(): void {}
 
 
     public function boot(): void
@@ -33,9 +30,9 @@ class AppServiceProvider extends ServiceProvider
                 ->itemPanelAspectRatio(null);
         });
 
-        if ($this->app->environment('production') || str_starts_with((string) config('app.url'), 'https://')) {
-            URL::forceScheme('https');
-        }
+        // if ($this->app->environment('production') || str_starts_with((string) config('app.url'), 'https://')) {
+        //     URL::forceScheme('https');
+        // }
 
         View::composer('partials.header', function ($view): void {
             $topDomesticDestinations = Destination::query()

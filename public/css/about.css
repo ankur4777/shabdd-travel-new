@@ -9,6 +9,10 @@
     overflow: hidden;
 }
 
+.about-hero-content h1{
+    font-family:"Merriweather", Georgia, "Times New Roman", Times, serif;
+}
+
 .about-hero {
     position: relative;
     min-height: 620px;
@@ -68,13 +72,13 @@
 .about-hero h1,
 .about-copy h2,
 .about-cta h2 {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: "Merriweather", Georgia, "Times New Roman", Times, serif;
     font-weight: 800;
     letter-spacing: 0;
 }
 
 .about-hero h1 {
-    max-width: 680px;
+    max-width: 950px;
     margin: 0;
     font-size: clamp(2.6rem, 5vw, 4.8rem);
     line-height: 1.04;
