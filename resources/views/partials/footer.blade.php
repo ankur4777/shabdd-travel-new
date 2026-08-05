@@ -96,7 +96,7 @@ CSS FILE: footer.css  (link in your layout head)
                 <div class="st-footer-col">
                     <h4 class="st-footer-col-title">Policies</h4>
                     <ul class="st-footer-col-links">
-                        <li><a href="#">Terms &amp; Conditions</a></li>
+                        <li><a href="{{ route('terms.conditions') }}">Terms &amp; Conditions</a></li>
                         <li><a href="#">Privacy Policies</a></li>
                         <li><a href="#">Copyright Policies</a></li>
                     </ul>
