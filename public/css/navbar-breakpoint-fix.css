@@ -23,7 +23,7 @@
 
 .st-brand img {
     flex: 0 0 auto;
-    max-width: clamp(112px, 9vw, 150px);
+    max-width: clamp(82px, 7vw, 108px);
 }
 
 .st-brand-copy {
@@ -141,7 +141,7 @@
     }
 
     .st-brand img {
-        width: 112px !important;
+        width: 58px !important;
         margin-left: 0 !important;
     }
 
