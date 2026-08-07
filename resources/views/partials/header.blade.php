@@ -63,7 +63,7 @@
         <nav class="st-navbar navbar navbar-expand-xl" id="stNavbar">
             <div class="container st-nav-inner">
                 <a class="st-brand navbar-brand" href="/">
-                    <img src="{{ asset('images/logo.png') }}" alt="SHABDD TRAVEL logo">
+                    <img src="{{ asset('images/header-logo.png') }}" alt="SHABDD TRAVEL logo">
                     <span class="st-brand-copy st-desktop-only">
                         <span class="st-brand-kicker">Luxury Travel Platform</span>
                         <span class="st-brand-subtitle">Curated holidays across India and beyond</span>
