@@ -98,7 +98,7 @@ CSS FILE: footer.css  (link in your layout head)
                     <ul class="st-footer-col-links">
                         <li><a href="{{ route('terms.conditions') }}">Terms &amp; Conditions</a></li>
                         <li><a href="{{ route('privacy.policy') }}">Privacy Policies</a></li>
-                        <li><a href="#">Copyright Policies</a></li>
+                        <li><a href="{{ route('copyright.policy') }}">Copyright Policies</a></li>
                     </ul>
                 </div>
 
