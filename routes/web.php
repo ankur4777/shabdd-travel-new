@@ -101,3 +101,6 @@ Route::get('/chatbot/search-destinations', [ChatController::class, 'searchDestin
 Route::get("/about-page",function(){
     return view("about");
 });
+
+
+    Route::view("/support","support")->name("support");

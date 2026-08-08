@@ -115,11 +115,11 @@ CSS FILE: footer.css  (link in your layout head)
                                 support@shabdd.com
                             </a>
                         </li>
-                        <li><a href="#">Support</a></li>
+                        <li><a href="{{ route('support') }}">Support</a></li>
                         <li><a href="/blogs">Blog</a></li>
-                        <li><a href="#">Sitemap</a></li>
+                     
                         <li><a href="/travel-agent-join-us">Partner With SHABDD</a></li>
-                        <li><a href="#">Destination Marketing</a></li>
+                      
                     </ul>
                 </div>
 
