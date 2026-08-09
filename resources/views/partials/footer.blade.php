@@ -97,8 +97,8 @@ CSS FILE: footer.css  (link in your layout head)
                     <h4 class="st-footer-col-title">Policies</h4>
                     <ul class="st-footer-col-links">
                         <li><a href="{{ route('terms.conditions') }}">Terms &amp; Conditions</a></li>
-                        <li><a href="#">Privacy Policies</a></li>
-                        <li><a href="#">Copyright Policies</a></li>
+                        <li><a href="{{ route('privacy.policy') }}">Privacy Policies</a></li>
+                        <li><a href="{{ route('copyright.policy') }}">Copyright Policies</a></li>
                     </ul>
                 </div>
 
@@ -115,11 +115,11 @@ CSS FILE: footer.css  (link in your layout head)
                                 support@shabdd.com
                             </a>
                         </li>
-                        <li><a href="#">Support</a></li>
+                        <li><a href="{{ route('support') }}">Support</a></li>
                         <li><a href="/blogs">Blog</a></li>
-                        <li><a href="#">Sitemap</a></li>
+                     
                         <li><a href="/travel-agent-join-us">Partner With SHABDD</a></li>
-                        <li><a href="#">Destination Marketing</a></li>
+                      
                     </ul>
                 </div>
 
@@ -194,7 +194,7 @@ CSS FILE: footer.css  (link in your layout head)
 
                 {{-- Logo --}}
                 <a href="{{ url('/') }}" class="st-footer-brand">
-                    <img src="{{ asset('images/logo-bottom.png') }}" alt="SHABDD" class="st-footer-logo">
+                    <img src="{{ asset('images/footer-logo.png') }}" alt="SHABDD" class="st-footer-logo">
                 </a>
 
                 {{-- Copyright --}}

@@ -63,7 +63,7 @@
         <nav class="st-navbar navbar navbar-expand-xl" id="stNavbar">
             <div class="container st-nav-inner">
                 <a class="st-brand navbar-brand" href="/">
-                    <img src="{{ asset('images/logo.png') }}" alt="SHABDD TRAVEL logo">
+                    <img src="{{ asset('images/header-logo.png') }}" alt="SHABDD TRAVEL logo">
                     <span class="st-brand-copy st-desktop-only">
                         <span class="st-brand-kicker">Luxury Travel Platform</span>
                         <span class="st-brand-subtitle">Curated holidays across India and beyond</span>
@@ -370,7 +370,7 @@
         const navbar = document.getElementById('stNavbar');
         const navShell = navbar ? navbar.closest('.st-nav-shell') : null;
         const headerEl = navbar ? navbar.closest('.st-header') : null;
-        const desktopMq = window.matchMedia('(min-width: 1297px)');
+        const desktopMq = window.matchMedia('(min-width: 768px)');
         const searchEndpoint = @json(route('search.live', [], false));
         const searchOverlay = document.getElementById('stSearchOverlay');
         const searchPanel = document.getElementById('stSearchPanel');
