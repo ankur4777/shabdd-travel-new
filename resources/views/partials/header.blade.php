@@ -462,13 +462,44 @@
             headerEl.style.setProperty('--st-nav-fixed-offset', `${navShell.offsetHeight}px`);
         };
 
+        const ensureNavSpacer = function () {
+            if (!navShell) return null;
+
+            let spacer = document.getElementById('stNavSpacer');
+            if (!spacer) {
+                spacer = document.createElement('div');
+                spacer.id = 'stNavSpacer';
+                spacer.style.width = '100%';
+                spacer.style.height = '0px';
+                spacer.style.pointerEvents = 'none';
+                navShell.parentNode.insertBefore(spacer, navShell.nextSibling);
+            }
+
+            return spacer;
+        };
+
         const setScrolledState = function () {
             const isScrolled = window.scrollY > 10;
+            // Restore fixed/sticky behavior on all viewports when scrolled.
             const shouldFixNavbar = isScrolled;
             navbar.classList.toggle('st-scrolled', isScrolled);
 
             if (navShell) {
+                // Measure the current navShell height before changing its layout
+                // so the spacer can preserve the original space and avoid jumps.
+                const originalHeight = navShell.offsetHeight;
+
+                // Apply or remove the fixed class
                 navShell.classList.toggle('st-shell-fixed', shouldFixNavbar);
+
+                // Preserve the layout space when the nav becomes fixed by
+                // inserting/resizing a spacer element directly after the nav shell.
+                const spacer = ensureNavSpacer();
+                if (shouldFixNavbar && spacer) {
+                    spacer.style.height = `${originalHeight}px`;
+                } else if (spacer) {
+                    spacer.style.height = '0px';
+                }
             }
 
             if (headerEl) {
