@@ -569,7 +569,8 @@ input[type="submit"],
     position: sticky;
     top: 0;
     z-index: 1035;
-    padding: 14px 0 14px;
+    padding: 10px;
+   
 }
 
 .st-navbar {
@@ -594,8 +595,7 @@ input[type="submit"],
 }
 
 div.container.st-nav-inner {
-    width: 100%;
-    max-width: none;
+    width:1440px;
     padding-left: 22px;
     padding-right: 22px;
 }
@@ -621,7 +621,8 @@ div.container.st-nav-inner {
     right: 0;
     width: 100%;
     z-index: 1040;
-    padding-top: 0;
+  
+    padding:0px
 }
 
 .st-nav-shell.st-shell-fixed .st-navbar {
