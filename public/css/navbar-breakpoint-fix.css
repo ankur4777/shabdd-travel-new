@@ -1,7 +1,7 @@
 /*
  * Main navbar breakpoint rules
- * Desktop navigation: 768px and above
- * Mobile hamburger: below 768px
+ * Desktop navigation: 992px and above
+ * Mobile hamburger: below 992px
  */
 
 .st-nav-shell,
@@ -52,8 +52,8 @@
     min-width: max-content;
 }
 
-/* Always use the full desktop navigation at 768px and above. */
-@media (min-width: 768px) {
+/* Use the full navigation only where its labels remain comfortably readable. */
+@media (min-width: 992px) {
     .st-topbar.st-desktop-only {
         display: flex !important;
     }
@@ -109,17 +109,17 @@
     }
 
     .st-navlink {
-        gap: 4px !important;
-        padding: 18px 4px !important;
-        font-size: 11px !important;
+        gap: 5px !important;
+        padding: 18px 5px !important;
+        font-size: 12px !important;
         line-height: 1.2 !important;
     }
 
     .st-navlink-icon {
-        width: 16px !important;
-        height: 16px !important;
-        flex-basis: 16px !important;
-        font-size: 15px !important;
+        width: 18px !important;
+        height: 18px !important;
+        flex-basis: 18px !important;
+        font-size: 17px !important;
     }
 
     .st-iconbtn {
@@ -132,12 +132,12 @@
     .st-cta {
         min-height: 35px !important;
         padding: 0 12px !important;
-        font-size: 10px !important;
+        font-size: 11px !important;
     }
 }
 
-/* Tablet desktop mode: keep every link visible and scale it to the width. */
-@media (min-width: 768px) and (max-width: 1199.98px) {
+/* Compact desktop mode without turning labels and icons into tiny text. */
+@media (min-width: 992px) and (max-width: 1199.98px) {
     .st-topbar-inner {
         max-width: none !important;
         padding-inline: 12px !important;
@@ -145,7 +145,7 @@
 
     .st-topbar-link,
     .st-utility-link {
-        font-size: clamp(8px, 0.85vw, 10px) !important;
+        font-size: 10.5px !important;
     }
 
     .st-topbar-cluster,
@@ -172,19 +172,19 @@
     }
 
     .st-navlink {
-        gap: clamp(2px, 0.3vw, 4px) !important;
-        padding: 17px clamp(1px, 0.28vw, 3px) !important;
-        font-size: clamp(7.2px, 0.84vw, 10px) !important;
+        gap: 3px !important;
+        padding: 17px 2px !important;
+        font-size: 10.5px !important;
         line-height: 1.15 !important;
         letter-spacing: -0.01em !important;
     }
 
     .st-navlink-icon {
-        width: clamp(9px, 1.15vw, 14px) !important;
-        height: clamp(9px, 1.15vw, 14px) !important;
+        width: 14px !important;
+        height: 14px !important;
         display: inline-flex !important;
-        flex: 0 0 clamp(9px, 1.15vw, 14px) !important;
-        font-size: clamp(9px, 1.15vw, 14px) !important;
+        flex: 0 0 14px !important;
+        font-size: 14px !important;
     }
 
     .st-dropdown-indicator {
@@ -213,7 +213,7 @@
     .st-cta {
         min-height: 30px !important;
         padding: 0 clamp(6px, 0.8vw, 10px) !important;
-        font-size: clamp(7.5px, 0.82vw, 9.5px) !important;
+        font-size: 9.5px !important;
         display: inline-flex !important;
         white-space: nowrap;
     }
@@ -224,72 +224,8 @@
     }
 }
 
-/* At the narrowest desktop widths, save space without hiding nav links. */
-@media (min-width: 768px) and (max-width: 899.98px) {
-    .st-header .st-navbar,
-    .st-nav-inner {
-        height: 54px !important;
-        min-height: 54px !important;
-    }
-
-    .st-topbar-link span:last-child,
-    .st-utility-link span:last-of-type,
-    .st-sep,
-    .st-badge {
-        display: none !important;
-    }
-
-    .st-nav-inner {
-        grid-template-columns: 48px minmax(0, 1fr) auto !important;
-        gap: 2px !important;
-        padding-inline: 4px !important;
-    }
-
-    .st-brand img {
-        width: 48px !important;
-    }
-
-    .st-navlink {
-        gap: 1px !important;
-        padding: 17px 0 !important;
-        font-size: clamp(6.2px, 0.82vw, 7.3px) !important;
-        line-height: 1 !important;
-    }
-
-    .st-navlink-icon {
-        width: 8px !important;
-        height: 8px !important;
-        flex-basis: 8px !important;
-        font-size: 8px !important;
-    }
-
-    .st-dropdown-indicator {
-        width: 4px !important;
-        height: 4px !important;
-    }
-
-    .st-iconbtn {
-        width: 23px !important;
-        height: 23px !important;
-        padding: 0 !important;
-        border-radius: 8px !important;
-    }
-
-    .st-iconbtn svg {
-        width: 12px !important;
-        height: 12px !important;
-    }
-
-    .st-cta {
-        min-height: 25px !important;
-        padding: 0 5px !important;
-        border-radius: 9px !important;
-        font-size: 6.3px !important;
-    }
-}
-
-/* Mobile navigation starts strictly below 768px. */
-@media (max-width: 767.98px) {
+/* Use the mobile navigation before desktop labels would need to shrink. */
+@media (max-width: 991.98px) {
     .st-desktop-only {
         display: none !important;
     }
@@ -325,12 +261,8 @@
     }
 
     .st-brand img {
-<<<<<<< HEAD
-        width: 58px !important;
-        margin-left: 0 !important;
-=======
         width: 82px !important;
->>>>>>> origin/shabdd-travel-new
+        margin-left: 0 !important;
     }
 
     .st-mobile-toggle {
