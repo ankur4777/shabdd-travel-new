@@ -1,0 +1,111 @@
+.career-apply-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) minmax(290px, 380px);
+    align-items: center;
+    gap: 24px;
+    padding: 34px;
+    background: linear-gradient(135deg, #fff 0%, #fff8f7 100%);
+}
+
+.career-apply-icon {
+    width: 72px;
+    height: 72px;
+    display: grid;
+    place-items: center;
+    border-radius: 20px;
+    background: #fff0ee;
+    color: var(--career-red);
+    font-size: 30px;
+}
+
+.career-apply-copy h2 {
+    margin: 4px 0 8px;
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.career-apply-copy > p:last-child {
+    margin: 0;
+    color: var(--career-muted);
+    font-size: 14px;
+}
+
+.career-contact-actions {
+    display: grid;
+    gap: 10px;
+}
+
+.career-contact-link {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 13px 15px;
+    border: 1px solid #f3d5d1;
+    border-radius: 13px;
+    background: #fff;
+    color: var(--career-ink);
+    text-decoration: none;
+    transition: transform .2s ease, border-color .2s ease;
+}
+
+.career-contact-link:hover {
+    transform: translateY(-1px);
+    border-color: var(--career-red);
+    color: var(--career-ink);
+}
+
+.career-contact-link > i {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 38px;
+    border-radius: 10px;
+    background: #fff0ee;
+    color: var(--career-red);
+    font-size: 17px;
+}
+
+.career-contact-link span {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+}
+
+.career-contact-link small {
+    color: var(--career-muted);
+    font-size: 11px;
+}
+
+.career-contact-link strong {
+    overflow-wrap: anywhere;
+    font-size: 13px;
+}
+
+@media (max-width: 991.98px) {
+    .career-apply-card {
+        grid-template-columns: auto 1fr;
+    }
+
+    .career-contact-actions {
+        grid-column: 1 / -1;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .career-apply-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .career-apply-icon {
+        margin: auto;
+    }
+
+    .career-contact-actions {
+        grid-column: auto;
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+}

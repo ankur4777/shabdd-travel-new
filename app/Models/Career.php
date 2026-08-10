@@ -30,4 +30,5 @@ class Career extends Model
             'is_active' => 'boolean',
         ];
     }
+
 }

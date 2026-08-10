@@ -77,7 +77,7 @@ CSS FILE: footer.css  (link in your layout head)
                     <h4 class="st-footer-col-title">About SHABDD</h4>
                     <ul class="st-footer-col-links">
                         <li><a href="/about-page">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
+                        <li><a href="{{ route('careers.index') }}">Careers</a></li>
                         <li><a href="{{ route('reviews.index') }}">SHABDD Reviews</a></li>
                         <li><a href="#">News</a></li>
                         <li>
