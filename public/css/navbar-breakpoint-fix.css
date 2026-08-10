@@ -111,7 +111,7 @@
     .st-navlink {
         gap: 4px !important;
         padding: 18px 4px !important;
-        font-size: 11px !important;
+        font-size: 12.8px !important;
         line-height: 1.2 !important;
     }
 
@@ -174,7 +174,7 @@
     .st-navlink {
         gap: clamp(2px, 0.3vw, 4px) !important;
         padding: 17px clamp(1px, 0.28vw, 3px) !important;
-        font-size: clamp(7.2px, 0.84vw, 10px) !important;
+        font-size: clamp(7.2px, 1.84vw, 12px) !important;
         line-height: 1.15 !important;
         letter-spacing: -0.01em !important;
     }
@@ -252,7 +252,7 @@
     .st-navlink {
         gap: 1px !important;
         padding: 17px 0 !important;
-        font-size: clamp(6.2px, 0.82vw, 7.3px) !important;
+        font-size: clamp(11.2px, 13.82vw, 11.3px) !important;
         line-height: 1 !important;
     }
 
