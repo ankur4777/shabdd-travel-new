@@ -325,7 +325,12 @@
     }
 
     .st-brand img {
+<<<<<<< HEAD
+        width: 58px !important;
+        margin-left: 0 !important;
+=======
         width: 82px !important;
+>>>>>>> origin/shabdd-travel-new
     }
 
     .st-mobile-toggle {
