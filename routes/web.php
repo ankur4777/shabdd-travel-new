@@ -10,6 +10,7 @@ use App\Http\Controllers\PremiumJourneyController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\CareerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -20,6 +21,8 @@ Route::view('/terms-and-conditions', 'terms-and-conditions')->name('terms.condit
 Route::view('/privacy-policy', 'privacy-policy')->name('privacy.policy');
 Route::view('/copyright-policy', 'copyright-policy')->name('copyright.policy');
 Route::view('/travel-agent-join-us', 'travel-agent-join-us')->name('travel-agent.join');
+Route::get('/careers', [CareerController::class, 'index'])->name('careers.index');
+Route::get('/careers/{career}', [CareerController::class, 'show'])->name('careers.show');
 Route::get('/blogs', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blogs/{destination}/{blog}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('/destinations', [DestinationController::class, 'index'])->name('destinations.index');
