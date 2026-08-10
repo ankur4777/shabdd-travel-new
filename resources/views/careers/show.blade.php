@@ -58,7 +58,6 @@
                         <div><dt>Job Location</dt><dd>{{ $career->job_location }}</dd></div>
                         <div><dt>Open Roles</dt><dd>{{ $career->open_roles }}</dd></div>
                         <div><dt>Posted On</dt><dd>{{ $career->created_at->format('d M Y') }}</dd></div>
-                        <div><dt>Job ID</dt><dd>SH-{{ str_pad((string) $career->id, 4, '0', STR_PAD_LEFT) }}</dd></div>
                     </dl>
                     <a href="#apply-here" class="career-primary-btn"><i class="bi bi-send"></i> Apply Now</a>
                 </div>
