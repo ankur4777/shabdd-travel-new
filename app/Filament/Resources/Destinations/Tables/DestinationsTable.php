@@ -35,6 +35,9 @@ class DestinationsTable
                 IconColumn::make('is_active')
                     ->label('Active')
                     ->boolean(),
+                IconColumn::make('is_seasonal_journey')
+                    ->label('Seasonal')
+                    ->boolean(),
             ])
             ->filters([
                 //

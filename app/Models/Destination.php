@@ -28,6 +28,7 @@ class Destination extends Model
         'about',
         'highlights',
         'is_trending',
+        'is_seasonal_journey',
         'is_active',
         'tagline',
         'hero_image',
@@ -93,6 +94,7 @@ class Destination extends Model
         'tags' => 'array',
         'highlights' => 'array',
         'is_trending' => 'boolean',
+        'is_seasonal_journey' => 'boolean',
         'is_active' => 'boolean',
         'rating' => 'decimal:1',
         'features' => 'array',
@@ -138,6 +140,11 @@ class Destination extends Model
     public function scopeTrending(Builder $query): Builder
     {
         return $query->where('is_trending', true);
+    }
+
+    public function scopeSeasonalJourney(Builder $query): Builder
+    {
+        return $query->where('is_seasonal_journey', true);
     }
 
     public function scopeDomestic(Builder $query): Builder

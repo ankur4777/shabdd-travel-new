@@ -10,7 +10,6 @@ use App\Http\Controllers\PremiumJourneyController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ChatController;
-use App\Http\Controllers\SeasonalJourneyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -88,7 +87,6 @@ Route::get('/premium-journeys/{slug}', [PremiumJourneyController::class, 'show']
     ])
     ->name('premium-journeys.show');
 
-Route::get('/seasonal-journeys/{slug}', [SeasonalJourneyController::class, 'show'])->name('seasonal-journeys.show');
 Route::post('/chat', [ChatController::class, 'chat'])
     ->name('chat');
 

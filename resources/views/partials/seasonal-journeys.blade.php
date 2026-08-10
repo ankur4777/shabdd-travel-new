@@ -1,60 +1,20 @@
 @php
-    use App\Models\SeasonalJourney;
+    use App\Models\Destination;
+    use App\Support\MediaUrl;
 
-    $journeys = SeasonalJourney::query()
-        ->where('is_active', true)
-        ->orderBy('sort_order')
+    $journeys = $seasonalJourneyDestinations ?? Destination::query()
+        ->active()
+        ->seasonalJourney()
+        ->orderByDesc('is_trending')
+        ->orderByDesc('rating')
+        ->orderBy('name')
         ->get();
-
-    if ($journeys->isEmpty()) {
-        $journeys = collect([
-            (object) [
-                'title' => 'ANDAMAN',
-                'price_text' => 'Start From ₹ 14,999',
-                'image_url' => asset('images/dubai.jpg'),
-                'slug'
-                => '#'
-            ],
-            (object) [
-                'title' => 'EUROPE',
-                'price_text' => 'Start From ₹ 69,089',
-                'image_url' => asset('images/himachal.jpg'),
-                'slug' => '#'
-            ],
-            (object) [
-                'title' => 'MAURITIUS',
-                'price_text' => 'Start From ₹ 26,999',
-                'image_url' => asset('images/himachal.jpg'),
-                'slug' => '#'
-            ],
-            (object) [
-                'title' => 'HIMACHAL PRADESH',
-                'price_text' => 'Start From ₹ 9,999',
-                'image_url' =>
-                    asset('images/himachal.jpg'),
-                'slug' => '#'
-            ],
-            (object) [
-                'title' => 'KERALA',
-                'price_text' => 'Start From ₹ 9,999',
-                'image_url' => asset('images/kerala.avif'),
-                'slug'
-                => '#'
-            ],
-            (object) [
-                'title' => 'MALAYSIA',
-                'price_text' => 'Start From ₹ 21,999',
-                'image_url' => asset('images/himachal.jpg'),
-                'slug' => '#'
-            ],
-        ]);
-    }
 
     $makeUrl = function ($item) {
         $slug = data_get($item, 'slug');
 
         return $slug && $slug !== '#'
-            ? route('seasonal-journeys.show', ['slug' => $slug])
+            ? route('destinations.show', ['destination' => $slug])
             : '#';
     };
 @endphp
@@ -72,21 +32,25 @@
             if ($index >= 3 && $index <= 4)
                 $classes[] = 'sj-card--bottom-sm';
             if ($index === 5)
-                $classes[] = 'sj-card--bottom-right'
-                ;
-            $img = $journey->image_url ?? ($journey->image ?? ($journey->image_url ?? null));
-            if (is_object($journey) && property_exists($journey, 'image_url')) {
-                $img = $journey->image_url;
+                $classes[] = 'sj-card--bottom-right';
+
+            $name = data_get($journey, 'name', data_get($journey, 'title', 'Seasonal Journey'));
+            $price = data_get($journey, 'price_text');
+
+            if (!$price) {
+                $priceFrom = (int) data_get($journey, 'price_from', 0);
+                $price = $priceFrom > 0 ? 'Start From Rs. ' . number_format($priceFrom) : 'On Request';
             }
 
-            // Support model accessor
-            if (method_exists($journey, 'getImageUrlAttribute')) {
-                $img = $journey->image_url;
+            $img = data_get($journey, 'image_url') ?: data_get($journey, 'hero_image');
+
+            if ($journey instanceof Destination) {
+                $img = MediaUrl::asset($img);
             }
         @endphp
 
         <a href="{{ $makeUrl($journey) }}" class="{{ implode(' ', $classes) }}">
-            <img src="{{ $img ?: asset('images/himachal.jpg') }}" alt="{{ $journey->title }}" class="sj-card__img"
+            <img src="{{ $img ?: asset('images/himachal.jpg') }}" alt="{{ $name }}" class="sj-card__img"
                 width="360"
                 height="480"
                 loading="{{ $index < 3 ? 'eager' : 'lazy' }}"
@@ -94,8 +58,8 @@
                 decoding="async">
             <div class="sj-card__overlay"></div>
             <div class="sj-card__content">
-                <h3 class="sj-card__name">{{ $journey->title }}</h3>
-                <p class="sj-card__price">{{ $journey->price_text }}</p>
+                <h3 class="sj-card__name">{{ $name }}</h3>
+                <p class="sj-card__price">{{ $price }}</p>
             </div>
         </a>
     @endforeach
