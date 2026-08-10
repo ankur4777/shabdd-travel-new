@@ -12,6 +12,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TagsInput;
+use Filament\Forms\Components\Toggle;
 
 class DestinationForm
 {
@@ -78,6 +79,11 @@ class DestinationForm
                             ])
                             ->columns(2)
                             ->columnSpanFull(),
+
+                        Toggle::make('is_seasonal_journey')
+                            ->label('Show in Seasonal Journey')
+                            ->helperText('Turn this on to show this destination card in the home page Seasonal Journeys section.')
+                            ->default(false),
 
                         TextInput::make('price_from')
                             ->numeric()

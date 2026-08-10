@@ -43,7 +43,7 @@ return new class extends Migration
             }
 
             if (!Schema::hasColumn('destinations', 'formatted_price')) {
-                $table->string('formatted_price')->nullable()->after('price');
+                $table->string('formatted_price')->nullable()->after('price_from');
             }
 
             if (!Schema::hasColumn('destinations', 'price_unit')) {

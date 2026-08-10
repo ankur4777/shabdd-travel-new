@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
-use App\Models\SeasonalJourney;
 
 class HomeController extends Controller
 {
@@ -32,6 +31,14 @@ class HomeController extends Controller
             ->take(12)
             ->get();
 
+        $seasonalJourneyDestinations = Destination::query()
+            ->active()
+            ->seasonalJourney()
+            ->orderByDesc('is_trending')
+            ->orderByDesc('rating')
+            ->orderBy('name')
+            ->get();
+
         $packagesForPriceDisplay = Package::query()
             ->whereNotNull('price')
             ->where('price', '>', 0)
@@ -42,7 +49,6 @@ class HomeController extends Controller
 
         $blogController = new BlogController();
         $blogs = $blogController->buildBlogCollection()->take(6);
-        $seasonalJourneys = SeasonalJourney::active()->get();
         $discoverDestinations = $this->homeDiscoverDestinations();
         $discoverDestinationOptions = $discoverDestinations
             ->map(fn(Destination $destination) => [
@@ -57,8 +63,8 @@ class HomeController extends Controller
         return view('home', compact(
             'destinations',
             'popularDestinations',
+            'seasonalJourneyDestinations',
             'blogs',
-            'seasonalJourneys',
             'discoverDestinationOptions',
             'discoverDestinationCards'
         ));

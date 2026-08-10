@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::table('destinations', function (Blueprint $table): void {
             $table->string('hero_video')->nullable()->after('hero_image');
-            $table->text('hero_description')->nullable()->after('hero_subtitle');
+            $table->text('hero_description')->nullable()->after('hero_video');
             $table->string('hero_primary_text')->nullable()->after('hero_description');
             $table->string('hero_primary_url')->nullable()->after('hero_primary_text');
             $table->string('hero_secondary_text')->nullable()->after('hero_primary_url');

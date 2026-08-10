@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Destination;
-use App\Models\SeasonalJourney;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
@@ -98,23 +97,7 @@ class ReviewController extends Controller
                     ));
             });
 
-        $journeyReviews = SeasonalJourney::query()
-            ->whereNotNull('testimonials')
-            ->get(['id', 'title', 'slug', 'testimonials', 'updated_at'])
-            ->flatMap(function (SeasonalJourney $journey): Collection {
-                return collect($journey->testimonials)
-                    ->filter(fn ($review) => is_array($review) && filled($review['review'] ?? null))
-                    ->map(fn (array $review, $index) => $this->normalizeReview(
-                        $review,
-                        'journey-' . $journey->id . '-' . $index,
-                        'journey:' . $journey->id,
-                        $journey->title,
-                        $journey->updated_at
-                    ));
-            });
-
         return $destinationReviews
-            ->concat($journeyReviews)
             ->filter()
             ->values();
     }

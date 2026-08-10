@@ -1238,6 +1238,7 @@
     ============================================================
     --}}
 
+    @if($seasonalJourneyDestinations->isNotEmpty())
     <section class="sj-section">
         <div class="container-fluid px-0">
 
@@ -1252,6 +1253,7 @@
 
         </div>
     </section>
+    @endif
 
 
 

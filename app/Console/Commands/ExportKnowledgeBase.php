@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Destination;
 use App\Models\Package;
-use App\Models\SeasonalJourney;
 use Illuminate\Support\Facades\Storage;
 
 class ExportKnowledgeBase extends Command
@@ -46,6 +45,7 @@ class ExportKnowledgeBase extends Command
                 "Ideal Duration: {$destination->ideal_duration}",
                 "Weather: {$destination->weather}",
                 "Recommended Months: {$destination->recommended_months}",
+                $destination->is_seasonal_journey ? 'Seasonal Journey: Yes' : null,
             ]));
 
             $documents[] = [
@@ -57,6 +57,7 @@ class ExportKnowledgeBase extends Command
                     'theme' => $destination->theme,
                     'country' => $destination->country,
                     'best_season' => $destination->best_season,
+                    'is_seasonal_journey' => (bool) $destination->is_seasonal_journey,
                 ]
             ];
         }
@@ -92,38 +93,6 @@ class ExportKnowledgeBase extends Command
                     'country' => $package->country,
                     'city' => $package->city,
                     'duration' => $package->duration_text,
-                ]
-            ];
-        }
-
-        foreach (SeasonalJourney::where('is_active', true)->get() as $journey) {
-
-            $content = implode("\n", array_filter([
-                "Journey: {$journey->title}",
-                "Tagline: {$journey->tagline}",
-                "Excerpt: " . html_entity_decode(strip_tags($journey->excerpt)),
-                "Content: " . html_entity_decode(strip_tags($journey->content)),
-                "Overview: " . html_entity_decode(strip_tags($journey->overview)),
-                "Best Season: {$journey->best_season}",
-                "Ideal Duration: {$journey->ideal_duration}",
-                "Location: {$journey->location}",
-                "Climate: {$journey->climate}",
-                "Popular For: " . json_encode($journey->popular_for ?? []),
-                "Highlights: " . json_encode($journey->highlights ?? []),
-                "Offer Title: {$journey->offer_title}",
-                "Offer Description: {$journey->offer_description}",
-            ]));
-
-            $documents[] = [
-                'id' => $journey->id,
-                'type' => 'seasonal_journey',
-                'title' => $journey->title,
-                'content' => $content,
-
-                'metadata' => [
-                    'location' => $journey->location,
-                    'best_season' => $journey->best_season,
-                    'climate' => $journey->climate,
                 ]
             ];
         }
