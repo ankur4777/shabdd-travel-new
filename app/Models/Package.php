@@ -45,6 +45,7 @@ class Package extends Model
         'faqs',
         'pdf_file',
         'featured',
+        'is_trending',
     ];
 
     protected $casts = [
@@ -56,6 +57,7 @@ class Package extends Model
         'exclusions' => 'array',
         'faqs' => 'array',
         'featured' => 'boolean',
+        'is_trending' => 'boolean',
         'summer_vacation_special' => 'boolean',
         'winter_vacation_special' => 'boolean',
         'monsoon_special' => 'boolean',

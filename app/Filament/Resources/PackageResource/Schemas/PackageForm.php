@@ -104,6 +104,10 @@ class PackageForm
 
                         Toggle::make('featured'),
 
+                        Toggle::make('is_trending')
+                            ->label('Trending')
+                            ->helperText('Show this package in the homepage trending packages section.'),
+
                     ])
                     ->columns(2),
 

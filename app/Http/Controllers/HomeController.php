@@ -39,6 +39,8 @@ class HomeController extends Controller
             ->orderBy('name')
             ->get();
 
+        $trendingPackages = $this->homeTrendingPackages();
+
         $packagesForPriceDisplay = Package::query()
             ->whereNotNull('price')
             ->where('price', '>', 0)
@@ -64,10 +66,43 @@ class HomeController extends Controller
             'destinations',
             'popularDestinations',
             'seasonalJourneyDestinations',
+            'trendingPackages',
             'blogs',
             'discoverDestinationOptions',
             'discoverDestinationCards'
         ));
+    }
+
+    private function homeTrendingPackages(): Collection
+    {
+        return Package::query()
+            ->where(function (Builder $query): void {
+                $query
+                    ->where('is_trending', true)
+                    ->orWhereRaw("LOWER(TRIM(COALESCE(category, ''))) = ?", ['trending']);
+            })
+            ->orderByDesc('featured')
+            ->orderByDesc('is_trending')
+            ->orderByDesc('rating')
+            ->latest('id')
+            ->take(8)
+            ->get()
+            ->map(fn(Package $package): array => [
+                'title' => $package->title,
+                'slug' => $package->slug,
+                'image' => MediaUrl::asset($package->image),
+                'category' => $package->category ?: 'Trending',
+                'duration' => $package->duration_text ?: ($package->days ? $package->days . ' Days' : 'Flexible Duration'),
+                'location' => collect([$package->city, $package->state, $package->country])->filter()->first() ?: 'India',
+                'rating' => $package->rating ? number_format((float) $package->rating, 1) : 'New',
+                'price' => (int) ($package->price ?? 0),
+                'old_price' => (int) ($package->old_price ?? 0),
+                'feature' => collect([$package->feature_1, $package->feature_2, $package->feature_3])
+                    ->filter()
+                    ->first() ?: 'Curated itinerary uploaded from the admin panel.',
+                'url' => route('packages.show', $package->slug),
+            ])
+            ->values();
     }
 
     private function attachLowestPackagePrices(Collection $destinations, Collection $packages): void

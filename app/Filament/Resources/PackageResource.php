@@ -138,6 +138,10 @@ class PackageResource extends Resource
 
                         Toggle::make('featured'),
 
+                        Toggle::make('is_trending')
+                            ->label('Trending')
+                            ->helperText('Show this package in the homepage trending packages section.'),
+
                     ])
                     ->columns(2),
 
@@ -278,6 +282,10 @@ class PackageResource extends Resource
                 TextColumn::make('rating'),
 
                 IconColumn::make('featured')
+                    ->boolean(),
+
+                IconColumn::make('is_trending')
+                    ->label('Trending')
                     ->boolean(),
 
             ]);
