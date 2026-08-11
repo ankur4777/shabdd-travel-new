@@ -30,6 +30,9 @@ class PackagesTable
                 TextColumn::make('price'),
                 IconColumn::make('featured')
                     ->boolean(),
+                IconColumn::make('is_trending')
+                    ->label('Trending')
+                    ->boolean(),
             ])
             ->filters([
                 //

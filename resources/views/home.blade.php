@@ -738,7 +738,312 @@
     </section>
 
     {{-- ── Styles ── --}}
+    @if($trendingPackages->isNotEmpty())
+        <section class="hp-trending-packages" aria-labelledby="hpTrendingPackagesTitle">
+            <div class="hp-trending-packages__shell">
+                <div class="hp-trending-packages__header">
+                    <div>
+                        <p class="hp-trending-packages__eyebrow">Trending Packages</p>
+                        <h2 id="hpTrendingPackagesTitle">Popular trips from the admin panel</h2>
+                        <p>Only packages marked as trending in admin are shown here.</p>
+                    </div>
+                    <a href="{{ route('packages.index') }}" class="hp-trending-packages__view">
+                        View all <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </div>
+
+                <div class="hp-trending-packages__grid">
+                    @foreach($trendingPackages as $package)
+                        <article class="hp-trending-package-card">
+                            <a href="{{ $package['url'] }}" class="hp-trending-package-card__media">
+                                <img src="{{ $package['image'] }}" alt="{{ $package['title'] }}" loading="lazy">
+                                <span class="hp-trending-package-card__badge">{{ $package['category'] }}</span>
+                                <span class="hp-trending-package-card__rating">
+                                    <i class="bi bi-star-fill" aria-hidden="true"></i>
+                                    {{ $package['rating'] }}
+                                </span>
+                            </a>
+
+                            <div class="hp-trending-package-card__body">
+                                <div class="hp-trending-package-card__meta">
+                                    <span><i class="bi bi-calendar3" aria-hidden="true"></i>{{ $package['duration'] }}</span>
+                                    <span><i class="bi bi-geo-alt-fill" aria-hidden="true"></i>{{ $package['location'] }}</span>
+                                </div>
+                                <h3><a href="{{ $package['url'] }}">{{ $package['title'] }}</a></h3>
+                                <p>{{ $package['feature'] }}</p>
+                                <div class="hp-trending-package-card__footer">
+                                    <div>
+                                        @if($package['old_price'] > 0)
+                                            <del>&#8377;{{ number_format($package['old_price']) }}</del>
+                                        @endif
+                                        <strong>{!! $package['price'] > 0 ? '&#8377;' . number_format($package['price']) : 'On Request' !!}</strong>
+                                        <span>Per couple</span>
+                                    </div>
+                                    <a href="{{ $package['url'] }}">View Details</a>
+                                </div>
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
     <style>
+        .hp-trending-packages {
+            width: 100%;
+            padding: 10px 16px 54px;
+            background: #fff;
+            font-family: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .hp-trending-packages__shell {
+            width: min(100%, 1320px);
+            margin: 0 auto;
+        }
+
+        .hp-trending-packages__header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 22px;
+        }
+
+        .hp-trending-packages__eyebrow {
+            margin: 0 0 6px;
+            color: #f97316;
+            font-size: .78rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .hp-trending-packages__header h2 {
+            margin: 0;
+            color: #101828;
+            font-size: clamp(1.45rem, 2.6vw, 2.25rem);
+            font-weight: 900;
+            line-height: 1.08;
+        }
+
+        .hp-trending-packages__header p:last-child {
+            max-width: 620px;
+            margin: 8px 0 0;
+            color: #667085;
+            font-size: .98rem;
+            line-height: 1.6;
+        }
+
+        .hp-trending-packages__view {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex: 0 0 auto;
+            color: #0f172a;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .hp-trending-packages__grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .hp-trending-package-card {
+            overflow: hidden;
+            border: 1px solid #d7e0ee;
+            border-radius: 5px;
+            background: #fff;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, .06);
+        }
+
+        .hp-trending-package-card__media {
+            position: relative;
+            display: block;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .hp-trending-package-card__media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .35s ease;
+        }
+
+        .hp-trending-package-card:hover .hp-trending-package-card__media img {
+            transform: scale(1.05);
+        }
+
+        .hp-trending-package-card__badge,
+        .hp-trending-package-card__rating {
+            position: absolute;
+            top: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            min-height: 30px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .94);
+            color: #101828;
+            font-size: .76rem;
+            font-weight: 800;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, .12);
+        }
+
+        .hp-trending-package-card__badge {
+            left: 12px;
+        }
+
+        .hp-trending-package-card__rating {
+            right: 12px;
+        }
+
+        .hp-trending-package-card__rating i {
+            color: #f59e0b;
+        }
+
+        .hp-trending-package-card__body {
+            display: flex;
+            min-height: 235px;
+            flex-direction: column;
+            padding: 12px 14px 13px;
+        }
+
+        .hp-trending-package-card__meta {
+            display: flex;
+            flex-wrap: wrap;
+            order: 2;
+            gap: 7px;
+            margin: 0 0 12px;
+        }
+
+        .hp-trending-package-card__meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            min-height: 25px;
+            padding: 4px 9px;
+            border: 1px solid #dce5f2;
+            border-radius: 999px;
+            color: #4a6690;
+            font-size: .69rem;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .hp-trending-package-card__meta i {
+            color: #3679d3;
+            font-size: .74rem;
+        }
+
+        .hp-trending-package-card__body h3 {
+            order: 1;
+            margin-bottom:5px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.12rem;
+            font-weight: 800;
+            line-height: 1.13;
+        }
+
+        .hp-trending-package-card__body h3 a {
+            color: #f04b4b;
+            text-decoration: none;
+        }
+
+        .hp-trending-package-card__body p {
+            display: -webkit-box;
+            order: 3;
+            margin: 0;
+            overflow: hidden;
+            color: #42638f;
+            font-size: .82rem;
+            line-height: 1.5;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+
+        .hp-trending-package-card__footer {
+            display: flex;
+            order: 4;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: auto;
+            padding-top: 12px;
+            border-top: 1px solid #dce5f2;
+        }
+
+        .hp-trending-package-card__footer div {
+            display: grid;
+            gap: 2px;
+        }
+
+        .hp-trending-package-card__footer del,
+        .hp-trending-package-card__footer span {
+            color: #53709b;
+            font-size: .78rem;
+            font-weight: 600;
+        }
+
+        .hp-trending-package-card__footer strong {
+            color: #2dbb65;
+            font-size: 1.12rem;
+            font-weight: 800;
+            font-family:"Merriweather", Georgia, "Times New Roman", Times, serif;
+        }
+
+        .hp-trending-package-card__footer > a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 35px;
+            padding: 7px 9px;
+            border: 1px solid #c9d8ee;
+            border-radius: 9px;
+            color: #1769ff;
+            font-size: .82rem;
+            font-weight: 800;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 1199px) {
+            .hp-trending-packages__grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 991px) {
+            .hp-trending-packages__grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 767px) {
+            .hp-trending-packages {
+                padding-inline: 12px;
+            }
+
+            .hp-trending-packages__header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .hp-trending-packages__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hp-trending-package-card__body {
+                min-height: 0;
+            }
+        }
+
         /* ═══════════════════════════════════════════════
                                                                                            SECTION WRAPPER
                                                                                         ════════════════════════════════════════════════*/
