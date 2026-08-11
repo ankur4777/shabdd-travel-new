@@ -852,6 +852,9 @@
         }
 
         .hp-trending-package-card {
+            display: flex;
+            height: 100%;
+            flex-direction: column;
             overflow: hidden;
             border: 1px solid #d7e0ee;
             border-radius: 5px;
@@ -891,7 +894,7 @@
             border-radius: 999px;
             background: rgba(255, 255, 255, .94);
             color: #101828;
-            font-size: .76rem;
+            font-size: .7rem;
             font-weight: 800;
             box-shadow: 0 8px 20px rgba(15, 23, 42, .12);
         }
@@ -910,6 +913,7 @@
 
         .hp-trending-package-card__body {
             display: flex;
+            flex: 1 1 auto;
             min-height: 235px;
             flex-direction: column;
             padding: 12px 14px 13px;
@@ -932,21 +936,21 @@
             border: 1px solid #dce5f2;
             border-radius: 999px;
             color: #4a6690;
-            font-size: .69rem;
+            font-size: .64rem;
             font-weight: 600;
             line-height: 1;
         }
 
         .hp-trending-package-card__meta i {
             color: #3679d3;
-            font-size: .74rem;
+            font-size: .68rem;
         }
 
         .hp-trending-package-card__body h3 {
             order: 1;
             margin-bottom:5px;
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 1.12rem;
+            font-size: 1rem;
             font-weight: 800;
             line-height: 1.13;
         }
@@ -962,7 +966,7 @@
             margin: 0;
             overflow: hidden;
             color: #42638f;
-            font-size: .82rem;
+            font-size: .76rem;
             line-height: 1.5;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 2;
@@ -987,13 +991,13 @@
         .hp-trending-package-card__footer del,
         .hp-trending-package-card__footer span {
             color: #53709b;
-            font-size: .78rem;
+            font-size: .7rem;
             font-weight: 600;
         }
 
         .hp-trending-package-card__footer strong {
             color: #2dbb65;
-            font-size: 1.12rem;
+            font-size: 1.03rem;
             font-weight: 800;
             font-family:"Merriweather", Georgia, "Times New Roman", Times, serif;
         }
@@ -1007,7 +1011,7 @@
             border: 1px solid #c9d8ee;
             border-radius: 9px;
             color: #1769ff;
-            font-size: .82rem;
+            font-size: .75rem;
             font-weight: 800;
             text-decoration: none;
             white-space: nowrap;
