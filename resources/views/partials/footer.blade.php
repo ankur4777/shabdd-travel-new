@@ -31,7 +31,7 @@ CSS FILE: footer.css  (link in your layout head)
             <div class="st-footer-tab-panel active" id="tab-domestic" role="tabpanel">
                 <div class="st-footer-link-grid">
                     @forelse(($footerDomesticDestinations ?? collect()) as $destination)
-                        <a href="{{ route('destinations.show', $destination) }}">{{ $destination->name }} Tour Packages</a>
+                        <a href="{{ route('destinations.show', $destination) }}">{{ $destination->name }} Tour Destination</a>
                     @empty
                         <span class="footer-sub-text">No domestic destinations published yet.</span>
                     @endforelse
@@ -42,7 +42,7 @@ CSS FILE: footer.css  (link in your layout head)
             <div class="st-footer-tab-panel" id="tab-international" role="tabpanel">
                 <div class="st-footer-link-grid">
                     @forelse(($footerInternationalDestinations ?? collect()) as $destination)
-                        <a href="{{ route('destinations.show', $destination) }}">{{ $destination->name }} Tour Packages</a>
+                        <a href="{{ route('destinations.show', $destination) }}">{{ $destination->name }} Tour Destination</a>
                     @empty
                         <span class="footer-sub-text">No international destinations published yet.</span>
                     @endforelse
@@ -53,7 +53,7 @@ CSS FILE: footer.css  (link in your layout head)
                 <div class="st-footer-tab-panel" id="tab-style-{{ $styleTab['id'] }}" role="tabpanel">
                     <div class="st-footer-link-grid">
                         @forelse(($styleTab['destinations'] ?? collect()) as $destination)
-                            <a href="{{ route('destinations.show', $destination) }}">{{ $destination->name }} {{ $styleTab['label'] }} Packages</a>
+                            <a href="{{ route('destinations.show', $destination) }}">{{ $destination->name }} {{ $styleTab['label'] }} Destination</a>
                         @empty
                             <span class="footer-sub-text">No {{ strtolower($styleTab['label']) }} destinations published yet.</span>
                         @endforelse
