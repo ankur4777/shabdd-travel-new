@@ -48,6 +48,10 @@
     white-space: nowrap;
 }
 
+.st-header .st-navlink::after {
+    bottom: 6px !important;
+}
+
 .st-nav-actions {
     min-width: max-content;
 }
@@ -108,11 +112,17 @@
         padding-inline: 14px !important;
     }
 
-    .st-navlink {
+    .st-header .st-navlink {
+        align-items: center !important;
         gap: 4px !important;
-        padding: 18px 4px !important;
+        height: 54px !important;
+        padding: 0 4px !important;
         font-size: 12.8px !important;
-        line-height: 1.2 !important;
+        line-height: 1.15 !important;
+    }
+
+    .st-header .st-navlink::after {
+        bottom: 7px !important;
     }
 
     .st-navlink-icon {
