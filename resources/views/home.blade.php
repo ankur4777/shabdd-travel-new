@@ -847,6 +847,7 @@
 
         .hp-trending-packages__grid {
             display: grid;
+<<<<<<< HEAD
             grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 14px;
         }
@@ -860,12 +861,28 @@
             border-radius: 5px;
             background: #fff;
             box-shadow: 0 10px 24px rgba(15, 23, 42, .06);
+=======
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .hp-trending-package-card {
+            overflow: hidden;
+            border: 1px solid rgba(15, 23, 42, .1);
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 16px 34px rgba(15, 23, 42, .08);
+>>>>>>> 78cdcf625d8d4cd6eb49f147afb296ba0ca6a994
         }
 
         .hp-trending-package-card__media {
             position: relative;
             display: block;
+<<<<<<< HEAD
             aspect-ratio: 16 / 10;
+=======
+            aspect-ratio: 4 / 3;
+>>>>>>> 78cdcf625d8d4cd6eb49f147afb296ba0ca6a994
             overflow: hidden;
             color: inherit;
             text-decoration: none;
@@ -894,7 +911,11 @@
             border-radius: 999px;
             background: rgba(255, 255, 255, .94);
             color: #101828;
+<<<<<<< HEAD
             font-size: .7rem;
+=======
+            font-size: .76rem;
+>>>>>>> 78cdcf625d8d4cd6eb49f147afb296ba0ca6a994
             font-weight: 800;
             box-shadow: 0 8px 20px rgba(15, 23, 42, .12);
         }
@@ -913,23 +934,35 @@
 
         .hp-trending-package-card__body {
             display: flex;
+<<<<<<< HEAD
             flex: 1 1 auto;
             min-height: 235px;
             flex-direction: column;
             padding: 12px 14px 13px;
+=======
+            min-height: 250px;
+            flex-direction: column;
+            padding: 16px;
+>>>>>>> 78cdcf625d8d4cd6eb49f147afb296ba0ca6a994
         }
 
         .hp-trending-package-card__meta {
             display: flex;
             flex-wrap: wrap;
+<<<<<<< HEAD
             order: 2;
             gap: 7px;
             margin: 0 0 12px;
+=======
+            gap: 8px;
+            margin-bottom: 10px;
+>>>>>>> 78cdcf625d8d4cd6eb49f147afb296ba0ca6a994
         }
 
         .hp-trending-package-card__meta span {
             display: inline-flex;
             align-items: center;
+<<<<<<< HEAD
             gap: 4px;
             min-height: 25px;
             padding: 4px 9px;
@@ -957,16 +990,40 @@
 
         .hp-trending-package-card__body h3 a {
             color: #f04b4b;
+=======
+            gap: 6px;
+            color: #475467;
+            font-size: .8rem;
+            font-weight: 700;
+        }
+
+        .hp-trending-package-card__body h3 {
+            margin: 0 0 8px;
+            font-size: 1.05rem;
+            font-weight: 900;
+            line-height: 1.25;
+        }
+
+        .hp-trending-package-card__body h3 a {
+            color: #101828;
+>>>>>>> 78cdcf625d8d4cd6eb49f147afb296ba0ca6a994
             text-decoration: none;
         }
 
         .hp-trending-package-card__body p {
             display: -webkit-box;
+<<<<<<< HEAD
             order: 3;
             margin: 0;
             overflow: hidden;
             color: #42638f;
             font-size: .76rem;
+=======
+            margin: 0;
+            overflow: hidden;
+            color: #667085;
+            font-size: .9rem;
+>>>>>>> 78cdcf625d8d4cd6eb49f147afb296ba0ca6a994
             line-height: 1.5;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 2;
@@ -974,13 +1031,20 @@
 
         .hp-trending-package-card__footer {
             display: flex;
+<<<<<<< HEAD
             order: 4;
+=======
+>>>>>>> 78cdcf625d8d4cd6eb49f147afb296ba0ca6a994
             align-items: flex-end;
             justify-content: space-between;
             gap: 12px;
             margin-top: auto;
+<<<<<<< HEAD
             padding-top: 12px;
             border-top: 1px solid #dce5f2;
+=======
+            padding-top: 18px;
+>>>>>>> 78cdcf625d8d4cd6eb49f147afb296ba0ca6a994
         }
 
         .hp-trending-package-card__footer div {
@@ -990,6 +1054,7 @@
 
         .hp-trending-package-card__footer del,
         .hp-trending-package-card__footer span {
+<<<<<<< HEAD
             color: #53709b;
             font-size: .7rem;
             font-weight: 600;
@@ -1000,18 +1065,38 @@
             font-size: 1.03rem;
             font-weight: 800;
             font-family:"Merriweather", Georgia, "Times New Roman", Times, serif;
+=======
+            color: #98a2b3;
+            font-size: .78rem;
+            font-weight: 700;
+        }
+
+        .hp-trending-package-card__footer strong {
+            color: #0f172a;
+            font-size: 1.1rem;
+            font-weight: 900;
+>>>>>>> 78cdcf625d8d4cd6eb49f147afb296ba0ca6a994
         }
 
         .hp-trending-package-card__footer > a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
+<<<<<<< HEAD
             min-height: 35px;
             padding: 7px 9px;
             border: 1px solid #c9d8ee;
             border-radius: 9px;
             color: #1769ff;
             font-size: .75rem;
+=======
+            min-height: 38px;
+            padding: 9px 12px;
+            border-radius: 7px;
+            border:2px solid #ff3b30;
+            color: #ff3b30;
+            font-size: .82rem;
+>>>>>>> 78cdcf625d8d4cd6eb49f147afb296ba0ca6a994
             font-weight: 800;
             text-decoration: none;
             white-space: nowrap;
@@ -1019,12 +1104,15 @@
 
         @media (max-width: 1199px) {
             .hp-trending-packages__grid {
+<<<<<<< HEAD
                 grid-template-columns: repeat(4, minmax(0, 1fr));
             }
         }
 
         @media (max-width: 991px) {
             .hp-trending-packages__grid {
+=======
+>>>>>>> 78cdcf625d8d4cd6eb49f147afb296ba0ca6a994
                 grid-template-columns: repeat(3, minmax(0, 1fr));
             }
         }
