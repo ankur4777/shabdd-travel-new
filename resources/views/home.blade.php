@@ -896,11 +896,11 @@
             align-items: center;
             gap: 6px;
             min-height: 32px;
-            padding: 8px 11px;
+            padding: 5px 6px;
             border-radius: 999px;
             background: rgba(255, 255, 255, .96);
             color: #0f172a;
-            font-size: .76rem;
+            font-size: .66rem;
             font-weight: 800;
             box-shadow: 0 10px 24px rgba(15, 23, 42, .08);
         }

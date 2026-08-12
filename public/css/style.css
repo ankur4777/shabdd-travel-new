@@ -4981,7 +4981,7 @@ div.container.st-nav-inner {
     line-height: 1;
     white-space: nowrap;
     cursor: pointer;
-    box-shadow: 0 14px 32px var(--df-red-glow);
+    /* box-shadow: 0 14px 32px var(--df-red-glow); */
     transition:
         transform var(--df-transition),
         box-shadow var(--df-transition),
@@ -4990,7 +4990,7 @@ div.container.st-nav-inner {
 
 .df-btn-search:hover {
     transform: translateY(-2px);
-    box-shadow: 0 20px 42px rgba(255, 59, 48, 0.3);
+    /* box-shadow: 0 20px 42px rgba(255, 59, 48, 0.3); */
     filter: saturate(1.06);
     color:white
 }
@@ -9193,7 +9193,7 @@ div.container.st-nav-inner {
 .destination-st-hero-btn--primary {
     background: var(--brand-primary);
     color: #fff;
-    box-shadow: 0 12px 32px rgba(255, 59, 48, 0.4);
+    /* box-shadow: 0 12px 32px rgba(255, 59, 48, 0.4); */
 }
 
 .destination-st-hero-btn--primary:hover {
@@ -11140,6 +11140,8 @@ body.travel-gallery-lightbox-open {
     border: 1px solid color-mix(in srgb, var(--dd-primary) 18%, #dce5f0);
     color: #ffffff;
     background: var(--brand-primary-tint);
+    margin-top: 34px !important;
+    padding-bottom: -25px;
 }
 
 .seo-dd-tag {

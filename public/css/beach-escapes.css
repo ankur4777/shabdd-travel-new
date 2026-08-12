@@ -1322,8 +1322,8 @@
     line-height: 1;
     white-space: nowrap;
     cursor: pointer;
-    box-shadow: 0 14px 32px var(
-    --df-red-glow);
+    /* box-shadow: 0 14px 32px var(
+    --df-red-glow); */
     transition:
         transform var(
     --df-transition),
@@ -1333,7 +1333,7 @@
 
 .beach-page[class*="beach-page--"] .df-sidebar-actions .df-btn-search:hover {
     transform: translateY(-2px);
-    box-shadow: 0 20px 42px rgba(255, 59, 48, 0.3);
+    /* box-shadow: 0 20px 42px rgba(255, 59, 48, 0.3); */
     filter: saturate(1.06);
     color: #fff;
 }

@@ -373,8 +373,14 @@ color: white;
 .budget25-card__media {
     position: relative;
     display: block;
-    min-height: 210px;
+    aspect-ratio: 4 / 3;
+    min-height: 0;
     overflow: hidden;
+}
+
+.budget25-card__media img {
+    position: absolute;
+    inset: 0;
 }
 
 .budget25-card__media img,

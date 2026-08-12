@@ -682,6 +682,7 @@ class HomeController extends Controller
     {
         return Destination::query()
             ->active()
+            ->domestic()
             ->whereRaw('LOWER(COALESCE(theme, \'\')) = ?', ['beach'])
             ->orderByDesc('rating')
             ->orderByDesc('is_trending')
@@ -871,6 +872,7 @@ class HomeController extends Controller
     private function popularBeachPackages(): Collection
     {
         return Package::query()
+            ->domestic()
             ->whereRaw('LOWER(COALESCE(theme, \'\')) = ?', ['beach'])
             ->whereRaw('LOWER(COALESCE(category, \'\')) = ?', ['popular'])
             ->orderByDesc('featured')
@@ -906,6 +908,7 @@ class HomeController extends Controller
 
         return Destination::query()
             ->active()
+            ->domestic()
             ->whereRaw('LOWER(TRIM(COALESCE(theme, \'\'))) IN (' . implode(',', array_fill(0, count($themeValues), '?')) . ')', $themeValues)
             ->orderByDesc('rating')
             ->orderByDesc('is_trending')
@@ -920,6 +923,7 @@ class HomeController extends Controller
         $themeValues = $this->travelThemeQueryValues($themeKey);
 
         return Package::query()
+            ->domestic()
             ->whereRaw('LOWER(TRIM(COALESCE(theme, \'\'))) IN (' . implode(',', array_fill(0, count($themeValues), '?')) . ')', $themeValues)
             ->whereRaw('LOWER(TRIM(COALESCE(category, \'\'))) = ?', ['popular'])
             ->orderByDesc('featured')
