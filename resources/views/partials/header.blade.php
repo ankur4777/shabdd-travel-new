@@ -73,10 +73,12 @@
                 <div class="st-nav-desktop st-desktop-only">
                     <ul class="navbar-nav st-nav-links">
                         <li class="nav-item dropdown">
+                             <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('blog.index') }}"><span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-house-door"></i></span><span>Home</span></a>
+                        </li>
                             <a class="nav-link st-navlink st-dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-house-door"></i></span>
-                                <span>Domestic Tours</span>
+                                <span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-geo-alt"></i></span>
+                                <span>Domestic </span>
                                 <span class="st-dropdown-indicator" aria-hidden="true"></span>
                             </a>
                             <div class="dropdown-menu st-megamenu">
@@ -87,7 +89,7 @@
                                             <a class="dropdown-item st-mega-link"
                                                 href="{{ route('destinations.show', $destination->slug) }}">
                                                 {{ $destination->name }}
-                                            </a>
+                                            </a>    
                                         @empty
                                             <a class="dropdown-item st-mega-link" href="{{ route('destinations.index') }}">
                                                 View All Destinations
@@ -119,7 +121,7 @@
                             <a class="nav-link st-navlink st-dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-globe2"></i></span>
-                                <span>International Tours</span>
+                                <span>International</span>
                                 <span class="st-dropdown-indicator" aria-hidden="true"></span>
                             </a>
                             <div class="dropdown-menu st-megamenu">
@@ -176,8 +178,8 @@
                         <li class="nav-item"><a class="nav-link st-navlink"
                                 href="{{ route('religious') }}"><span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-bank"></i></span><span>Religious</span></a></li>
                         <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('budget-friendly') }}"><span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-tags"></i></span><span>Budget Friendly</span></a></li>
-                        <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('blog.index') }}"><span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-journal-text"></i></span><span>Blogs</span></a>
-                        </li>
+                        <!-- <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('blog.index') }}"><span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-journal-text"></i></span><span>Blogs</span></a>
+                        </li> -->
 
                         <li class="nav-item"><a class="nav-link st-navlink"
                                 href="{{ route('contact', [], false) }}"><span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-telephone"></i></span><span>Contact</span></a></li>
