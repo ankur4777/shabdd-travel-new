@@ -750,7 +750,10 @@ div.container.st-nav-inner {
 
 .st-navlink:hover,
 .st-navlink:focus {
+
     color: var(--brand-black) !important;
+
+
 }
 
 .st-navlink:focus,
@@ -768,9 +771,9 @@ div.container.st-nav-inner {
 .st-navlink::after {
     content: "";
     position: absolute;
-    left: 12px;
-    right: 12px;
-    bottom: 10px;
+    left: 8px;
+    right: 10px;
+    bottom: 5px;
     height: 2px;
     border-radius: 999px;
     background: linear-gradient(90deg,
@@ -779,6 +782,34 @@ div.container.st-nav-inner {
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.28s ease;
+}
+
+@media (min-width: 1300px) and (max-width: 1400px) {
+    .st-navlink::after {
+        content: "";
+        position: absolute;
+        left: 8px;
+        right: 5px;
+        top:25px;
+        bottom: 5px;
+        height: 2px;
+        border-radius: 999px;
+
+        background: linear-gradient(
+            90deg,
+            var(--brand-primary),
+            var(--brand-primary-tint)
+        );
+
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.28s ease;
+    }
+
+    .st-navlink:hover::after,
+    .st-navlink.active::after {
+        transform: scaleX(1);
+    }
 }
 
 .st-navlink:hover::after,
@@ -6327,6 +6358,8 @@ div.container.st-nav-inner {
         transform 0.4s ease,
         box-shadow 0.4s ease;
 }
+
+
 
 .hb-card:hover {
     transform: perspective(1200px) rotateX(0deg) translateY(-4px);
