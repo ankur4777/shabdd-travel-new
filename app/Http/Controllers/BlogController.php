@@ -115,6 +115,7 @@ class BlogController extends Controller
             'excerpt' => $excerpt !== '' ? $excerpt : $this->buildExcerpt($destination->name, $title),
             'image' => $image,
             'published_at' => $publishedAt,
+            'published_at_display' => \Carbon\Carbon::parse($publishedAt)->format('M d, Y'),
             'published_timestamp' => strtotime($publishedAt) ?: now()->timestamp,
             'category' => $category,
             'reading_time' => $readingTime,

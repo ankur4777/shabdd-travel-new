@@ -183,6 +183,37 @@
 .blog-meta i {
     color: #667eea;
 }
+.featured-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid #e5e7eb;
+    flex-wrap: nowrap;
+}
+.featured-cta {
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+.featured-meta {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    min-width: 0;
+    gap: 12px;
+    overflow: hidden;
+}
+.featured-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
 .featured-post {
     background: white;
     border-radius: 24px;
@@ -207,9 +238,18 @@
 .featured-post:hover .featured-img {
     transform: scale(1.05);
 }
+.featured-row {
+    align-items: stretch;
+}
+.featured-row > [class*="col-"] {
+    display: flex;
+}
 .featured-content {
-    padding: 26px;
-    padding-bottom:0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 42px 46px 36px;
 }
 .featured-badge {
     display: inline-flex;
@@ -229,17 +269,17 @@
     font-size: 1rem;
 }
 .featured-title {
-    font-size: 2.75rem;
+    font-size: clamp(2.1rem, 3vw, 2.9rem);
     font-weight: 900;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     color: #1f2937;
     line-height: 1.2;
 }
 .featured-excerpt {
-    font-size: 1.15rem;
+    font-size: 1.02rem;
     color: #6b7280;
-    line-height: 1.8;
-    margin-bottom: 28px;
+    line-height: 1.75;
+    margin-bottom: 0;
 }
 .no-results {
     text-align: center;
@@ -273,7 +313,24 @@
         font-size: 2rem;
     }
     .featured-content {
-        padding: 30px;
+        padding: 34px 34px 30px;
+    }
+    .featured-actions {
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .featured-cta,
+    .featured-meta {
+        width: 100%;
+    }
+    .featured-meta {
+        justify-content: flex-start;
+        overflow: visible;
+        flex-wrap: wrap;
+    }
+    .featured-title {
+        font-size: 2rem;
     }
 }
 </style>
@@ -332,25 +389,27 @@
         <div class="blog-posts-area">
             @if($featured && !request('destination'))
             <div class="featured-post" id="featuredPost">
-                <div class="row g-0">
-                    <div class="col-lg-6">
+                <div class="row g-0 featured-row">
+                    <div class="col-lg-5">
                         <div class="featured-img-wrap">
                             <img src="{{ $featured['image'] }}" alt="{{ $featured['title'] }}" class="featured-img">
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-7">
                         <div class="featured-content">
                             <span class="featured-badge">
                                 <i class="bi bi-star-fill"></i> Featured Story
                             </span>
                             <h2 class="featured-title">{{ $featured['title'] }}</h2>
                             <p class="featured-excerpt">{{ $featured['excerpt'] }}</p>
-                            <div class="blog-meta mb-4">
-                                <span><i class="bi bi-clock"></i> {{ $featured['reading_time'] }} min read</span>
-                                <span><i class="bi bi-calendar3"></i> {{ $featured['published_at'] }}</span>
-                                <span><i class="bi bi-geo-alt"></i> {{ $featured['destination_name'] }}</span>
+                            <div class="featured-actions">
+                                <a href="{{ $featured['url'] }}" class="btn btn-primary btn-lg featured-cta">Read Full Story <i class="bi bi-arrow-right"></i></a>
+                                <div class="blog-meta featured-meta">
+                                    <span><i class="bi bi-clock"></i> {{ $featured['reading_time'] }} min read</span>
+                                    <span><i class="bi bi-calendar3"></i> {{ $featured['published_at_display'] ?? \Carbon\Carbon::parse($featured['published_at'])->format('M d, Y') }}</span>
+                                    <span><i class="bi bi-geo-alt"></i> {{ $featured['destination_name'] }}</span>
+                                </div>
                             </div>
-                            <a href="{{ $featured['url'] }}" class="btn btn-primary btn-lg">Read Full Story <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -461,7 +520,7 @@ document.addEventListener('DOMContentLoaded', function() {
         featuredPost.querySelector('.featured-title').textContent = blog.title;
         featuredPost.querySelector('.featured-excerpt').textContent = blog.excerpt;
         featuredPost.querySelector('.blog-meta span:nth-child(1)').innerHTML = `<i class="bi bi-clock"></i> ${blog.reading_time} min read`;
-        featuredPost.querySelector('.blog-meta span:nth-child(2)').innerHTML = `<i class="bi bi-calendar3"></i> ${blog.published_at}`;
+        featuredPost.querySelector('.blog-meta span:nth-child(2)').innerHTML = `<i class="bi bi-calendar3"></i> ${blog.published_at_display || blog.published_at}`;
         featuredPost.querySelector('.blog-meta span:nth-child(3)').innerHTML = `<i class="bi bi-geo-alt"></i> ${blog.destination_name}`;
         featuredPost.querySelector('.btn').href = blog.url;
     }
