@@ -336,6 +336,18 @@
                 <span class="st-cta-arrow" aria-hidden="true">→</span>
             </a>
             <div class="st-mobile-mini-actions">
+                <a href="{{ url('/') }}" class="st-iconbtn st-mobile-home-action {{ request()->is('/') ? 'is-active' : '' }}"
+                    aria-label="Home" @if (request()->is('/')) aria-current="page" @endif>
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M4.5 10.25 12 4l7.5 6.25" stroke="currentColor" stroke-width="1.7"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M6.5 9.75V20h11V9.75" stroke="currentColor" stroke-width="1.7"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M10.25 20v-5.25h3.5V20" stroke="currentColor" stroke-width="1.7"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span>Home</span>
+                </a>
                 <button class="st-iconbtn" type="button" aria-label="Search" data-st-search-open>
                     <svg viewBox="0 0 24 24" fill="none">
                         <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.7" />
