@@ -756,7 +756,6 @@ div.container.st-nav-inner {
 
 }
 
-.st-navlink:focus,
 .st-navlink:focus-visible,
 .st-iconbtn:focus,
 .st-iconbtn:focus-visible,
@@ -814,7 +813,8 @@ div.container.st-nav-inner {
 
 .st-navlink:hover::after,
 .st-nav-item-active .st-navlink::after,
-.st-navlink:focus::after {
+.st-navlink.active::after,
+.st-navlink:focus-visible::after {
     transform: scaleX(1);
 }
 

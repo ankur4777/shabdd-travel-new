@@ -72,9 +72,12 @@
 
                 <div class="st-nav-desktop st-desktop-only">
                     <ul class="navbar-nav st-nav-links">
-                        <li class="nav-item dropdown">
-                             <li class="nav-item"><a class="nav-link st-navlink" href="{{ route('blog.index') }}"><span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-house-door"></i></span><span>Home</span></a>
+                        <li class="nav-item">
+                            <a class="nav-link st-navlink" href="{{ route('blog.index') }}">
+                                <span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-house-door"></i></span><span>Home</span>
+                            </a>
                         </li>
+                        <li class="nav-item dropdown">
                             <a class="nav-link st-navlink st-dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-geo-alt"></i></span>
