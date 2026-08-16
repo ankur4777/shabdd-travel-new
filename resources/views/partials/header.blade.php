@@ -250,10 +250,12 @@
 
     <div class="st-mobile-overlay" id="stMobileOverlay" aria-hidden="true"></div>
 
+
+    <!-- mobile view -->
     <aside class="st-mobile-drawer" id="stMobileDrawer" aria-label="Mobile navigation">
         <div class="st-mobile-head">
             <a class="st-brand" href="/">
-                <img src="{{ asset('images/logo.png') }}" alt="SHABDD TRAVEL logo">
+                <img src="{{ asset('images/header-logo.png') }}" alt="SHABDD TRAVEL logo">
             </a>
             <button class="st-mobile-close" id="stMobileClose" aria-label="Close menu">
                 <svg viewBox="0 0 24 24" fill="none">
@@ -346,7 +348,7 @@
                         <path d="M10.25 20v-5.25h3.5V20" stroke="currentColor" stroke-width="1.7"
                             stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    <span>Home</span>
+                    
                 </a>
                 <button class="st-iconbtn" type="button" aria-label="Search" data-st-search-open>
                     <svg viewBox="0 0 24 24" fill="none">

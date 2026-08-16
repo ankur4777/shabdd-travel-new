@@ -28,9 +28,9 @@
 
 .st-brand img {
     flex: 0 0 auto;
-    width: clamp(70px, 7vw, 108px) !important;
+    width:108px;
     max-width: 100%;
-    margin-left: 0 !important;
+  
 }
 
 .st-brand-copy,
@@ -177,9 +177,7 @@
         padding-inline: clamp(6px, 0.9vw, 11px) !important;
     }
 
-    .st-brand img {
-        width: clamp(58px, 7vw, 82px) !important;
-    }
+  
 
     .st-navlink {
         gap: clamp(2px, 0.3vw, 4px) !important;
@@ -255,9 +253,7 @@
         padding-inline: 4px !important;
     }
 
-    .st-brand img {
-        width: 48px !important;
-    }
+  
 
     .st-navlink {
         gap: 1px !important;
@@ -319,9 +315,7 @@
         max-width: calc(100vw - 104px) !important;
     }
 
-    .st-brand img {
-        width: 90px !important;
-    }
+  
 
     .st-mobile-toggle {
         flex: 0 0 auto;

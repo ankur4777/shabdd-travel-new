@@ -1603,9 +1603,10 @@ div.container.st-nav-inner {
     gap: 12px;
 }
 
-.st-mobile-head .st-brand img {
+.st-mobile-head .st-brand {
     width: 71px;
 }
+
 
 .st-mobile-close {
     width: 42px;
@@ -2049,7 +2050,7 @@ div.container.st-nav-inner {
 .st-mobile-mini-actions {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     flex-wrap: nowrap;
     gap: 10px;
 }
