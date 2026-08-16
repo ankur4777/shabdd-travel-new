@@ -878,8 +878,9 @@ div.container.st-nav-inner {
 .st-iconbtn:hover {
     transform: translateY(-2px);
     border-color: rgba(255, 59, 48, 0.18);
-    background: #fff;
+      background: rgba(255, 59, 48, 0.08);
     color: var(--brand-primary);
+     box-shadow: 0 10px 22px rgba(255, 59, 48, 0.12);
 }
 
 .st-search-overlay {
@@ -2094,7 +2095,7 @@ div.container.st-nav-inner {
     height: 18px;
 }
 
-.st-mobile-home-action.is-active {
+.st-mobile-home-action:hover{
     border-color: rgba(255, 59, 48, 0.22);
     background: rgba(255, 59, 48, 0.08);
     color: var(--brand-primary);
