@@ -73,7 +73,7 @@
                 <div class="st-nav-desktop st-desktop-only">
                     <ul class="navbar-nav st-nav-links">
                         <li class="nav-item">
-                            <a class="nav-link st-navlink" href="{{ route('blog.index') }}">
+                            <a class="nav-link st-navlink" href="{{ route('home') }}">
                                 <span class="st-navlink-icon" aria-hidden="true"><i class="bi bi-house-door"></i></span><span>Home</span>
                             </a>
                         </li>
