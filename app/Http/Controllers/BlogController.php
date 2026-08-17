@@ -12,13 +12,42 @@ class BlogController extends Controller
 {
     public function index(): View
     {
-        $blogs = $this->buildBlogCollection();
+        $allBlogs = $this->buildBlogCollection();
+        $blogs = $allBlogs;
+
+        if ($category = trim((string) request('category'))) {
+            $blogs = $blogs->filter(function (array $blog) use ($category) {
+                return strcasecmp((string) $blog['category'], $category) === 0;
+            })->values();
+        }
+
+        if ($destination = trim((string) request('destination'))) {
+            $blogs = $blogs->filter(function (array $blog) use ($destination) {
+                return strcasecmp((string) $blog['destination_name'], $destination) === 0;
+            })->values();
+        }
+
+        if ($search = trim((string) request('search'))) {
+            $term = mb_strtolower($search);
+
+            $blogs = $blogs->filter(function (array $blog) use ($term) {
+                $haystack = mb_strtolower(implode(' ', [
+                    $blog['title'] ?? '',
+                    $blog['excerpt'] ?? '',
+                    $blog['category'] ?? '',
+                    $blog['destination_name'] ?? '',
+                ]));
+
+                return str_contains($haystack, $term);
+            })->values();
+        }
 
         return view('blog.index', [
+            'allBlogs' => $allBlogs,
             'blogs' => $blogs,
             'featured' => $blogs->first(),
             'highlights' => $blogs->take(4)->values(),
-            'destinations' => $blogs
+            'destinations' => $allBlogs
                 ->pluck('destination_name')
                 ->filter()
                 ->unique()

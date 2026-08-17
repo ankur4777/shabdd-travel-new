@@ -47,18 +47,15 @@
         <ul class="categories-list">
             <li><a href="{{ route('blog.index') }}" class="category-link {{ !request('category') ? 'active' : '' }}">
                 <span>All Posts</span>
-                <span class="count">{{ $blogs->count() }}</span>
-              
+                <span class="count">{{ ($allBlogs ?? $blogs)->count() }}</span>
             </a></li>
             @php
-
-
-                $categories = $blogs->pluck('category')->unique()->sort();
+                $categories = ($allBlogs ?? $blogs)->pluck('category')->filter()->unique()->sort();
             @endphp
             @foreach($categories as $category)
             <li><a href="{{ route('blog.index', ['category' => $category]) }}" class="category-link {{ request('category') == $category ? 'active' : '' }}">
                 <span>{{ $category }}</span>
-                <span class="count">{{ $blogs->where('category', $category)->count() }}</span>
+                <span class="count">{{ ($allBlogs ?? $blogs)->where('category', $category)->count() }}</span>
             </a></li>
             @endforeach
         </ul>
