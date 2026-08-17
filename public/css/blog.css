@@ -59,6 +59,7 @@
 @media (max-width: 768px) {
     .blog-detail-title {
         font-size: 2rem;
+        color:white;
     }
     
     .featured-title {

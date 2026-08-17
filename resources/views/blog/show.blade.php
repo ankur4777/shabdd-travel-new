@@ -60,6 +60,7 @@
             margin-bottom: 20px;
             line-height: 1.2;
             text-shadow: 0 2px 20px rgba(0, 0, 0, .3);
+            color:white;
         }
 
         .blog-detail-meta {
@@ -422,6 +423,7 @@
 
             .blog-detail-title {
                 font-size: 2.2rem;
+                color:white;
             }
         }
 
