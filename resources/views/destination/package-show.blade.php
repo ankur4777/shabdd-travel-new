@@ -77,6 +77,27 @@
                             <a href="#xpkd-faq-block">FAQs</a>
                         @endif
                     </nav>
+                                 
+                    
+                    <article class="xpkd-booking-card xpkd-booking-card-mobile">
+                        <p class="xpkd-price-kicker">Starting From</p>
+                        <h3>{{ $pd['starting_price'] }}</h3>
+                        @if(!empty($pd['original_price']) && $pd['original_price'] !== $pd['starting_price'])
+                            <p class="xpkd-strike-price">{{ $pd['original_price'] }}</p>
+                        @endif
+                        <p class="xpkd-price-note">Per person on twin sharing</p>
+
+                        <a href="#" class="xpkd-cta-btn">Send Enquiry</a>
+                        <a href="https://wa.me/" target="_blank" rel="noopener"
+                            class="xpkd-cta-btn xpkd-cta-btn-lite">WhatsApp Expert</a>
+
+                        <div class="xpkd-side-split"></div>
+                        <ul class="xpkd-side-facts">
+                            <li><span>Duration</span><strong>{{ $pd['package_duration'] }}</strong></li>
+                            <li><span>Destination</span><strong>{{ $destination->name }}</strong></li>
+                            <li><span>Rating</span><strong>{{ $pd['package_rating'] }}/5</strong></li>
+                        </ul>
+                    </article>
 
                     <section id="xpkd-overview-block" class="xpkd-content-card">
                         <h2>Package Overview</h2>
