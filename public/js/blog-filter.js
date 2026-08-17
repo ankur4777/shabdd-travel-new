@@ -36,20 +36,20 @@ document.addEventListener('DOMContentLoaded', function() {
      * Add click event listeners to category links
      */
     categoryLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
+        link.addEventListener('click', function() {
             const href = this.getAttribute('href');
+            if (!href) return;
+
             const url = new URL(href, window.location.origin);
             const category = url.searchParams.get('category');
-            
-            // Update URL without page reload
+
             if (category) {
-                updateURL('category', category);
-                applyFilter('category', category);
-            } else {
-                // "All Posts" clicked
-                clearFilter('category');
+                // Let the browser navigate to the category URL so Laravel can filter properly.
+                return;
             }
+
+            // Let the browser navigate to /blogs so the full list loads again.
+            return;
         });
     });
 
@@ -57,17 +57,12 @@ document.addEventListener('DOMContentLoaded', function() {
      * Add click event listeners to destination tags
      */
     destinationTags.forEach(tag => {
-        tag.addEventListener('click', function(e) {
-            e.preventDefault();
+        tag.addEventListener('click', function() {
             const href = this.getAttribute('href');
-            const url = new URL(href, window.location.origin);
-            const destination = url.searchParams.get('destination');
-            
-            // Update URL without page reload
-            if (destination) {
-                updateURL('destination', destination);
-                applyFilter('destination', destination);
-            }
+            if (!href) return;
+
+            // Preserve native navigation so the server can apply the destination filter.
+            return;
         });
     });
 
