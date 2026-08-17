@@ -48,8 +48,11 @@
             <li><a href="{{ route('blog.index') }}" class="category-link {{ !request('category') ? 'active' : '' }}">
                 <span>All Posts</span>
                 <span class="count">{{ $blogs->count() }}</span>
+                dd($blogs);
             </a></li>
             @php
+
+
                 $categories = $blogs->pluck('category')->unique()->sort();
             @endphp
             @foreach($categories as $category)
