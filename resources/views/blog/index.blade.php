@@ -185,6 +185,7 @@
 }
 .featured-actions {
     display: flex;
+    flex-direction:column;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
@@ -405,7 +406,7 @@
                             <div class="featured-actions">
                                 <a href="{{ $featured['url'] }}" class="btn btn-primary btn-lg featured-cta">Read Full Story <i class="bi bi-arrow-right"></i></a>
                                 <div class="blog-meta featured-meta">
-                                    <span><i class="bi bi-clock"></i> {{ $featured['reading_time'] }} min read</span>
+                                    <!-- <span><i class="bi bi-clock"></i> {{ $featured['reading_time'] }} min read</span> -->
                                     <span><i class="bi bi-calendar3"></i> {{ $featured['published_at_display'] ?? \Carbon\Carbon::parse($featured['published_at'])->format('M d, Y') }}</span>
                                     <span><i class="bi bi-geo-alt"></i> {{ $featured['destination_name'] }}</span>
                                 </div>

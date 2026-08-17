@@ -29,7 +29,7 @@
                         <span class="latest-post-category">{{ $post['category'] }}</span>
                         <h4 class="latest-post-title">{{ Str::limit($post['title'], 60) }}</h4>
                         <div class="latest-post-meta">
-                            <span><i class="bi bi-clock"></i> {{ $post['reading_time'] }} min</span>
+                            <!-- <span><i class="bi bi-clock"></i> {{ $post['reading_time'] }} min</span> -->
                             <span><i class="bi bi-calendar3"></i> {{ \Carbon\Carbon::parse($post['published_at'])->format('M d') }}</span>
                         </div>
                     </div>
