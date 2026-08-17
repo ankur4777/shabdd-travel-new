@@ -431,7 +431,7 @@
                             </h3>
                             <p class="blog-excerpt">{{ Str::limit($blog['excerpt'], 120) }}</p>
                             <div class="blog-meta">
-                                <span><i class="bi bi-clock"></i> {{ $blog['reading_time'] }} min</span>
+                                <!-- <span><i class="bi bi-clock"></i> {{ $blog['reading_time'] }} min</span> -->
                                 <span><i class="bi bi-geo-alt"></i> {{ $blog['destination_name'] }}</span>
                             </div>
                         </div>
