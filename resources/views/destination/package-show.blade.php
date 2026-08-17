@@ -99,6 +99,21 @@
                         </ul>
                     </article>
 
+                           @if(!empty($pd['pdf_url']))
+                            <div class="xpkd-pdf-download-section">
+                                <a href="{{ $pd['pdf_url'] }}" class="xpkd-pdf-btn xpkd-pdf-btn-mobile" download>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
+                                    Download PDF
+                                </a>
+                            </div>
+                        @endif
+
+
                     <section id="xpkd-overview-block" class="xpkd-content-card">
                         <h2>Package Overview</h2>
                         <div class="xpkd-overview-copy">{!! $pd['overview_text'] !!}</div>
@@ -172,6 +187,7 @@
                                     <a href="{{ route('contact') }}" class="seo-dd-faq-cta">Contact Sales</a>
                                 </div>
                             </div>
+
                             <div class="seo-dd-faq-list">
                                 @foreach($packageFaqs as $index => $faq)
                                     <article class="seo-dd-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -212,7 +228,7 @@
 
                         @if(!empty($pd['pdf_url']))
                             <div class="xpkd-pdf-download-section">
-                                <a href="{{ $pd['pdf_url'] }}" class="xpkd-pdf-btn" download>
+                                <a href="{{ $pd['pdf_url'] }}" class="xpkd-pdf-btn " download>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -224,47 +240,7 @@
                             </div>
                         @endif
 
-                        <div class="xpkd-includes-section">
-                            <h4>Package Includes</h4>
-                            <div class="xpkd-includes-grid">
-                                <div class="xpkd-include-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                    </svg>
-                                    <span>Hotel</span>
-                                </div>
-                                <div class="xpkd-include-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-                                        <line x1="9" y1="9" x2="9.01" y2="9"></line>
-                                        <line x1="15" y1="9" x2="15.01" y2="9"></line>
-                                    </svg>
-                                    <span>Sightseeing</span>
-                                </div>
-                                <div class="xpkd-include-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="9"></circle>
-                                        <path d="M9 10h6v4H9z"></path>
-                                    </svg>
-                                    <span>Transfer</span>
-                                </div>
-                                <div class="xpkd-include-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="1"></circle>
-                                        <path d="M12 5v14M7 12h10M5 8l14 8M5 16l14-8"></path>
-                                    </svg>
-                                    <span>Meal</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="xpkd-side-split"></div>
+                     
                     </article>
 
                     <article class="xpkd-booking-card">

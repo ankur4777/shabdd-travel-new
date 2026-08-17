@@ -13482,7 +13482,9 @@ body.travel-gallery-lightbox-open {
     border-radius: 12px;
     padding: 14px;
 }
-
+.xpkd-pdf-btn-mobile{
+    display:none
+}
 @media (max-width: 991.98px) {
     .xpkd-booking-card{
         display:none
@@ -13490,6 +13492,11 @@ body.travel-gallery-lightbox-open {
 
     .xpkd-booking-card-mobile{
         display:block
+    }
+
+    .xpkd-pdf-btn-mobile{
+        display:block;
+        text-align:center
     }
 }
 
