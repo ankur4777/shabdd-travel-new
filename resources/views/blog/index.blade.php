@@ -176,11 +176,10 @@
     
 
 }
-.filter-btn:hover, .filter-btn.active {
+.filter-btn.active {
     background: #667eea;
     color: white;
     border-color: #667eea;
-    transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 .blog-main-content {

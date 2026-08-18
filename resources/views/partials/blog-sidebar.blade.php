@@ -317,7 +317,6 @@
     transition: all 0.3s;
 }
 
-.category-link:hover,
 .category-link.active {
     background: #667eea;
     color: white;
@@ -355,7 +354,6 @@
     transition: all 0.3s;
 }
 
-.destination-tag:hover,
 .destination-tag.active {
     background: #667eea;
     color: white;
