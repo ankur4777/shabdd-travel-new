@@ -79,7 +79,6 @@ html {
 /* Filter Button Hover Effects */
 .filter-btn {
     position: relative;
-    overflow: hidden;
 }
 
 .filter-btn::before {

@@ -165,15 +165,15 @@
     gap: 8px;
 }
 .filter-btn {
-    padding: 10px 24px;
+   
     border: 2px solid #e5e7eb;
     background: white;
-    border-radius: 24px;
+    border-radius: 10px;
     margin: 5px;
     cursor: pointer;
     transition: all 0.3s;
-    font-weight: 600;
-    font-size: 0.9rem;
+    
+
 }
 .filter-btn:hover, .filter-btn.active {
     background: #667eea;
@@ -439,6 +439,19 @@
     }
     .blog-mobile-toolbar__label {
         min-width: 0;
+    }
+    .blog-mobile-toolbar .filter-btn,
+    .blog-mobile-toolbar .destination-tag {
+        font-size: 0.76rem;
+        line-height: 1.1;
+        padding: 8px 12px;
+        border-radius: 16px;
+    }
+    .blog-mobile-toolbar .filter-btn {
+        white-space: nowrap;
+    }
+    .blog-mobile-toolbar .destination-tag {
+        max-width: 92px;
     }
     .blog-mobile-search .search-input {
         font-size: 0.92rem;
