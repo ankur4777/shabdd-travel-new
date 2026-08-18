@@ -17,13 +17,13 @@ class BlogController extends Controller
 
         if ($category = trim((string) request('category'))) {
             $blogs = $blogs->filter(function (array $blog) use ($category) {
-                return strcasecmp((string) $blog['category'], $category) === 0;
+                return strcasecmp(trim((string) $blog['category']), $category) === 0;
             })->values();
         }
 
         if ($destination = trim((string) request('destination'))) {
             $blogs = $blogs->filter(function (array $blog) use ($destination) {
-                return strcasecmp((string) $blog['destination_name'], $destination) === 0;
+                return strcasecmp(trim((string) $blog['destination_name']), $destination) === 0;
             })->values();
         }
 
@@ -49,6 +49,7 @@ class BlogController extends Controller
             'highlights' => $blogs->take(4)->values(),
             'destinations' => $allBlogs
                 ->pluck('destination_name')
+                ->map(fn ($destination) => trim((string) $destination))
                 ->filter()
                 ->unique()
                 ->sort()
@@ -134,14 +135,15 @@ class BlogController extends Controller
         $readingTime = (int) ($blogData['reading_time'] ?? max(3, min(9, 4 + (int) (strlen($excerpt) / 120))));
         $category = $blogData['category'] ?? $this->inferCategory($destination->name, $title);
         $image = $this->mediaUrl($blogData['image'] ?? $destination->image_url);
+        $destinationName = trim((string) $destination->name);
 
         return [
             'slug' => $slug,
             'destination_slug' => $destination->slug,
-            'destination_name' => $destination->name,
+            'destination_name' => $destinationName,
             'country' => $destination->country,
             'title' => $title,
-            'excerpt' => $excerpt !== '' ? $excerpt : $this->buildExcerpt($destination->name, $title),
+            'excerpt' => $excerpt !== '' ? $excerpt : $this->buildExcerpt($destinationName, $title),
             'image' => $image,
             'published_at' => $publishedAt,
             'published_at_display' => \Carbon\Carbon::parse($publishedAt)->format('M d, Y'),

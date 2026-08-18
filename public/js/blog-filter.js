@@ -5,6 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     // Get all filter elements
+    const destinationButtons = document.querySelectorAll('.filter-btn[data-type="destination"]');
     const categoryLinks = document.querySelectorAll('.category-link');
     const destinationTags = document.querySelectorAll('.destination-tag');
     const blogItems = document.querySelectorAll('.blog-item');
@@ -24,32 +25,45 @@ document.addEventListener('DOMContentLoaded', function() {
      * Initialize filters based on URL parameters
      */
     function initializeFilters() {
-        if (currentCategory) {
-            applyFilter('category', currentCategory);
-        }
-        if (currentDestination) {
-            applyFilter('destination', currentDestination);
-        }
+        applyAllFilters();
+    }
+
+    function normalizeFilterValue(value) {
+        return (value || '').trim().toLowerCase();
     }
 
     /**
      * Add click event listeners to category links
      */
     categoryLinks.forEach(link => {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+
             const href = this.getAttribute('href');
             if (!href) return;
 
             const url = new URL(href, window.location.origin);
             const category = url.searchParams.get('category');
 
-            if (category) {
-                // Let the browser navigate to the category URL so Laravel can filter properly.
-                return;
+            updateURL('category', category ? category.trim() : '');
+            applyAllFilters();
+        });
+    });
+
+    /**
+     * Add click event listeners to destination filter buttons
+     */
+    destinationButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filter = (this.dataset.filter || '').trim();
+
+            if (filter === 'all' || filter === '') {
+                updateURL('destination', '');
+            } else {
+                updateURL('destination', filter);
             }
 
-            // Let the browser navigate to /blogs so the full list loads again.
-            return;
+            applyAllFilters();
         });
     });
 
@@ -57,12 +71,17 @@ document.addEventListener('DOMContentLoaded', function() {
      * Add click event listeners to destination tags
      */
     destinationTags.forEach(tag => {
-        tag.addEventListener('click', function() {
+        tag.addEventListener('click', function(event) {
+            event.preventDefault();
+
             const href = this.getAttribute('href');
             if (!href) return;
 
-            // Preserve native navigation so the server can apply the destination filter.
-            return;
+            const url = new URL(href, window.location.origin);
+            const destination = url.searchParams.get('destination');
+
+            updateURL('destination', destination ? destination.trim() : '');
+            applyAllFilters();
         });
     });
 
@@ -79,14 +98,14 @@ document.addEventListener('DOMContentLoaded', function() {
             let show = true;
 
             // Check category filter
-            const activeCategory = currentParams.get('category');
-            if (activeCategory && itemCategory !== activeCategory) {
+            const activeCategory = normalizeFilterValue(currentParams.get('category'));
+            if (activeCategory && normalizeFilterValue(itemCategory) !== activeCategory) {
                 show = false;
             }
 
             // Check destination filter
-            const activeDestination = currentParams.get('destination');
-            if (activeDestination && itemDestination !== activeDestination) {
+            const activeDestination = normalizeFilterValue(currentParams.get('destination'));
+            if (activeDestination && normalizeFilterValue(itemDestination) !== activeDestination) {
                 show = false;
             }
 
@@ -142,14 +161,14 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function applyAllFilters() {
         const currentParams = new URLSearchParams(window.location.search);
-        const category = currentParams.get('category');
-        const destination = currentParams.get('destination');
+        const category = normalizeFilterValue(currentParams.get('category'));
+        const destination = normalizeFilterValue(currentParams.get('destination'));
         
         let visibleCount = 0;
         
         blogItems.forEach(item => {
-            const itemCategory = item.dataset.category;
-            const itemDestination = item.dataset.destination;
+            const itemCategory = normalizeFilterValue(item.dataset.category);
+            const itemDestination = normalizeFilterValue(item.dataset.destination);
             let show = true;
 
             if (category && itemCategory !== category) {
@@ -187,9 +206,16 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function updateURL(paramName, paramValue) {
         const currentParams = new URLSearchParams(window.location.search);
-        currentParams.set(paramName, paramValue);
+        const normalizedValue = (paramValue || '').trim();
+
+        if (normalizedValue) {
+            currentParams.set(paramName, normalizedValue);
+        } else {
+            currentParams.delete(paramName);
+        }
+
         const newURL = `${window.location.pathname}?${currentParams.toString()}`;
-        window.history.pushState({}, '', newURL);
+        window.history.pushState({}, '', currentParams.toString() ? newURL : window.location.pathname);
     }
 
     /**
@@ -197,14 +223,14 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function updateActiveStates() {
         const currentParams = new URLSearchParams(window.location.search);
-        const activeCategory = currentParams.get('category');
-        const activeDestination = currentParams.get('destination');
+        const activeCategory = normalizeFilterValue(currentParams.get('category'));
+        const activeDestination = normalizeFilterValue(currentParams.get('destination'));
 
         // Update category links
         categoryLinks.forEach(link => {
             const href = link.getAttribute('href');
             const url = new URL(href, window.location.origin);
-            const linkCategory = url.searchParams.get('category');
+            const linkCategory = normalizeFilterValue(url.searchParams.get('category'));
             
             if (!activeCategory && !linkCategory) {
                 // "All Posts" is active
@@ -220,12 +246,25 @@ document.addEventListener('DOMContentLoaded', function() {
         destinationTags.forEach(tag => {
             const href = tag.getAttribute('href');
             const url = new URL(href, window.location.origin);
-            const tagDestination = url.searchParams.get('destination');
+            const tagDestination = normalizeFilterValue(url.searchParams.get('destination'));
             
             if (tagDestination === activeDestination) {
                 tag.classList.add('active');
             } else {
                 tag.classList.remove('active');
+            }
+        });
+
+        // Update destination filter buttons
+        destinationButtons.forEach(button => {
+            const buttonFilter = normalizeFilterValue(button.dataset.filter);
+
+            if (!activeDestination && buttonFilter === 'all') {
+                button.classList.add('active');
+            } else if (buttonFilter === activeDestination) {
+                button.classList.add('active');
+            } else {
+                button.classList.remove('active');
             }
         });
     }

@@ -65,6 +65,89 @@
     position: relative;
     z-index: 10;
 }
+.blog-mobile-toolbar {
+    display: none;
+    background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(248,250,252,0.98) 100%);
+    border: 1px solid rgba(229,231,235,0.9);
+    border-radius: 22px;
+    padding: 16px;
+    margin: -28px 0 24px;
+    box-shadow: 0 14px 36px rgba(17,24,39,0.08);
+    position: relative;
+    z-index: 12;
+    backdrop-filter: blur(10px);
+}
+.blog-mobile-toolbar__top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+.blog-mobile-toolbar__label {
+    min-width: 160px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #475569;
+    font-size: 0.82rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+}
+.blog-mobile-search {
+    flex: 1;
+}
+.blog-mobile-search .search-form {
+    margin: 0;
+}
+.blog-mobile-search .search-input-group {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1.5px solid #dbe3ff;
+    border-radius: 16px;
+    padding: 4px;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.08);
+}
+.blog-mobile-search .search-input {
+    border: 0;
+    background: transparent;
+    padding: 12px 14px;
+    min-width: 0;
+    flex: 1;
+    box-shadow: none;
+}
+.blog-mobile-search .search-input:focus {
+    border: 0;
+    outline: none;
+}
+.blog-mobile-search .search-btn {
+    position: static;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+.blog-mobile-toolbar__chips {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+.blog-mobile-toolbar__chips::-webkit-scrollbar {
+    display: none;
+}
+.blog-mobile-toolbar .destination-tag {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 10px 16px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+}
 .filter-section {
     margin-bottom: 20px;
 }
@@ -301,10 +384,19 @@
     color: #9ca3af;
 }
 @media (max-width: 991px) {
+    .blog-filters {
+        display: none;
+    }
+    .blog-mobile-toolbar {
+        display: block;
+    }
     .blog-main-content {
         flex-direction: column;
     }
     .blog-sidebar-area {
+        display: none;
+    }
+    .blog-mobile-sidebar {
         display: none;
     }
     .blog-hero h1 {
@@ -332,6 +424,24 @@
     }
     .featured-title {
         font-size: 2rem;
+    }
+}
+@media (max-width: 575px) {
+    .blog-mobile-toolbar {
+        margin-top: -18px;
+        padding: 14px;
+        border-radius: 18px;
+    }
+    .blog-mobile-toolbar__top {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    .blog-mobile-toolbar__label {
+        min-width: 0;
+    }
+    .blog-mobile-search .search-input {
+        font-size: 0.92rem;
     }
 }
 </style>
@@ -368,11 +478,41 @@
                 <i class="bi bi-geo-alt-fill"></i> Filter by Destination
             </div>
             <div class="d-flex flex-wrap justify-content-center align-items-center">
-                <button class="filter-btn {{ !request('destination') ? 'active' : '' }}" data-filter="all" data-type="destination">All Destinations</button>
+                <button class="filter-btn {{ !trim((string) request('destination')) ? 'active' : '' }}" data-filter="all" data-type="destination">All Destinations</button>
                 @foreach($destinations as $destination)
-                    <button class="filter-btn {{ request('destination') == $destination ? 'active' : '' }}" data-filter="{{ $destination }}" data-type="destination">{{ $destination }}</button>
+                    <button class="filter-btn {{ trim((string) request('destination')) === trim((string) $destination) ? 'active' : '' }}" data-filter="{{ $destination }}" data-type="destination">{{ $destination }}</button>
                 @endforeach
             </div>
+        </div>
+    </div>
+
+    <div class="blog-mobile-toolbar">
+        <div class="blog-mobile-toolbar__top">
+            <div class="blog-mobile-toolbar__label">
+                <i class="bi bi-geo-alt-fill"></i> Filter by Destination
+            </div>
+            <div class="blog-mobile-search">
+                <form action="{{ route('blog.index') }}" method="GET" class="search-form">
+                    @if(request('destination'))
+                        <input type="hidden" name="destination" value="{{ request('destination') }}">
+                    @endif
+                    @if(request('category'))
+                        <input type="hidden" name="category" value="{{ request('category') }}">
+                    @endif
+                    <div class="search-input-group">
+                        <input type="text" name="search" class="search-input" placeholder="Search articles..." value="{{ request('search') }}">
+                        <button type="submit" class="search-btn">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="blog-mobile-toolbar__chips" aria-label="Destination filters">
+            <button class="filter-btn {{ !trim((string) request('destination')) ? 'active' : '' }}" data-filter="all" data-type="destination">All Destinations</button>
+            @foreach($destinations as $destination)
+                <button class="filter-btn {{ trim((string) request('destination')) === trim((string) $destination) ? 'active' : '' }}" data-filter="{{ $destination }}" data-type="destination">{{ $destination }}</button>
+            @endforeach
         </div>
     </div>
 
@@ -388,7 +528,7 @@
 
     <div class="blog-main-content">
         <div class="blog-posts-area">
-            @if($featured && !request('destination'))
+            @if($featured && !trim((string) request('destination')))
             <div class="featured-post" id="featuredPost">
                 <div class="row g-0 featured-row">
                     <div class="col-lg-5">
@@ -418,7 +558,8 @@
             @endif
 
             <div class="row g-4" id="blogGrid">
-                @forelse($blogs as $blog)
+                @foreach($blogs as $blog)
+
                 <div class="col-md-6 blog-item" data-destination="{{ $blog['destination_name'] }}" data-category="{{ $blog['category'] }}">
                     <article class="blog-card">
                         <div class="blog-card-img-wrap">
@@ -437,15 +578,7 @@
                         </div>
                     </article>
                 </div>
-                @empty
-                <div class="col-12">
-                    <div class="no-results">
-                        <div class="no-results-icon"><i class="bi bi-search"></i></div>
-                        <h3>No articles found</h3>
-                        <p>Try adjusting your filters to find more content</p>
-                    </div>
-                </div>
-                @endforelse
+                @endforeach
             </div>
         </div>
 
@@ -457,75 +590,5 @@
 
 @push('scripts')
 <script src="{{ asset('js/blog-filter.js') }}"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const blogItems = document.querySelectorAll('.blog-item');
-    const featuredPost = document.getElementById('featuredPost');
-    const allBlogs = @json($blogs);
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const filter = this.dataset.filter;
-            const type = this.dataset.type;
-            
-            // Update active state
-            document.querySelectorAll(`.filter-btn[data-type="${type}"]`).forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-
-            // Filter blog items
-            let visibleCount = 0;
-            blogItems.forEach(item => {
-                const destination = item.dataset.destination;
-                const category = item.dataset.category;
-                let show = true;
-
-                if (filter !== 'all') {
-                    if (type === 'destination' && destination !== filter) {
-                        show = false;
-                    }
-                }
-
-                if (show) {
-                    item.style.display = 'block';
-                    visibleCount++;
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-
-            // Update featured post based on filter
-            if (featuredPost) {
-                if (filter === 'all') {
-                    featuredPost.style.display = 'block';
-                } else {
-                    // Find featured post for selected destination
-                    const filteredBlogs = allBlogs.filter(blog => blog.destination_name === filter);
-                    if (filteredBlogs.length > 0) {
-                        const newFeatured = filteredBlogs[0];
-                        updateFeaturedPost(newFeatured);
-                        featuredPost.style.display = 'block';
-                    } else {
-                        featuredPost.style.display = 'none';
-                    }
-                }
-            }
-        });
-    });
-
-    function updateFeaturedPost(blog) {
-        if (!featuredPost) return;
-        
-        featuredPost.querySelector('.featured-img').src = blog.image;
-        featuredPost.querySelector('.featured-img').alt = blog.title;
-        featuredPost.querySelector('.featured-title').textContent = blog.title;
-        featuredPost.querySelector('.featured-excerpt').textContent = blog.excerpt;
-        featuredPost.querySelector('.blog-meta span:nth-child(1)').innerHTML = `<i class="bi bi-clock"></i> ${blog.reading_time} min read`;
-        featuredPost.querySelector('.blog-meta span:nth-child(2)').innerHTML = `<i class="bi bi-calendar3"></i> ${blog.published_at_display || blog.published_at}`;
-        featuredPost.querySelector('.blog-meta span:nth-child(3)').innerHTML = `<i class="bi bi-geo-alt"></i> ${blog.destination_name}`;
-        featuredPost.querySelector('.btn').href = blog.url;
-    }
-});
-</script>
 @endpush
 @endsection

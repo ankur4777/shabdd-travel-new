@@ -51,9 +51,11 @@
             </a></li>
             @php
                 $categories = ($allBlogs ?? $blogs)->pluck('category')->filter()->unique()->sort();
+                $activeCategory = trim((string) request('category'));
+                $activeDestination = trim((string) request('destination'));
             @endphp
             @foreach($categories as $category)
-            <li><a href="{{ route('blog.index', ['category' => $category]) }}" class="category-link {{ request('category') == $category ? 'active' : '' }}">
+            <li><a href="{{ route('blog.index', ['category' => $category]) }}" class="category-link {{ $activeCategory === trim((string) $category) ? 'active' : '' }}">
                 <span>{{ $category }}</span>
                 <span class="count">{{ ($allBlogs ?? $blogs)->where('category', $category)->count() }}</span>
             </a></li>
@@ -69,7 +71,7 @@
         <div class="destinations-tags">
             @foreach($destinations as $destination)
             <a href="{{ route('blog.index', ['destination' => $destination]) }}" 
-               class="destination-tag {{ request('destination') == $destination ? 'active' : '' }}">
+               class="destination-tag {{ $activeDestination === trim((string) $destination) ? 'active' : '' }}">
                 {{ $destination }}
             </a>
             @endforeach
