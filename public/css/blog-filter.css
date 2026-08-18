@@ -229,9 +229,9 @@ html {
         margin-top: 40px;
     }
     
-    .sidebar-widget {
-        margin-bottom: 20px;
-    }
+.search-widget{
+    display: none;
+   }
 }
 
 @media (max-width: 767px) {
