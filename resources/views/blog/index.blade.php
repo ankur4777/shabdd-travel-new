@@ -365,6 +365,32 @@
     line-height: 1.75;
     margin-bottom: 0;
 }
+.blog-grid-footer {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+}
+.blog-load-more-btn {
+    min-width: 180px;
+    padding: 12px 22px;
+    border: 1px solid #667eea;
+    border-radius: 14px;
+    background: #fff;
+    color: #667eea;
+    font-weight: 800;
+    transition: all 0.3s ease;
+}
+.blog-load-more-btn:hover {
+    background: #667eea;
+    color: #fff;
+    transform: translateY(-2px);
+}
+.blog-grid-footer.is-hidden {
+    display: none;
+}
+.latest-post-mobile-view{
+    display:none;
+}
 .no-results {
     text-align: center;
     padding: 80px 20px;
@@ -425,6 +451,13 @@
     .featured-title {
         font-size: 2rem;
     }
+    .blog-grid-footer {
+        margin-top: 14px;
+    }
+
+    .latest-post-mobile-view{
+        display: block;
+    }
 }
 @media (max-width: 575px) {
     .blog-mobile-toolbar {
@@ -455,6 +488,9 @@
     }
     .blog-mobile-search .search-input {
         font-size: 0.92rem;
+    }
+    .blog-load-more-btn {
+        width: 100%;
     }
 }
 </style>
@@ -571,9 +607,9 @@
             @endif
 
             <div class="row g-4" id="blogGrid">
-                @foreach($blogs as $blog)
+                @foreach($blogs as $index => $blog)
 
-                <div class="col-md-6 blog-item" data-destination="{{ $blog['destination_name'] }}" data-category="{{ $blog['category'] }}">
+                <div class="col-md-6 blog-item" data-destination="{{ $blog['destination_name'] }}" data-category="{{ $blog['category'] }}" @if($index >= 6) style="display:none;" @endif>
                     <article class="blog-card">
                         <div class="blog-card-img-wrap">
                             <img src="{{ $blog['image'] }}" alt="{{ $blog['title'] }}" class="blog-card-img">
@@ -593,8 +629,46 @@
                 </div>
                 @endforeach
             </div>
-        </div>
+            @if($blogs->count() > 6)
+                <div class="blog-grid-footer" data-blog-load-more-wrap>
+                    <button type="button" class="blog-load-more-btn" data-blog-load-more>
+                        See More
+                    </button>
+                </div>
+            @endif
 
+            
+    {{-- Latest Posts --}}
+    <div class="sidebar-widget latest-posts-widget latest-post-mobile-view">
+        <h3 class="widget-title">
+            <i class="bi bi-fire"></i> Latest Stories
+        </h3>
+        <div class="latest-posts-list">
+            @foreach($highlights->take(5) as $post)
+            <article class="latest-post-item">
+                <a href="{{ $post['url'] }}" class="latest-post-link">
+                    <div class="latest-post-img">
+                        <img src="{{ $post['image'] }}" alt="{{ $post['title'] }}">
+                    </div>
+                    <div class="latest-post-content">
+                        <span class="latest-post-category">{{ $post['category'] }}</span>
+                        <h4 class="latest-post-title">{{ Str::limit($post['title'], 60) }}</h4>
+                        <div class="latest-post-meta">
+                            <!-- <span><i class="bi bi-clock"></i> {{ $post['reading_time'] }} min</span> -->
+                            <span><i class="bi bi-calendar3"></i> {{ \Carbon\Carbon::parse($post['published_at'])->format('M d') }}</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+            @endforeach
+        </div>
+    </div>
+
+
+        </div>
+        
+
+        
         <div class="blog-sidebar-area">
             @include('partials.blog-sidebar')
         </div>

@@ -1,5 +1,10 @@
 {{-- Blog Sidebar Component --}}
 <aside class="blog-sidebar">
+    @php
+        $latestStoriesCollection = collect($latestStories ?? $highlights ?? []);
+        $latestStoriesCount = $latestStoriesCollection->count();
+    @endphp
+
     {{-- Search Box --}}
     <div class="sidebar-widget search-widget">
         <h3 class="widget-title">Search Blog</h3>
@@ -14,13 +19,13 @@
     </div>
 
     {{-- Latest Posts --}}
-    <div class="sidebar-widget latest-posts-widget">
+    <div class="sidebar-widget latest-posts-widget latest-post-mobile-view" data-latest-posts-widget>
         <h3 class="widget-title">
             <i class="bi bi-fire"></i> Latest Stories
         </h3>
-        <div class="latest-posts-list">
-            @foreach($highlights->take(5) as $post)
-            <article class="latest-post-item">
+        <div class="latest-posts-list" data-latest-posts-list>
+            @foreach($latestStoriesCollection as $index => $post)
+            <article class="latest-post-item {{ $index >= 4 ? 'is-hidden' : '' }}" data-latest-post-item>
                 <a href="{{ $post['url'] }}" class="latest-post-link">
                     <div class="latest-post-img">
                         <img src="{{ $post['image'] }}" alt="{{ $post['title'] }}">
@@ -37,6 +42,13 @@
             </article>
             @endforeach
         </div>
+        @if($latestStoriesCount > 4)
+            <div class="latest-posts-actions" data-latest-posts-actions>
+                <button type="button" class="latest-posts-more-btn" data-latest-posts-more>
+                    See More
+                </button>
+            </div>
+        @endif
     </div>
 
     {{-- Categories --}}
@@ -63,7 +75,7 @@
         </ul>
     </div>
 
-    {{-- Destinations --}}
+    <!-- {{-- Destinations --}}
     <div class="sidebar-widget destinations-widget">
         <h3 class="widget-title">
             <i class="bi bi-geo-alt"></i> Destinations
@@ -76,7 +88,7 @@
             </a>
             @endforeach
         </div>
-    </div>
+    </div> -->
 
     {{-- Newsletter --}}
     <div class="sidebar-widget newsletter-widget">
@@ -447,6 +459,10 @@
     color: white;
 }
 
+.latest-post-mobile-view {
+    display: none;
+}
+
 @media (max-width: 991px) {
     .blog-mobile-sidebar {
         display: block;
@@ -465,6 +481,10 @@
     .blog-sidebar {
         position: static;
         margin-top: 40px;
+    }
+
+    .latest-post-mobile-view {
+        display: block;
     }
 }
 </style>

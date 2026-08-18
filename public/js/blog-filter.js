@@ -11,7 +11,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const blogItems = document.querySelectorAll('.blog-item');
     const featuredPost = document.getElementById('featuredPost');
     const blogGrid = document.getElementById('blogGrid');
+    const blogLoadMoreButton = document.querySelector('[data-blog-load-more]');
+    const blogLoadMoreWrap = document.querySelector('[data-blog-load-more-wrap]');
     const noResultsDiv = createNoResultsElement();
+    const blogLoadMoreStep = 6;
+    let blogLoadMoreLimit = blogLoadMoreStep;
+    let lastFilterSignature = '';
 
     // Get current URL parameters
     const urlParams = new URLSearchParams(window.location.search);
@@ -20,12 +25,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize filters on page load
     initializeFilters();
+    initializeBlogLoadMore();
 
     /**
      * Initialize filters based on URL parameters
      */
     function initializeFilters() {
         applyAllFilters();
+    }
+
+    /**
+     * Initialize blog grid "See More" button
+     */
+    function initializeBlogLoadMore() {
+        if (!blogLoadMoreButton) {
+            return;
+        }
+
+        blogLoadMoreButton.addEventListener('click', function() {
+            blogLoadMoreLimit += blogLoadMoreStep;
+            applyAllFilters();
+        });
     }
 
     function normalizeFilterValue(value) {
@@ -163,6 +183,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentParams = new URLSearchParams(window.location.search);
         const category = normalizeFilterValue(currentParams.get('category'));
         const destination = normalizeFilterValue(currentParams.get('destination'));
+        const filterSignature = `${category}|${destination}`;
+
+        if (filterSignature !== lastFilterSignature) {
+            blogLoadMoreLimit = blogLoadMoreStep;
+            lastFilterSignature = filterSignature;
+        }
         
         let visibleCount = 0;
         
@@ -187,6 +213,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        applyBlogLoadMoreLimit();
+
         updateActiveStates();
 
         if (featuredPost) {
@@ -199,6 +227,29 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             hideNoResults();
         }
+    }
+
+    /**
+     * Limit the blog grid to the current load-more amount.
+     */
+    function applyBlogLoadMoreLimit() {
+        if (!blogLoadMoreButton || !blogLoadMoreWrap) {
+            return;
+        }
+
+        const filteredItems = Array.from(blogItems).filter(item => item.style.display !== 'none');
+        let shownCount = 0;
+
+        filteredItems.forEach(item => {
+            if (shownCount < blogLoadMoreLimit) {
+                item.style.display = 'block';
+                shownCount++;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        blogLoadMoreWrap.classList.toggle('is-hidden', filteredItems.length <= blogLoadMoreLimit);
     }
 
     /**
