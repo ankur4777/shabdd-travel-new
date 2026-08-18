@@ -313,7 +313,7 @@
     border-radius: 10px;
     text-decoration: none;
     color: #4b5563;
-    font-weight: 600;
+    font-weight: 400;
     transition: all 0.3s;
 }
 
@@ -351,7 +351,7 @@
     border-radius: 20px;
     text-decoration: none;
     font-size: 0.85rem;
-    font-weight: 600;
+    font-weight: 400;
     transition: all 0.3s;
 }
 

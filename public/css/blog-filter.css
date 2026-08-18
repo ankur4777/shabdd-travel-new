@@ -79,6 +79,7 @@ html {
 /* Filter Button Hover Effects */
 .filter-btn {
     position: relative;
+    font-weight: 400;
 }
 
 .filter-btn::before {
@@ -103,6 +104,7 @@ html {
 .category-link {
     position: relative;
     overflow: hidden;
+    font-weight: 400;
 }
 
 .category-link::after {
@@ -124,6 +126,7 @@ html {
 /* Destination Tag Pulse Effect */
 .destination-tag {
     position: relative;
+    font-weight: 400;
 }
 
 .destination-tag.active::before {

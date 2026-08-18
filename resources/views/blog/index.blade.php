@@ -172,6 +172,7 @@
     margin: 5px;
     cursor: pointer;
     transition: all 0.3s;
+    font-weight: 400;
     
 
 }
