@@ -234,6 +234,24 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    max-height: 460px;
+    overflow-y: auto;
+    padding-right: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: #c7d2fe transparent;
+}
+
+.latest-posts-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.latest-posts-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.latest-posts-list::-webkit-scrollbar-thumb {
+    background: #c7d2fe;
+    border-radius: 999px;
 }
 
 .latest-post-item {
