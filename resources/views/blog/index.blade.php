@@ -83,13 +83,16 @@
     gap: 14px;
     margin-bottom: 14px;
 }
+.blog-mobile-toolbar__top--split {
+    justify-content: space-between;
+}
 .blog-mobile-toolbar__label {
     min-width: 160px;
     display: inline-flex;
     align-items: center;
     gap: 8px;
     color: #475569;
-    font-size: 0.82rem;
+    font-size: clamp(0.76rem, 0.75vw, 0.9rem);
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -129,6 +132,35 @@
     border-radius: 12px;
     flex-shrink: 0;
 }
+.filter-section__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+.clear-filters-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #dbe3ff;
+    background: #f8fbff;
+    color: #667eea;
+    padding: clamp(7px, 1vw, 10px) clamp(10px, 1.4vw, 14px);
+    border-radius: 12px;
+    font-size: clamp(0.74rem, 0.7vw, 0.86rem);
+    font-weight: 800;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+}
+.clear-filters-btn:hover {
+    background: #667eea;
+    color: #fff;
+    transform: translateY(-1px);
+}
+.clear-filters-btn.is-hidden {
+    display: none;
+}
 .blog-mobile-toolbar__chips {
     display: flex;
     flex-wrap: nowrap;
@@ -155,11 +187,11 @@
     margin-bottom: 0;
 }
 .filter-label {
-    font-size: 0.85rem;
+    font-size: clamp(0.78rem, 0.8vw, 0.9rem);
     font-weight: 700;
     color: #6b7280;
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: clamp(10px, 1vw, 12px);
     display: flex;
     align-items: center;
     gap: 8px;
@@ -493,8 +525,20 @@
         align-items: stretch;
         gap: 12px;
     }
+    .blog-mobile-toolbar__top--split {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
     .blog-mobile-toolbar__label {
         min-width: 0;
+    }
+    .clear-filters-btn {
+       padding: clamp(0px, 1vw, 9px) clamp(3px, 1vw, 12px);
+        font-size: clamp(0.72rem, 2.4vw, 0.8rem);
+    }
+    .filter-section__header {
+        align-items: flex-start;
     }
     .blog-mobile-toolbar .filter-btn,
     .blog-mobile-toolbar .destination-tag {
@@ -546,8 +590,13 @@
 <div class="container">
     <div class="blog-filters">
         <div class="filter-section">
-            <div class="filter-label">
-                <i class="bi bi-geo-alt-fill"></i> Filter by Destination
+            <div class="filter-section__header">
+                <div class="filter-label">
+                    <i class="bi bi-geo-alt-fill"></i> Filter by Destination
+                </div>
+                <button type="button" class="clear-filters-btn" data-clear-filters>
+                    <i class="bi bi-x-circle"></i> Clear All
+                </button>
             </div>
             <div class="d-flex flex-wrap justify-content-center align-items-center">
                 <button class="filter-btn {{ !trim((string) request('destination')) ? 'active' : '' }}" data-filter="all" data-type="destination">All Destinations</button>
@@ -559,10 +608,15 @@
     </div>
 
     <div class="blog-mobile-toolbar">
-        <div class="blog-mobile-toolbar__top">
+        <div class="blog-mobile-toolbar__top blog-mobile-toolbar__top--split">
             <div class="blog-mobile-toolbar__label">
                 <i class="bi bi-geo-alt-fill"></i> Filter by Destination
             </div>
+            <button type="button" class="clear-filters-btn" data-clear-filters>
+                <i class="bi bi-x-circle"></i> Clear All
+            </button>
+        </div>
+        <div class="blog-mobile-toolbar__top">
             <div class="blog-mobile-search">
                 <form action="{{ route('blog.index') }}" method="GET" class="search-form">
                     @if(request('destination'))

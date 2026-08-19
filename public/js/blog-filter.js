@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const blogLoadMoreButton = document.querySelector('[data-blog-load-more]');
     const blogLoadMoreWrap = document.querySelector('[data-blog-load-more-wrap]');
     const latestStoriesWidgets = document.querySelectorAll('[data-latest-stories-list]');
+    const clearFiltersButtons = document.querySelectorAll('[data-clear-filters]');
     const noResultsDiv = createNoResultsElement();
     const blogLoadMoreStep = 6;
     let blogLoadMoreLimit = blogLoadMoreStep;
@@ -27,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize filters on page load
     initializeFilters();
     initializeBlogLoadMore();
+    initializeClearFilters();
     initializeLatestStoriesToggle();
 
     /**
@@ -48,6 +50,33 @@ document.addEventListener('DOMContentLoaded', function() {
             blogLoadMoreLimit += blogLoadMoreStep;
             applyAllFilters();
         });
+    }
+
+    /**
+     * Initialize "Clear All" filter buttons
+     */
+    function initializeClearFilters() {
+        if (!clearFiltersButtons.length) {
+            return;
+        }
+
+        clearFiltersButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                const currentParams = new URLSearchParams(window.location.search);
+
+                currentParams.delete('category');
+                currentParams.delete('destination');
+                currentParams.delete('search');
+
+                const newURL = currentParams.toString()
+                    ? `${window.location.pathname}?${currentParams.toString()}`
+                    : window.location.pathname;
+
+                window.location.href = newURL;
+            });
+        });
+
+        updateClearFiltersVisibility();
     }
 
     /**
@@ -190,6 +219,8 @@ document.addEventListener('DOMContentLoaded', function() {
             hideNoResults();
         }
 
+        updateClearFiltersVisibility();
+
         // Smooth scroll to results
         if (blogGrid) {
             blogGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -304,6 +335,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const newURL = `${window.location.pathname}?${currentParams.toString()}`;
         window.history.pushState({}, '', currentParams.toString() ? newURL : window.location.pathname);
+    }
+
+    /**
+     * Show or hide the clear button depending on active filters.
+     */
+    function updateClearFiltersVisibility() {
+        if (!clearFiltersButtons.length) {
+            return;
+        }
+
+        clearFiltersButtons.forEach(function(button) {
+            button.classList.remove('is-hidden');
+        });
     }
 
     /**
