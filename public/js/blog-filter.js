@@ -102,14 +102,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            let latestStoriesExpanded = false;
-            latestStoriesList.classList.add('is-collapsed');
-            latestStoriesToggle.textContent = 'Show more stories';
+            const latestStoriesStep = 4;
+            let latestStoriesVisibleCount = latestStoriesStep;
+
+            function renderLatestStories() {
+                latestStoriesItems.forEach(function(item, index) {
+                    item.style.display = index < latestStoriesVisibleCount ? 'block' : 'none';
+                });
+
+                if (latestStoriesVisibleCount >= latestStoriesItems.length) {
+                    latestStoriesToggle.style.display = 'none';
+                } else {
+                    latestStoriesToggle.style.display = '';
+                    latestStoriesToggle.textContent = `Show ${latestStoriesStep} more stories`;
+                }
+            }
+
+            renderLatestStories();
 
             latestStoriesToggle.addEventListener('click', function() {
-                latestStoriesExpanded = !latestStoriesExpanded;
-                latestStoriesList.classList.toggle('is-collapsed', !latestStoriesExpanded);
-                latestStoriesToggle.textContent = latestStoriesExpanded ? 'Show fewer stories' : 'Show more stories';
+                latestStoriesVisibleCount = Math.min(latestStoriesVisibleCount + latestStoriesStep, latestStoriesItems.length);
+                renderLatestStories();
             });
         });
     }
