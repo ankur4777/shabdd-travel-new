@@ -18,38 +18,6 @@
         </form>
     </div>
 
-    {{-- Latest Posts --}}
-    <div class="sidebar-widget latest-posts-widget latest-post-mobile-view" data-latest-posts-widget>
-        <h3 class="widget-title">
-            <i class="bi bi-fire"></i> Latest Stories
-        </h3>
-        <div class="latest-posts-list" data-latest-posts-list>
-            @foreach($latestStoriesCollection as $index => $post)
-            <article class="latest-post-item {{ $index >= 4 ? 'is-hidden' : '' }}" data-latest-post-item>
-                <a href="{{ $post['url'] }}" class="latest-post-link">
-                    <div class="latest-post-img">
-                        <img src="{{ $post['image'] }}" alt="{{ $post['title'] }}">
-                    </div>
-                    <div class="latest-post-content">
-                        <span class="latest-post-category">{{ $post['category'] }}</span>
-                        <h4 class="latest-post-title">{{ Str::limit($post['title'], 60) }}</h4>
-                        <div class="latest-post-meta">
-                            <!-- <span><i class="bi bi-clock"></i> {{ $post['reading_time'] }} min</span> -->
-                            <span><i class="bi bi-calendar3"></i> {{ \Carbon\Carbon::parse($post['published_at'])->format('M d') }}</span>
-                        </div>
-                    </div>
-                </a>
-            </article>
-            @endforeach
-        </div>
-        @if($latestStoriesCount > 4)
-            <div class="latest-posts-actions" data-latest-posts-actions>
-                <button type="button" class="latest-posts-more-btn" data-latest-posts-more>
-                    See More
-                </button>
-            </div>
-        @endif
-    </div>
 
     {{-- Categories --}}
     <div class="sidebar-widget categories-widget">
@@ -74,6 +42,41 @@
             @endforeach
         </ul>
     </div>
+
+    {{-- Latest Posts --}}
+    @if($latestStoriesCount > 0)
+        <div class="sidebar-widget latest-posts-widget">
+            <h3 class="widget-title">
+                <i class="bi bi-fire"></i> Latest Stories
+            </h3>
+            <div class="latest-posts-list" data-latest-stories-list>
+                @foreach($latestStoriesCollection as $post)
+                    <article class="latest-post-item">
+                        <a href="{{ $post['url'] }}" class="latest-post-link">
+                            <div class="latest-post-img">
+                                <img src="{{ $post['image'] }}" alt="{{ $post['title'] }}">
+                            </div>
+                            <div class="latest-post-content">
+                                <span class="latest-post-category">{{ $post['category'] }}</span>
+                                <h4 class="latest-post-title">{{ Str::limit($post['title'], 60) }}</h4>
+                                <div class="latest-post-meta">
+                                    <span><i class="bi bi-calendar3"></i> {{ \Carbon\Carbon::parse($post['published_at'])->format('M d') }}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                @endforeach
+            </div>
+
+            @if($latestStoriesCount > 4)
+                <div class="latest-posts-footer">
+                    <button type="button" class="latest-posts-toggle-btn" data-latest-stories-toggle>
+                        Show more stories
+                    </button>
+                </div>
+            @endif
+        </div>
+    @endif
 
     <!-- {{-- Destinations --}}
     <div class="sidebar-widget destinations-widget">
@@ -107,7 +110,7 @@
 
     {{-- Popular Tags --}}
     <div class="sidebar-widget tags-widget">
-        <h3 class="widget-title">
+        <!-- <h3 class="widget-title">
             <i class="bi bi-tags"></i> Popular Tags
         </h3>
         <div class="tags-cloud">
@@ -121,7 +124,7 @@
             <a href="#" class="tag-item">Solo Travel</a>
             <a href="#" class="tag-item">Food</a>
             <a href="#" class="tag-item">Culture</a>
-        </div>
+        </div> -->
     </div>
 </aside>
 
@@ -457,6 +460,33 @@
 .tag-item:hover {
     background: #667eea;
     color: white;
+}
+
+.latest-posts-list.is-collapsed .latest-post-item:nth-child(n+5) {
+    display: none;
+}
+
+.latest-posts-footer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.latest-posts-toggle-btn {
+    width: 100%;
+    padding: 10px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #f9fafb;
+    color: #667eea;
+    font-weight: 800;
+    transition: all 0.3s ease;
+}
+
+.latest-posts-toggle-btn:hover {
+    background: #667eea;
+    color: #fff;
+    transform: translateY(-1px);
 }
 
 .latest-post-mobile-view {

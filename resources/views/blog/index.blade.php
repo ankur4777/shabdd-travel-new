@@ -388,6 +388,29 @@
 .blog-grid-footer.is-hidden {
     display: none;
 }
+.latest-posts-list.is-collapsed .latest-post-item:nth-child(n+5) {
+    display: none;
+}
+.latest-posts-footer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+.latest-posts-toggle-btn {
+    width: 100%;
+    padding: 10px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #f9fafb;
+    color: #667eea;
+    font-weight: 800;
+    transition: all 0.3s ease;
+}
+.latest-posts-toggle-btn:hover {
+    background: #667eea;
+    color: #fff;
+    transform: translateY(-1px);
+}
 .latest-post-mobile-view{
     display:none;
 }
@@ -639,12 +662,16 @@
 
             
     {{-- Latest Posts --}}
+    @php
+        $latestStoriesCollection = collect($latestStories ?? $highlights ?? []);
+        $latestStoriesCount = $latestStoriesCollection->count();
+    @endphp
     <div class="sidebar-widget latest-posts-widget latest-post-mobile-view">
         <h3 class="widget-title">
             <i class="bi bi-fire"></i> Latest Stories
         </h3>
-        <div class="latest-posts-list">
-            @foreach($highlights->take(5) as $post)
+        <div class="latest-posts-list" data-latest-stories-list>
+            @foreach($latestStoriesCollection as $post)
             <article class="latest-post-item">
                 <a href="{{ $post['url'] }}" class="latest-post-link">
                     <div class="latest-post-img">
@@ -662,6 +689,15 @@
             </article>
             @endforeach
         </div>
+
+        
+        @if($latestStoriesCount > 4)
+            <div class="latest-posts-footer">
+                <button type="button" class="latest-posts-toggle-btn" data-latest-stories-toggle>
+                    Show more stories
+                </button>
+            </div>
+        @endif
     </div>
 
 

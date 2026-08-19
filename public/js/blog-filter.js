@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const blogGrid = document.getElementById('blogGrid');
     const blogLoadMoreButton = document.querySelector('[data-blog-load-more]');
     const blogLoadMoreWrap = document.querySelector('[data-blog-load-more-wrap]');
+    const latestStoriesWidgets = document.querySelectorAll('[data-latest-stories-list]');
     const noResultsDiv = createNoResultsElement();
     const blogLoadMoreStep = 6;
     let blogLoadMoreLimit = blogLoadMoreStep;
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize filters on page load
     initializeFilters();
     initializeBlogLoadMore();
+    initializeLatestStoriesToggle();
 
     /**
      * Initialize filters based on URL parameters
@@ -45,6 +47,41 @@ document.addEventListener('DOMContentLoaded', function() {
         blogLoadMoreButton.addEventListener('click', function() {
             blogLoadMoreLimit += blogLoadMoreStep;
             applyAllFilters();
+        });
+    }
+
+    /**
+     * Initialize latest stories "Show more" button
+     */
+    function initializeLatestStoriesToggle() {
+        if (!latestStoriesWidgets.length) {
+            return;
+        }
+
+        latestStoriesWidgets.forEach(function(latestStoriesList) {
+            const widget = latestStoriesList.closest('.sidebar-widget');
+            const latestStoriesToggle = widget ? widget.querySelector('[data-latest-stories-toggle]') : null;
+
+            if (!latestStoriesToggle) {
+                return;
+            }
+
+            const latestStoriesItems = latestStoriesList.querySelectorAll('.latest-post-item');
+
+            if (latestStoriesItems.length <= 4) {
+                latestStoriesToggle.style.display = 'none';
+                return;
+            }
+
+            let latestStoriesExpanded = false;
+            latestStoriesList.classList.add('is-collapsed');
+            latestStoriesToggle.textContent = 'Show more stories';
+
+            latestStoriesToggle.addEventListener('click', function() {
+                latestStoriesExpanded = !latestStoriesExpanded;
+                latestStoriesList.classList.toggle('is-collapsed', !latestStoriesExpanded);
+                latestStoriesToggle.textContent = latestStoriesExpanded ? 'Show fewer stories' : 'Show more stories';
+            });
         });
     }
 

@@ -47,6 +47,7 @@ class BlogController extends Controller
             'blogs' => $blogs,
             'featured' => $blogs->first(),
             'highlights' => $blogs->take(4)->values(),
+            'latestStories' => $blogs->values(),
             'destinations' => $allBlogs
                 ->pluck('destination_name')
                 ->map(fn ($destination) => trim((string) $destination))
@@ -94,6 +95,7 @@ class BlogController extends Controller
             'destinationBlogs' => $destinationBlogs,
             'blogs' => $blogs,
             'highlights' => $blogs->take(5)->values(),
+            'latestStories' => $blogs->values(),
             'destinations' => $blogs
                 ->pluck('destination_name')
                 ->filter()
