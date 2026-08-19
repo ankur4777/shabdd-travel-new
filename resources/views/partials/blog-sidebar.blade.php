@@ -45,7 +45,7 @@
 
     {{-- Latest Posts --}}
     @if($latestStoriesCount > 0)
-        <div class="sidebar-widget latest-posts-widget">
+        <div class="sidebar-widget latest-posts-widget latest-post-mobile">
             <h3 class="widget-title">
                 <i class="bi bi-fire"></i> Latest Stories
             </h3>
@@ -517,6 +517,9 @@
         margin-bottom: 28px;
     }
 
+    .latest-post-mobile{
+        display: none;
+    }
     .blog-mobile-sidebar .blog-sidebar {
         position: static;
         margin-top: 0;
@@ -524,6 +527,7 @@
 
     .blog-mobile-sidebar .sidebar-widget {
         margin-bottom: 16px;
+        
     }
 
     .blog-sidebar {
