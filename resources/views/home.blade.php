@@ -785,7 +785,17 @@
                         </article>
                     @endforeach
                 </div>
+
+
+<a href="{{ route('packages.index') }}" class="hp-trending-packages__view-view-all-mobile">
+                        View all <span aria-hidden="true">&rarr;</span>
+                    </a>
+                
             </div>
+
+            
+
+
         </section>
     @endif
 
@@ -1025,6 +1035,10 @@
             border-color: #2563eb;
         }
 
+
+        .hp-trending-packages__view-view-all-mobile{
+            display:none;
+        }
         @media (max-width: 1199px) {
             .hp-trending-packages__grid {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1035,6 +1049,7 @@
             .hp-trending-packages__grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
+
         }
 
         @media (max-width: 767px) {
@@ -1053,6 +1068,24 @@
 
             .hp-trending-package-card__body {
                 min-height: 0;
+            }
+
+            
+            .hp-trending-packages__view{
+                display: none;
+            }
+
+            .hp-trending-packages__view-view-all-mobile{
+                display:block;
+               width:fit-content;
+                  margin:0px auto;
+            align-items: center;
+            gap: 8px;
+            flex: 0 0 auto;
+            color: #0f172a;
+            font-weight: 800;
+            text-decoration: none;
+            margin-top: 12px;
             }
         }
 
@@ -2134,7 +2167,7 @@
 
                     {{-- CTA Buttons --}}
                     <div class="hb-actions">
-                        <a href="#" class="hb-btn hb-btn--primary">
+                        <a href="{{ route('destinations.index', ['travel_style' => 'honeymoon']) }}" class="hb-btn hb-btn--primary">
                             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M12 21C12 21 4 13.5 4 8.5a8 8 0 0 1 16 0C20 13.5 12 21 12 21z"
                                     stroke="currentColor" stroke-width="1.8" />
@@ -2142,7 +2175,7 @@
                             </svg>
                             Explore Packages
                         </a>
-                        <a href="#" class="hb-btn hb-btn--ghost">
+                        <a href="{{route('contact')}}" class="hb-btn hb-btn--ghost">
                             Customize My Trip
                             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2"
