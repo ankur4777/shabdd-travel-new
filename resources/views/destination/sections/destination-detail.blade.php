@@ -449,11 +449,7 @@
                     </div>
 
                     <div class="df-section" id="dfSection">
-                        <button class="df-desktop-sidebar-toggle d-none d-lg-inline-flex" type="button"
-                            id="dfDesktopSidebarToggle" aria-pressed="false" aria-controls="dfSidebar">
-                            <i class="bi bi-arrows-collapse-vertical" aria-hidden="true"></i>
-                            <span>Slide Filters</span>
-                        </button>
+                       
                         <div class="df-wrapper">
                             <aside class="df-sidebar d-none d-lg-flex" id="dfSidebar" aria-label="Filter packages">
                                 <div class="df-sidebar-inner">
@@ -639,7 +635,7 @@
                                             </div>
                                         </article>
                                     @empty
-                                        <div class="seo-dd-card seo-dd-empty-card">
+                                        <div class="seo-dd-card seo-dd-empty-card ">
                                             <h3>No packages uploaded yet</h3>
                                             <p>Packages added from the admin panel with {{ $destination->name }} in the package name will appear here.</p>
                                         </div>
@@ -650,13 +646,13 @@
 
                                     <div class="destination-cart-icon-slide-x-axis">
 
-                                    <button class="df-carousel-arrow df-carousel-arrow--left d-none d-lg-flex" type="button"
+                                    <button class="df-carousel-arrow df-carousel-arrow--left d-none d-lg-flex  left-button-destination" type="button"
                                         id="dfCardsScrollLeft" aria-label="Scroll packages left">
                                         <i class="bi bi-chevron-left" aria-hidden="true"></i>
                                     </button>
 
 
-                                    <button class="df-carousel-arrow df-carousel-arrow--right d-none d-lg-flex" type="button"
+                                    <button class="df-carousel-arrow df-carousel-arrow--right d-none d-lg-flex  right-button-destination" type="button"
                                         id="dfCardsScrollRight" aria-label="Scroll packages right">
                                         <i class="bi bi-chevron-right" aria-hidden="true"></i>
                                     </button>
@@ -742,7 +738,7 @@
                     @endif --}}
                 </section>
 
-                
+
                 <section id="why" class="seo-dd-section seo-dd-why-section">
                     <div class="seo-dd-why-head">
                          <p class="seo-dd-kicker seo-dd-section-eyebrow"><span>WHy Choose Us?</span></p>
@@ -1086,6 +1082,26 @@
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
+
+                    // ✅ Use getElementsByClassName correctly
+    const scrollContainer = document.getElementsByClassName("df-cards-grid")[0];
+    const scrollLeft = document.getElementsByClassName("left-button-destination")[0];
+    const scrollRight = document.getElementsByClassName("right-button-destination")[0];
+
+    scrollLeft.addEventListener("click", () => {
+        scrollContainer.scrollBy({
+            left: -200,
+            behavior: "smooth"
+        });
+    });
+
+    scrollRight.addEventListener("click", () => {
+        scrollContainer.scrollBy({
+            left: 200,
+            behavior: "smooth"
+        });
+    });
+
         document.addEventListener('DOMContentLoaded', function () {
             const desktopSidebarToggle = document.getElementById('dfDesktopSidebarToggle');
             const desktopSidebarSection = document.getElementById('dfSection');

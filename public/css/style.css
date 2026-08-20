@@ -5996,19 +5996,18 @@ div.container.st-nav-inner {
 }
 
 .df-mobile-sort-select {
-    width: 100%;
+    width: auto;
     appearance: none;
     -webkit-appearance: none;
     background: var(--df-bg);
     border: 1.5px solid var(--df-border-md);
     border-radius: 999px;
-    padding: 10px 36px 10px 16px;
-    font-family: var(--df-font);
     font-size: 13px;
     font-weight: 700;
     color: var(--df-black);
     cursor: pointer;
     outline: none;
+    padding: 10px 37px;
 }
 
 .df-mobile-sort-chevron {
