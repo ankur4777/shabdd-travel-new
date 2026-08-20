@@ -93,7 +93,7 @@
                 <div class="st-offers-track" data-offers-track tabindex="0">
                     <div class="st-offers-strip" data-offers-strip>
                         <a class="st-offers-card st-offers-card--orange" href="{{ route('packages.index') }}"
-                            style="--offer-image: url('{{ asset('images/himachal.jpg') }}');">
+                            style="--offer-image: url('{{ asset('images/packages-image/Amazon.webp') }}');">
                             <span class="st-offers-art st-offers-art--loop" aria-hidden="true"></span>
                             <span class="st-offers-art st-offers-art--dash" aria-hidden="true"></span>
                             <span class="st-offers-copy">
@@ -105,7 +105,7 @@
                         </a>
 
                         <a class="st-offers-card st-offers-card--purple" href="{{ route('packages.index') }}"
-                            style="--offer-image: url('{{ asset('images/dubai.jpg') }}');">
+                            style="--offer-image: url('{{ asset('images/packages-image/Taiwan.jpg') }}');">
                             <span class="st-offers-art st-offers-art--spark" aria-hidden="true"></span>
                             <span class="st-offers-art st-offers-art--trail" aria-hidden="true"></span>
                             <span class="st-offers-copy">
@@ -117,7 +117,7 @@
                         </a>
 
                         <a class="st-offers-card st-offers-card--mint" href="{{ route('destinations.index') }}"
-                            style="--offer-image: url('{{ asset('images/kerala.avif') }}');">
+                            style="--offer-image: url('{{ asset('images/packages-image/Korea.webp') }}');">
                             <span class="st-offers-art st-offers-art--spark" aria-hidden="true"></span>
                             <span class="st-offers-art st-offers-art--orb" aria-hidden="true"></span>
                             <span class="st-offers-copy">
@@ -129,7 +129,7 @@
                         </a>
 
                         <a class="st-offers-card st-offers-card--sunset" href="{{ route('packages.index') }}"
-                            style="--offer-image: url('{{ asset('public\images\packages-image\Familiy.webp') }}');">
+                            style="--offer-image: url('{{ asset('images/packages-image/Familiy.webp') }}');">
                             <span class="st-offers-art st-offers-art--loop" aria-hidden="true"></span>
                             <span class="st-offers-art st-offers-art--dash" aria-hidden="true"></span>
                             <span class="st-offers-copy">
@@ -191,28 +191,7 @@
                     <a href="{{ route('destinations.index', ['travel_style' => 'honeymoon']) }}" class="st-theme-card"
                         data-theme="honeymoon">
                         <div class="st-theme-card-img"
-                            style="background: linear-gradient(160deg,#f472b6 0%,#ec4899 40%,#be185d 100%);">
-                            <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <!-- Eiffel Tower silhouette -->
-                                <rect x="88" y="60" width="4" height="140" fill="rgba(255,255,255,0.25)" rx="2" />
-                                <polygon points="90,60 82,120 98,120" fill="rgba(255,255,255,0.35)" />
-                                <rect x="80" y="120" width="20" height="4" fill="rgba(255,255,255,0.3)" rx="1" />
-                                <rect x="76" y="140" width="28" height="4" fill="rgba(255,255,255,0.3)" rx="1" />
-                                <!-- Couple silhouette -->
-                                <ellipse cx="65" cy="195" rx="14" ry="30" fill="rgba(255,255,255,0.18)" />
-                                <ellipse cx="115" cy="195" rx="12" ry="28" fill="rgba(255,255,255,0.15)" />
-                                <circle cx="63" cy="160" r="10" fill="rgba(255,255,255,0.22)" />
-                                <circle cx="115" cy="162" r="9" fill="rgba(255,255,255,0.18)" />
-                                <!-- Hearts -->
-                                <text x="130" y="80" font-size="18" fill="rgba(255,255,255,0.55)">♥</text>
-                                <text x="48" y="70" font-size="12" fill="rgba(255,255,255,0.4)">♥</text>
-                                <!-- City buildings -->
-                                <rect x="10" y="170" width="30" height="60" fill="rgba(180,0,80,0.35)" rx="3" />
-                                <rect x="150" y="160" width="40" height="70" fill="rgba(180,0,80,0.3)" rx="3" />
-                                <rect x="140" y="180" width="20" height="50" fill="rgba(180,0,80,0.25)" rx="2" />
-                                <!-- Ground -->
-                                <rect x="0" y="220" width="200" height="20" fill="rgba(150,0,60,0.3)" />
-                            </svg>
+                            style="background-image: url('{{ asset('images/perfect/honeymoon.jpg') }}'); background-size: cover; background-position: center;">
                         </div>
                         <div class="st-theme-card-body">
                             <span class="st-theme-name">Honeymoon / Romantic</span>
@@ -223,26 +202,11 @@
                     {{-- Card 2: Family --}}
                     <a href="{{ route('destinations.index', ['travel_style' => 'family']) }}" class="st-theme-card"
                         data-theme="family">
-                        <div class="st-theme-card-img"
-                            style="background: linear-gradient(160deg,#fde68a 0%,#f59e0b 45%,#d97706 100%);">
-                            <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <!-- Beach / sky -->
-                                <ellipse cx="160" cy="50" rx="28" ry="28" fill="rgba(255,255,255,0.2)" />
-                                <!-- Family figures -->
-                                <circle cx="70" cy="120" r="14" fill="rgba(255,255,255,0.28)" />
-                                <rect x="58" y="134" width="24" height="52" fill="rgba(255,255,255,0.22)" rx="8" />
-                                <circle cx="120" cy="125" r="12" fill="rgba(255,255,255,0.24)" />
-                                <rect x="109" y="137" width="22" height="48" fill="rgba(255,255,255,0.18)" rx="7" />
-                                <!-- Kid -->
-                                <circle cx="155" cy="145" r="9" fill="rgba(255,255,255,0.22)" />
-                                <rect x="147" y="154" width="16" height="36" fill="rgba(255,255,255,0.18)" rx="5" />
-                                <!-- Ground wave -->
-                                <path d="M0 200 Q50 185 100 200 Q150 215 200 200 L200 240 L0 240Z"
-                                    fill="rgba(180,120,0,0.35)" />
-                                <!-- Bag -->
-                                <rect x="108" y="155" width="12" height="18" fill="rgba(255,200,0,0.4)" rx="3" />
-                            </svg>
+
+                         <div class="st-theme-card-img"
+                            style="background-image: url('{{ asset('images/perfect/Family.jpg') }}'); background-size: cover; background-position: center;">
                         </div>
+                        
                         <div class="st-theme-card-body">
                             <span class="st-theme-name">Family</span>
                             <span class="st-theme-count">70+ destinations</span>
@@ -252,31 +216,11 @@
                     {{-- Card 3: Friends / Group --}}
                     <a href="{{ route('destinations.index', ['travel_style' => 'friends']) }}" class="st-theme-card"
                         data-theme="friends">
-                        <div class="st-theme-card-img"
-                            style="background: linear-gradient(160deg,#6ee7b7 0%,#34d399 40%,#059669 100%);">
-                            <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <!-- Trees -->
-                                <ellipse cx="40" cy="80" rx="28" ry="45" fill="rgba(255,255,255,0.15)" />
-                                <rect x="36" y="120" width="8" height="40" fill="rgba(0,100,60,0.3)" rx="3" />
-                                <ellipse cx="160" cy="70" rx="24" ry="40" fill="rgba(255,255,255,0.12)" />
-                                <rect x="156" y="105" width="8" height="40" fill="rgba(0,100,60,0.25)" rx="3" />
-                                <!-- Ground -->
-                                <ellipse cx="100" cy="210" rx="90" ry="20" fill="rgba(0,120,70,0.3)" />
-                                <!-- 3 sitting figures -->
-                                <circle cx="65" cy="170" r="11" fill="rgba(255,255,255,0.3)" />
-                                <ellipse cx="65" cy="192" rx="14" ry="18" fill="rgba(255,255,255,0.2)" />
-                                <circle cx="100" cy="165" r="11" fill="rgba(255,255,255,0.28)" />
-                                <ellipse cx="100" cy="187" rx="14" ry="18" fill="rgba(255,255,255,0.18)" />
-                                <circle cx="135" cy="170" r="11" fill="rgba(255,255,255,0.3)" />
-                                <ellipse cx="135" cy="192" rx="14" ry="18" fill="rgba(255,255,255,0.2)" />
-                                <!-- Campfire -->
-                                <ellipse cx="100" cy="200" rx="10" ry="4" fill="rgba(255,150,0,0.5)" />
-                                <path d="M97 198 Q100 185 103 198" stroke="rgba(255,100,0,0.8)" stroke-width="3"
-                                    stroke-linecap="round" />
-                                <path d="M99 196 Q100 187 101 196" stroke="rgba(255,200,0,0.7)" stroke-width="2"
-                                    stroke-linecap="round" />
-                            </svg>
+
+                       <div class="st-theme-card-img"
+                            style="background-image: url('{{ asset('images/perfect/friend.jpg') }}'); background-size: cover; background-position: center;">
                         </div>
+
                         <div class="st-theme-card-body">
                             <span class="st-theme-name">Friends / Group</span>
                             <span class="st-theme-count">10+ destinations</span>
@@ -286,34 +230,11 @@
                     {{-- Card 4: Solo --}}
                     <a href="{{ route('destinations.index', ['travel_style' => 'solo']) }}" class="st-theme-card"
                         data-theme="solo">
-                        <div class="st-theme-card-img"
-                            style="background: linear-gradient(160deg,#fcd34d 0%,#f97316 45%,#b45309 100%);">
-                            <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <!-- Sun / sky glow -->
-                                <circle cx="130" cy="55" r="32" fill="rgba(255,230,100,0.3)" />
-                                <circle cx="130" cy="55" r="20" fill="rgba(255,220,50,0.45)" />
-                                <!-- Mountains / trees -->
-                                <polygon points="0,180 60,80 120,180" fill="rgba(180,80,0,0.35)" />
-                                <polygon points="80,180 140,90 200,180" fill="rgba(150,60,0,0.3)" />
-                                <!-- Solo hiker figure -->
-                                <circle cx="80" cy="148" r="12" fill="rgba(255,255,255,0.35)" />
-                                <rect x="70" y="160" width="20" height="38" fill="rgba(255,255,255,0.28)" rx="6" />
-                                <!-- Backpack -->
-                                <rect x="83" y="162" width="12" height="22" fill="rgba(255,200,100,0.45)" rx="4" />
-                                <!-- Walking stick -->
-                                <line x1="65" y1="160" x2="55" y2="200" stroke="rgba(255,255,255,0.5)" stroke-width="3"
-                                    stroke-linecap="round" />
-                                <!-- Birds -->
-                                <path d="M140 40 Q144 36 148 40" stroke="rgba(255,255,255,0.55)" stroke-width="1.5"
-                                    stroke-linecap="round" fill="none" />
-                                <path d="M155 32 Q159 28 163 32" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"
-                                    stroke-linecap="round" fill="none" />
-                                <path d="M165 48 Q168 44 172 48" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"
-                                    stroke-linecap="round" fill="none" />
-                                <!-- Ground -->
-                                <rect x="0" y="198" width="200" height="42" fill="rgba(120,50,0,0.3)" />
-                            </svg>
+                        
+                         <div class="st-theme-card-img"
+                            style="background-image: url('{{ asset('images/perfect/Solo.jpg') }}'); background-size: cover; background-position: center;">
                         </div>
+                      
                         <div class="st-theme-card-body">
                             <span class="st-theme-name">Solo</span>
                             <span class="st-theme-count">130+ destinations</span>
@@ -323,40 +244,11 @@
                     {{-- Card 5: Adventure --}}
                     <a href="{{ route('destinations.index', ['travel_style' => 'adventure']) }}" class="st-theme-card"
                         data-theme="adventure">
-                        <div class="st-theme-card-img"
-                            style="background: linear-gradient(160deg,#7dd3fc 0%,#0284c7 45%,#075985 100%);">
-                            <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <!-- Underwater bg -->
-                                <ellipse cx="100" cy="130" rx="90" ry="70" fill="rgba(255,255,255,0.06)" />
-                                <!-- Diver figure - skydiving pose -->
-                                <circle cx="110" cy="70" r="14" fill="rgba(255,255,255,0.35)" />
-                                <!-- Body spread arms -->
-                                <rect x="90" y="82" width="40" height="14" fill="rgba(255,255,255,0.28)" rx="7" />
-                                <!-- Left arm -->
-                                <rect x="55" y="80" width="38" height="10" fill="rgba(255,255,255,0.22)" rx="5"
-                                    transform="rotate(-20 55 80)" />
-                                <!-- Right arm -->
-                                <rect x="128" y="78" width="38" height="10" fill="rgba(255,255,255,0.22)" rx="5"
-                                    transform="rotate(20 128 78)" />
-                                <!-- Legs -->
-                                <rect x="95" y="94" width="10" height="34" fill="rgba(255,255,255,0.2)" rx="5"
-                                    transform="rotate(-15 95 94)" />
-                                <rect x="112" y="94" width="10" height="34" fill="rgba(255,255,255,0.2)" rx="5"
-                                    transform="rotate(15 112 94)" />
-                                <!-- Fish bubbles -->
-                                <circle cx="40" cy="150" r="6" fill="rgba(255,255,255,0.18)" />
-                                <circle cx="55" cy="165" r="4" fill="rgba(255,255,255,0.14)" />
-                                <circle cx="160" cy="145" r="5" fill="rgba(255,255,255,0.16)" />
-                                <!-- Fish shapes -->
-                                <ellipse cx="50" cy="180" rx="18" ry="8" fill="rgba(255,255,255,0.18)" />
-                                <polygon points="68,180 78,172 78,188" fill="rgba(255,255,255,0.14)" />
-                                <ellipse cx="130" cy="195" rx="15" ry="7" fill="rgba(255,255,255,0.15)" />
-                                <polygon points="145,195 154,189 154,201" fill="rgba(255,255,255,0.12)" />
-                                <!-- Clouds top -->
-                                <ellipse cx="30" cy="30" rx="30" ry="14" fill="rgba(255,255,255,0.18)" />
-                                <ellipse cx="170" cy="22" rx="24" ry="12" fill="rgba(255,255,255,0.14)" />
-                            </svg>
+
+                       <div class="st-theme-card-img"
+                            style="background-image: url('{{ asset('images/perfect/Advanture.jpg') }}'); background-size: cover; background-position: center;">
                         </div>
+                        
                         <div class="st-theme-card-body">
                             <span class="st-theme-name">Adventure</span>
                             <span class="st-theme-count">30+ destinations</span>
@@ -366,33 +258,11 @@
                     {{-- Card 6: Nature --}}
                     <a href="{{ route('destinations.index', ['travel_style' => 'nature']) }}" class="st-theme-card"
                         data-theme="nature">
-                        <div class="st-theme-card-img"
-                            style="background: linear-gradient(160deg,#a7f3d0 0%,#10b981 45%,#065f46 100%);">
-                            <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <!-- Snow mountain -->
-                                <polygon points="100,20 30,160 170,160" fill="rgba(255,255,255,0.25)" />
-                                <polygon points="100,20 80,70 120,70" fill="rgba(255,255,255,0.45)" />
-                                <!-- Second peak -->
-                                <polygon points="160,60 110,160 200,160" fill="rgba(255,255,255,0.15)" />
-                                <!-- Forest -->
-                                <ellipse cx="30" cy="185" rx="22" ry="35" fill="rgba(0,100,50,0.4)" />
-                                <ellipse cx="60" cy="175" rx="20" ry="32" fill="rgba(0,120,60,0.35)" />
-                                <ellipse cx="155" cy="180" rx="20" ry="32" fill="rgba(0,100,50,0.38)" />
-                                <ellipse cx="178" cy="190" rx="18" ry="28" fill="rgba(0,120,60,0.32)" />
-                                <!-- Houses / village -->
-                                <rect x="85" y="175" width="18" height="18" fill="rgba(255,255,255,0.3)" rx="2" />
-                                <polygon points="85,175 94,163 103,175" fill="rgba(255,255,255,0.4)" />
-                                <rect x="108" y="180" width="14" height="14" fill="rgba(255,255,255,0.25)" rx="2" />
-                                <polygon points="108,180 115,170 122,180" fill="rgba(255,255,255,0.35)" />
-                                <!-- Ground -->
-                                <rect x="0" y="210" width="200" height="30" fill="rgba(0,80,40,0.4)" />
-                                <!-- Birds -->
-                                <path d="M145 40 Q149 36 153 40" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"
-                                    fill="none" stroke-linecap="round" />
-                                <path d="M158 32 Q162 28 166 32" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"
-                                    fill="none" stroke-linecap="round" />
-                            </svg>
+                      
+                         <div class="st-theme-card-img"
+                            style="background-image: url('{{ asset('images/perfect/Nature.jpg') }}'); background-size: cover; background-position: center;">
                         </div>
+
                         <div class="st-theme-card-body">
                             <span class="st-theme-name">Nature</span>
                             <span class="st-theme-count">100+ destinations</span>
@@ -402,32 +272,11 @@
                     {{-- Card 7: Religious --}}
                     <a href="{{ route('destinations.index', ['travel_style' => 'religiuos']) }}" class="st-theme-card"
                         data-theme="religious">
-                        <div class="st-theme-card-img"
-                            style="background: linear-gradient(160deg,#fbbf24 0%,#d97706 45%,#92400e 100%);">
-                            <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <!-- Sun halo -->
-                                <circle cx="100" cy="60" r="38" fill="rgba(255,240,180,0.22)" />
-                                <circle cx="100" cy="60" r="24" fill="rgba(255,230,100,0.35)" />
-                                <!-- Temple / church dome -->
-                                <ellipse cx="100" cy="95" rx="28" ry="20" fill="rgba(255,255,255,0.25)" />
-                                <!-- Flag / cross on top -->
-                                <rect x="98" y="45" width="4" height="50" fill="rgba(255,255,255,0.4)" rx="2" />
-                                <rect x="86" y="55" width="28" height="5" fill="rgba(255,255,255,0.35)" rx="2" />
-                                <!-- Main temple body -->
-                                <rect x="72" y="115" width="56" height="80" fill="rgba(255,255,255,0.2)" rx="4" />
-                                <!-- Arch entrance -->
-                                <path d="M88 195 Q100 175 112 195" fill="rgba(150,80,0,0.4)" />
-                                <rect x="88" y="185" width="24" height="15" fill="rgba(150,80,0,0.35)" />
-                                <!-- Side minarets -->
-                                <rect x="55" y="135" width="18" height="60" fill="rgba(255,255,255,0.15)" rx="3" />
-                                <ellipse cx="64" cy="135" rx="9" ry="7" fill="rgba(255,255,255,0.2)" />
-                                <rect x="127" y="135" width="18" height="60" fill="rgba(255,255,255,0.15)" rx="3" />
-                                <ellipse cx="136" cy="135" rx="9" ry="7" fill="rgba(255,255,255,0.2)" />
-                                <!-- Silhouette city line -->
-                                <rect x="0" y="195" width="55" height="45" fill="rgba(100,50,0,0.3)" rx="2" />
-                                <rect x="145" y="190" width="55" height="50" fill="rgba(100,50,0,0.28)" rx="2" />
-                            </svg>
+                      
+                       <div class="st-theme-card-img"
+                            style="background-image: url('{{ asset('images/perfect/Religious.jpg') }}'); background-size: cover; background-position: center;">
                         </div>
+
                         <div class="st-theme-card-body">
                             <span class="st-theme-name">Religious</span>
                             <span class="st-theme-count">60+ destinations</span>
@@ -437,44 +286,11 @@
                     {{-- Card 8: Wildlife --}}
                     <a href="{{ route('destinations.index', ['travel_style' => 'wildlife']) }}" class="st-theme-card"
                         data-theme="wildlife">
-                        <div class="st-theme-card-img"
-                            style="background: linear-gradient(160deg,#fef3c7 0%,#b45309 50%,#78350f 100%);">
-                            <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <!-- Savanna sky -->
-                                <circle cx="155" cy="45" r="30" fill="rgba(255,200,50,0.28)" />
-                                <circle cx="155" cy="45" r="18" fill="rgba(255,180,30,0.4)" />
-                                <!-- Acacia tree -->
-                                <rect x="96" y="110" width="8" height="70" fill="rgba(120,60,0,0.5)" rx="3" />
-                                <ellipse cx="100" cy="105" rx="35" ry="18" fill="rgba(80,120,20,0.45)" />
-                                <ellipse cx="76" cy="115" rx="22" ry="12" fill="rgba(60,100,10,0.4)" />
-                                <ellipse cx="122" cy="112" rx="22" ry="12" fill="rgba(60,100,10,0.4)" />
-                                <!-- Jeep silhouette -->
-                                <rect x="130" y="175" width="52" height="24" fill="rgba(80,50,10,0.45)" rx="5" />
-                                <rect x="136" y="163" width="34" height="16" fill="rgba(80,50,10,0.4)" rx="4" />
-                                <circle cx="143" cy="200" r="8" fill="rgba(40,20,5,0.6)" />
-                                <circle cx="173" cy="200" r="8" fill="rgba(40,20,5,0.6)" />
-                                <!-- Deer silhouettes -->
-                                <ellipse cx="45" cy="185" rx="14" ry="10" fill="rgba(120,60,0,0.5)" />
-                                <rect x="38" y="190" width="4" height="18" fill="rgba(120,60,0,0.45)" rx="2" />
-                                <rect x="48" y="192" width="4" height="16" fill="rgba(120,60,0,0.45)" rx="2" />
-                                <circle cx="50" cy="177" r="7" fill="rgba(120,60,0,0.5)" />
-                                <rect x="49" y="170" width="2" height="8" fill="rgba(120,60,0,0.5)" rx="1" />
-                                <!-- Second deer -->
-                                <ellipse cx="78" cy="192" rx="12" ry="9" fill="rgba(100,50,0,0.4)" />
-                                <rect x="72" y="197" width="3.5" height="15" fill="rgba(100,50,0,0.38)" rx="2" />
-                                <rect x="80" y="199" width="3.5" height="13" fill="rgba(100,50,0,0.38)" rx="2" />
-                                <circle cx="84" cy="185" r="6" fill="rgba(100,50,0,0.4)" />
-                                <!-- Birds in sky -->
-                                <path d="M40 60 Q44 55 48 60" stroke="rgba(80,40,0,0.5)" stroke-width="1.5" fill="none"
-                                    stroke-linecap="round" />
-                                <path d="M55 50 Q59 45 63 50" stroke="rgba(80,40,0,0.45)" stroke-width="1.5" fill="none"
-                                    stroke-linecap="round" />
-                                <path d="M28 75 Q32 70 36 75" stroke="rgba(80,40,0,0.4)" stroke-width="1.5" fill="none"
-                                    stroke-linecap="round" />
-                                <!-- Ground -->
-                                <rect x="0" y="208" width="200" height="32" fill="rgba(100,50,0,0.35)" />
-                            </svg>
+
+                         <div class="st-theme-card-img"
+                            style="background-image: url('{{ asset('images/perfect/Wild.jpg') }}'); background-size: cover; background-position: center;">
                         </div>
+                        
                         <div class="st-theme-card-body">
                             <span class="st-theme-name">Wildlife</span>
                             <span class="st-theme-count">20+ destinations</span>
@@ -484,44 +300,11 @@
                     {{-- Card 9: Water Activities --}}
                     <a href="{{ route('destinations.index', ['travel_style' => 'water activities']) }}"
                         class="st-theme-card" data-theme="water">
-                        <div class="st-theme-card-img"
-                            style="background: linear-gradient(160deg,#67e8f9 0%,#0891b2 45%,#164e63 100%);">
-                            <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <!-- Palm trees left -->
-                                <rect x="18" y="80" width="6" height="90" fill="rgba(0,80,40,0.4)" rx="3" />
-                                <ellipse cx="18" cy="78" rx="22" ry="12" fill="rgba(0,120,50,0.4)"
-                                    transform="rotate(-20 18 78)" />
-                                <ellipse cx="22" cy="72" rx="22" ry="10" fill="rgba(0,120,50,0.35)"
-                                    transform="rotate(15 22 72)" />
-                                <!-- Palm right -->
-                                <rect x="175" y="100" width="6" height="80" fill="rgba(0,80,40,0.35)" rx="3" />
-                                <ellipse cx="176" cy="98" rx="20" ry="10" fill="rgba(0,120,50,0.38)"
-                                    transform="rotate(20 176 98)" />
-                                <!-- Water waves -->
-                                <path
-                                    d="M0 170 Q25 158 50 170 Q75 182 100 170 Q125 158 150 170 Q175 182 200 170 L200 240 L0 240Z"
-                                    fill="rgba(0,150,200,0.4)" />
-                                <path
-                                    d="M0 185 Q30 175 60 185 Q90 195 120 185 Q150 175 180 185 Q190 190 200 185 L200 240 L0 240Z"
-                                    fill="rgba(0,120,180,0.45)" />
-                                <!-- Jet ski -->
-                                <ellipse cx="110" cy="165" rx="42" ry="14" fill="rgba(255,200,0,0.7)" />
-                                <path d="M75 160 Q110 148 145 160" fill="rgba(255,220,50,0.6)" />
-                                <!-- Two riders -->
-                                <circle cx="105" cy="148" r="11" fill="rgba(255,255,255,0.4)" />
-                                <rect x="96" y="158" width="18" height="16" fill="rgba(255,100,0,0.55)" rx="5" />
-                                <circle cx="125" cy="151" r="10" fill="rgba(255,255,255,0.38)" />
-                                <rect x="116" y="160" width="18" height="14" fill="rgba(255,100,0,0.5)" rx="5" />
-                                <!-- Life jackets (orange) -->
-                                <rect x="97" y="159" width="18" height="14" fill="rgba(255,100,0,0.6)" rx="4" />
-                                <rect x="117" y="161" width="18" height="12" fill="rgba(255,100,0,0.55)" rx="4" />
-                                <!-- Spray -->
-                                <path d="M148 162 Q158 155 165 162" stroke="rgba(255,255,255,0.55)" stroke-width="3"
-                                    stroke-linecap="round" fill="none" />
-                                <path d="M150 168 Q162 160 170 166" stroke="rgba(255,255,255,0.4)" stroke-width="2"
-                                    stroke-linecap="round" fill="none" />
-                            </svg>
+                      
+                         <div class="st-theme-card-img"
+                            style="background-image: url('{{ asset('images/perfect/Water.jpg') }}'); background-size: cover; background-position: center;">
                         </div>
+                      
                         <div class="st-theme-card-body">
                             <span class="st-theme-name">Water Activities</span>
                             <span class="st-theme-count">20+ destinations</span>
@@ -531,43 +314,12 @@
                     {{-- Card 10: Corporate Tour --}}
                     <a href="{{ route('destinations.index', ['travel_style' => 'corporate tour']) }}"
                         class="st-theme-card" data-theme="corporate-tour">
-                        <div class="st-theme-card-img"
-                            style="background: linear-gradient(160deg,#93c5fd 0%,#2563eb 45%,#1e3a8a 100%);">
-                            <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <!-- City skyline -->
-                                <rect x="22" y="80" width="42" height="125" fill="rgba(255,255,255,0.2)" rx="5" />
-                                <rect x="78" y="48" width="52" height="157" fill="rgba(255,255,255,0.26)" rx="6" />
-                                <rect x="144" y="98" width="34" height="107" fill="rgba(255,255,255,0.18)" rx="5" />
-                                <!-- Office windows -->
-                                <g fill="rgba(30,64,175,0.42)">
-                                    <rect x="34" y="96" width="8" height="10" rx="2" />
-                                    <rect x="48" y="96" width="8" height="10" rx="2" />
-                                    <rect x="34" y="118" width="8" height="10" rx="2" />
-                                    <rect x="48" y="118" width="8" height="10" rx="2" />
-                                    <rect x="92" y="68" width="9" height="11" rx="2" />
-                                    <rect x="108" y="68" width="9" height="11" rx="2" />
-                                    <rect x="92" y="92" width="9" height="11" rx="2" />
-                                    <rect x="108" y="92" width="9" height="11" rx="2" />
-                                    <rect x="92" y="116" width="9" height="11" rx="2" />
-                                    <rect x="108" y="116" width="9" height="11" rx="2" />
-                                    <rect x="154" y="116" width="8" height="10" rx="2" />
-                                    <rect x="154" y="138" width="8" height="10" rx="2" />
-                                </g>
-                                <!-- Meeting table and people -->
-                                <ellipse cx="104" cy="176" rx="42" ry="14" fill="rgba(15,23,42,0.28)" />
-                                <circle cx="72" cy="151" r="11" fill="rgba(255,255,255,0.42)" />
-                                <rect x="62" y="162" width="20" height="28" fill="rgba(255,255,255,0.27)" rx="8" />
-                                <circle cx="104" cy="145" r="12" fill="rgba(255,255,255,0.45)" />
-                                <rect x="93" y="158" width="22" height="33" fill="rgba(255,255,255,0.3)" rx="8" />
-                                <circle cx="138" cy="151" r="11" fill="rgba(255,255,255,0.38)" />
-                                <rect x="128" y="162" width="20" height="28" fill="rgba(255,255,255,0.24)" rx="8" />
-                                <!-- Suitcase -->
-                                <rect x="82" y="184" width="44" height="28" fill="rgba(15,23,42,0.35)" rx="5" />
-                                <path d="M94 184v-8c0-4 3-7 7-7h6c4 0 7 3 7 7v8"
-                                    stroke="rgba(255,255,255,0.45)" stroke-width="4" stroke-linecap="round" />
-                                <rect x="0" y="208" width="200" height="32" fill="rgba(15,23,42,0.24)" />
-                            </svg>
+                      
+                      
+                         <div class="st-theme-card-img"
+                            style="background-image: url('{{ asset('images/perfect/Corporate.jpg') }}'); background-size: cover; background-position: center;">
                         </div>
+
                         <div class="st-theme-card-body">
                             <span class="st-theme-name">Corporate Tour</span>
                             <span class="st-theme-count">20+ destinations</span>
