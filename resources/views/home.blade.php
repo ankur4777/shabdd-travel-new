@@ -2167,7 +2167,7 @@
 
                     {{-- CTA Buttons --}}
                     <div class="hb-actions">
-                        <a href="{{ route('destinations.index', ['travel_style' => 'honeymoon']) }}" class="hb-btn hb-btn--primary">
+                        <a href="{{ route('honeymoon', ['travel_style' => 'honeymoon']) }}" class="hb-btn hb-btn--primary">
                             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M12 21C12 21 4 13.5 4 8.5a8 8 0 0 1 16 0C20 13.5 12 21 12 21z"
                                     stroke="currentColor" stroke-width="1.8" />
