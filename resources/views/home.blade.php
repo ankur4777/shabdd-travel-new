@@ -129,7 +129,7 @@
                         </a>
 
                         <a class="st-offers-card st-offers-card--sunset" href="{{ route('packages.index') }}"
-                            style="--offer-image: url('{{ asset('images/world-map.avif') }}');">
+                            style="--offer-image: url('{{ asset('public\images\packages-image\Familiy.webp') }}');">
                             <span class="st-offers-art st-offers-art--loop" aria-hidden="true"></span>
                             <span class="st-offers-art st-offers-art--dash" aria-hidden="true"></span>
                             <span class="st-offers-copy">
