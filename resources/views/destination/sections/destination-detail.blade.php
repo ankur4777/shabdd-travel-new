@@ -404,19 +404,252 @@
                     <div class="seo-dd-title-wrap">
                         <p class="seo-dd-kicker seo-dd-section-eyebrow"><span>Explore {{ $destination->name }} Packages</span></p>
                     </div>
-                            <div class="seo-dd-mobile-filter-bar" aria-label="Mobile quick actions">
-            <button class="seo-dd-mobile-filter-btn" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#seoTripOffcanvas" aria-controls="seoTripOffcanvas">
-                <i class="bi bi-funnel-fill"></i>
-                <span>Filter</span>
-            </button>
-            <button class="seo-dd-mobile-filter-btn" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#seoPageNavOffcanvas" aria-controls="seoPageNavOffcanvas">
-                <i class="bi bi-sort-down"></i>
-                <span>Sort</span>
-            </button>
-        </div>
-                    @if(empty($packages))
+                    @php
+                        $dfBudgetOptions = [
+                            ['label' => 'Under ₹25K', 'value' => 'u25', 'min' => 0, 'max' => 25000],
+                            ['label' => '₹25K - ₹50K', 'value' => '25-50', 'min' => 25000, 'max' => 50000],
+                            ['label' => '₹50K - ₹1L', 'value' => '50-1l', 'min' => 50000, 'max' => 100000],
+                            ['label' => 'Luxury ₹1L+', 'value' => 'lux', 'min' => 100000, 'max' => null],
+                        ];
+                    @endphp
+
+                    <div class="df-mobile-filter-bar d-lg-none" aria-label="Mobile package filters">
+                        <button class="df-mobile-filter-btn" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#dfFilterOffcanvas" aria-controls="dfFilterOffcanvas">
+                            <i class="bi bi-sliders2"></i>
+                            <span>Filter</span>
+                            <span class="df-filter-badge" id="dfMobileFilterBadge" style="display:none;">0</span>
+                        </button>
+                        <div class="df-mobile-sort-wrap">
+                            <select class="df-mobile-sort-select" id="dfMobileSortSelect" aria-label="Sort by">
+                                <option value="popular">Most Popular</option>
+                                <option value="budget">Budget Friendly</option>
+                                <option value="luxury">Luxury</option>
+                                <option value="trending">Trending</option>
+                                <option value="duration">Duration</option>
+                            </select>
+                            <i class="bi bi-chevron-down df-mobile-sort-chevron"></i>
+                        </div>
+                    </div>
+
+                    <div class="offcanvas offcanvas-start df-offcanvas" tabindex="-1" id="dfFilterOffcanvas"
+                        aria-labelledby="dfFilterOffcanvasLabel">
+                        <div class="offcanvas-header df-offcanvas-header">
+                            <div>
+                                <h5 class="offcanvas-title df-sidebar-title" id="dfFilterOffcanvasLabel">Find Your Perfect Journey</h5>
+                                <p class="df-sidebar-subtitle">Filter curated travel experiences.</p>
+                            </div>
+                            <button type="button" class="df-offcanvas-close" data-bs-dismiss="offcanvas" aria-label="Close">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
+                        <div class="offcanvas-body df-offcanvas-body">
+                            <div id="dfOffcanvasContent"></div>
+                        </div>
+                    </div>
+
+                    <div class="df-section" id="dfSection">
+                        <div class="df-wrapper">
+                            <aside class="df-sidebar d-none d-lg-flex" id="dfSidebar" aria-label="Filter packages">
+                                <div class="df-sidebar-inner">
+                                    <div class="df-sidebar-head">
+                                        <div class="df-sidebar-head-icon">
+                                            <i class="bi bi-compass"></i>
+                                        </div>
+                                        <div>
+                                            <h2 class="df-sidebar-title">Find Your Perfect Journey</h2>
+                                            <p class="df-sidebar-subtitle">Filter {{ $destination->name }} packages by price, duration, style, trip type, and rating.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="df-filter-group" id="dfDesktopBudgetGroup">
+                                        <label class="df-filter-label">
+                                            <i class="bi bi-currency-rupee"></i> Budget
+                                        </label>
+                                        <div class="df-budget-options" id="dfBudgetOptions" role="radiogroup" aria-label="Budget range"></div>
+                                    </div>
+
+                                    <div class="df-filter-group">
+                                        <label class="df-filter-label">
+                                            <i class="bi bi-clock"></i> Duration
+                                        </label>
+                                        <div class="df-chip-group" id="dfDurationGroup" role="group" aria-label="Duration">
+                                            <button class="df-chip" data-filter="duration" data-value="weekend">Weekend</button>
+                                            <button class="df-chip" data-filter="duration" data-value="3-5">3-5 Days</button>
+                                            <button class="df-chip" data-filter="duration" data-value="5-7">5-7 Days</button>
+                                            <button class="df-chip" data-filter="duration" data-value="7+">7+ Days</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="df-filter-group">
+                                        <label class="df-filter-label">
+                                            <i class="bi bi-heart"></i> Travel Style
+                                        </label>
+                                        <div class="df-chip-group df-chip-group--wrap" id="dfStyleGroup" role="group" aria-label="Travel style">
+                                            <button class="df-chip" data-filter="style" data-value="honeymoon">Honeymoon</button>
+                                            <button class="df-chip" data-filter="style" data-value="adventure">Adventure</button>
+                                            <button class="df-chip" data-filter="style" data-value="family">Family</button>
+                                            <button class="df-chip" data-filter="style" data-value="solo">Solo</button>
+                                            <button class="df-chip" data-filter="style" data-value="friends">Friends</button>
+                                            <button class="df-chip" data-filter="style" data-value="luxury">Luxury</button>
+                                            <button class="df-chip" data-filter="style" data-value="corporate-tour">Corporate Tour</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="df-filter-group">
+                                        <label class="df-filter-label">
+                                            <i class="bi bi-globe2"></i> Trip Type
+                                        </label>
+                                        <div class="df-toggle-pill" id="dfTripToggle" role="radiogroup" aria-label="Trip type">
+                                            <button class="df-toggle-btn df-toggle-btn--active" data-value="all" aria-pressed="true">All</button>
+                                            <button class="df-toggle-btn" data-value="domestic" aria-pressed="false">Domestic</button>
+                                            <button class="df-toggle-btn" data-value="international" aria-pressed="false">International</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="df-filter-group">
+                                        <label class="df-filter-label">
+                                            <i class="bi bi-star"></i> Minimum Rating
+                                        </label>
+                                        <div class="df-chip-group" id="dfRatingGroup" role="radiogroup" aria-label="Minimum rating">
+                                            <button class="df-chip" data-filter="rating" data-value="4">4★ & above</button>
+                                            <button class="df-chip" data-filter="rating" data-value="4.5">4.5★ & above</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="df-filter-group">
+                                        <label class="df-filter-label" for="dfSort">
+                                            <i class="bi bi-sort-down"></i> Sort By
+                                        </label>
+                                        <div class="df-select-wrap">
+                                            <select class="df-select" id="dfSort" aria-label="Sort results">
+                                                <option value="popular">Most Popular</option>
+                                                <option value="budget">Budget Friendly</option>
+                                                <option value="luxury">Luxury</option>
+                                                <option value="trending">Trending</option>
+                                                <option value="duration">Duration</option>
+                                            </select>
+                                            <i class="bi bi-chevron-down df-select-chevron"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="df-sidebar-actions">
+                                        <button class="df-btn-clear" id="dfClearFilters" type="button" aria-label="Clear all filters">
+                                            <i class="bi bi-x-circle"></i> Clear Filters
+                                        </button>
+                                        <button class="df-btn-search" id="dfExploreBtn" type="button">
+                                            <i class="bi bi-search"></i> Apply Filters
+                                        </button>
+                                    </div>
+                                </div>
+                            </aside>
+
+                            <div class="df-results" id="dfResults">
+                                <div class="df-results-topbar">
+                                    <div class="df-results-meta">
+                                        <h2 class="df-results-title">Packages that match your travel mood</h2>
+                                        <p class="df-results-subtitle">Filter by budget, duration, style, rating, and sort preference.</p>
+                                    </div>
+                                    <div class="df-results-controls">
+                                        <span class="df-results-count" id="dfResultsCount" data-result-label="packages">{{ count($packages) }} packages found</span>
+                                        <div class="df-active-filters" id="dfActiveFilters" aria-live="polite"></div>
+                                    </div>
+                                </div>
+
+                                <div class="df-cards-grid" id="dfCardsGrid" aria-live="polite" aria-label="Package results">
+                                    @forelse($packages as $package)
+                                        @php
+                                            $packageDuration = $package['duration'] ?? '4D/3N';
+                                            $packageRating = number_format((float) ($package['rating'] ?? 4.5), 1);
+                                            $packageOldPrice = $package['price'] ?? $destination->formatted_price;
+                                            $packageNewPrice = $package['discounted_price'] ?? ($package['discounted price'] ?? '');
+                                            $packageType = \Illuminate\Support\Str::lower((string) ($package['type'] ?? 'domestic'));
+                                            $packageStyle = \Illuminate\Support\Str::slug((string) ($package['style'] ?? 'family'));
+                                            $packagePriceValue = (float) ($package['price_numeric'] ?? 0);
+                                            $packageCategory = $packagePriceValue <= 25000
+                                                ? 'budget-friendly'
+                                                : ($packagePriceValue >= 100000
+                                                    ? 'luxury'
+                                                    : (((float) ($package['rating'] ?? 4.5)) >= 4.7 ? 'trending' : 'popular'));
+                                            $inclusionOne = $package['inclusion_one'] ?? 'Hotel stay included';
+                                            $inclusionTwo = $package['inclusion_two'] ?? 'Local transfers covered';
+                                            $inclusionThree = $package['inclusion_three'] ?? 'Top sightseeing spots';
+                                            $packageDetailUrl = $package['detail_url'] ?? route('destinations.packages.show', [
+                                                'destination' => $destination,
+                                                'packageSlug' => $package['package_slug'] ?? \Illuminate\Support\Str::slug(($package['name'] ?? 'package') . '-' . $loop->iteration),
+                                            ]);
+                                        @endphp
+                                        <article class="df-card"
+                                            data-destination="{{ $destination->slug }}"
+                                            data-type="{{ $packageType }}"
+                                            data-style="{{ $packageStyle }}"
+                                            data-season="all"
+                                            data-duration="{{ $package['duration_code'] ?? '5-7' }}"
+                                            data-rating="{{ $package['rating'] ?? 4.5 }}"
+                                            data-price="{{ $package['price_numeric'] ?? 0 }}"
+                                            data-category="{{ $packageCategory }}"
+                                            data-tag="{{ $package['tag'] ?? '' }}">
+                                            <div class="df-card-img-wrap">
+                                                <img src="{{ $mediaUrl($package['image'] ?? $destinationImage) }}" alt="{{ $package['name'] }}" class="df-card-img" loading="lazy">
+                                                <div class="df-card-overlay"></div>
+                                                <div class="df-card-badges">
+                                                    <span class="df-badge df-badge--trending">{{ $packageDuration }}</span>
+                                                </div>
+                                                <div class="df-card-rating">
+                                                    <i class="bi bi-star-fill"></i>
+                                                    {{ $packageRating }} Rating
+                                                </div>
+                                            </div>
+                                            <div class="df-card-body">
+                                                <div class="df-card-header">
+                                                    <div>
+                                                        <h3 class="df-card-name">{{ $package['name'] }}</h3>
+                                                        <p class="df-card-location"><i class="bi bi-geo-alt-fill"></i> {{ $destination->name }}</p>
+                                                    </div>
+                                                    <div class="df-card-price-block">
+                                                        <span class="df-price-from">From</span>
+                                                        <span class="df-price">{{ $packageNewPrice ?: $packageOldPrice }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="df-card-highlights">
+                                                    <span><i class="bi bi-clock"></i> {{ $packageDuration }}</span>
+                                                    <span><i class="bi bi-check-circle"></i> {{ $packageType === 'international' ? 'International trip' : 'Domestic trip' }}</span>
+                                                    <span><i class="bi bi-camera"></i> Sightseeing</span>
+                                                </div>
+                                                <div class="df-card-tags">
+                                                    @if(!empty($package['style_labels']))
+                                                        @foreach(explode(',', $package['style_labels']) as $styleLabel)
+                                                            <span class="df-tag">{{ trim($styleLabel) }}</span>
+                                                        @endforeach
+                                                    @endif
+                                                    @foreach(array_slice($popularFor, 0, 2) as $popularTag)
+                                                        <span class="df-tag">{{ $popularTag }}</span>
+                                                    @endforeach
+                                                </div>
+                                                <a href="{{ $packageDetailUrl }}" class="df-card-btn">View Details <i class="bi bi-arrow-right"></i></a>
+                                            </div>
+                                        </article>
+                                    @empty
+                                        <div class="seo-dd-card seo-dd-empty-card">
+                                            <h3>No packages uploaded yet</h3>
+                                            <p>Packages added from the admin panel with {{ $destination->name }} in the package name will appear here.</p>
+                                        </div>
+                                    @endforelse
+                                </div>
+                                <div class="df-no-results" id="dfNoResults" style="display:none;" aria-live="assertive">
+                                    <div class="df-no-results-inner">
+                                        <div class="df-no-results-icon"><i class="bi bi-search-heart"></i></div>
+                                        <h3>No packages found</h3>
+                                        <p>Try adjusting your filters or clearing them to discover more packages.</p>
+                                        <button class="df-btn-search" id="dfClearFiltersAlt" type="button">
+                                            <i class="bi bi-arrow-counterclockwise"></i> Reset Filters
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- @if(false)
                         <article class="seo-dd-card seo-dd-empty-card">
                             <h3>No packages uploaded yet</h3>
                             <p>Packages added from the admin panel with {{ $destination->name }} in the package name will appear here.</p>
@@ -478,7 +711,7 @@
                                     class="bi bi-arrow-right"></i></button>
                         </div>
                     </div>
-                    @endif
+                    @endif --}}
                 </section>
 
                 <section id="why" class="seo-dd-section seo-dd-why-section">
