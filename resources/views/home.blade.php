@@ -2013,6 +2013,8 @@
                                             <i class="bi bi-star-fill"></i> {{ $destination['rating'] }}
                                         </div>
                                     </div>
+
+                                    
                                     <div class="df-card-body">
                                         <div class="df-card-header">
                                             <div>
@@ -2024,6 +2026,7 @@
                                                 <span class="df-price">{{ $destination['price_label'] }}</span>
                                             </div>
                                         </div>
+
                                         @if(!empty($destination['highlights'][0]))
                                             <div class="df-card-highlights">
                                                 <span>

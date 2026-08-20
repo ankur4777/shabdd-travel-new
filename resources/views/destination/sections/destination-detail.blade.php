@@ -449,6 +449,11 @@
                     </div>
 
                     <div class="df-section" id="dfSection">
+                        <button class="df-desktop-sidebar-toggle d-none d-lg-inline-flex" type="button"
+                            id="dfDesktopSidebarToggle" aria-pressed="false" aria-controls="dfSidebar">
+                            <i class="bi bi-arrows-collapse-vertical" aria-hidden="true"></i>
+                            <span>Slide Filters</span>
+                        </button>
                         <div class="df-wrapper">
                             <aside class="df-sidebar d-none d-lg-flex" id="dfSidebar" aria-label="Filter packages">
                                 <div class="df-sidebar-inner">
@@ -556,7 +561,11 @@
                                     </div>
                                 </div>
 
-                                <div class="df-cards-grid" id="dfCardsGrid" aria-live="polite" aria-label="Package results">
+                                <div class="df-results-carousel-shell">
+                                    
+
+                                    <div class="df-cards-viewport">
+                                        <div class="df-cards-grid" id="dfCardsGrid" aria-live="polite" aria-label="Package results">
                                     @forelse($packages as $package)
                                         @php
                                             $packageDuration = $package['duration'] ?? '4D/3N';
@@ -635,6 +644,25 @@
                                             <p>Packages added from the admin panel with {{ $destination->name }} in the package name will appear here.</p>
                                         </div>
                                     @endforelse
+                                        </div>
+                                    </div>
+
+
+                                    <div class="destination-cart-icon-slide-x-axis">
+
+                                    <button class="df-carousel-arrow df-carousel-arrow--left d-none d-lg-flex" type="button"
+                                        id="dfCardsScrollLeft" aria-label="Scroll packages left">
+                                        <i class="bi bi-chevron-left" aria-hidden="true"></i>
+                                    </button>
+
+
+                                    <button class="df-carousel-arrow df-carousel-arrow--right d-none d-lg-flex" type="button"
+                                        id="dfCardsScrollRight" aria-label="Scroll packages right">
+                                        <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                                    </button>
+
+                                    </div>
+                  
                                 </div>
                                 <div class="df-no-results" id="dfNoResults" style="display:none;" aria-live="assertive">
                                     <div class="df-no-results-inner">
@@ -714,6 +742,7 @@
                     @endif --}}
                 </section>
 
+                
                 <section id="why" class="seo-dd-section seo-dd-why-section">
                     <div class="seo-dd-why-head">
                          <p class="seo-dd-kicker seo-dd-section-eyebrow"><span>WHy Choose Us?</span></p>
@@ -1058,6 +1087,20 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            const desktopSidebarToggle = document.getElementById('dfDesktopSidebarToggle');
+            const desktopSidebarSection = document.getElementById('dfSection');
+
+            if (desktopSidebarToggle && desktopSidebarSection) {
+                desktopSidebarToggle.addEventListener('click', function () {
+                    const isCollapsed = desktopSidebarSection.classList.toggle('df-sidebar-collapsed');
+                    desktopSidebarToggle.setAttribute('aria-pressed', isCollapsed ? 'true' : 'false');
+                    const label = desktopSidebarToggle.querySelector('span');
+                    if (label) {
+                        label.textContent = isCollapsed ? 'Show Filters' : 'Slide Filters';
+                    }
+                });
+            }
+
             const readMoreContent = document.querySelector('[data-seo-readmore]');
             const readMoreToggle = document.querySelector('[data-seo-toggle]');
 
