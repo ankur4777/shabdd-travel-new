@@ -209,13 +209,23 @@
                        
                     </a>
                 </div>
+                
+                <div class="st-mobile-nav-actions st-mobile-only">
+                    <button class="st-iconbtn st-mobile-search-btn" type="button" aria-label="Search" data-st-search-open>
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.7" />
+                            <path d="m20 20-4.35-4.35" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                        </svg>
+                    </button>
 
-                <button class="navbar-toggler st-mobile-only st-mobile-toggle" type="button" id="stMobileToggle"
-                    aria-label="Open menu" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+                    <button class="navbar-toggler st-mobile-toggle" type="button" id="stMobileToggle"
+                        aria-label="Open menu" aria-expanded="false">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+           
             </div>
         </nav>
     </div>
@@ -256,7 +266,7 @@
         <div class="st-mobile-head">
          
             <div class="st-mobile-mini-actions">
-                <a href="{{ url('/') }}" class="st-iconbtn st-mobile-home-action {{ request()->is('/') ? 'is-active' : '' }}"
+                <!-- <a href="{{ url('/') }}" class="st-iconbtn st-mobile-home-action {{ request()->is('/') ? 'is-active' : '' }}"
                     aria-label="Home" @if (request()->is('/')) aria-current="page" @endif>
                     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                         <path d="M4.5 10.25 12 4l7.5 6.25" stroke="currentColor" stroke-width="1.7"
@@ -267,13 +277,13 @@
                             stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                     
-                </a>
-                <button class="st-iconbtn" type="button" aria-label="Search" data-st-search-open>
+                </a> -->
+                <!-- <button class="st-iconbtn" type="button" aria-label="Search" data-st-search-open>
                     <svg viewBox="0 0 24 24" fill="none">
                         <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.7" />
                         <path d="m20 20-4.35-4.35" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
                     </svg>
-                </button>
+                </button> -->
                 <a href="#" class="st-iconbtn" aria-label="Login">
                     <svg viewBox="0 0 24 24" fill="none">
                         <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="1.7" />
@@ -295,7 +305,18 @@
             <a href="#" class="st-mobile-pill st-mobile-pill-alt">WhatsApp</a>
         </div>
 
+  
+
         <div class="st-mobile-links" id="stMobileLinksMain">
+
+        <a href="{{ route('home') }}">
+            <div class="menu-home" id="menuHome">
+                <i class="bi bi-house"></i>
+                Home
+            </div>
+        </a>
+
+
             <div class="st-mobile-menu-item st-has-submenu">
                 <button class="st-mobile-link st-mobile-link--tour st-mobile-link--domestic st-mobile-menu-toggle" type="button" data-submenu="domestic"
                     aria-expanded="false">

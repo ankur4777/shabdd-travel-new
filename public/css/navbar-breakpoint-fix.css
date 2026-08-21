@@ -294,14 +294,20 @@
     }
 }
 
-/* Mobile navigation starts strictly below 768px. */
-@media (max-width: 767.98px) {
+/* Mobile navigation uses the compact controls below 992px. */
+@media (max-width: 991.98px) {
     .st-desktop-only {
         display: none !important;
     }
 
     .st-mobile-only {
         display: flex !important;
+    }
+
+    .st-mobile-nav-actions {
+        align-items: center;
+        gap: 8px;
+        justify-content: flex-end;
     }
 
     .st-nav-inner {
@@ -312,13 +318,21 @@
     }
 
     .st-brand {
-        max-width: calc(100vw - 104px) !important;
+        max-width: calc(100vw - 120px) !important;
     }
-
-  
 
     .st-mobile-toggle {
         flex: 0 0 auto;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .st-nav-inner {
+        min-height: 64px !important;
+    }
+
+    .st-brand {
+        max-width: calc(100vw - 104px) !important;
     }
 }
 
@@ -331,6 +345,12 @@
  
 
     .st-mobile-toggle {
+        width: 38px !important;
+        height: 38px !important;
+        border-radius: 14px !important;
+    }
+
+    .st-mobile-search-btn {
         width: 38px !important;
         height: 38px !important;
         border-radius: 14px !important;
