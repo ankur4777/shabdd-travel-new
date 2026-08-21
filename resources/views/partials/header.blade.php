@@ -420,7 +420,7 @@
         const searchStatus = document.getElementById('stSearchStatus');
         const searchClose = document.getElementById('stSearchClose');
         const searchOpeners = document.querySelectorAll('[data-st-search-open]');
-        const chatbot-toggle = document.getElementById('chatbot-toggle');
+        const chatbotToggle = document.getElementById('chatbot-toggle');
         let searchTimer = null;
         let searchAbortController = null;
         let latestSearchResults = [];
@@ -558,7 +558,9 @@
             drawer.classList.add('show');
             openBtn.setAttribute('aria-expanded', 'true');
             document.body.style.overflow = 'hidden';
-            chatbot-toggle.style.display='none';
+            if (chatbotToggle) {
+                chatbotToggle.style.display = 'none';
+            }
         };
 
         const close = function () {
@@ -566,6 +568,9 @@
             drawer.classList.remove('show');
             openBtn.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
+            if (chatbotToggle) {
+                chatbotToggle.style.display = '';
+            }
             // Close any open submenu
             closeSubmenu();
         };
