@@ -638,6 +638,21 @@
         });
     }
 
+    function initFilterOverlayCoordination() {
+        const filterOffcanvas = $("dfFilterOffcanvas");
+        const heroSearchbar = $("heroSearchbar");
+
+        if (!filterOffcanvas || !heroSearchbar) return;
+
+        filterOffcanvas.addEventListener('show.bs.offcanvas', () => {
+            document.body.classList.add('df-filter-open');
+        });
+
+        filterOffcanvas.addEventListener('hidden.bs.offcanvas', () => {
+            document.body.classList.remove('df-filter-open');
+        });
+    }
+
     /* =========================================================
        RECOMMENDED DESTINATIONS CAROUSEL
        ========================================================= */
@@ -976,6 +991,7 @@
         initSort();
         initViewToggle();
         initWishlistButtons();
+        initFilterOverlayCoordination();
         initCardLinks();
         // initCardsCarousel(); // Disabled - using grid layout instead
         buildOffcanvasContent();

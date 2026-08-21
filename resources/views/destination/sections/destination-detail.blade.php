@@ -1082,6 +1082,10 @@
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
+        const destinationFilterOffcanvas = document.getElementById('dfFilterOffcanvas');
+        if (destinationFilterOffcanvas && destinationFilterOffcanvas.parentElement !== document.body) {
+            document.body.appendChild(destinationFilterOffcanvas);
+        }
 
                     // ✅ Use getElementsByClassName correctly
     const scrollContainer = document.getElementsByClassName("df-cards-grid")[0];
