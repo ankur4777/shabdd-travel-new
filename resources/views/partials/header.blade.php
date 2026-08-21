@@ -37,7 +37,7 @@
                     <span>Offers</span>
                     <span class="st-badge">3</span>
                 </a>
-                <a href="#" class="st-utility-link">
+                <a href="{{ route('blog.index') }}" class="st-utility-link">
                     <span class="st-topbar-icon" aria-hidden="true"><i class="bi bi-journal-text"></i></span>
                     <span>Blog</span>
                 </a>

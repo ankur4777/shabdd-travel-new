@@ -260,7 +260,7 @@
                         data-theme="nature">
                       
                          <div class="st-theme-card-img"
-                            style="background-image: url('{{ asset('images/perfect/Nature.jpg') }}'); background-size: cover; background-position: center;">
+                            style="background-image: url('{{ asset('/images/perfect/nature.avif') }}'); background-size: cover; background-position: center;">
                         </div>
 
                         <div class="st-theme-card-body">
