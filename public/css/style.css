@@ -871,6 +871,44 @@ div.container.st-nav-inner {
         border-color 0.25s ease,
         background 0.25s ease,
         color 0.25s ease;
+       align-self: center;
+}
+
+.st-mobile-profile{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.st-mobile-profile .st-iconbtn {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    padding: 0 !important;
+    overflow: hidden;
+    border: 2px solid var(--brand-primary) !important;
+    border-radius: 50% !important;
+    background: #fff;
+    flex: 0 0 42px !important;
+}
+
+.st-mobile-profile .st-iconbtn img {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    border-radius: inherit !important;
+    border: 0 !important;
+    padding: 0 !important;
+}
+
+.st-mobile-profile h4,
+.st-mobile-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--brand-black);
 }
 
 .st-iconbtn:hover {
@@ -1631,7 +1669,7 @@ div.container.st-nav-inner {
 
 .st-mobile-head {
     display: flex;
-    align-items: cen;
+    align-items: center;
     justify-content: space-between;
     gap: 12px;
 }

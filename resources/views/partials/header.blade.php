@@ -265,7 +265,7 @@
     <aside class="st-mobile-drawer" id="stMobileDrawer" aria-label="Mobile navigation">
         <div class="st-mobile-head">
          
-            <div class="st-mobile-mini-actions">
+            <div class="st-mobile-profile">
                 <!-- <a href="{{ url('/') }}" class="st-iconbtn st-mobile-home-action {{ request()->is('/') ? 'is-active' : '' }}"
                     aria-label="Home" @if (request()->is('/')) aria-current="page" @endif>
                     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -284,13 +284,12 @@
                         <path d="m20 20-4.35-4.35" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
                     </svg>
                 </button> -->
-                <a href="#" class="st-iconbtn" aria-label="Login">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="1.7" />
-                        <path d="M4.75 19.25c1.74-2.83 4.16-4.25 7.25-4.25s5.51 1.42 7.25 4.25" stroke="currentColor"
-                            stroke-width="1.7" stroke-linecap="round" />
-                    </svg>
-                </a>
+                <div class="st-mobile-profile">
+                    <a href="#" class="st-iconbtn" aria-label="Login">
+                        <img src="{{ asset('images/Profile image.webp') }}" alt="Ankur">
+                    </a>
+                    <h4 class="st-mobile-title">Anjali</h4>
+                </div>
             </div>
 
             <button class="st-mobile-close" id="stMobileClose" aria-label="Close menu">
