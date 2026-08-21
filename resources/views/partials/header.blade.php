@@ -300,8 +300,11 @@
         </div>
 
         <div class="st-mobile-utility">
-            <a href="tel:+91-9999999999" class="st-mobile-pill">Call Support</a>
-            <a href="#" class="st-mobile-pill st-mobile-pill-alt">WhatsApp</a>
+            
+
+            <a href="tel:+91-9999999999" class="st-mobile-pill"><i class="bi bi-telephone"></i> </a>
+            <a href="#" class="st-mobile-pill st-mobile-pill-alt"><i class="bi bi-whatsapp"></i></a>
+            <a href="#" class="st-mobile-pill st-mobile-pill-plan">Plan My Trip</a>
         </div>
 
   
@@ -378,13 +381,7 @@
             <div id="stMobileSubmenuContent"></div>
         </div>
 
-        <div class="st-mobile-footer">
-            <a href="#" class="st-cta btn">
-                <span>Plan My Trip</span>
-                <span class="st-cta-arrow" aria-hidden="true">→</span>
-            </a>
-           
-        </div>
+   
     </aside>
 </header>
 
