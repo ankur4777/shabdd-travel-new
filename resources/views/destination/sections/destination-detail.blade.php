@@ -459,7 +459,7 @@
                                         </div>
                                         <div>
                                             <h2 class="df-sidebar-title">Find Your Perfect Journey</h2>
-                                            <p class="df-sidebar-subtitle">Filter {{ $destination->name }} packages by price, duration, style, trip type, and rating.</p>
+                                            <p class="df-sidebar-subtitle">Filter {{ $destination->name }} packages by price, duration, style, and rating.</p>
                                         </div>
                                     </div>
 
@@ -494,17 +494,6 @@
                                             <button class="df-chip" data-filter="style" data-value="friends">Friends</button>
                                             <button class="df-chip" data-filter="style" data-value="luxury">Luxury</button>
                                             <button class="df-chip" data-filter="style" data-value="corporate-tour">Corporate Tour</button>
-                                        </div>
-                                    </div>
-
-                                    <div class="df-filter-group">
-                                        <label class="df-filter-label">
-                                            <i class="bi bi-globe2"></i> Trip Type
-                                        </label>
-                                        <div class="df-toggle-pill" id="dfTripToggle" role="radiogroup" aria-label="Trip type">
-                                            <button class="df-toggle-btn df-toggle-btn--active" data-value="all" aria-pressed="true">All</button>
-                                            <button class="df-toggle-btn" data-value="domestic" aria-pressed="false">Domestic</button>
-                                            <button class="df-toggle-btn" data-value="international" aria-pressed="false">International</button>
                                         </div>
                                     </div>
 
