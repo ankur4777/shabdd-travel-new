@@ -1599,7 +1599,12 @@ div.container.st-nav-inner {
     background: var(--brand-black);
     display: block;
 }
-
+@media(max-width:991px) {
+       .st-mobile-nav-actions .st-iconbtn svg {
+        width: 23px !important;
+        height: 23px !important;
+    }
+}
 @media (min-width: 576px) and (max-width: 991.98px) {
     .st-mobile-nav-actions {
         display: flex !important;
@@ -1617,10 +1622,7 @@ div.container.st-nav-inner {
         border-radius: 16px !important;
     }
 
-    .st-mobile-nav-actions .st-iconbtn svg {
-        width: 18px !important;
-        height: 18px !important;
-    }
+ 
 }
 
 .st-mobile-overlay {
