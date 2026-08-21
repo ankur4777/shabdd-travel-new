@@ -65,13 +65,7 @@
                         <label class="st-field-label" for="hero-date">Travel Date</label>
                         <div class="st-date-field">
                             <input id="hero-date" type="date" class="form-control st-field-control">
-                            <span class="st-date-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none">
-                                    <rect x="3.75" y="4.75" width="16.5" height="15.5" rx="2.5" stroke="currentColor"
-                                        stroke-width="1.7" />
-                                    <path d="M3.75 9.25h16.5M8 3.75v3M16 3.75v3" stroke="currentColor" stroke-width="1.7"
-                                        stroke-linecap="round" />
-                                </svg>
+                          
                             </span>
                         </div>
                     </div>
