@@ -254,9 +254,35 @@
     <!-- mobile view -->
     <aside class="st-mobile-drawer" id="stMobileDrawer" aria-label="Mobile navigation">
         <div class="st-mobile-head">
-            <a class="st-brand" href="/">
-                <img src="{{ asset('images/header-logo.png') }}" alt="SHABDD TRAVEL logo">
-            </a>
+         
+            <div class="st-mobile-mini-actions">
+                <a href="{{ url('/') }}" class="st-iconbtn st-mobile-home-action {{ request()->is('/') ? 'is-active' : '' }}"
+                    aria-label="Home" @if (request()->is('/')) aria-current="page" @endif>
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M4.5 10.25 12 4l7.5 6.25" stroke="currentColor" stroke-width="1.7"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M6.5 9.75V20h11V9.75" stroke="currentColor" stroke-width="1.7"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M10.25 20v-5.25h3.5V20" stroke="currentColor" stroke-width="1.7"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    
+                </a>
+                <button class="st-iconbtn" type="button" aria-label="Search" data-st-search-open>
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.7" />
+                        <path d="m20 20-4.35-4.35" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                    </svg>
+                </button>
+                <a href="#" class="st-iconbtn" aria-label="Login">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="1.7" />
+                        <path d="M4.75 19.25c1.74-2.83 4.16-4.25 7.25-4.25s5.51 1.42 7.25 4.25" stroke="currentColor"
+                            stroke-width="1.7" stroke-linecap="round" />
+                    </svg>
+                </a>
+            </div>
+
             <button class="st-mobile-close" id="stMobileClose" aria-label="Close menu">
                 <svg viewBox="0 0 24 24" fill="none">
                     <path d="M6 6 18 18M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
@@ -337,33 +363,7 @@
                 <span>Plan My Trip</span>
                 <span class="st-cta-arrow" aria-hidden="true">→</span>
             </a>
-            <div class="st-mobile-mini-actions">
-                <a href="{{ url('/') }}" class="st-iconbtn st-mobile-home-action {{ request()->is('/') ? 'is-active' : '' }}"
-                    aria-label="Home" @if (request()->is('/')) aria-current="page" @endif>
-                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M4.5 10.25 12 4l7.5 6.25" stroke="currentColor" stroke-width="1.7"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M6.5 9.75V20h11V9.75" stroke="currentColor" stroke-width="1.7"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M10.25 20v-5.25h3.5V20" stroke="currentColor" stroke-width="1.7"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    
-                </a>
-                <button class="st-iconbtn" type="button" aria-label="Search" data-st-search-open>
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.7" />
-                        <path d="m20 20-4.35-4.35" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
-                    </svg>
-                </button>
-                <a href="#" class="st-iconbtn" aria-label="Login">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="1.7" />
-                        <path d="M4.75 19.25c1.74-2.83 4.16-4.25 7.25-4.25s5.51 1.42 7.25 4.25" stroke="currentColor"
-                            stroke-width="1.7" stroke-linecap="round" />
-                    </svg>
-                </a>
-            </div>
+           
         </div>
     </aside>
 </header>
