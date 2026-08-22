@@ -900,14 +900,38 @@
     gap: 18px;
 }
 
-.destination-cart-icon-slide-x-axis{
-    display: flex;
-    margin:10px;
+.df-results-carousel-shell {
+    position: relative;
+    /* padding: 0 30px; */
 }
 
-.destination-cart-icon-slide-x-axis button{
-    margin:10px;
+.df-cards-viewport {
+    position: relative;
+    overflow: hidden;
 }
+
+.destination-cart-icon-slide-x-axis {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.destination-cart-icon-slide-x-axis .df-carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: auto;
+    box-shadow: 0 10px 26px rgba(17, 17, 17, 0.12);
+}
+
+.destination-cart-icon-slide-x-axis .left-button-destination {
+    left: -18px;
+}
+
+.destination-cart-icon-slide-x-axis .right-button-destination {
+    right: -41px;
+}
+
 /* Responsive */
 @media (max-width: 1199.98px) {
     .df-cards-grid {
