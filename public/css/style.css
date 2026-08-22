@@ -3443,7 +3443,7 @@ div.container.st-nav-inner {
 
     .sj-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(6, 200px);
+        grid-template-rows: repeat(auto, 200px);
         grid-auto-rows: 200px;
         gap: 10px;
     }
