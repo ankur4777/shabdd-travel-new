@@ -139,6 +139,13 @@
         border-radius: 12px !important;
     }
 
+    .st-mobile-profile-btn {
+        width: 35px !important;
+        height: 35px !important;
+        flex-basis: 35px !important;
+        border-radius: 50% !important;
+    }
+
     .st-cta {
         min-height: 35px !important;
         padding: 0 12px !important;
@@ -213,6 +220,13 @@
         border-radius: 10px !important;
     }
 
+    .st-mobile-profile-btn {
+        width: clamp(27px, 3.1vw, 33px) !important;
+        height: clamp(27px, 3.1vw, 33px) !important;
+        flex-basis: clamp(27px, 3.1vw, 33px) !important;
+        border-radius: 50% !important;
+    }
+
     .st-iconbtn svg {
         width: 15px !important;
         height: 15px !important;
@@ -279,6 +293,13 @@
         height: 23px !important;
         padding: 0 !important;
         border-radius: 8px !important;
+    }
+
+    .st-mobile-profile-btn {
+        width: 23px !important;
+        height: 23px !important;
+        flex-basis: 23px !important;
+        border-radius: 50% !important;
     }
 
     .st-iconbtn svg {
@@ -354,5 +375,11 @@
         width: 38px !important;
         height: 38px !important;
         border-radius: 14px !important;
+    }
+
+    .st-mobile-profile-btn {
+        width: 38px !important;
+        height: 38px !important;
+        flex-basis: 38px !important;
     }
 }

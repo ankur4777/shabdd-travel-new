@@ -180,6 +180,10 @@
                 </div>
 
                 <div class="st-nav-actions st-desktop-only">
+                    <a href="#" class="st-mobile-profile-btn" aria-label="Profile">
+                        <img src="{{ asset('images/Profile image.jpg') }}" alt="">
+                    </a>
+
                     <button class="st-iconbtn" type="button" aria-label="Search" data-st-search-open>
                         <svg viewBox="0 0 24 24" fill="none">
                             <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.7" />
@@ -194,13 +198,17 @@
                 </div>
                 
                 <div class="st-mobile-nav-actions st-mobile-only">
+               
+
                     <button class="st-iconbtn st-mobile-search-btn" type="button" aria-label="Search" data-st-search-open>
                         <svg viewBox="0 0 24 24" fill="none">
                             <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.7" />
                             <path d="m20 20-4.35-4.35" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
                         </svg>
                     </button>
-
+                         <a href="#" class="st-mobile-profile-btn" aria-label="Profile">
+                        <img src="{{ asset('images/Profile image.jpg') }}" alt="">
+                    </a>
                     <button class="navbar-toggler st-mobile-toggle" type="button" id="stMobileToggle"
                         aria-label="Open menu" aria-expanded="false">
                         <span></span>
