@@ -45,16 +45,6 @@
                     <span class="st-topbar-icon" aria-hidden="true"><i class="bi bi-phone"></i></span>
                     <span>Download App</span>
                 </a>
-                {{-- <a href="#" class="st-login-chip">
-                    <span class="st-chip-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="1.7" />
-                            <path d="M5 19.25c1.68-2.69 4.06-4.03 7-4.03 2.94 0 5.32 1.34 7 4.03" stroke="currentColor"
-                                stroke-width="1.7" stroke-linecap="round" />
-                        </svg>
-                    </span>
-                    <span>Login</span>
-                </a> --}}
             </div>
         </div>
     </div>
@@ -197,14 +187,7 @@
                                 stroke-linecap="round" />
                         </svg>
                     </button>
-                    <a href="#" class="st-iconbtn" aria-label="Login">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="1.7" />
-                            <path d="M4.75 19.25c1.74-2.83 4.16-4.25 7.25-4.25s5.51 1.42 7.25 4.25"
-                                stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
-                        </svg>
-                    </a>
-                    <a href="#" class="st-cta btn" role="button">
+<a href="#" class="st-cta btn" role="button">
                         <span>Plan My Trip</span>
                        
                     </a>
@@ -285,11 +268,7 @@
                     </svg>
                 </button> -->
                 <div class="st-mobile-profile">
-                    <a href="#" class="st-iconbtn" aria-label="Login">
-                        <img src="{{ asset('images/Profile image.webp') }}" alt="Ankur">
-                    </a>
-                    <h4 class="st-mobile-title">Anjali</h4>
-                </div>
+</div>
             </div>
 
             <button class="st-mobile-close" id="stMobileClose" aria-label="Close menu">
@@ -417,7 +396,6 @@
         const searchStatus = document.getElementById('stSearchStatus');
         const searchClose = document.getElementById('stSearchClose');
         const searchOpeners = document.querySelectorAll('[data-st-search-open]');
-        const chatbotToggle = document.getElementById('chatbot-toggle');
         let searchTimer = null;
         let searchAbortController = null;
         let latestSearchResults = [];
@@ -555,9 +533,6 @@
             drawer.classList.add('show');
             openBtn.setAttribute('aria-expanded', 'true');
             document.body.style.overflow = 'hidden';
-            if (chatbotToggle) {
-                chatbotToggle.style.display = 'none';
-            }
         };
 
         const close = function () {
@@ -565,9 +540,6 @@
             drawer.classList.remove('show');
             openBtn.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
-            if (chatbotToggle) {
-                chatbotToggle.style.display = '';
-            }
             // Close any open submenu
             closeSubmenu();
         };
@@ -823,3 +795,4 @@
         overlay.addEventListener('click', close);
     })();
 </script>
+
