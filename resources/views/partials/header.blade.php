@@ -247,28 +247,11 @@
     <!-- mobile view -->
     <aside class="st-mobile-drawer" id="stMobileDrawer" aria-label="Mobile navigation">
         <div class="st-mobile-head">
-         
             <div class="st-mobile-profile">
-                <!-- <a href="{{ url('/') }}" class="st-iconbtn st-mobile-home-action {{ request()->is('/') ? 'is-active' : '' }}"
-                    aria-label="Home" @if (request()->is('/')) aria-current="page" @endif>
-                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M4.5 10.25 12 4l7.5 6.25" stroke="currentColor" stroke-width="1.7"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M6.5 9.75V20h11V9.75" stroke="currentColor" stroke-width="1.7"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M10.25 20v-5.25h3.5V20" stroke="currentColor" stroke-width="1.7"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    
-                </a> -->
-                <!-- <button class="st-iconbtn" type="button" aria-label="Search" data-st-search-open>
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.7" />
-                        <path d="m20 20-4.35-4.35" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
-                    </svg>
-                </button> -->
-                <div class="st-mobile-profile">
-</div>
+                <img class="st-mobile-profile-photo" src="{{ asset('images/Profile image.jpg') }}" alt="Anjali">
+                <div class="st-mobile-profile-copy">
+                    <span class="st-mobile-profile-name">Anjali</span>
+                </div>
             </div>
 
             <button class="st-mobile-close" id="stMobileClose" aria-label="Close menu">
@@ -290,11 +273,9 @@
 
         <div class="st-mobile-links" id="stMobileLinksMain">
 
-        <a href="{{ route('home') }}">
-            <div class="menu-home" id="menuHome">
-                <i class="bi bi-house"></i>
-                Home
-            </div>
+        <a href="{{ route('home') }}" class="st-mobile-link st-mobile-link--context st-mobile-link--home" id="menuHome">
+            <span class="st-mobile-link-icon" aria-hidden="true"><i class="bi bi-house"></i></span>
+            <span>Home</span>
         </a>
 
 
@@ -795,4 +776,3 @@
         overlay.addEventListener('click', close);
     })();
 </script>
-
