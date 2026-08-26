@@ -15,7 +15,7 @@ INCLUDE: @include('partials.testimonials-section') in your page
                 Testimonials
                 <span class="tm-eyebrow-line"></span>
             </div>
-            <h2 class="tm-title">Results that speaks volume</h2>
+            <h2 class="tm-title">Creating Memorable Journeys</h2>
             <p class="tm-subtitle">Read success stories</p>
             <p class="tm-desc">Find out how our happy travellers are raving about us.</p>
         </div>
