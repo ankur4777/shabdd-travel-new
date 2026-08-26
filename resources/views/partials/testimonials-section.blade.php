@@ -3,6 +3,14 @@ SECTION: Premium Testimonials & Reviews
 FILE: resources/views/partials/testimonials-section.blade.php
 INCLUDE: @include('partials.testimonials-section') in your page
 --}}
+@php
+    $randomUserPortrait = static function (string $gender, int $seed): string {
+        $gender = $gender === 'women' ? 'women' : 'men';
+        $seed = max(1, $seed);
+
+        return "https://randomuser.me/api/portraits/{$gender}/{$seed}.jpg";
+    };
+@endphp
 
 <section class="tm-section">
     <div class="tm-container">
@@ -41,7 +49,7 @@ INCLUDE: @include('partials.testimonials-section') in your page
                     felt like personal travel companions — highly recommend to every travel lover!"</p>
                 <div class="tm-author">
                     <div class="tm-author-avatar tm-avatar--1">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rajesh Mehra" loading="lazy">
+                        <img src="{{ $randomUserPortrait('men', 32) }}" alt="Rajesh Mehra" loading="lazy">
                     </div>
                     <div class="tm-author-info">
                         <span class="tm-author-name">Rajesh Mehra</span>
@@ -77,8 +85,7 @@ INCLUDE: @include('partials.testimonials-section') in your page
                         private waterfall trek was absolutely breathtaking!"</p>
                     <div class="tm-author">
                         <div class="tm-author-avatar tm-avatar--2">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Sharma"
-                                loading="lazy">
+                            <img src="{{ $randomUserPortrait('women', 44) }}" alt="Priya Sharma" loading="lazy">
                         </div>
                         <div class="tm-author-info">
                             <span class="tm-author-name">Priya Sharma</span>
@@ -116,8 +123,7 @@ INCLUDE: @include('partials.testimonials-section') in your page
                             it!"</p>
                         <div class="tm-author">
                             <div class="tm-author-avatar tm-avatar--3">
-                                <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Arjun Patel"
-                                    loading="lazy">
+                                <img src="{{ $randomUserPortrait('men', 52) }}" alt="Arjun Patel" loading="lazy">
                             </div>
                             <div class="tm-author-info">
                                 <span class="tm-author-name">Arjun Patel</span>
@@ -140,8 +146,7 @@ INCLUDE: @include('partials.testimonials-section') in your page
                             sunsets!"</p>
                         <div class="tm-author">
                             <div class="tm-author-avatar tm-avatar--4">
-                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Neha & Vikram"
-                                    loading="lazy">
+                                <img src="{{ $randomUserPortrait('women', 68) }}" alt="Neha & Vikram" loading="lazy">
                             </div>
                             <div class="tm-author-info">
                                 <span class="tm-author-name">Neha & Vikram</span>
