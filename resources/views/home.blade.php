@@ -490,7 +490,7 @@
                 <div class="hp-trending-packages__header">
                     <div>
                         <p class="hp-trending-packages__eyebrow">Trending Packages</p>
-                        <h2 id="hpTrendingPackagesTitle">Popular trips from the admin panel</h2>
+                        <h2 id="hpTrendingPackagesTitle">Popular trips</h2>
                         <p>Only packages marked as trending in admin are shown here.</p>
                     </div>
                     <a href="{{ route('packages.index') }}" class="hp-trending-packages__view">
