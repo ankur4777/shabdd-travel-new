@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- For SEO -->
+    <title>Customized Domestic & International Tour Packages | SHABDD Travel</title>
+ <meta name="description" content="Explore customized domestic and international tour packages with SHABDD Travel, including honeymoon, family, adventure and budget holiday packages.">
     @hasSection('meta')
         @yield('meta')
     @else
