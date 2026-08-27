@@ -7,7 +7,8 @@
 
     <!-- For SEO -->
     <title>Customized Domestic & International Tour Packages | SHABDD Travel</title>
- <meta name="description" content="Explore customized domestic and international tour packages with SHABDD Travel, including honeymoon, family, adventure and budget holiday packages.">
+    <meta name="description" content="Explore customized domestic and international tour packages with SHABDD Travel. Discover honeymoon, family, adventure, beach and group holidays across India and abroad.">
+
     @hasSection('meta')
         @yield('meta')
     @else
