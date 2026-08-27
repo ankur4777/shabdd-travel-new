@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /login
+Disallow: /register
+Disallow: /search/
+Disallow: /chat
+Disallow: /chatbot/
+
+Sitemap: https://shabddtravels.in/sitemap.xml
+
+
+
