@@ -26,6 +26,11 @@
     <meta name="twitter:description" content="Explore customized domestic and international tour packages with SHABDD Travel.">
     <meta name="twitter:image" content="{{ asset('/images/logo.png') }}">
     <meta name="twitter:image:alt" content="Shabdd Travels logo">
+    <meta property="og:image:width"
+      content="1200">
+
+<meta property="og:image:height"
+      content="630">
     @hasSection('meta')
         @yield('meta')
     @endif
