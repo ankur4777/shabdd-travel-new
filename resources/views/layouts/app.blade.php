@@ -18,13 +18,13 @@
     <meta property="og:description" content="Explore customized domestic and international tour packages with Shabdd Travel.">
     <meta property="og:url" content="{{ url('/') }}">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="{{ asset('/images/logo.png') }}">
+    <meta property="og:image" content="{{ asset('Seo.jpeg') }}">
     <meta property="og:image:alt" content="Shabdd Travels logo">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Shabdd Travels Domestic &amp; International Tour Packages">
     <meta name="twitter:description" content="Explore customized domestic and international tour packages with SHABDD Travel.">
-    <meta name="twitter:image" content="{{ asset('/images/logo.png') }}">
+    <meta name="twitter:image" content="{{ asset('Seo.jpeg') }}">
     <meta name="twitter:image:alt" content="Shabdd Travels logo">
     <meta property="og:image:width"
       content="1200">
@@ -37,7 +37,7 @@
         @yield('meta')
     @endif
 
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
