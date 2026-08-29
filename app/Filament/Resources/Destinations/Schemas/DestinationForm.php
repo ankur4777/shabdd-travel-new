@@ -67,7 +67,7 @@ class DestinationForm
                             ->label('Travel style')
                             ->options([
                                 'honeymoon' => 'Honeymoon',
-                                'religiuos' => 'Religious',
+                                'religious' => 'Religious',
                                 'family' => 'Family',
                                 'adventure' => 'Adventure',
                                 'friends' => 'Friends',

@@ -215,6 +215,7 @@ class HomeController extends Controller
 
         return $this->homeDiscoverTextCollection($destination->travel_styles ?? [])
             ->map(fn($value) => trim((string) $value))
+            ->map(fn(string $value) => $this->normalizeTravelStyleSlug($value))
             ->filter(fn(string $value) => array_key_exists($value, $travelStyleOptions))
             ->map(fn(string $value) => $travelStyleOptions[$value])
             ->unique()
@@ -225,7 +226,6 @@ class HomeController extends Controller
     {
         return [
             'honeymoon' => 'Honeymoon',
-            'religiuos' => 'Religious',
             'religious' => 'Religious',
             'family' => 'Family',
             'adventure' => 'Adventure',
@@ -236,6 +236,13 @@ class HomeController extends Controller
             'wildlife' => 'Wildlife',
             'water activities' => 'Water Activities',
         ];
+    }
+
+    private function normalizeTravelStyleSlug(string $value): string
+    {
+        $value = trim(Str::lower($value));
+
+        return $value === 'religiuos' ? 'religious' : $value;
     }
 
     private function homeDiscoverHighlights(Destination $destination, string $durationLabel): Collection
@@ -553,6 +560,7 @@ class HomeController extends Controller
 
     private function packageListing(Request $request, string $travelStyle, string $view): View
     {
+        $travelStyle = $this->normalizeTravelStyleSlug($travelStyle);
         $baseQuery = Package::query()
             ->where('travel_style', $travelStyle);
 

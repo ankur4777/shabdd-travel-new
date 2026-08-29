@@ -264,7 +264,7 @@
                     </a>
 
                     {{-- Card 7: Religious --}}
-                    <a href="{{ route('destinations.index', ['travel_style' => 'religiuos']) }}" class="st-theme-card"
+                    <a href="{{ route('destinations.index', ['travel_style' => 'religious']) }}" class="st-theme-card"
                         data-theme="religious">
                       
                        <div class="st-theme-card-img"

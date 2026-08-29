@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Destination;
 use App\Models\Package;
 use App\Support\MediaUrl;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -13,8 +14,12 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class DestinationController extends Controller
 {
-    public function index(Request $request): View
+    public function index(Request $request): View|RedirectResponse
     {
+        if ($request->query('travel_style') === 'religiuos') {
+            return redirect()->to($request->fullUrlWithQuery(['travel_style' => 'religious']));
+        }
+
         $destinations = Destination::query()
             ->active()
             ->latest()
@@ -96,7 +101,6 @@ class DestinationController extends Controller
     {
         return [
             'honeymoon' => 'Honeymoon',
-            'religiuos' => 'Religious',
             'family' => 'Family',
             'adventure' => 'Adventure',
             'friends' => 'Friends',
@@ -106,6 +110,13 @@ class DestinationController extends Controller
             'wildlife' => 'Wildlife',
             'water activities' => 'Water Activities',
         ];
+    }
+
+    private function normalizeTravelStyleSlug(string $value): string
+    {
+        $value = trim(Str::lower($value));
+
+        return $value === 'religiuos' ? 'religious' : $value;
     }
 
     private function buildDestinationOptions(Collection $destinations): Collection
@@ -145,7 +156,7 @@ class DestinationController extends Controller
                 );
             })
             ->when($request->filled('travel_style'), function (Collection $destinations) use ($request) {
-                $travelStyle = (string) $request->input('travel_style');
+                $travelStyle = $this->normalizeTravelStyleSlug((string) $request->input('travel_style'));
 
                 if (!array_key_exists($travelStyle, $this->travelStyleOptions())) {
                     return $destinations;
@@ -183,10 +194,11 @@ class DestinationController extends Controller
 
     private function destinationMatchesTravelStyle(Destination $destination, string $travelStyle): bool
     {
-        $needle = Str::slug($travelStyle);
+        $needle = $this->normalizeTravelStyleSlug(Str::slug($travelStyle));
 
         return collect()
             ->merge($destination->travel_styles ?? [])
+            ->map(fn($value) => $this->normalizeTravelStyleSlug((string) $value))
             ->merge($destination->popular_for ?? [])
             ->merge($destination->tags ?? [])
             ->filter()
@@ -248,6 +260,7 @@ class DestinationController extends Controller
         $travelStyleOptions = $this->travelStyleOptions();
 
         return collect($destination->travel_styles ?? [])
+            ->map(fn($style) => $this->normalizeTravelStyleSlug((string) $style))
             ->map(fn($style) => trim((string) $style))
             ->filter(fn(string $style) => array_key_exists($style, $travelStyleOptions))
             ->map(fn(string $style) => $travelStyleOptions[$style])
