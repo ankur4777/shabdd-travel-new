@@ -69,6 +69,11 @@
     <script src="{{ asset('js/script.js') }}" defer></script>
     @stack('scripts')
 
+    <script
+    src="https://chatbot.shabddtravels.in/widget/loader.js"
+    data-widget-key="WGT_JD24PH62NYEKX73M">
+</script>
+
 
 </body>
 
