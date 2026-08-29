@@ -6,10 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- For SEO -->
-    <title> SHABDD Travels Domestic & International Tour Packages</title>
+    <title> Shabdd Travels Domestic & International Tour Packages</title>
+
     <meta name="description" content="Explore customized domestic and international tour packages with SHABDD Travel, including honeymoon, family, adventure and budget holiday packages, beaches, hill stations, islands, deserts, Dubai holidays, Thailand journeys, Bali, Singapore family trips, Europe, Swiss Alps, Japan, Türkiye, solo & group trips in India, adventure, nature, religious, wildlife, water activities and corporate tours.">
 
     <link rel="canonical" href="{{ url()->current() }}">
+
+
+    <!-- open graph meta tags -->
+     <meta property="og:title" content="Shabdd Travels Domestic & International Tour Packages">
+    <meta property="og:description" content="Explore customized domestic and international tour packages with Shabdd Travel">
+    <meta property="og:url" content="https://shabddtravels.in/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ asset('images/favicon.ico') }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Customized Domestic & International Tour Packages | SHABDD Travel">
+<meta name="twitter:description" content="Discover customized domestic and international holiday packages with SHABDD Travel.">
+<meta name="twitter:image" content="{{ asset('images/favicon.ico') }}">
     @hasSection('meta')
         @yield('meta')
     @else
