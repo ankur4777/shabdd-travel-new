@@ -435,7 +435,7 @@
                                 placeholder="Destination, dates, budget, travellers, and anything else we should know"></textarea>
                         </div>
 
-                        <button class="contact-submit" type="submit">
+                        <button class="contact-submit"  type="submit">
                             <i class="bi bi-send"></i>
                             Send enquiry
                         </button>
