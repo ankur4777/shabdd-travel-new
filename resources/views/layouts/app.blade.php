@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- For SEO -->
-    <title>Customized Domestic & International Tour Packages | SHABDD Travel</title>
+    <title>Domestic & International Tour Packages | SHABDD Travel</title>
     <meta name="description" content="Explore customized domestic and international tour packages with SHABDD Travel, including honeymoon, family, adventure and budget holiday packages, beaches, hill stations, islands, deserts, Dubai holidays, Thailand journeys, Bali, Singapore family trips, Europe, Swiss Alps, Japan, Türkiye, solo & group trips in India, adventure, nature, religious, wildlife, water activities and corporate tours.">
 
     @hasSection('meta')
