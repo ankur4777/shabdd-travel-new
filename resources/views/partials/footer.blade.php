@@ -107,14 +107,25 @@ CSS FILE: footer.css  (link in your layout head)
                     <h4 class="st-footer-col-title">Contact Us</h4>
                     <ul class="st-footer-col-links">
                         <li>
-                            <a href="mailto:support@shabdd.com" class="st-footer-email-link">
+                            <a href="mailto:shabddtravel@gmail.com" class="st-footer-email-link">
                                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                     <rect x="2" y="4" width="20" height="16" rx="3" stroke="currentColor" stroke-width="1.7"/>
                                     <path d="M2 7l10 7 10-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
                                 </svg>
-                                support@shabdd.com
+                                shabddtravel@gmail.com
                             </a>
                         </li>
+                        <li class="st-footer-phone-row">
+                            <a href="tel:+917347673924" class="st-footer-phone-link">
+                                <i class="bi bi-telephone-fill" aria-hidden="true"></i>
+                                <span>7347673924</span>
+                            </a>
+                            <a href="tel:+919643305791" class="st-footer-phone-link">
+                                <i class="bi bi-telephone-fill" aria-hidden="true"></i>
+                                <span>9643305791</span>
+                            </a>
+                        </li>
+                      
                         <li><a href="{{ route('support') }}">Support</a></li>
                         <li><a href="/blogs">Blog</a></li>
                      

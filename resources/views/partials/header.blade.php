@@ -11,7 +11,19 @@
                                 stroke-linejoin="round" />
                         </svg>
                     </span>
-                    <span>+91 99999 99999</span>
+                    <span>7347673924</span>
+                </a>
+
+                    <a href="tel:+91-9999999999" class="st-topbar-link">
+                    <span class="st-topbar-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M7.56 3h2.11c.44 0 .83.29.95.71l.89 3.13a1 1 0 0 1-.25.98l-1.42 1.42a13.11 13.11 0 0 0 4.92 4.92l1.42-1.42a1 1 0 0 1 .98-.25l3.13.89c.42.12.71.51.71.95v2.11a1 1 0 0 1-.88 1A17.5 17.5 0 0 1 3.44 4.88 1 1 0 0 1 4.44 4h3.12Z"
+                                stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    <span>9643305791</span>
                 </a>
                 <span class="st-sep" aria-hidden="true"></span>
                 <a href="mailto:support@shabddtravel.com" class="st-topbar-link">
@@ -23,7 +35,7 @@
                                 stroke-width="1.5" />
                         </svg>
                     </span>
-                    <span>support@shabddtravel.com</span>
+                    <span>shabddtravel@gmail.com</span>
                 </a>
             </div>
 

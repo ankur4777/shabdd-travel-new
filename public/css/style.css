@@ -3917,6 +3917,26 @@ div.container.st-nav-inner {
     opacity: 0.7;
 }
 
+.st-footer-phone-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    align-items: center;
+}
+
+.st-footer-phone-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.st-footer-phone-link i {
+    font-size: 15px;
+    flex-shrink: 0;
+    color: inherit;
+    opacity: 0.8;
+}
+
 /* ── Fraud warning link ── */
 .st-footer-fraud-link {
     display: inline-flex;
