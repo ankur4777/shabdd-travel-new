@@ -26,7 +26,7 @@
                     <span>9643305791</span>
                 </a>
                 <span class="st-sep" aria-hidden="true"></span>
-                <a href="mailto:support@shabddtravel.com" class="st-topbar-link">
+                <a href="mailto:shabddtravel@gmail.com" class="st-topbar-link">
                     <span class="st-topbar-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none">
                             <path d="M4 7.5 12 13l8-5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"

@@ -480,7 +480,7 @@
                         Share a few details and the team will get back with a suitable package plan.
                     </p>
 
-                    <form class="contact-form" action="mailto:support@shabddtravel.com" method="POST" enctype="text/plain">
+                    <form class="contact-form" action="mailto:shabddtravel@gmail.com" method="POST" enctype="text/plain">
                         <div class="contact-field">
                             <label for="contactName">Full name</label>
                             <input id="contactName" name="name" type="text" placeholder="Your name" required>

@@ -1019,8 +1019,8 @@ class DestinationController extends Controller
             'why_visit' => $this->buildWhyVisit($destination, $selectedPackage, $dayCount),
             'main_image' => $mainImage,
             'pdf_url' => $selectedPackage['pdf_url'] ?? null,
-            'contact_phone' => '+91-98280-65555',
-            'contact_email' => 'support@shabddtravel.com',
+            'contact_phone' => '+91 9643305791',
+            'contact_email' => 'shabddtravel@gmail.com',
             'other_packages' => collect($destinationPackages)
                 ->reject(fn(array $package) => ($package['package_slug'] ?? '') === ($selectedPackage['package_slug'] ?? ''))
                 ->take(3)

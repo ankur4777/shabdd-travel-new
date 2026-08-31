@@ -64,7 +64,7 @@
             [
                 'icon' => 'bi-envelope',
                 'title' => 'Contact Us',
-                'summary' => 'For questions, please contact us at support@shabddtravel.com or +91 98765 43210.',
+                'summary' => 'For questions, please contact us at shabddtravel@gmail.com or +91 98765 43210.',
                 'details' => 'Our support team can help with booking terms, payment questions, cancellation rules, and package-specific conditions.',
             ],
         ];
