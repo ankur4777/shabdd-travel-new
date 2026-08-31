@@ -113,6 +113,62 @@
             color: #111;
         }
 
+        .contact-phone-links {
+            display: grid;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .contact-phone-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+            color: #111;
+            font-size: 13px;
+            font-weight: 850;
+            line-height: 1.35;
+            text-decoration: none;
+        }
+
+        .contact-phone-link:hover,
+        .contact-phone-link:focus-visible {
+            color: #ff3b30;
+        }
+
+        .contact-phone-link i {
+            color: #ff3b30;
+            font-size: 0.95rem;
+        }
+
+        .contact-chat-links {
+            display: grid;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .contact-chat-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+            color: #111;
+            font-size: 13px;
+            font-weight: 850;
+            line-height: 1.35;
+            text-decoration: none;
+        }
+
+        .contact-chat-link:hover,
+        .contact-chat-link:focus-visible {
+            color: #25d366;
+        }
+
+        .contact-chat-link i {
+            color: #25d366;
+            font-size: 0.95rem;
+        }
+
         .contact-quick-icon {
             width: 38px;
             height: 38px;
@@ -124,6 +180,11 @@
             background: rgba(255, 59, 48, 0.1);
             color: #ff3b30;
             font-size: 1.05rem;
+        }
+
+        .contact-quick-icon--whatsapp {
+            background: rgba(37, 211, 102, 0.12);
+            color: #25d366;
         }
 
         .contact-quick-label {
@@ -138,7 +199,7 @@
             display: block;
             margin-top: 4px;
             color: #111;
-            font-size: 0.8rem;
+            font-size: 13px;
             font-weight: 850;
             line-height: 1.35;
         }
@@ -368,28 +429,47 @@
 
         <section class="contact-shell" aria-label="Contact options">
             <div class="contact-quick-grid">
-                <a href="tel:+91 73476 73924" class="contact-quick-card">
+                <div class="contact-quick-card">
                     <span class="contact-quick-icon"><i class="bi bi-telephone"></i></span>
                     <span>
                         <span class="contact-quick-label">Call support</span>
-                        <span class="contact-quick-value">+91 73476 73924 </span>
-                        <span class="contact-quick-value">+91 96433 05791 </span>
+                        <span class="contact-phone-links">
+                            <a class="contact-phone-link" href="tel:+91 73476 73924" aria-label="Call +91 73476 73924">
+                               
+                                <span>+91 73476 73924</span>
+                            </a>
+                            <a class="contact-phone-link" href="tel:+91 96433 05791" aria-label="Call +91 96433 05791">
+                                
+                                <span>+91 96433 05791</span>
+                            </a>
+                        </span>
                     </span>
-                </a>
-                <a href="mailto:support@shabddtravel.com" class="contact-quick-card">
+                </div>
+                <a href="mailto:shabddtravel@gmail.com" class="contact-quick-card">
                     <span class="contact-quick-icon"><i class="bi bi-envelope"></i></span>
                     <span>
                         <span class="contact-quick-label">Email us</span>
                         <span class="contact-quick-value">shabddtravel@gmail.com</span>
                     </span>
                 </a>
-                <a href="https://wa.me/919999999999" class="contact-quick-card">
-                    <span class="contact-quick-icon"><i class="bi bi-whatsapp"></i></span>
+                <div class="contact-quick-card">
+                    <span class="contact-quick-icon contact-quick-icon--whatsapp"><i class="bi bi-whatsapp"></i></span>
                     <span>
                         <span class="contact-quick-label">WhatsApp</span>
-                        <span class="contact-quick-value">Chat with a trip expert</span>
+                        <span class="contact-chat-links">
+                            <a class="contact-chat-link" href="https://wa.me/917347673924"
+                                aria-label="Chat on WhatsApp with 7347673924">
+                              
+                                <span>7347673924</span>
+                            </a>
+                            <a class="contact-chat-link" href="https://wa.me/919643305791"
+                                aria-label="Chat on WhatsApp with 9643305791">
+                                
+                                <span>9643305791</span>
+                            </a>
+                        </span>
                     </span>
-                </a>
+                </div>
             </div>
 
             <div class="contact-main-grid">
