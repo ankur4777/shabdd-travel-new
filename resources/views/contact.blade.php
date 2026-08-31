@@ -368,18 +368,19 @@
 
         <section class="contact-shell" aria-label="Contact options">
             <div class="contact-quick-grid">
-                <a href="tel:+919999999999" class="contact-quick-card">
+                <a href="tel:+91 73476 73924" class="contact-quick-card">
                     <span class="contact-quick-icon"><i class="bi bi-telephone"></i></span>
                     <span>
                         <span class="contact-quick-label">Call support</span>
-                        <span class="contact-quick-value">+91 99999 99999</span>
+                        <span class="contact-quick-value">+91 73476 73924 </span>
+                        <span class="contact-quick-value">+91 96433 05791 </span>
                     </span>
                 </a>
                 <a href="mailto:support@shabddtravel.com" class="contact-quick-card">
                     <span class="contact-quick-icon"><i class="bi bi-envelope"></i></span>
                     <span>
                         <span class="contact-quick-label">Email us</span>
-                        <span class="contact-quick-value">support@shabddtravel.com</span>
+                        <span class="contact-quick-value">shabddtravel@gmail.com</span>
                     </span>
                 </a>
                 <a href="https://wa.me/919999999999" class="contact-quick-card">
@@ -407,7 +408,7 @@
 
                         <div class="contact-field">
                             <label for="contactPhone">Phone number</label>
-                            <input id="contactPhone" name="phone" type="tel" placeholder="+91 99999 99999" required>
+                            <input id="contactPhone" name="phone" type="tel" maxlength="10" placeholder="+91 99999 99999" required>
                         </div>
 
                         <div class="contact-field">
@@ -472,7 +473,7 @@
                             <div>
                                 <p class="contact-info-title">Support mailbox</p>
                                 <p class="contact-info-copy"><a
-                                        href="mailto:support@shabddtravel.com">support@shabddtravel.com</a></p>
+                                        href="mailto:shabddtravel@gmail.com">shabddtravel@gmail.com</a></p>
                             </div>
                         </div>
                     </div>
