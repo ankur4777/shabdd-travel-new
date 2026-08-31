@@ -72,14 +72,21 @@
                 <p>Share your resume with us by email. For any query, you can call our team directly.</p>
             </div>
             <div class="career-contact-actions">
-                <a class="career-contact-link" href="mailto:support@shabddtravel.com?subject={{ rawurlencode('Application for ' . $career->title) }}">
+                <a class="career-contact-link" href="mailto:shabddtravel@gmail.com?subject={{ rawurlencode('Application for ' . $career->title) }}">
                     <i class="bi bi-envelope"></i>
-                    <span><small>Send your resume</small><strong>support@shabddtravel.com</strong></span>
+                    <span><small>Send your resume</small><strong>shabddtravel@gmail.com</strong></span>
                 </a>
-                <a class="career-contact-link" href="tel:+919999999999">
+                <div class="career-contact-link career-contact-link--phone">
                     <i class="bi bi-telephone"></i>
-                    <span><small>Call for any query</small><strong>+91 99999 99999</strong></span>
-                </a>
+                    <div class="career-contact-phone-list">
+                        <a href="tel:+919643305791">
+                            <strong>+91 96433 05791</strong>
+                        </a>
+                        <a href="tel:+917347673924">
+                            <strong>+91 73476 73924</strong>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
     </div>

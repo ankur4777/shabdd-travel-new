@@ -30,9 +30,9 @@
             <div class="support-heading"><h2>How Can We Help You?</h2><span></span></div>
             @php
                 $helpCards = [
-                    ['bi-headset', '24/7 Support', 'Our team is available to assist you throughout your journey.', 'Live Chat', '#support-faq'],
-                    ['bi-envelope', 'Email Support', 'Drop us an email and we will get back to you promptly.', 'Send Email', 'mailto:support@shabddtravel.com'],
-                    ['bi-telephone', 'Call Us', 'Speak directly with one of our experienced travel experts.', '+91 99999 99999', 'tel:+919999999999'],
+                    ['bi-headset', '24/7 Support', 'Our team is available to assist you throughout your journey.', 'WhatsApp Chat', 'https://wa.me/919643305791?text=Hi%20I%20need%2024%2F7%20support'],
+                    ['bi-envelope', 'Email Support', 'Drop us an email and we will get back to you promptly.', 'Send Email', 'mailto:shabddtravel@gmail.com'],
+                    ['bi-telephone', 'Call Us', 'Speak directly with one of our experienced travel experts.', '+91 96433 05791', 'tel:+919643305791'],
                     ['bi-ticket-perforated', 'Booking Support', 'Need help with your booking, itinerary or travel plan?', 'Get Help', route('contact')],
                     ['bi-credit-card', 'Payment Help', 'Questions about payments, refunds or confirmations?', 'Learn More', '#support-faq'],
                     ['bi-file-earmark-text', 'General Enquiries', 'For any other travel question, we are here for you.', 'Contact Us', route('contact')],
@@ -54,7 +54,7 @@
                     <h2>Still Need Help?</h2>
                     <p>Our travel experts are just a message away. Reach out and we will get back to you as soon as possible.</p>
                     <a class="support-btn support-btn-light" href="{{ route('contact') }}">Contact Our Team <i class="bi bi-arrow-right"></i></a>
-                    <a class="support-btn" href="mailto:support@shabddtravel.com">Send an Email <i class="bi bi-envelope"></i></a>
+                    <a class="supshabddtravel@gmail.com">Send an Email <i class="bi bi-envelope"></i></a>
                 </aside>
 
                 <div class="support-faq" id="support-faq">
@@ -88,8 +88,9 @@
                     <h2>We'd Love To Hear From <span class="support-accent">You!</span></h2>
                     <p>Whether you have a question, feedback or need travel advice, we are just a message away.</p>
                     <div class="support-details">
-                        <a class="support-detail text-decoration-none text-dark" href="tel:+919999999999"><i class="bi bi-telephone"></i><span><strong>+91 99999 99999</strong><small>Call us anytime</small></span></a>
-                        <a class="support-detail text-decoration-none text-dark" href="mailto:support@shabddtravel.com"><i class="bi bi-envelope"></i><span><strong>support@shabddtravel.com</strong><small>We reply within 24 hours</small></span></a>
+                        <a class="support-detail text-decoration-none text-dark" href="tel:+919643305791"><i class="bi bi-telephone"></i><span><strong>+91 96433 05791</strong><small>Call us anytime</small></span></a>
+                        <a class="support-detail text-decoration-none text-dark" href="tel:+917347673924"><i class="bi bi-telephone"></i><span><strong>+91 73476 73924</strong><small>Call us anytime</small></span></a>
+                        <a class="support-detail text-decoration-none text-dark" href="mailto:shabddtravel@gmail.com"><i class="bi bi-envelope"></i><span><strong>shabddtravel@gmail.com</strong><small>We reply within 24 hours</small></span></a>
                         <div class="support-detail"><i class="bi bi-clock"></i><span><strong>Mon - Sun: 24/7</strong><small>We are always open</small></span></div>
                     </div>
                 </div>

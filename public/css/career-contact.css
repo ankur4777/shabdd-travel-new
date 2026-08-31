@@ -48,6 +48,10 @@
     transition: transform .2s ease, border-color .2s ease;
 }
 
+.career-contact-link--phone {
+    align-items: flex-start;
+}
+
 .career-contact-link:hover {
     transform: translateY(-1px);
     border-color: var(--career-red);
@@ -72,14 +76,30 @@
     flex-direction: column;
 }
 
-.career-contact-link small {
-    color: var(--career-muted);
-    font-size: 11px;
+.career-contact-phone-list {
+    display: grid;
+    gap: 6px;
+    width: 100%;
+}
+
+.career-contact-phone-list a {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+    min-width: 0;
+    width: 100%;
+}
+
+.career-contact-phone-list a:hover,
+.career-contact-phone-list a:focus-visible {
+    color: var(--career-red);
 }
 
 .career-contact-link strong {
     overflow-wrap: anywhere;
     font-size: 13px;
+    line-height: 1.2;
 }
 
 @media (max-width: 991.98px) {
