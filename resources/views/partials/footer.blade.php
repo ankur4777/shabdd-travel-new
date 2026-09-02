@@ -80,15 +80,15 @@ CSS FILE: footer.css  (link in your layout head)
                         <li><a href="{{ route('careers.index') }}">Careers</a></li>
                         <li><a href="{{ route('reviews.index') }}">SHABDD Reviews</a></li>
                         <li><a href="#">News</a></li>
-                        <li>
+                        <!-- <li>
                             <a href="#" class="st-footer-fraud-link">
                                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                     <path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
-                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                                 Beware Of Frauds
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
 
@@ -106,6 +106,7 @@ CSS FILE: footer.css  (link in your layout head)
                 <div class="st-footer-col">
                     <h4 class="st-footer-col-title">Contact Us</h4>
                     <ul class="st-footer-col-links">
+               
                         <li>
                             <a href="mailto:shabddtravel@gmail.com" class="st-footer-email-link">
                                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -130,6 +131,14 @@ CSS FILE: footer.css  (link in your layout head)
                         <li><a href="/blogs">Blog</a></li>
                      
                         <li><a href="/travel-agent-join-us">Partner With SHABDD</a></li>
+
+                                 <li>
+                            <address class="st-footer-address">
+                                H.No. 232, Gali No. 14,<br>
+                                Gulab Vatika, Loni,<br>
+                                Ghaziabad, Uttar Pradesh 201102, India
+                            </address>
+                        </li>
                       
                     </ul>
                 </div>

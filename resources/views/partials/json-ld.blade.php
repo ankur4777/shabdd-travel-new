@@ -36,7 +36,7 @@
     $routeName = request()->route()?->getName();
     $pageName = $pageNames[$routeName] ?? 'SHABDD Travel';
     $pageUrl = url()->current();
-    $logoUrl = asset('Seo.jpeg');
+    $logoUrl = asset('images/logo.png');
 
     if (isset($packagePageData)) {
         $pageName = $packagePageData['package_title'] . ' | SHABDD Travel';
@@ -56,9 +56,28 @@
             '@id' => url('/') . '#organization',
             'name' => 'SHABDD Travel',
             'url' => url('/'),
+            'description' => 'SHABDD Travel provides domestic and international tour packages and travel support from Ghaziabad, Uttar Pradesh, India.',
             'logo' => [
                 '@type' => 'ImageObject',
                 'url' => $logoUrl,
+            ],
+            'address' => [
+                '@type' => 'PostalAddress',
+                'streetAddress' => 'H.No. 232, Gali No. 14, Gulab Vatika, Loni',
+                'addressLocality' => 'Ghaziabad',
+                'addressRegion' => 'Uttar Pradesh',
+                'postalCode' => '201102',
+                'addressCountry' => 'IN',
+            ],
+            'telephone' => ['+91 7347673924', '+91 9643305791'],
+            'email' => 'shabddtravel@gmail.com',
+            'contactPoint' => [
+                '@type' => 'ContactPoint',
+                'telephone' => '+91 7347673924',
+                'email' => 'shabddtravel@gmail.com',
+                'contactType' => 'customer support',
+                'areaServed' => 'IN',
+                'availableLanguage' => ['en', 'hi'],
             ],
         ],
         [
