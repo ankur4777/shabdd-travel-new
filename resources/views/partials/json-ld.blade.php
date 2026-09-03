@@ -108,7 +108,38 @@
         ];
     };
 
-    if (isset($packagePageData, $destination)) {
+    if ($routeName === 'home') {
+        $homeFaqs = [
+            [
+                'question' => 'How do I book a tour package?',
+                'answer' => 'Choose your destination, share your travel dates, and our team will help confirm the itinerary, pricing, and payment steps.',
+            ],
+            [
+                'question' => 'Can I customize my travel plan?',
+                'answer' => 'Yes. Hotels, transfers, sightseeing, trip duration, and experiences can be adjusted around your budget and travel style.',
+            ],
+            [
+                'question' => 'Do packages include flights?',
+                'answer' => 'Some packages include flights and some are land-only. The package details and our sales team will clearly mention what is included.',
+            ],
+            [
+                'question' => 'What support do I get during the trip?',
+                'answer' => 'You get assistance for bookings, itinerary coordination, and on-trip travel support so your holiday stays smooth.',
+            ],
+        ];
+
+        $graph[] = [
+            '@type' => 'FAQPage',
+            'mainEntity' => collect($homeFaqs)->map(fn ($faq) => [
+                '@type' => 'Question',
+                'name' => $faq['question'],
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => $faq['answer'],
+                ],
+            ])->values()->all(),
+        ];
+    } elseif (isset($packagePageData, $destination)) {
         $packageUrl = $pageUrl;
         $packageSchema = [
             '@type' => 'Product',

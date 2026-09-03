@@ -2018,7 +2018,7 @@
 
             <div class="home-faq-list">
                 @foreach($homeFaqs as $index => $faq)
-                    <details class="home-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" @if($index === 0) open @endif>
+                    <details class="home-faq-item" name="home-faq" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" @if($index === 0) open @endif>
                         <summary itemprop="name">
                             <span class="home-faq-icon" aria-hidden="true"></span>
                             <span>{{ $faq['question'] }}</span>
@@ -2040,16 +2040,24 @@
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.home-faq-list').forEach(function (faqList) {
                 faqList.querySelectorAll('.home-faq-item').forEach(function (item) {
-                    item.addEventListener('toggle', function () {
-                        if (!item.open) {
-                            return;
-                        }
+                    const summary = item.querySelector('summary');
 
-                        faqList.querySelectorAll('.home-faq-item[open]').forEach(function (openItem) {
+                    if (!summary) {
+                        return;
+                    }
+
+                    summary.addEventListener('click', function (event) {
+                        event.preventDefault();
+
+                        const shouldOpen = !item.open;
+
+                        faqList.querySelectorAll('.home-faq-item').forEach(function (openItem) {
                             if (openItem !== item) {
                                 openItem.open = false;
                             }
                         });
+
+                        item.open = shouldOpen;
                     });
                 });
             });
@@ -2287,21 +2295,5 @@
                 next.disabled = false;
             });
         });
-    </script>
-    <script type="application/ld+json">
-        {!! json_encode([
-            '@context' => 'https://schema.org',
-            '@type' => 'FAQPage',
-            'mainEntity' => array_map(function ($faq) {
-                return [
-                    '@type' => 'Question',
-                    'name' => $faq['question'],
-                    'acceptedAnswer' => [
-                        '@type' => 'Answer',
-                        'text' => $faq['answer'],
-                    ],
-                ];
-            }, $homeFaqs),
-        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
     </script>
 @endpush
