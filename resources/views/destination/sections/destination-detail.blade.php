@@ -730,7 +730,7 @@
 
                 <section id="why" class="seo-dd-section seo-dd-why-section">
                     <div class="seo-dd-why-head">
-                         <p class="seo-dd-kicker seo-dd-section-eyebrow"><span>WHy Choose Us?</span></p>
+                         <p class="seo-dd-kicker seo-dd-section-eyebrow"><span>Why Choose Us?</span></p>
                         <span class="seo-dd-why-divider" aria-hidden="true"></span>
                     </div>
                     <div class="seo-dd-card-grid seo-dd-feature-grid seo-dd-why-grid">

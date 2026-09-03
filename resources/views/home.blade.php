@@ -1981,56 +1981,53 @@
     {{-- Dynamic Blog Section --}}
     @include('partials.home-blog-section')
 
-    <section class="home-faq-section" aria-labelledby="homeFaqTitle">
+    @php
+        $homeFaqs = [
+            [
+                'question' => 'How do I book a tour package?',
+                'answer' => 'Choose your destination, share your travel dates, and our team will help confirm the itinerary, pricing, and payment steps.',
+            ],
+            [
+                'question' => 'Can I customize my travel plan?',
+                'answer' => 'Yes. Hotels, transfers, sightseeing, trip duration, and experiences can be adjusted around your budget and travel style.',
+            ],
+            [
+                'question' => 'Do packages include flights?',
+                'answer' => 'Some packages include flights and some are land-only. The package details and our sales team will clearly mention what is included.',
+            ],
+            [
+                'question' => 'What support do I get during the trip?',
+                'answer' => 'You get assistance for bookings, itinerary coordination, and on-trip travel support so your holiday stays smooth.',
+            ],
+        ];
+    @endphp
+
+    <section id="faq" class="home-faq-section" aria-labelledby="homeFaqTitle" itemscope itemtype="https://schema.org/FAQPage">
         <div class="home-faq-shell">
             <div class="home-faq-copy">
-                <h2 id="homeFaqTitle">General Questions<br>asked by<br>customers.</h2>
+                <p class="home-faq-eyebrow">FAQs</p>
+                <h2 id="homeFaqTitle">General Questions<br>asked by<br>customers<span>.</span></h2>
                 <div class="home-faq-support">
                     <p>Our friendly team is always here to help you with quick, clear, and reliable answers whenever needed.</p>
-                    <a href="{{ route('contact') }}" class="home-faq-cta">Contact Sales</a>
+                    <a href="{{ route('contact') }}" class="home-faq-cta">
+                        <i class="bi bi-chat-dots" aria-hidden="true"></i>
+                        <span>Chat with us</span>
+                    </a>
                 </div>
             </div>
 
             <div class="home-faq-list">
-                <details class="home-faq-item" open>
-                    <summary>
-                        <span>How do I book a tour package?</span>
-                        <span class="home-faq-icon" aria-hidden="true"></span>
-                    </summary>
-                    <div class="home-faq-answer">
-                        <p>Choose your destination, share your travel dates, and our team will help confirm the itinerary, pricing, and payment steps.</p>
-                    </div>
-                </details>
-
-                <details class="home-faq-item">
-                    <summary>
-                        <span>Can I customize my travel plan?</span>
-                        <span class="home-faq-icon" aria-hidden="true"></span>
-                    </summary>
-                    <div class="home-faq-answer">
-                        <p>Yes. Hotels, transfers, sightseeing, trip duration, and experiences can be adjusted around your budget and travel style.</p>
-                    </div>
-                </details>
-
-                <details class="home-faq-item">
-                    <summary>
-                        <span>Do packages include flights?</span>
-                        <span class="home-faq-icon" aria-hidden="true"></span>
-                    </summary>
-                    <div class="home-faq-answer">
-                        <p>Some packages include flights and some are land-only. The package details and our sales team will clearly mention what is included.</p>
-                    </div>
-                </details>
-
-                <details class="home-faq-item">
-                    <summary>
-                        <span>What support do I get during the trip?</span>
-                        <span class="home-faq-icon" aria-hidden="true"></span>
-                    </summary>
-                    <div class="home-faq-answer">
-                        <p>You get assistance for bookings, itinerary coordination, and on-trip travel support so your holiday stays smooth.</p>
-                    </div>
-                </details>
+                @foreach($homeFaqs as $index => $faq)
+                    <details class="home-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" @if($index === 0) open @endif>
+                        <summary itemprop="name">
+                            <span class="home-faq-icon" aria-hidden="true"></span>
+                            <span>{{ $faq['question'] }}</span>
+                        </summary>
+                        <div class="home-faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text">{{ $faq['answer'] }}</p>
+                        </div>
+                    </details>
+                @endforeach
             </div>
         </div>
     </section>
@@ -2041,6 +2038,22 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.home-faq-list').forEach(function (faqList) {
+                faqList.querySelectorAll('.home-faq-item').forEach(function (item) {
+                    item.addEventListener('toggle', function () {
+                        if (!item.open) {
+                            return;
+                        }
+
+                        faqList.querySelectorAll('.home-faq-item[open]').forEach(function (openItem) {
+                            if (openItem !== item) {
+                                openItem.open = false;
+                            }
+                        });
+                    });
+                });
+            });
+
             document.querySelectorAll('[data-offers-slider]').forEach(function (slider) {
                 const track = slider.querySelector('[data-offers-track]');
                 const strip = slider.querySelector('[data-offers-strip]');
@@ -2274,5 +2287,21 @@
                 next.disabled = false;
             });
         });
+    </script>
+    <script type="application/ld+json">
+        {!! json_encode([
+            '@context' => 'https://schema.org',
+            '@type' => 'FAQPage',
+            'mainEntity' => array_map(function ($faq) {
+                return [
+                    '@type' => 'Question',
+                    'name' => $faq['question'],
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => $faq['answer'],
+                    ],
+                ];
+            }, $homeFaqs),
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
     </script>
 @endpush
