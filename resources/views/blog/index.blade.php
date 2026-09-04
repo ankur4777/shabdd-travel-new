@@ -575,7 +575,7 @@
                     <span class="blog-stat-label">Articles</span>
                 </div>
                 <div class="blog-stat">
-                    <span class="blog-stat-num">{{ $destinations->count() }}</span>
+                    <span class="blog-stat-num">{{ $blogDestinations->count() }}</span>
                     <span class="blog-stat-label">Destinations</span>
                 </div>
                 <div class="blog-stat">
@@ -600,8 +600,8 @@
             </div>
             <div class="d-flex flex-wrap justify-content-center align-items-center">
                 <button class="filter-btn {{ !trim((string) request('destination')) ? 'active' : '' }}" data-filter="all" data-type="destination">All Destinations</button>
-                @foreach($destinations as $destination)
-                    <button class="filter-btn {{ trim((string) request('destination')) === trim((string) $destination) ? 'active' : '' }}" data-filter="{{ $destination }}" data-type="destination">{{ $destination }}</button>
+                @foreach($blogDestinations as $destinationName)
+                    <button class="filter-btn {{ trim((string) request('destination')) === trim((string) $destinationName) ? 'active' : '' }}" data-filter="{{ $destinationName }}" data-type="destination">{{ $destinationName }}</button>
                 @endforeach
             </div>
         </div>
@@ -636,8 +636,8 @@
         </div>
         <div class="blog-mobile-toolbar__chips" aria-label="Destination filters">
             <button class="filter-btn {{ !trim((string) request('destination')) ? 'active' : '' }}" data-filter="all" data-type="destination">All Destinations</button>
-            @foreach($destinations as $destination)
-                <button class="filter-btn {{ trim((string) request('destination')) === trim((string) $destination) ? 'active' : '' }}" data-filter="{{ $destination }}" data-type="destination">{{ $destination }}</button>
+            @foreach($blogDestinations as $destinationName)
+                <button class="filter-btn {{ trim((string) request('destination')) === trim((string) $destinationName) ? 'active' : '' }}" data-filter="{{ $destinationName }}" data-type="destination">{{ $destinationName }}</button>
             @endforeach
         </div>
     </div>
@@ -689,7 +689,7 @@
                 <div class="col-md-6 blog-item" data-destination="{{ $blog['destination_name'] }}" data-category="{{ $blog['category'] }}" @if($index >= 6) style="display:none;" @endif>
                     <article class="blog-card">
                         <div class="blog-card-img-wrap">
-                            <img src="{{ $blog['image'] }}" alt="{{ $blog['title'] }}" class="blog-card-img">
+                            <img src="{{ $blog['image'] }}" alt="{{ $featured['image_alt_text'] }}" class="blog-card-img">
                         </div>
                         <div class="blog-card-body">
                             <span class="blog-category">{{ $blog['category'] }}</span>
@@ -729,7 +729,7 @@
             <article class="latest-post-item">
                 <a href="{{ $post['url'] }}" class="latest-post-link">
                     <div class="latest-post-img">
-                        <img src="{{ $post['image'] }}" alt="{{ $post['title'] }}">
+                        <img src="{{ $post['image'] }}" alt="{{ $featured['image_alt_text'] }}">
                     </div>
                     <div class="latest-post-content">
                         <span class="latest-post-category">{{ $post['category'] }}</span>

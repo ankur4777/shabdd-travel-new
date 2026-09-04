@@ -84,10 +84,10 @@
             <i class="bi bi-geo-alt"></i> Destinations
         </h3>
         <div class="destinations-tags">
-            @foreach($destinations as $destination)
-            <a href="{{ route('blog.index', ['destination' => $destination]) }}" 
-               class="destination-tag {{ $activeDestination === trim((string) $destination) ? 'active' : '' }}">
-                {{ $destination }}
+            @foreach($blogDestinations as $destinationName)
+            <a href="{{ route('blog.index', ['destination' => $destinationName]) }}" 
+               class="destination-tag {{ $activeDestination === trim((string) $destinationName) ? 'active' : '' }}">
+                {{ $destinationName }}
             </a>
             @endforeach
         </div>

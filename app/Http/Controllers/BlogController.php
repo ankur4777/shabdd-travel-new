@@ -48,7 +48,7 @@ class BlogController extends Controller
             'featured' => $blogs->first(),
             'highlights' => $blogs->take(4)->values(),
             'latestStories' => $blogs->values(),
-            'destinations' => $allBlogs
+            'blogDestinations' => $allBlogs
                 ->pluck('destination_name')
                 ->map(fn ($destination) => trim((string) $destination))
                 ->filter()
@@ -96,7 +96,7 @@ class BlogController extends Controller
             'blogs' => $blogs,
             'highlights' => $blogs->take(5)->values(),
             'latestStories' => $blogs->values(),
-            'destinations' => $blogs
+            'blogDestinations' => $blogs
                 ->pluck('destination_name')
                 ->filter()
                 ->unique()
@@ -147,6 +147,7 @@ class BlogController extends Controller
             'title' => $title,
             'excerpt' => $excerpt !== '' ? $excerpt : $this->buildExcerpt($destinationName, $title),
             'image' => $image,
+            'image_alt_text' => trim((string) ($blogData['image_alt_text'] ?? '')) ?: $title . ' travel guide image',
             'published_at' => $publishedAt,
             'published_at_display' => \Carbon\Carbon::parse($publishedAt)->format('M d, Y'),
             'published_timestamp' => strtotime($publishedAt) ?: now()->timestamp,

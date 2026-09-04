@@ -61,6 +61,10 @@ class BlogResource extends Resource
                             ->directory('blogs')
                             ->visibility('public'),
 
+                        TextInput::make('image_alt_text')
+                            ->label('Image Alt Text')
+                            ->maxLength(255),
+
                         Select::make('category')
                             ->options([
                                 'Destination Guide' => 'Destination Guide',

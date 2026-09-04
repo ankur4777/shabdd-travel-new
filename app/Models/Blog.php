@@ -14,6 +14,7 @@ class Blog extends Model
         'title',
         'slug',
         'image',
+        'image_alt_text',
         'category',
         'excerpt',
         'content',

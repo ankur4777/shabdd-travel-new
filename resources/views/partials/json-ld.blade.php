@@ -174,7 +174,15 @@
             ['name' => $destination->name, 'url' => route('destinations.show', $destination)],
             ['name' => $packagePageData['package_title'], 'url' => $packageUrl],
         ]);
-    } elseif (isset($post, $destination)) {
+    } elseif (isset($post)) {
+        $hasDestinationModel = isset($destination) && $destination instanceof \App\Models\Destination;
+        $postDestinationName = $hasDestinationModel
+            ? $destination->name
+            : ($post['destination_name'] ?? '');
+        $postDestinationUrl = $hasDestinationModel
+            ? route('destinations.show', $destination)
+            : route('blog.index');
+
         $graph[] = [
             '@type' => 'BlogPosting',
             '@id' => $pageUrl . '#article',
@@ -190,7 +198,7 @@
         $graph[] = $breadcrumb([
             ['name' => 'Home', 'url' => route('home')],
             ['name' => 'Blog', 'url' => route('blog.index')],
-            ['name' => $destination->name, 'url' => route('destinations.show', $destination)],
+            ['name' => $postDestinationName, 'url' => $postDestinationUrl],
             ['name' => $post['title'], 'url' => $pageUrl],
         ]);
         if (!empty($post['faqs'])) {
