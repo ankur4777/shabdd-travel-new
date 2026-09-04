@@ -694,7 +694,7 @@
                         <div class="blog-card-body">
                             <span class="blog-category">{{ $blog['category'] }}</span>
                             <h3 class="blog-title">
-                                <a href="{{ $blog['url'] }}">{{ $blog['title'] }}</a>
+                                <a href="{{ $blog['url'] }}">{{ $blog['title'] }}</a>   
                             </h3>
                             <p class="blog-excerpt">{{ Str::limit($blog['excerpt'], 120) }}</p>
                             <div class="blog-meta">
