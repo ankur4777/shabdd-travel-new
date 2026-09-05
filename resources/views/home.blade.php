@@ -491,7 +491,7 @@
                     <div>
                         <p class="hp-trending-packages__eyebrow">Trending Packages</p>
                         <h2 id="hpTrendingPackagesTitle">Popular trips</h2>
-                        <p>Only packages marked as trending in admin are shown here.</p>
+                        <p>Explore the perfect travel package</p>
                     </div>
                     <a href="{{ route('packages.index') }}" class="hp-trending-packages__view">
                         View all <span aria-hidden="true">&rarr;</span>
